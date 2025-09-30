@@ -5,6 +5,7 @@ Obrigado por considerar contribuir para este projeto! 🎉
 ## 🚀 Como Contribuir
 
 ### 1. **Fork e Clone**
+
 ```bash
 git fork https://github.com/seu-usuario/financeiro-ai-agent
 git clone https://github.com/seu-usuario/financeiro-ai-agent.git
@@ -12,11 +13,13 @@ cd financeiro-ai-agent
 ```
 
 ### 2. **Instale as Dependências**
+
 ```bash
 pip install -r requirements.txt
 ```
 
 ### 3. **Crie uma Branch**
+
 ```bash
 git checkout -b feature/nova-funcionalidade
 # ou
@@ -24,11 +27,13 @@ git checkout -b fix/correcao-bug
 ```
 
 ### 4. **Desenvolva e Teste**
+
 - Siga o padrão de código existente
 - Adicione testes quando necessário
 - Teste com dados de exemplo (nunca dados reais)
 
 ### 5. **Commit e Push**
+
 ```bash
 git add .
 git commit -m "feat: adiciona nova funcionalidade X"
@@ -36,6 +41,7 @@ git push origin feature/nova-funcionalidade
 ```
 
 ### 6. **Abra um Pull Request**
+
 - Descreva claramente as mudanças
 - Referencie issues relacionadas
 - Aguarde review
@@ -43,6 +49,7 @@ git push origin feature/nova-funcionalidade
 ## 📋 Diretrizes
 
 ### **Padrões de Commit**
+
 - `feat:` nova funcionalidade
 - `fix:` correção de bug
 - `docs:` documentação
@@ -51,11 +58,13 @@ git push origin feature/nova-funcionalidade
 - `test:` testes
 
 ### **Segurança**
+
 - ⚠️ **NUNCA** commite dados financeiros reais
 - Use sempre dados de exemplo nos testes
 - Verifique o `.gitignore` antes do commit
 
 ### **Qualidade**
+
 - Código Python deve seguir PEP 8
 - Adicione docstrings para funções
 - Mantenha funções pequenas e focadas

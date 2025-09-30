@@ -11,24 +11,28 @@ Um sistema Python que automatiza a categorização e análise de extratos bancá
 ## 🚀 **Funcionalidades**
 
 ### 🤖 **Processamento Automático**
+
 - ✅ **Múltiplas fontes**: Itaú, Latam, PIX (extensível)
 - ✅ **Formatos diversos**: XLS, XLSX, TXT, CSV
 - ✅ **Detecção inteligente** de tipos de cartão (físico/virtual/recorrente)
 - ✅ **Busca automática** de arquivos dos últimos 12 meses
 
 ### 🧠 **Sistema de Aprendizado**
+
 - ✅ **Categorização automática** baseada em ML
 - ✅ **Mapeamento dinâmico** descrição → categoria
 - ✅ **Aprendizado contínuo** com feedback do usuário
 - ✅ **Base de conhecimento** persistente em SQLite
 
 ### 📊 **Análise e Relatórios**
+
 - ✅ **Consolidação temporal** por mês/ano
 - ✅ **Exportação Excel** com dados estruturados
 - ✅ **Identificação de padrões** de gastos
 - ✅ **Filtros inteligentes** (moedas estrangeiras, duplicatas)
 
 ### 🔧 **Tratamento de Dados**
+
 - ✅ **Normalização automática** de descrições
 - ✅ **Conversão de moedas** e formatos
 - ✅ **Detecção de anomalias** (valores suspeitos)
@@ -54,17 +58,20 @@ Financeiro/
 ## ⚡ **Instalação Rápida**
 
 ### 1. **Clone o Repositório**
+
 ```bash
 git clone https://github.com/seu-usuario/financeiro-ai-agent.git
 cd financeiro-ai-agent
 ```
 
 ### 2. **Instale as Dependências**
+
 ```bash
 pip install pandas sqlite3 openpyxl xlrd
 ```
 
 ### 3. **Configure o Ambiente**
+
 ```bash
 # Copie o arquivo de configuração
 cp backend/src/config.example.ini backend/src/config.ini
@@ -74,6 +81,7 @@ nano backend/src/config.ini
 ```
 
 ### 4. **Estruture seus Dados**
+
 ```bash
 # Crie a estrutura de pastas para seus extratos
 mkdir -p dados/db dados/planilhas
@@ -87,12 +95,14 @@ mkdir -p dados/db dados/planilhas
 ## 🎯 **Como Usar**
 
 ### **Execução Principal**
+
 ```bash
 cd backend/src
 python agente_financeiro.py
 ```
 
 ### **Atualizar Base de Conhecimento**
+
 ```bash
 # Após categorizar manualmente no Excel
 python atualiza_dicionario.py
@@ -102,6 +112,7 @@ python atualiza_dicionario_controle.py
 ```
 
 ### **Automatização (Windows)**
+
 ```cmd
 :: Execute via batch para automação
 agente_financeiro.bat
@@ -110,6 +121,7 @@ agente_financeiro.bat
 ## 📋 **Formato dos Arquivos**
 
 ### **PIX (TXT/CSV)**
+
 ```csv
 Data;Descrição;Valor
 19/12/2024;PIX QRS PAGFACIL IP19/12;-2,00
@@ -117,6 +129,7 @@ Data;Descrição;Valor
 ```
 
 ### **Cartões (XLS/XLSX)**
+
 ```
 Coluna A: Data (DD/MM/AAAA)
 Coluna B: Descrição da transação
@@ -126,6 +139,7 @@ Coluna D: Valor (positivo/negativo)
 ## 🧠 **Sistema de Categorização**
 
 ### **Categorias Automáticas**
+
 - 💰 **SALÁRIO**: `SISPAG PIX`, `PAGTO REMUNERACAO`
 - 📈 **INVESTIMENTOS**: `REND PAGO APLIC`
 - 🍕 **ALIMENTAÇÃO**: Restaurantes, delivery, supermercados
@@ -133,6 +147,7 @@ Coluna D: Valor (positivo/negativo)
 - 🏠 **MORADIA**: Aluguel, condomínio, utilities
 
 ### **Aprendizado Contínuo**
+
 ```python
 # O sistema aprende automaticamente:
 "UBER TRIP" → "TRANSPORTE"
@@ -143,6 +158,7 @@ Coluna D: Valor (positivo/negativo)
 ## 🔧 **Configuração Avançada**
 
 ### **config.ini**
+
 ```ini
 [PATHS]
 diretorio_arquivos = /caminho/para/seus/dados
@@ -160,6 +176,7 @@ filtrar_moedas_estrangeiras = true
 ## 📊 **Saídas Geradas**
 
 ### **Excel Consolidado**
+
 - 📅 **Data**: Data da transação
 - 📝 **Descrição**: Descrição normalizada
 - 🏪 **Fonte**: Origem (Itaú Master, Latam Visa, PIX)
@@ -168,6 +185,7 @@ filtrar_moedas_estrangeiras = true
 - 📆 **MêsComp**: Mês de competência
 
 ### **Base SQLite**
+
 ```sql
 -- Transações processadas
 SELECT * FROM lancamentos;
@@ -221,6 +239,7 @@ Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para de
 ## 👨‍💻 **Autor**
 
 **Seu Nome**
+
 - 🐙 GitHub: [@seu-usuario](https://github.com/seu-usuario)
 - 💼 LinkedIn: [seu-perfil](https://linkedin.com/in/seu-perfil)
 - 📧 Email: seu.email@exemplo.com

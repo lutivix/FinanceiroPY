@@ -52,9 +52,21 @@ mapa_db = dict(zip(df_existente["descricao"].str.upper().str.strip(), df_existen
 df_consolidado = pd.read_excel(arquivo_consolidado)
 df_consolidado = df_consolidado.dropna(subset=["Descricao", "Categoria"])
 
+# Função para limpar datas das descrições
+def limpar_data_descricao(desc):
+    """Remove padrões de data (dd/mm) do final das descrições"""
+    import re
+    desc = desc.strip()
+    # Remove padrões como " 01/02", " 03/12", etc. do final
+    desc = re.sub(r'\s*\d{2}/\d{2}$', '', desc)
+    return desc.strip()
+
 # Constrói dicionário novo
 df_consolidado["Descricao"] = df_consolidado["Descricao"].str.upper().str.strip()
 df_consolidado["Categoria"] = df_consolidado["Categoria"].str.strip()
+
+# Limpa datas das descrições antes de adicionar
+df_consolidado["Descricao"] = df_consolidado["Descricao"].apply(limpar_data_descricao)
 
 novos = []
 for _, row in df_consolidado.iterrows():
