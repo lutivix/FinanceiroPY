@@ -64,7 +64,12 @@ df_controle["Descricao"] = df_controle[descricao_col].astype(str).str.upper().st
 df_controle["Categoria"] = df_controle[categoria_col].astype(str).str.strip()
 
 def normalizar_descricao(desc):
+    """Remove padrões de data das descrições"""
+    import re
     desc = desc.upper().strip()
+    # Remove padrões como " 01/02", " 03/12", etc. do final
+    desc = re.sub(r'\s*\d{2}/\d{2}$', '', desc)
+    # Remove datas específicas do PIX (lógica original)
     if "PIX" in desc and len(desc) >= 5:
         possivel_data = desc[-5:]
         if "/" in possivel_data and possivel_data.replace("/", "").isdigit():
