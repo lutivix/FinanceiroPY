@@ -2,7 +2,7 @@
 
 ## 📖 **Estrutura da Documentação**
 
-### **🏠 [README.md](README.md)**
+### **🏠 [README.md](../README.md)**
 
 **Visão geral do projeto** - Primeira parada para novos usuários
 
@@ -47,7 +47,7 @@
 
 ---
 
-### **📋 [CHANGELOG.md](CHANGELOG.md)**
+### **📋 [CHANGELOG.md](../CHANGELOG.md)**
 
 **Histórico de versões** - Evolução do projeto
 
@@ -94,16 +94,17 @@
 ```
 Financeiro/
 ├── README.md                    # 🏠 Visão geral (COMECE AQUI)
-├── GUIA_USUARIO.md             # 👤 Manual do usuário
-├── DOCUMENTACAO_TECNICA.md     # 🔧 Documentação técnica
 ├── CHANGELOG.md                # 📋 Histórico de versões
-├── INDICE_DOCUMENTACAO.md      # 📚 Este índice
+├── CONTRIBUTING.md             # 🤝 Guia de contribuição
+├── LICENSE                     # ⚖️ Licença do projeto
+├── docs/                       # 📚 Documentação detalhada
+│   ├── GUIA_USUARIO.md        # 👤 Manual do usuário
+│   ├── DOCUMENTACAO_TECNICA.md # 🔧 Documentação técnica  
+│   └── INDICE_DOCUMENTACAO.md # 📚 Este índice
 └── backend/src/
     ├── config.ini              # ⚙️ Configurações do sistema
     └── *.py                    # 🐍 Scripts principais
-```
-
----
+```---
 
 ## 🎨 **Convenções da Documentação**
 

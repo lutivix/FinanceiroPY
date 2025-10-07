@@ -293,6 +293,14 @@ ORDER BY transacoes DESC;
 - [ ] 🌍 **Suporte multi-idioma** e moedas
 - [ ] 🏢 **Versão Enterprise** para empresas
 
+## 📚 **Documentação Completa**
+
+- 📖 **[Guia do Usuário](docs/GUIA_USUARIO.md)** - Manual completo passo a passo
+- 🔧 **[Documentação Técnica](docs/DOCUMENTACAO_TECNICA.md)** - Arquitetura e detalhes técnicos
+- 📚 **[Índice da Documentação](docs/INDICE_DOCUMENTACAO.md)** - Navegação completa
+- 📋 **[Changelog](CHANGELOG.md)** - Histórico de versões
+- 🤝 **[Como Contribuir](CONTRIBUTING.md)** - Guia de contribuição
+
 ## 🤝 **Contribuindo**
 
 1. **Fork** o projeto
