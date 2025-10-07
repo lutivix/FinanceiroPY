@@ -20,7 +20,7 @@ class TransactionSource(Enum):
     LATAM_VISA_VIRTUAL = "Visa Virtual"
     LATAM_VISA_RECORRENTE = "Visa Recorrente"
     LATAM_VISA_BIA = "Visa Bia"
-    LATAM_VISA_MAE = "Visa Mãe"
+    LATAM_VISA_MAE = "Visa Mae"
 
 
 class TransactionCategory(Enum):

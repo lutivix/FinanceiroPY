@@ -91,7 +91,7 @@
 
 ## 📁 **Arquivos da Documentação**
 
-```
+````
 Financeiro/
 ├── README.md                    # 🏠 Visão geral (COMECE AQUI)
 ├── CHANGELOG.md                # 📋 Histórico de versões
@@ -99,7 +99,7 @@ Financeiro/
 ├── LICENSE                     # ⚖️ Licença do projeto
 ├── docs/                       # 📚 Documentação detalhada
 │   ├── GUIA_USUARIO.md        # 👤 Manual do usuário
-│   ├── DOCUMENTACAO_TECNICA.md # 🔧 Documentação técnica  
+│   ├── DOCUMENTACAO_TECNICA.md # 🔧 Documentação técnica
 │   └── INDICE_DOCUMENTACAO.md # 📚 Este índice
 └── backend/src/
     ├── config.ini              # ⚙️ Configurações do sistema
@@ -217,3 +217,4 @@ Sua opinião é importante:
 _Esta documentação é mantida com amor pela comunidade_ ❤️
 
 _Última atualização: September 30, 2025 - v2.0.0_ 📅
+````
