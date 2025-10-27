@@ -2,6 +2,22 @@
 
 ## 📖 **Estrutura da Documentação**
 
+### **⚡ [RESUMO_RAPIDO.md](RESUMO_RAPIDO.md)** 🆕
+
+**Guia rápido de orientação** - Quando você está perdido
+
+- 🎯 Estado atual do projeto em bullets
+- 🚀 O que fazer AGORA (próximos 15 dias)
+- 📅 Cronograma visual simplificado
+- 📂 Onde encontrar cada coisa
+- 🛠️ Comandos úteis do dia a dia
+- ✅ Checklist de início de sessão
+- 🆘 O que fazer quando travar
+
+**👤 Audiência:** Desenvolvedores que querem se orientar rapidamente
+
+---
+
 ### **🏠 [README.md](../README.md)**
 
 **Visão geral do projeto** - Primeira parada para novos usuários
@@ -61,7 +77,30 @@
 
 ---
 
+### **📅 [PLANEJAMENTO.md](PLANEJAMENTO.md)**
+
+**Planejamento estratégico de desenvolvimento** - Roadmap detalhado
+
+- 📊 Estado atual do projeto (v2.0)
+- 🎯 Visão estratégica de curto, médio e longo prazo
+- 📅 Cronograma detalhado com prazos
+- ✅ Checklists de tarefas por fase
+- 🚀 Próximos passos priorizados
+- 📈 Métricas de sucesso por versão
+- 🛠️ Stack tecnológico evolutivo
+- ⚠️ Riscos e mitigações
+
+**👤 Audiência:** Desenvolvedores, gestores de projeto, contribuidores que querem entender a evolução planejada
+
+---
+
 ## 🎯 **Como Usar Esta Documentação**
+
+### **⚡ Estou perdido! Onde estou?**
+
+1. **Comece com [RESUMO_RAPIDO.md](RESUMO_RAPIDO.md)** → orientação rápida
+2. **Veja [PLANEJAMENTO.md](PLANEJAMENTO.md)** → próximos passos
+3. **Consulte este índice** para encontrar detalhes específicos
 
 ### **🚀 Eu sou novo no projeto**
 
@@ -71,9 +110,10 @@
 
 ### **👨‍💻 Eu quero contribuir**
 
-1. **Leia [README.md](README.md)** → entenda o projeto
+1. **Leia [README.md](../README.md)** → entenda o projeto
 2. **Estude [DOCUMENTACAO_TECNICA.md](DOCUMENTACAO_TECNICA.md)** → arquitetura
-3. **Consulte [CHANGELOG.md](CHANGELOG.md)** → roadmap e histórico
+3. **Consulte [PLANEJAMENTO.md](PLANEJAMENTO.md)** → veja tarefas planejadas
+4. **Verifique [CHANGELOG.md](../CHANGELOG.md)** → histórico e contexto
 
 ### **🔧 Eu tenho um problema**
 
@@ -98,13 +138,31 @@ Financeiro/
 ├── CONTRIBUTING.md             # 🤝 Guia de contribuição
 ├── LICENSE                     # ⚖️ Licença do projeto
 ├── docs/                       # 📚 Documentação detalhada
+│   ├── PLANEJAMENTO.md         # 📅 Planejamento estratégico (NOVO!)
+│   ├── RESUMO_RAPIDO.md        # ⚡ Guia rápido de orientação (NOVO!)
 │   ├── GUIA_USUARIO.md        # 👤 Manual do usuário
 │   ├── DOCUMENTACAO_TECNICA.md # 🔧 Documentação técnica
 │   └── INDICE_DOCUMENTACAO.md # 📚 Este índice
 └── backend/src/
     ├── config.ini              # ⚙️ Configurações do sistema
     └── *.py                    # 🐍 Scripts principais
-```---
+```
+
+---
+
+## 📚 **Links Rápidos**
+
+| Documento                | Descrição                         | Audiência         |
+| ------------------------ | --------------------------------- | ----------------- |
+| [README](../README.md)   | Visão geral e início rápido       | Todos             |
+| [RESUMO_RAPIDO](RESUMO_RAPIDO.md) | Orientação rápida quando perdido | Desenvolvedores |
+| [PLANEJAMENTO](PLANEJAMENTO.md) | Roadmap e próximos passos | Desenvolvedores/Gestores |
+| [GUIA_USUARIO](GUIA_USUARIO.md) | Manual prático do usuário | Usuários finais   |
+| [DOCUMENTACAO_TECNICA](DOCUMENTACAO_TECNICA.md) | Detalhes técnicos | Desenvolvedores |
+| [PLANEJAMENTO](PLANEJAMENTO.md) | Roadmap e próximos passos | Desenvolvedores/Gestores |
+| [CHANGELOG](../CHANGELOG.md) | Histórico de mudanças | Todos |
+
+---
 
 ## 🎨 **Convenções da Documentação**
 

@@ -297,7 +297,8 @@ ORDER BY transacoes DESC;
 
 - 📖 **[Guia do Usuário](docs/GUIA_USUARIO.md)** - Manual completo passo a passo
 - 🔧 **[Documentação Técnica](docs/DOCUMENTACAO_TECNICA.md)** - Arquitetura e detalhes técnicos
-- 📚 **[Índice da Documentação](docs/INDICE_DOCUMENTACAO.md)** - Navegação completa
+- � **[Planejamento](docs/PLANEJAMENTO.md)** - Roadmap e próximos passos 🆕
+- �📚 **[Índice da Documentação](docs/INDICE_DOCUMENTACAO.md)** - Navegação completa
 - 📋 **[Changelog](CHANGELOG.md)** - Histórico de versões
 - 🤝 **[Como Contribuir](CONTRIBUTING.md)** - Guia de contribuição
 
