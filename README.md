@@ -7,12 +7,16 @@ Sistema Python avançado que automatiza completamente o processamento de extrato
 [![Python](https://img.shields.io/badge/Python-3.13+-blue.svg)](https://python.org)
 [![SQLite](https://img.shields.io/badge/Database-SQLite-green.svg)](https://sqlite.org)
 [![Efficiency](https://img.shields.io/badge/Precisão-98.2%25-brightgreen.svg)](README.md)
+[![Tests](https://img.shields.io/badge/Tests-119%20passing-success.svg)](tests/)
+[![Coverage](https://img.shields.io/badge/Coverage-35.34%25-yellow.svg)](htmlcov/index.html)
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 ## 🏆 **Performance Atual**
 
 - ✅ **98.2% de precisão** na categorização automática (1759/1791 transações)
 - ✅ **584 categorias** otimizadas após limpeza de duplicatas
+- ✅ **119 testes automatizados** garantindo qualidade do código
+- ✅ **35.34% de cobertura** de testes (em crescimento)
 - ✅ **Automação completa** com interface menu Windows
 - ✅ **Processamento inteligente** de múltiplas fontes simultâneas
 
@@ -297,10 +301,39 @@ ORDER BY transacoes DESC;
 
 - 📖 **[Guia do Usuário](docs/GUIA_USUARIO.md)** - Manual completo passo a passo
 - 🔧 **[Documentação Técnica](docs/DOCUMENTACAO_TECNICA.md)** - Arquitetura e detalhes técnicos
-- � **[Planejamento](docs/PLANEJAMENTO.md)** - Roadmap e próximos passos 🆕
-- �📚 **[Índice da Documentação](docs/INDICE_DOCUMENTACAO.md)** - Navegação completa
+- 📅 **[Planejamento](docs/PLANEJAMENTO.md)** - Roadmap e próximos passos
+- 🧪 **[Guia de Testes](docs/TESTING.md)** - Como executar e criar testes 🆕
+- 📚 **[Índice da Documentação](docs/INDICE_DOCUMENTACAO.md)** - Navegação completa
+- ✅ **[Semana 1 - Conclusão](docs/SEMANA1_CONCLUSAO.md)** - Infraestrutura de testes 🆕
 - 📋 **[Changelog](CHANGELOG.md)** - Histórico de versões
 - 🤝 **[Como Contribuir](CONTRIBUTING.md)** - Guia de contribuição
+
+## 🧪 **Testes e Qualidade**
+
+O projeto possui uma suíte completa de testes automatizados:
+
+```bash
+# Executar todos os testes
+py -m pytest tests/ -v
+
+# Executar com relatório de cobertura
+py -m pytest tests/ --cov=backend/src --cov-report=html
+
+# Ver relatório HTML
+start htmlcov/index.html
+```
+
+**Estatísticas Atuais:**
+
+- ✅ **119 testes** passando (100%)
+- 📊 **35.34%** de cobertura de código
+- ✨ **85.71%** de cobertura em processadores base
+- 👍 **62.26%** de cobertura em processador PIX
+- 📊 **60.63%** de cobertura em processador de cartões
+- 🔧 **44.86%** de cobertura em serviço de categorização
+- 📁 **44.27%** de cobertura em processamento de arquivos
+
+Consulte [docs/TESTING.md](docs/TESTING.md) para mais detalhes.
 
 ## 🤝 **Contribuindo**
 

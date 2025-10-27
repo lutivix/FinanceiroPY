@@ -85,12 +85,45 @@
 - 🎯 Visão estratégica de curto, médio e longo prazo
 - 📅 Cronograma detalhado com prazos
 - ✅ Checklists de tarefas por fase
+- ✅ **Semana 1 CONCLUÍDA** - Infraestrutura de testes (119 testes, 35.34% cobertura) 🆕
 - 🚀 Próximos passos priorizados
 - 📈 Métricas de sucesso por versão
 - 🛠️ Stack tecnológico evolutivo
 - ⚠️ Riscos e mitigações
 
 **👤 Audiência:** Desenvolvedores, gestores de projeto, contribuidores que querem entender a evolução planejada
+
+---
+
+### **🧪 [TESTING.md](TESTING.md)** 🆕
+
+**Guia completo de testes** - Como testar e contribuir com testes
+
+- 🎯 Estrutura de testes do projeto
+- 🚀 Como executar testes (comandos Windows)
+- 📊 Relatórios de cobertura
+- ✅ Como criar novos testes
+- 🔧 Fixtures disponíveis
+- 📈 Métricas de qualidade
+- 🐛 Troubleshooting de testes
+
+**👤 Audiência:** Desenvolvedores e contribuidores
+
+---
+
+### **✅ [SEMANA1_CONCLUSAO.md](SEMANA1_CONCLUSAO.md)** 🆕
+
+**Relatório de conclusão - Infraestrutura de Testes**
+
+- ✅ 119 testes implementados (100% passando)
+- 📊 35.34% de cobertura inicial
+- 📁 Estrutura completa de testes criada
+- 🛠️ Tecnologias implementadas (pytest, coverage, black, flake8)
+- 📈 Cobertura detalhada por módulo
+- 🐛 Problemas conhecidos documentados
+- 🎯 Próximos passos (Semana 2: CI/CD)
+
+**👤 Audiência:** Desenvolvedores acompanhando o progresso do projeto
 
 ---
 
