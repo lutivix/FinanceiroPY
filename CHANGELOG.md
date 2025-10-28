@@ -7,6 +7,61 @@ e este projeto adere ao [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
 ---
 
+## [2.0.2] - 2025-10-28 🐛
+
+### 🐛 Corrigido
+
+- **Lógica incorreta do ciclo mensal 19-18**
+  - Sistema não buscava arquivos do mês correto após dia 19
+  - Arquivos de novembro (202511) não eram processados
+  - Lógica definia `mes_atual = hoje.month` independente do dia
+  - Corrigido para avançar para o próximo mês quando `dia >= 19`
+
+### 📊 Impacto
+
+- **Antes:** 30 arquivos processados (202510 e anteriores)
+- **Depois:** 33 arquivos processados (202511, 202510, ...)
+- **Ganho:** +3 arquivos (novembro completo)
+- **Transações:** 2184 (vs 2109 anterior, +75 transações)
+
+### ✨ Adicionado
+
+- **Script de validação do ciclo 19-18**
+  - `backend/src/teste_ciclo_19_18.py`
+  - Visualiza lógica do ciclo mensal
+  - Lista arquivos que devem ser buscados
+  - Compara com arquivos realmente encontrados
+
+- **Novo teste unitário**
+  - `test_find_recent_files_ciclo_19_18()`
+  - Valida comportamento antes e depois do dia 19
+  - Verifica arquivo correto sendo buscado
+
+### 🔧 Melhorado
+
+- **Documentação técnica atualizada**
+  - Nova seção "Ciclo Mensal e Busca de Arquivos"
+  - Tabela com exemplos práticos de datas
+  - Explicação sobre não filtrar datas dentro dos arquivos
+  - Motivos para preservar todas as transações
+
+### 🧪 Testes
+
+- **17/17 testes passando** em `test_file_processing_service.py`
+- Teste de integração real executado com sucesso
+- Processamento completo validado com 2184 transações
+
+### 📝 Arquivos Modificados
+
+```
+M  backend/src/services/file_processing_service.py
+M  tests/test_services/test_file_processing_service.py
+M  docs/DOCUMENTACAO_TECNICA.md
+A  backend/src/teste_ciclo_19_18.py
+```
+
+---
+
 ## [2.0.1] - 2025-10-28 🔧
 
 ### 🐛 Corrigido

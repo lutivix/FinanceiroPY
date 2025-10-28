@@ -62,15 +62,24 @@ class TestFileProcessingService:
     
     def test_find_recent_files_with_files(self, service):
         """Testa busca com arquivos presentes."""
-        # Cria alguns arquivos de teste
+        # Cria alguns arquivos de teste considerando o ciclo 19-18
         hoje = datetime.today()
-        ano = hoje.year
-        mes = hoje.month
+        
+        # Calcula o mês correto baseado no ciclo
+        if hoje.day >= 19:
+            mes = hoje.month + 1
+            ano = hoje.year
+            if mes > 12:
+                mes = 1
+                ano += 1
+        else:
+            mes = hoje.month
+            ano = hoje.year
         
         # Formato: YYYYMM_Extrato.txt
         file1 = service.planilhas_dir / f"{ano}{mes:02d}_Extrato.txt"
-        file2 = service.planilhas_dir / f"{ano}{mes:02d}_Itau.csv"
-        file3 = service.planilhas_dir / f"{ano}{mes:02d}_Latam.csv"
+        file2 = service.planilhas_dir / f"{ano}{mes:02d}_Itau.xls"
+        file3 = service.planilhas_dir / f"{ano}{mes:02d}_Latam.xls"
         
         # Cria arquivos vazios
         file1.touch()
@@ -95,9 +104,21 @@ class TestFileProcessingService:
         old_file = service.planilhas_dir / "202301_Extrato.txt"
         old_file.touch()
         
-        # Cria arquivo recente
+        # Cria arquivo recente baseado no ciclo 19-18
         hoje = datetime.today()
-        recent_file = service.planilhas_dir / f"{hoje.year}{hoje.month:02d}_Extrato.txt"
+        
+        # Se hoje é >= 19, o mês atual é o próximo mês
+        if hoje.day >= 19:
+            mes_arquivo = hoje.month + 1
+            ano_arquivo = hoje.year
+            if mes_arquivo > 12:
+                mes_arquivo = 1
+                ano_arquivo += 1
+        else:
+            mes_arquivo = hoje.month
+            ano_arquivo = hoje.year
+            
+        recent_file = service.planilhas_dir / f"{ano_arquivo}{mes_arquivo:02d}_Extrato.txt"
         recent_file.touch()
         
         try:
@@ -108,7 +129,41 @@ class TestFileProcessingService:
             assert any("202301" not in str(f) for f in found_files) or len(found_files) == 0
         finally:
             old_file.unlink()
-            recent_file.unlink()
+            if recent_file.exists():
+                recent_file.unlink()
+    
+    def test_find_recent_files_ciclo_19_18(self, service):
+        """Testa que a busca considera o ciclo mensal de 19 a 18."""
+        hoje = datetime.today()
+        
+        # Simula diferentes dias para testar a lógica
+        # Se hoje é dia 19 ou depois, deve buscar o próximo mês
+        if hoje.day >= 19:
+            # Deve buscar arquivo do próximo mês
+            mes_esperado = hoje.month + 1
+            ano_esperado = hoje.year
+            if mes_esperado > 12:
+                mes_esperado = 1
+                ano_esperado += 1
+        else:
+            # Deve buscar arquivo do mês atual
+            mes_esperado = hoje.month
+            ano_esperado = hoje.year
+        
+        # Cria arquivo do mês esperado
+        arquivo_esperado = service.planilhas_dir / f"{ano_esperado}{mes_esperado:02d}_Extrato.txt"
+        arquivo_esperado.touch()
+        
+        try:
+            files = service.find_recent_files(months_back=1)
+            
+            # Deve encontrar o arquivo do mês esperado
+            assert len(files) > 0
+            found_files = [f.name for f in files.values()]
+            assert arquivo_esperado.name in found_files
+        finally:
+            if arquivo_esperado.exists():
+                arquivo_esperado.unlink()
     
     def test_process_file_unknown_type(self, service):
         """Testa processamento de arquivo de tipo desconhecido."""

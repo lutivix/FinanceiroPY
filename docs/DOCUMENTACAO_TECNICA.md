@@ -33,7 +33,95 @@
 
 ---
 
-## 🔧 **Componentes Principais**
+## � **Ciclo Mensal e Busca de Arquivos**
+
+### **Regra de Negócio: Ciclo 19-18**
+
+O sistema opera com um **ciclo mensal personalizado** que vai do **dia 19 de um mês ao dia 18 do próximo mês**. Esta lógica garante que todas as transações do período correto sejam capturadas.
+
+**Funcionamento:**
+
+```python
+# Determina o mês atual baseado no ciclo 19-18
+if hoje.day >= 19:
+    # A partir do dia 19, o ciclo é do PRÓXIMO mês
+    mes_atual = hoje.month + 1
+    ano_atual = hoje.year
+    if mes_atual > 12:
+        mes_atual = 1
+        ano_atual += 1
+else:
+    # Antes do dia 19, o ciclo é do mês corrente
+    mes_atual = hoje.month
+    ano_atual = hoje.year
+```
+
+**Exemplos práticos:**
+
+| Data Atual | Mês do Ciclo | Arquivo Buscado | Período Coberto |
+|------------|--------------|-----------------|-----------------|
+| 15/10/2025 | Outubro | 202510_*.* | 19/09 a 18/10 |
+| 19/10/2025 | Novembro | 202511_*.* | 19/10 a 18/11 |
+| 28/10/2025 | Novembro | 202511_*.* | 19/10 a 18/11 |
+| 05/11/2025 | Novembro | 202511_*.* | 19/10 a 18/11 |
+| 19/11/2025 | Dezembro | 202512_*.* | 19/11 a 18/12 |
+
+### **Processamento de Arquivos**
+
+**Importante:** O sistema **NÃO filtra datas dentro dos arquivos**. Todas as transações presentes no arquivo são processadas, independentemente de suas datas.
+
+**Motivo:**
+
+- ✅ Preserva compras parceladas que aparecem com datas futuras
+- ✅ Mantém transações programadas e agendadas
+- ✅ Captura ajustes e estornos retroativos
+- ✅ Evita perda de informações importantes
+
+**Exemplo:**
+
+Arquivo `202511_Itau.xls` (novembro) pode conter:
+- Transações de 19/10 (início do ciclo)
+- Transações de 05/11 (meio do ciclo)
+- Transações de 18/11 (fim do ciclo)
+- **Parcelas futuras** (01/12, 01/01, etc.)
+
+✅ **Todas são processadas!**
+
+### **Busca de Arquivos Retroativos**
+
+```python
+def find_recent_files(months_back: int = 12) -> Dict[str, Path]:
+    """
+    Busca arquivos dos últimos N meses baseado no ciclo 19-18.
+    
+    Args:
+        months_back: Quantos meses para trás buscar (padrão: 12)
+        
+    Returns:
+        Dicionário com identificador -> caminho do arquivo
+    """
+    # Determina mês atual do ciclo
+    mes_atual = calcular_mes_ciclo(hoje)
+    
+    # Busca retroativa
+    for i in range(months_back):
+        ano_mes = calcular_ano_mes(mes_atual - i)
+        buscar_arquivos(ano_mes)
+```
+
+**Arquivos buscados (exemplo em 28/10/2025):**
+
+```
+202511_*.* (Nov 2025) ← Mês atual do ciclo
+202510_*.* (Out 2025)
+202509_*.* (Set 2025)
+...
+202412_*.* (Dez 2024) ← 12 meses atrás
+```
+
+---
+
+## �🔧 **Componentes Principais**
 
 ### **1. agente_financeiro.py**
 

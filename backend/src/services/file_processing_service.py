@@ -52,13 +52,19 @@ class FileProcessingService:
         hoje = datetime.today()
         
         # Determina o "mês atual" baseado no ciclo 19-18
+        # Se estamos no dia 19 ou depois, o ciclo atual é do PRÓXIMO mês
+        # Exemplo: 19/10 a 18/11 é o ciclo de NOVEMBRO (arquivo 202511)
         if hoje.day >= 19:
-            # Se estamos no dia 19 ou depois, o "mês atual" é o mês corrente
-            mes_atual = hoje.month
+            # Avança para o próximo mês
+            mes_atual = hoje.month + 1
             ano_atual = hoje.year
+            # Ajusta se passou de dezembro
+            if mes_atual > 12:
+                mes_atual = 1
+                ano_atual += 1
         else:
-            # Se estamos antes do dia 19, ainda estamos no ciclo do mês anterior
-            # Por exemplo: 07/10 está no ciclo que vai de 19/09 a 18/10, então mês atual é 10
+            # Se estamos antes do dia 19, o ciclo atual é do mês corrente
+            # Exemplo: 07/10 está no ciclo que vai de 19/09 a 18/10, então mês atual é 10
             mes_atual = hoje.month
             ano_atual = hoje.year
         

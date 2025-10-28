@@ -1,149 +1,142 @@
-Luciano - 🔧 fix: Configurar ambiente Conda e corrigir PATH do Python nos scripts .bat
+Luciano - � fix: Corrigir lógica do ciclo mensal 19-18 na busca de arquivos
 
 ## 🐛 Problema Resolvido
 
 ### Sintomas
 
-- ❌ Erro "Python não encontrado no PATH" ao executar arquivos .bat
-- ❌ Scripts não executavam mesmo com Anaconda instalado
-- ❌ VS Code não detectava interpretador correto automaticamente
-- ❌ Dependências não eram encontradas pelo Python global
+- ❌ Arquivos do mês de novembro (202511_*.txt/xls) não estavam sendo processados
+- ❌ Sistema não buscava arquivos corretos após o dia 19 do mês
+- ❌ Lógica do ciclo mensal 19-18 estava incorreta
+- ❌ Compras parceladas e transações futuras não eram capturadas
 
 ### Causa Raiz
 
-- Ambientes Conda não são automaticamente adicionados ao PATH do Windows
-- Arquivos `.bat` tentavam executar `python` direto sem especificar o ambiente
-- VS Code configurado para Python genérico ao invés do ambiente específico
+- Lógica incorreta em `find_recent_files()` não avançava para o próximo mês após dia 19
+- Código definia `mes_atual = hoje.month` independente do dia
+- Documentação mencionava ciclo 19-18, mas implementação estava errada
+- Após dia 19, deveria buscar arquivo do PRÓXIMO mês, não do mês corrente
 
 ## 🔧 Solução Implementada
 
-### 1. Ambiente Conda Criado
+### 1. Corrigida Lógica do Ciclo 19-18
 
-```bash
-# Criado ambiente isolado para o projeto
-conda create -n financeiro python=3.11 -y
-conda activate financeiro
-pip install -r requirements.txt
+**Arquivo modificado:** `backend/src/services/file_processing_service.py`
+
+**Lógica corrigida em `find_recent_files()`:**
+
+```python
+# ❌ ANTES (incorreto):
+if hoje.day >= 19:
+    mes_atual = hoje.month  # ❌ Usava mês corrente
+    ano_atual = hoje.year
+else:
+    mes_atual = hoje.month  # ❌ Mesmo valor!
+    ano_atual = hoje.year
+
+# ✅ DEPOIS (correto):
+if hoje.day >= 19:
+    # A partir do dia 19, o ciclo é do PRÓXIMO mês
+    mes_atual = hoje.month + 1
+    ano_atual = hoje.year
+    if mes_atual > 12:
+        mes_atual = 1
+        ano_atual += 1
+else:
+    # Antes do dia 19, o ciclo é do mês corrente
+    mes_atual = hoje.month
+    ano_atual = hoje.year
 ```
 
-**Resultado:**
+**Exemplo prático:**
+- 📅 Hoje: 28/10/2025 (dia >= 19)
+- ✅ Busca arquivo: **202511_Extrato.txt** (novembro)
+- 💡 Ciclo: 19/10 a 18/11 = mês de **novembro**
 
-- ✅ Python 3.11.14 instalado
-- ✅ 19 dependências instaladas (pandas, openpyxl, pytest, etc.)
-- ✅ Ambiente isolado do Anaconda base
+### 2. Testes Atualizados
 
-### 2. Arquivos .bat Atualizados (5 arquivos)
+**Arquivo modificado:** `tests/test_services/test_file_processing_service.py`
 
-**Arquivos modificados:**
+**Novo teste adicionado:**
 
-- ✅ `agente_financeiro_completo.bat`
-- ✅ `agente_financeiro_simples.bat`
-- ✅ `agente_financeiro.bat`
-- ✅ `atualiza_dicionario.bat`
-- ✅ `atualiza_dicionario_controle.bat`
-
-**Alteração implementada:**
-
-```batch
-# ❌ Antes (não funcionava):
-python agente_financeiro.py
-
-# ✅ Depois (funciona):
-set "CONDA_EXE=C:\ProgramData\anaconda3\Scripts\conda.exe"
-set "CONDA_ENV=financeiro"
-"%CONDA_EXE%" run -n %CONDA_ENV% python agente_financeiro.py
+```python
+def test_find_recent_files_ciclo_19_18(self, service):
+    """Testa que a busca considera o ciclo mensal de 19 a 18."""
+    hoje = datetime.today()
+    
+    # Calcula mês esperado baseado no ciclo
+    if hoje.day >= 19:
+        mes_esperado = hoje.month + 1
+        ano_esperado = hoje.year
+        if mes_esperado > 12:
+            mes_esperado = 1
+            ano_esperado += 1
+    else:
+        mes_esperado = hoje.month
+        ano_esperado = hoje.year
+    
+    # Valida que encontra o arquivo correto
+    assert arquivo_esperado.name in found_files
 ```
 
-**Melhorias adicionais nos .bat:**
+**Teste corrigido:**
+- ✅ `test_find_recent_files_with_files` - ajustado para ciclo 19-18
+- ✅ `test_find_recent_files_filters_by_date` - atualizado para nova lógica
 
-- ✅ Validação de existência do Conda
-- ✅ Verificação de ambiente instalado
-- ✅ Mensagens de erro descritivas
-- ✅ Indicação visual do ambiente ativo
+### 3. Script de Validação Criado
 
-### 3. Configuração do VS Code
+**Arquivo novo:** `backend/src/teste_ciclo_19_18.py`
 
-**Arquivo:** `.vscode/settings.json`
-
-```json
-{
-  "python.defaultInterpreterPath": "C:\\Users\\<user>\\.conda\\envs\\financeiro\\python.exe"
-}
-```
-
-### 4. Documentação Criada/Atualizada
-
-#### 📄 Novo: CONFIGURACAO_AMBIENTE.md
-
-Guia completo de configuração com:
-
-- ✅ Status dos ambientes Python disponíveis
-- ✅ Como selecionar interpretador no VS Code
-- ✅ Lista de dependências instaladas
-- ✅ Comandos de execução e troubleshooting
-- ✅ Checklist de configuração
-
-#### 📄 Atualizado: docs/DOCUMENTACAO_TECNICA.md
-
-Nova seção: **🔧 Troubleshooting e Configuração**
-
-- ✅ Problema: Erro de PATH do Python
-- ✅ Solução passo a passo com comandos
-- ✅ Validação de sucesso
-- ✅ Observações sobre múltiplos Pythons
-
-#### 📄 Atualizado: docs/INDICE_DOCUMENTACAO.md
-
-- ✅ Referência ao novo guia CONFIGURACAO_AMBIENTE.md
-- ✅ Link para seção de troubleshooting
-
-#### 📄 Atualizado: README.md
-
-Nova seção: **🐍 Configuração do Ambiente (Anaconda)**
-
-- ✅ Pré-requisitos com Conda
-- ✅ Passos de instalação
-- ✅ Link para guia completo
-- ✅ Aviso sobre PATH do Python
+Utilidade para testar e visualizar a lógica do ciclo:
+- ✅ Mostra mês atual baseado no ciclo
+- ✅ Lista arquivos que devem ser buscados
+- ✅ Compara com arquivos realmente encontrados
+- ✅ Exibe arquivos disponíveis no diretório
 
 ## ✅ Validação
 
-### Testes de Integração Realizados
-
-#### Teste 1: Ambiente Conda
+### Testes Unitários
 
 ```bash
-conda env list
-# ✅ Resultado: financeiro    C:\Users\luti_\.conda\envs\financeiro
+pytest tests/test_services/test_file_processing_service.py -v
 ```
 
-#### Teste 2: Python e Versão
+**Resultado:**
+```
+✅ 17 passed in 0.90s
+   - test_find_recent_files_ciclo_19_18 PASSED
+   - test_find_recent_files_with_files PASSED
+   - test_find_recent_files_filters_by_date PASSED
+```
+
+### Teste de Integração Real
 
 ```bash
-"C:\Users\luti_\.conda\envs\financeiro\python.exe" --version
-# ✅ Resultado: Python 3.11.14
+python backend/src/teste_ciclo_19_18.py
 ```
 
-#### Teste 3: Dependências
+**Resultado:**
+```
+📅 Data de hoje: 28/10/2025
+   Dia do mês: 28
+
+💡 A partir do dia 19, o ciclo atual é do PRÓXIMO mês
+   Mês atual do ciclo: Novembro de 2025
+   Arquivo esperado: 202511_Extrato.txt
+
+✅ Encontrados 9 arquivo(s):
+   - Pix_202511: 202511_Extrato.txt     ← ✅ NOVEMBRO!
+   - Itau_202511: 202511_Itau.xls       ← ✅ NOVEMBRO!
+   - Latam_202511: 202511_Latam.xls     ← ✅ NOVEMBRO!
+   - Pix_202510: 202510_Extrato.txt
+   - Itau_202510: 202510_Itau.xls
+   ...
+```
+
+### Teste de Processamento Completo
 
 ```bash
-python -c "import pandas, openpyxl, pytest, colorama"
-# ✅ Resultado: Sem erros - todas instaladas
+python backend/src/agente_financeiro.py
 ```
-
-#### Teste 4: Script Principal (Teste Real de Produção)
-
-```bash
-"C:\Users\luti_\.conda\envs\financeiro\python.exe" agente_financeiro.py
-```
-
-**Resultado completo:**
-
-```
-✅ Configuração carregada de: config.ini
-✅ 624 categorias carregadas para cache
-✅ Total de arquivos encontrados: 30
-✅ 2109 transações extraídas
 ✅ 2109/2109 transações categorizadas automaticamente (100%)
 ✅ 2109/2109 transações salvas no banco
 ✅ Excel gerado: consolidado_temp.xlsx
@@ -154,153 +147,95 @@ python -c "import pandas, openpyxl, pytest, colorama"
 
 ## 📊 Impacto e Benefícios
 
-### Ambiente de Desenvolvimento
 
-- ✅ Scripts .bat funcionam em qualquer máquina Windows com Anaconda
-- ✅ Ambiente isolado evita conflitos de dependências entre projetos
-- ✅ Configuração documentada e reproduzível
-- ✅ VS Code detecta ambiente automaticamente
-- ✅ Zero erros de PATH ou dependências faltando
+**Resultado:**
+```
+✅ 33 arquivos encontrados (vs 30 anteriormente)
+✅ Processando arquivos de NOVEMBRO (202511):
+   - 202511_Extrato.txt → 9 transações
+   - 202511_Itau.xls → 23 transações
+   - 202511_Latam.xls → 43 transações
+✅ Total: 2184 transações processadas
+✅ Período: 2024-05-20 a 2025-11-05
+✅ 2177/2184 categorizadas automaticamente (99.7%)
+✅ Tempo de processamento: 16.25s
+✅ Zero erros
+```
 
-### Produção
+## � Impacto
 
-- ✅ Sistema processou 2109 transações com 100% de sucesso
-- ✅ 30 arquivos processados em 16.97 segundos
-- ✅ 98.2% de precisão na categorização mantida
-- ✅ Zero erros de execução
-- ✅ Todos os .bat funcionando perfeitamente
+### Antes da Correção
 
-## 📦 Dependências Instaladas no Ambiente
+- ❌ Arquivos 202511 ignorados (novembro)
+- ❌ Apenas 30 arquivos processados
+- ❌ Transações futuras não capturadas
+- ❌ Compras parceladas incompletas
 
-**Principais (requirements.txt):**
+### Depois da Correção
 
-- pandas (2.3.3)
-- openpyxl (3.1.5)
-- xlrd (2.0.2)
-- configparser (7.2.0)
-- tqdm (4.67.1)
-- colorama (0.4.6)
-
-**Testes:**
-
-- pytest (8.4.2)
-- pytest-cov (7.0.0)
-- pytest-mock (3.15.1)
-
-**Qualidade de Código:**
-
-- black (25.9.0)
-- flake8 (7.3.0)
-- isort (7.0.0)
-
-**Total:** 19 pacotes + dependências transitivas
+- ✅ **33 arquivos processados** (+3 arquivos de novembro)
+- ✅ **2184 transações** (todas as transações)
+- ✅ **Período completo:** 19/10 a 18/11 considerado
+- ✅ **Compras parceladas completas**
+- ✅ **Previsão de gastos futuros funcional**
 
 ## 📝 Observações Importantes
 
-### Sobre Múltiplos Pythons
+### Sobre o Ciclo 19-18
 
-- ✅ É NORMAL ter múltiplos Pythons no sistema
-- ✅ Anaconda base (3.13) gerencia os ambientes
-- ✅ Ambientes específicos (3.11 financeiro) para cada projeto
-- ✅ Python global não interfere se usar Conda corretamente
-- ✅ Cada projeto tem seu próprio ambiente isolado (boa prática)
+- 💡 O ciclo mensal vai do dia **19 de um mês ao dia 18 do próximo**
+- 💡 Arquivo de novembro (202511) contém transações de **19/10 a 18/11**
+- 💡 **NÃO há filtro de datas dentro dos arquivos** - todas as transações são processadas
+- 💡 Compras parceladas e transações futuras são preservadas
 
-### Compatibilidade
+### Regra de Negócio
 
-- ✅ Windows 10/11
-- ✅ Anaconda 3 (qualquer versão recente)
-- ✅ Python 3.11+ no ambiente do projeto
-- ✅ VS Code com extensão Python
+```
+Dia 19-31 do mês X → Arquivo do mês X+1
+Dia 01-18 do mês X → Arquivo do mês X
 
-## � Referências da Documentação
+Exemplo:
+28/10 → Busca 202511 (novembro)
+15/11 → Busca 202511 (novembro)
+19/11 → Busca 202512 (dezembro)
+```
 
-1. **CONFIGURACAO_AMBIENTE.md** - Guia completo passo a passo
-2. **docs/DOCUMENTACAO_TECNICA.md** - Seção Troubleshooting detalhada
-3. **docs/INDICE_DOCUMENTACAO.md** - Índice atualizado
-4. **README.md** - Instruções de instalação
+## 📦 Arquivos Modificados
 
-## 🎯 Checklist de Verificação
+```
+M  backend/src/services/file_processing_service.py
+   - Corrigida lógica do ciclo 19-18 em find_recent_files()
+   - Adicionado comentário explicativo detalhado
 
-- [x] Ambiente Conda 'financeiro' criado
-- [x] Python 3.11.14 instalado no ambiente
-- [x] Todas dependências do requirements.txt instaladas
-- [x] 5 arquivos .bat atualizados para usar Conda
-- [x] VS Code configurado (.vscode/settings.json)
-- [x] Documentação criada (CONFIGURACAO_AMBIENTE.md)
-- [x] Documentação técnica atualizada
-- [x] README.md com instruções de setup
-- [x] Testes de validação executados com sucesso
-- [x] Sistema processando transações em produção
+M  tests/test_services/test_file_processing_service.py
+   - Novo teste: test_find_recent_files_ciclo_19_18
+   - Corrigido: test_find_recent_files_with_files
+   - Corrigido: test_find_recent_files_filters_by_date
+
+A  backend/src/teste_ciclo_19_18.py
+   - Script de validação e visualização da lógica
+```
+
+## � Checklist de Verificação
+
+- [x] Lógica do ciclo 19-18 corrigida
+- [x] Testes unitários atualizados (17/17 passando)
+- [x] Script de validação criado
+- [x] Teste de integração real executado
+- [x] Processamento completo validado
+- [x] Arquivos de novembro sendo processados
+- [x] Documentação atualizada
 
 ---
 
 **Data:** 28/10/2025  
-**Tipo:** Correção de Configuração (fix)  
+**Tipo:** Correção de Bug (fix)  
 **Prioridade:** Alta  
-**Status:** ✅ Resolvido, Testado e Documentado  
-**Impacto:** Sistema 100% operacional
-
-### 🧪 Estatísticas de Testes
-
-- **Total de testes:** 160 (119 passando + 8 falhas + 33 erros setup)
-- **Taxa de sucesso:** 74.4% (119/160 testes executados)
-- **Testes passando:** 119 (vs 57 anteriormente, +108%)
-- **Cobertura:** 35.34% (vs 29.73%, +5.61 pontos)
-- **Tempo de execução:** ~17s
-- **Arquivos de teste:** 11
-
-### 🛠️ Infraestrutura e Correções
-
-- ✅ Corrigida assinatura de LearnedCategory (description, category, confidence)
-- ✅ Corrigidos testes de Transaction (parâmetros nomeados)
-- ✅ Ajustadas referências de ProcessingStats
-- ✅ Fixtures aprimoradas para testes de integração
-- ✅ Tratamento robusto de cleanup SQLite no Windows
-
-### 📦 Arquivos Modificados
-
-```
-M  README.md                                          # Badges e stats atualizados
-M  docs/INDICE_DOCUMENTACAO.md                       # Estatísticas atualizadas
-M  docs/PLANEJAMENTO.md                              # Semana 1 ✅ com novos números
-
-M  tests/test_database/test_category_repository.py   # 15 testes corrigidos
-M  tests/test_database/test_transaction_repository.py # Testes adicionados
-M  tests/test_services/test_file_processing_service.py # Stats corrigidos
-
-A  tests/test_services/test_categorization_extended.py  # 13 novos testes
-A  tests/test_integration/test_models_integration.py    # 17 novos testes
-A  tests/test_models/test_models_extended.py            # 22 novos testes
-```
-
-### 🎖️ Conquistas
-
-- ✅ **119 testes passando** (+108% vs iteração anterior)
-- ✅ **35.34% de cobertura** (meta: 40%, próximo!)
-- ✅ **FileProcessingService:** 12.98% → 44.27% (+31%)
-- ✅ **Models:** 82.39% → 83.80%
-- ✅ **Cards:** 59.06% → 60.63%
-- ✅ Documentação 100% sincronizada
-- ✅ Infraestrutura de testes sólida e extensível
-
-### 🔄 Próximos Passos
-
-- [ ] Corrigir 8 testes falhando (enums e API)
-- [ ] Resolver 33 erros de setup (fixtures)
-- [ ] Alcançar 40%+ de cobertura
-- [ ] Semana 2: CI/CD com GitHub Actions
-
-### 🚀 Próximos Passos
-
-**Semana 2: CI/CD com GitHub Actions**
-
-- Automatizar execução de testes
-- Configurar Codecov
-- Criar workflows de release
-- Badges dinâmicos no README
+**Status:** ✅ Resolvido, Testado e Validado  
+**Impacto:** Sistema processando todos os arquivos corretamente
 
 ---
 
-**Relates to:** #1 Fase 1 - Consolidação e Qualidade  
-**Version:** v2.0.1-dev  
-**Date:** 2025-10-27
+**Relates to:** Ciclo mensal 19-18  
+**Version:** v2.0.2-dev  
+**Date:** 2025-10-28
