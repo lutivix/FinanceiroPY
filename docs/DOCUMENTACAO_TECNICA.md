@@ -465,7 +465,99 @@ def monitor_performance():
 
 ---
 
-## 🛡️ **Segurança e Privacidade**
+## � **Troubleshooting e Configuração**
+
+### **Problema: Erro de PATH do Python ao executar .bat**
+
+**Sintoma:**
+
+- Ao executar os arquivos `.bat`, aparece erro "Python não encontrado no PATH"
+- Scripts não executam mesmo com Anaconda instalado
+- VS Code não detecta o interpretador correto
+
+**Causa Raiz:**
+
+- Ambientes Conda não são automaticamente adicionados ao PATH do Windows
+- Arquivos `.bat` tentam executar `python` direto sem especificar o ambiente
+- VS Code pode estar configurado para Python genérico ao invés do ambiente específico
+
+**Solução Implementada:**
+
+1. **Criar ambiente Conda específico para o projeto:**
+
+   ```bash
+   conda create -n financeiro python=3.11 -y
+   conda activate financeiro
+   pip install -r requirements.txt
+   ```
+
+2. **Atualizar todos os arquivos .bat para usar o Conda:**
+
+   ```batch
+   REM Define o caminho do Conda
+   set "CONDA_EXE=C:\ProgramData\anaconda3\Scripts\conda.exe"
+   set "CONDA_ENV=financeiro"
+
+   REM Executa Python via Conda
+   "%CONDA_EXE%" run -n %CONDA_ENV% python agente_financeiro.py
+   ```
+
+3. **Configurar VS Code (.vscode/settings.json):**
+
+   ```json
+   {
+     "python.defaultInterpreterPath": "C:\\Users\\<user>\\.conda\\envs\\financeiro\\python.exe"
+   }
+   ```
+
+4. **Verificar instalação:**
+   ```bash
+   conda env list  # Verificar ambientes disponíveis
+   conda activate financeiro
+   python --version  # Deve mostrar Python 3.11.x
+   pip list  # Verificar pacotes instalados
+   ```
+
+**Arquivos Atualizados:**
+
+- ✅ `agente_financeiro_completo.bat`
+- ✅ `agente_financeiro_simples.bat`
+- ✅ `agente_financeiro.bat`
+- ✅ `atualiza_dicionario.bat`
+- ✅ `atualiza_dicionario_controle.bat`
+- ✅ `.vscode/settings.json`
+
+**Documentação de Referência:**
+
+- 📄 `CONFIGURACAO_AMBIENTE.md` - Guia completo de configuração do ambiente
+
+**Observações Importantes:**
+
+- É normal ter múltiplos Pythons no sistema (Anaconda base + ambientes específicos)
+- Cada projeto deve ter seu próprio ambiente Conda isolado
+- Python global (ex: Python 3.13 standalone) não interfere se usar Conda corretamente
+- O Anaconda base (ex: 3.13) gerencia os ambientes, mas projetos usam versões específicas
+
+**Validação de Sucesso:**
+
+```bash
+# Teste 1: Verificar ambiente
+C:\ProgramData\anaconda3\Scripts\conda.exe env list
+# Deve listar: financeiro
+
+# Teste 2: Verificar dependências
+"C:\Users\<user>\.conda\envs\financeiro\python.exe" -c "import pandas, openpyxl, pytest"
+# Não deve dar erro
+
+# Teste 3: Executar script
+cd backend/src
+"C:\Users\<user>\.conda\envs\financeiro\python.exe" agente_financeiro.py
+# Deve processar transações com sucesso
+```
+
+---
+
+## �🛡️ **Segurança e Privacidade**
 
 ### **Proteção de Dados**
 

@@ -8,17 +8,26 @@ Sistema Python avançado que automatiza completamente o processamento de extrato
 [![SQLite](https://img.shields.io/badge/Database-SQLite-green.svg)](https://sqlite.org)
 [![Efficiency](https://img.shields.io/badge/Precisão-98.2%25-brightgreen.svg)](README.md)
 [![Tests](https://img.shields.io/badge/Tests-119%20passing-success.svg)](tests/)
+[![Test Status](https://img.shields.io/badge/Status-94%25%20healthy-yellow.svg)](docs/SEMANA2_PRONTIDAO.md)
 [![Coverage](https://img.shields.io/badge/Coverage-35.34%25-yellow.svg)](htmlcov/index.html)
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Phase](https://img.shields.io/badge/Phase-Week%202%20Ready-blue.svg)](docs/SEMANA2_RESUMO_EXECUTIVO.md)
 
 ## 🏆 **Performance Atual**
 
+### 🎯 Produção (v2.0)
+
 - ✅ **98.2% de precisão** na categorização automática (1759/1791 transações)
 - ✅ **584 categorias** otimizadas após limpeza de duplicatas
-- ✅ **119 testes automatizados** garantindo qualidade do código
-- ✅ **35.34% de cobertura** de testes (em crescimento)
 - ✅ **Automação completa** com interface menu Windows
 - ✅ **Processamento inteligente** de múltiplas fontes simultâneas
+
+### 🧪 Qualidade (Semana 1 - Concluída)
+
+- ✅ **127 testes implementados** (119 passing, 8 to fix)
+- ✅ **35.34% de cobertura** de código (meta: 70%)
+- ✅ **Infraestrutura completa** de testes com pytest
+- 🔧 **94% funcional** - [Ver status detalhado](docs/SEMANA2_PRONTIDAO.md)
 
 ## 🚀 **Funcionalidades**
 
@@ -90,7 +99,26 @@ Financeiro/
 
 ## ⚡ **Instalação e Execução**
 
-### **🚀 Execução Rápida (Recomendada)**
+### **� Configuração do Ambiente (Anaconda)**
+
+**⚠️ IMPORTANTE:** Este projeto usa Anaconda com ambiente isolado.
+
+```bash
+# 1. Criar ambiente Conda específico (Python 3.11)
+conda create -n financeiro python=3.11 -y
+
+# 2. Ativar o ambiente
+conda activate financeiro
+
+# 3. Instalar dependências
+pip install -r requirements.txt
+```
+
+**📌 Primeira vez configurando?** Consulte [CONFIGURACAO_AMBIENTE.md](CONFIGURACAO_AMBIENTE.md) para guia completo.
+
+**🔧 Troubleshooting de PATH:** Se encontrar erro "Python não encontrado", veja seção de troubleshooting em [DOCUMENTACAO_TECNICA.md](docs/DOCUMENTACAO_TECNICA.md#-troubleshooting-e-configura%C3%A7%C3%A3o).
+
+### **�🚀 Execução Rápida (Recomendada)**
 
 1. **Execute via interface automática:**
    ```cmd

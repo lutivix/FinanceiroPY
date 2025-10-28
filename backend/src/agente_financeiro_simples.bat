@@ -3,12 +3,17 @@ title Agente Financeiro IA - Sistema Completo
 cd /d "%~dp0"
 cls
 
+REM Define o caminho do Conda
+set "CONDA_EXE=C:\ProgramData\anaconda3\Scripts\conda.exe"
+set "CONDA_ENV=financeiro"
+
 :inicio
 echo.
 echo ========================================================
 echo           🤖 AGENTE FINANCEIRO IA v2.0
 echo ========================================================
 echo 📂 Diretorio: %~dp0
+echo 🐍 Ambiente: %CONDA_ENV%
 echo.
 echo 🎯 Selecione uma opcao:
 echo.
@@ -38,11 +43,11 @@ echo ========================================================
 echo         🔄 PROCESSAMENTO COMPLETO INICIADO
 echo ========================================================
 echo.
-python agente_financeiro.py
+"%CONDA_EXE%" run -n %CONDA_ENV% python agente_financeiro.py
 echo.
-python atualiza_dicionario.py  
+"%CONDA_EXE%" run -n %CONDA_ENV% python atualiza_dicionario.py  
 echo.
-python atualiza_dicionario_controle.py
+"%CONDA_EXE%" run -n %CONDA_ENV% python atualiza_dicionario_controle.py
 echo.
 echo ✅ PROCESSAMENTO COMPLETO FINALIZADO!
 goto :fim
@@ -52,7 +57,7 @@ cls
 echo ========================================================
 echo           📊 PROCESSANDO TRANSACOES
 echo ========================================================
-python agente_financeiro.py
+"%CONDA_EXE%" run -n %CONDA_ENV% python agente_financeiro.py
 goto :fim
 
 :dicionario
@@ -60,7 +65,7 @@ cls
 echo ========================================================
 echo         📚 ATUALIZANDO DICIONARIO (EXCEL)
 echo ========================================================
-python atualiza_dicionario.py
+"%CONDA_EXE%" run -n %CONDA_ENV% python atualiza_dicionario.py
 goto :fim
 
 :controle
@@ -68,7 +73,7 @@ cls
 echo ========================================================
 echo        📋 ATUALIZANDO DICIONARIO (CONTROLE)
 echo ========================================================
-python atualiza_dicionario_controle.py
+"%CONDA_EXE%" run -n %CONDA_ENV% python atualiza_dicionario_controle.py
 goto :fim
 
 :limpeza
@@ -76,7 +81,7 @@ cls
 echo ========================================================
 echo           🧹 LIMPANDO CATEGORIAS DUPLICADAS
 echo ========================================================
-python limpar_categorias.py
+"%CONDA_EXE%" run -n %CONDA_ENV% python limpar_categorias.py
 goto :fim
 
 :sair

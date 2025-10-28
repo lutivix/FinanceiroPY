@@ -14,16 +14,32 @@ echo ========================================================
 echo 📁 Executando de: %SCRIPT_DIR%
 echo.
 
-REM Verifica se o Python está disponível
-python --version >nul 2>&1
-if errorlevel 1 (
-    echo ❌ ERRO: Python nao encontrado no PATH!
-    echo 💡 Tente executar pelo VS Code ou configure o PATH do Python.
+REM Define o caminho do Conda
+set "CONDA_EXE=C:\ProgramData\anaconda3\Scripts\conda.exe"
+set "CONDA_ENV=financeiro"
+
+REM Verifica se o Conda está disponível
+if not exist "%CONDA_EXE%" (
+    echo ❌ ERRO: Anaconda nao encontrado em %CONDA_EXE%
+    echo 💡 Verifique se o Anaconda esta instalado corretamente.
     echo.
     pause
     popd
     exit /b 1
 )
+
+REM Verifica se o ambiente existe
+"%CONDA_EXE%" env list | findstr /C:"%CONDA_ENV%" >nul 2>&1
+if errorlevel 1 (
+    echo ❌ ERRO: Ambiente conda '%CONDA_ENV%' nao encontrado!
+    echo 💡 Execute: conda create -n %CONDA_ENV% python=3.11
+    echo.
+    pause
+    popd
+    exit /b 1
+)
+
+echo ✅ Usando ambiente Conda: %CONDA_ENV%
 
 REM Verifica se os arquivos principais existem
 if not exist "agente_financeiro.py" (
@@ -90,7 +106,7 @@ echo         🔄 PROCESSAMENTO COMPLETO INICIADO
 echo ========================================================
 echo.
 echo ⏳ Executando processamento principal...
-python agente_financeiro.py
+"%CONDA_EXE%" run -n %CONDA_ENV% python agente_financeiro.py
 if errorlevel 1 (
     echo ❌ Erro no processamento principal!
     pause
@@ -98,7 +114,7 @@ if errorlevel 1 (
 )
 echo.
 echo ⏳ Atualizando dicionario do Excel...
-python atualiza_dicionario.py
+"%CONDA_EXE%" run -n %CONDA_ENV% python atualiza_dicionario.py
 if errorlevel 1 (
     echo ❌ Erro na atualização do dicionário Excel!
     pause
@@ -106,7 +122,7 @@ if errorlevel 1 (
 )
 echo.
 echo ⏳ Atualizando dicionario do Controle...  
-python atualiza_dicionario_controle.py
+"%CONDA_EXE%" run -n %CONDA_ENV% python atualiza_dicionario_controle.py
 if errorlevel 1 (
     echo ❌ Erro na atualização do dicionário Controle!
     pause
@@ -123,7 +139,7 @@ echo ========================================================
 echo           📊 PROCESSANDO TRANSACOES
 echo ========================================================
 echo.
-python agente_financeiro.py
+"%CONDA_EXE%" run -n %CONDA_ENV% python agente_financeiro.py
 if errorlevel 1 (
     echo ❌ Erro no processamento!
     pause
@@ -138,7 +154,7 @@ echo ========================================================
 echo         📚 ATUALIZANDO DICIONARIO (EXCEL)
 echo ========================================================
 echo.
-python atualiza_dicionario.py
+"%CONDA_EXE%" run -n %CONDA_ENV% python atualiza_dicionario.py
 if errorlevel 1 (
     echo ❌ Erro na atualização do dicionário!
     pause
@@ -153,7 +169,7 @@ echo ========================================================
 echo        📋 ATUALIZANDO DICIONARIO (CONTROLE)
 echo ========================================================
 echo.
-python atualiza_dicionario_controle.py
+"%CONDA_EXE%" run -n %CONDA_ENV% python atualiza_dicionario_controle.py
 if errorlevel 1 (
     echo ❌ Erro na atualização do dicionário!
     pause
@@ -168,7 +184,7 @@ echo ========================================================
 echo           🧹 LIMPANDO CATEGORIAS DUPLICADAS
 echo ========================================================
 echo.
-python limpar_categorias.py
+"%CONDA_EXE%" run -n %CONDA_ENV% python limpar_categorias.py
 if errorlevel 1 (
     echo ❌ Erro na limpeza!
     pause
