@@ -59,12 +59,12 @@ else:
 **Exemplos práticos:**
 
 | Data Atual | Mês do Ciclo | Arquivo Buscado | Período Coberto |
-|------------|--------------|-----------------|-----------------|
-| 15/10/2025 | Outubro | 202510_*.* | 19/09 a 18/10 |
-| 19/10/2025 | Novembro | 202511_*.* | 19/10 a 18/11 |
-| 28/10/2025 | Novembro | 202511_*.* | 19/10 a 18/11 |
-| 05/11/2025 | Novembro | 202511_*.* | 19/10 a 18/11 |
-| 19/11/2025 | Dezembro | 202512_*.* | 19/11 a 18/12 |
+| ---------- | ------------ | --------------- | --------------- |
+| 15/10/2025 | Outubro      | 202510\__._     | 19/09 a 18/10   |
+| 19/10/2025 | Novembro     | 202511\__._     | 19/10 a 18/11   |
+| 28/10/2025 | Novembro     | 202511\__._     | 19/10 a 18/11   |
+| 05/11/2025 | Novembro     | 202511\__._     | 19/10 a 18/11   |
+| 19/11/2025 | Dezembro     | 202512\__._     | 19/11 a 18/12   |
 
 ### **Processamento de Arquivos**
 
@@ -80,6 +80,7 @@ else:
 **Exemplo:**
 
 Arquivo `202511_Itau.xls` (novembro) pode conter:
+
 - Transações de 19/10 (início do ciclo)
 - Transações de 05/11 (meio do ciclo)
 - Transações de 18/11 (fim do ciclo)
@@ -93,16 +94,16 @@ Arquivo `202511_Itau.xls` (novembro) pode conter:
 def find_recent_files(months_back: int = 12) -> Dict[str, Path]:
     """
     Busca arquivos dos últimos N meses baseado no ciclo 19-18.
-    
+
     Args:
         months_back: Quantos meses para trás buscar (padrão: 12)
-        
+
     Returns:
         Dicionário com identificador -> caminho do arquivo
     """
     # Determina mês atual do ciclo
     mes_atual = calcular_mes_ciclo(hoje)
-    
+
     # Busca retroativa
     for i in range(months_back):
         ano_mes = calcular_ano_mes(mes_atual - i)

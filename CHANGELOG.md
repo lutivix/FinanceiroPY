@@ -27,6 +27,7 @@ e este projeto adere ao [Semantic Versioning](https://semver.org/lang/pt-BR/).
 ### ✨ Adicionado
 
 - **Script de validação do ciclo 19-18**
+
   - `backend/src/teste_ciclo_19_18.py`
   - Visualiza lógica do ciclo mensal
   - Lista arquivos que devem ser buscados
