@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pluggy Connect - Conectar Conta Bancária</title>
+    <script src="https://cdn.pluggy.ai/pluggy-connect/v3.6.1/pluggy-connect.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            font-size: 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        #result {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f0f0f0;
+            border-radius: 4px;
+            display: none;
+        }
+        .info {
+            background-color: #e7f3ff;
+            border-left: 4px solid #2196F3;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔌 Pluggy Connect - Conectar Conta Bancária</h1>
+    
+    <div class="info">
+        <h3>ℹ️ Instruções:</h3>
+        <ol>
+            <li>Clique no botão abaixo para abrir o widget Pluggy Connect</li>
+            <li>Escolha sua instituição financeira (Mercado Pago, Nubank, etc.)</li>
+            <li>Digite suas credenciais de acesso</li>
+            <li>Após conectar, o <strong>Item ID</strong> será exibido aqui</li>
+            <li>Copie o Item ID e cole no código Python</li>
+        </ol>
+    </div>
+
+    <button id="openPluggy">🚀 Abrir Pluggy Connect</button>
+    
+    <div id="result">
+        <h3>✅ Conta Conectada!</h3>
+        <p><strong>Item ID:</strong> <span id="itemId" style="color: green; font-family: monospace;"></span></p>
+        <p><strong>Instituição:</strong> <span id="connectorName"></span></p>
+        <p>Copie o Item ID acima e use no código Python!</p>
+    </div>
+
+    <script>
+        // Suas credenciais Pluggy
+        const CLIENT_ID = '0774411c-feca-44dc-83df-b5ab7a1735a6';
+        const CLIENT_SECRET = '3bd7389d-72d6-419a-804a-146e3e0eaacf';
+
+        // Função para obter Connect Token
+        async function getConnectToken() {
+            const response = await fetch('https://api.pluggy.ai/auth', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    clientId: CLIENT_ID,
+                    clientSecret: CLIENT_SECRET
+                })
+            });
+            const data = await response.json();
+            return data.apiKey;
+        }
+
+        // Configurar botão
+        document.getElementById('openPluggy').addEventListener('click', async function() {
+            try {
+                // Obter token de acesso
+                const connectToken = await getConnectToken();
+                
+                // Inicializar Pluggy Connect
+                const pluggyConnect = new PluggyConnect({
+                    connectToken: connectToken,
+                    includeSandbox: true, // Incluir banco de teste
+                    onSuccess: (itemData) => {
+                        console.log('Item criado:', itemData);
+                        
+                        // Exibir resultado
+                        document.getElementById('itemId').textContent = itemData.item.id;
+                        document.getElementById('connectorName').textContent = itemData.item.connector.name;
+                        document.getElementById('result').style.display = 'block';
+                    },
+                    onError: (error) => {
+                        console.error('Erro:', error);
+                        alert('Erro ao conectar: ' + error.message);
+                    }
+                });
+
+                // Abrir widget
+                pluggyConnect.init();
+                
+            } catch (error) {
+                console.error('Erro ao obter token:', error);
+                alert('Erro ao inicializar: ' + error.message);
+            }
+        });
+    </script>
+</body>
+</html>

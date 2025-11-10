@@ -7,6 +7,117 @@ e este projeto adere ao [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
 ---
 
+## [2.1.0] - 2025-11-10 🚀
+
+### 🎉 Principais Mudanças
+
+Esta versão representa um **avanço significativo** no projeto com integração Open Finance e reorganização profissional completa da documentação.
+
+### ✨ Adicionado
+
+#### **🔗 Integração Open Finance (Pluggy)**
+
+- Integração completa com Open Finance Brasil via Pluggy
+- Cliente REST API funcional (autenticação, contas, transações, identidade)
+- Suporte a OAuth2 para conexão segura com bancos
+- Mercado Pago conectado e validado com dados reais
+- Sandbox de testes configurado e operacional
+- Módulos `backend/src/integrations/`:
+  - `pluggy_client.py` - Cliente API (REST, não SDK)
+  - `pluggy_sync.py` - Serviço de sincronização de transações
+- Scripts de teste e validação:
+  - `teste_pluggy_rest.py` - Validação REST API ✅
+  - `verificar_dados_completos.py` - Testes completos ✅
+
+#### **📚 Documentação Profissional Reorganizada**
+
+- Estrutura de documentação com padrão de mercado
+- 3 categorias temáticas criadas:
+  - `/docs/Desenvolvimento/` - Arquitetura, guias, planejamento
+  - `/docs/Integracao/` - Open Finance, APIs externas
+  - `/docs/Testing/` - Estratégia de testes, qualidade
+- Numeração cronológica (XXX_NOME.md) em todos os documentos
+- READMEs em cada categoria para navegação
+- `/docs/README.md` - Índice visual completo
+- `Integracao_PROXIMO_CHAT.md` - Contexto rápido para IA/novos membros
+- Novos documentos técnicos:
+  - `003_ARQUITETURA_PLUGGY.md` - Decisões técnicas (REST vs SDK)
+  - `004_SEGURANCA_OPENFINANCE.md` - Compliance LGPD/BCB
+  - `007_REORGANIZACAO_COMPLETA.md` - Histórico da reorganização
+
+#### **⚙️ Configurações Centralizadas**
+
+- Pasta `/config/` criada para arquivos de configuração
+- `config/README.md` com guia completo de uso
+- `config.ini` movido de `/backend/src/` para `/config/`
+- Template `config.example.ini` atualizado com seção `[PLUGGY]`
+- Proteção via `.gitignore` mantida
+
+### 🔧 Melhorado
+
+- **README.md** atualizado:
+  - Badge Open Finance adicionado
+  - Seção de integração Open Finance
+  - Links para documentação reorganizada
+  - Estrutura do projeto atualizada
+  - Roadmap ajustado (v2.1 = Open Finance)
+  - Informações de autor corretas
+- **Badges** atualizadas com novos links (paths corretos)
+- **Roadmap** reajustado para refletir avanço no cronograma
+
+### 📖 Documentação
+
+#### **Guias de Integração Open Finance**
+
+- Decisões técnicas documentadas (por que REST API em vez de SDK)
+- Diagramas de arquitetura (Mermaid) - componentes e fluxos
+- Mapeamento completo Pluggy → Transaction model
+- Segurança e compliance LGPD/BCB documentados
+- Checklist de segurança e plano de resposta a incidentes
+- Performance e otimizações implementadas
+
+#### **Navegação Melhorada**
+
+- Links cruzados entre documentos relacionados
+- Índices em cada categoria
+- Emojis padronizados para seções
+- Estrutura hierárquica clara
+
+### 🔐 Segurança
+
+- Credenciais Pluggy protegidas em `config/config.ini` (`.gitignore`)
+- OAuth2 implementado (não compartilha senha bancária)
+- Read-only access (sem permissão de transferência)
+- Compliance LGPD documentado
+- Certificações Pluggy verificadas (ISO 27001, PCI DSS, SOC 2)
+- Plano de resposta a incidentes documentado
+
+### 🐛 Problemas Conhecidos
+
+- **pluggy-sdk** tem bug de autenticação (não usar)
+- Solução: REST API direta com biblioteca `requests`
+- Trial Pluggy expirado, mas Sandbox funciona
+- Items criados apenas via Dashboard (não programaticamente)
+- Documentação completa em `docs/Integracao_PROXIMO_CHAT.md`
+
+### 🎯 Próximos Passos
+
+- [ ] Migrar credenciais para `.env` + `python-decouple`
+- [ ] Refatorar `pluggy_client.py` para usar REST API definitivamente
+- [ ] Conectar conta Itaú via Open Finance
+- [ ] Implementar sincronização automática de transações
+- [ ] Integrar Open Finance no fluxo principal do agente
+
+### 📊 Estatísticas
+
+- **9 novos arquivos** criados (docs + config)
+- **14 arquivos** reorganizados com numeração
+- **100% preservação** de conteúdo (nada perdido)
+- **3 categorias** de documentação
+- **4 READMEs** de navegação criados
+
+---
+
 ## [2.0.2] - 2025-10-28 🐛
 
 ### 🐛 Corrigido

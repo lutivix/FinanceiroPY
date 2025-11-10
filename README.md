@@ -1,33 +1,44 @@
-# 🤖 Agente Financeiro IA v2.0
+# 🤖 Agente Financeiro IA v2.1
 
-> **Sistema inteligente de automação financeira com 98.2% de precisão em categorização**
+> **Sistema inteligente de automação financeira com 98.2% de precisão + Open Finance**
 
-Sistema Python avançado que automatiza completamente o processamento de extratos bancários, cartões de crédito e PIX, utilizando machine learning para categorização inteligente e gerando relatórios consolidados prontos para análise.
+Sistema Python avançado que automatiza completamente o processamento de extratos bancários, cartões de crédito e PIX, utilizando machine learning para categorização inteligente, **integração Open Finance via Pluggy**, e gerando relatórios consolidados prontos para análise.
 
 [![Python](https://img.shields.io/badge/Python-3.13+-blue.svg)](https://python.org)
 [![SQLite](https://img.shields.io/badge/Database-SQLite-green.svg)](https://sqlite.org)
 [![Efficiency](https://img.shields.io/badge/Precisão-98.2%25-brightgreen.svg)](README.md)
 [![Tests](https://img.shields.io/badge/Tests-119%20passing-success.svg)](tests/)
-[![Test Status](https://img.shields.io/badge/Status-94%25%20healthy-yellow.svg)](docs/SEMANA2_PRONTIDAO.md)
+[![Test Status](https://img.shields.io/badge/Status-94%25%20healthy-yellow.svg)](docs/Testing/003_SEMANA2_PRONTIDAO.md)
 [![Coverage](https://img.shields.io/badge/Coverage-35.34%25-yellow.svg)](htmlcov/index.html)
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Phase](https://img.shields.io/badge/Phase-Week%202%20Ready-blue.svg)](docs/SEMANA2_RESUMO_EXECUTIVO.md)
+[![Open Finance](https://img.shields.io/badge/Open%20Finance-Pluggy-success.svg)](docs/Integracao_PROXIMO_CHAT.md)
+[![Docs](https://img.shields.io/badge/Docs-Organized-blue.svg)](docs/README.md)
 
 ## 🏆 **Performance Atual**
 
-### 🎯 Produção (v2.0)
+### 🎯 Produção (v2.1)
 
 - ✅ **98.2% de precisão** na categorização automática (1759/1791 transações)
 - ✅ **584 categorias** otimizadas após limpeza de duplicatas
 - ✅ **Automação completa** com interface menu Windows
 - ✅ **Processamento inteligente** de múltiplas fontes simultâneas
+- 🆕 **Open Finance integrado** - Acesso automatizado a dados bancários via Pluggy
+- 🆕 **Documentação profissional** - Reorganização completa com padrão de mercado
 
-### 🧪 Qualidade (Semana 1 - Concluída)
+### 🧪 Qualidade (Semana 2 - Concluída)
 
 - ✅ **127 testes implementados** (119 passing, 8 to fix)
 - ✅ **35.34% de cobertura** de código (meta: 70%)
 - ✅ **Infraestrutura completa** de testes com pytest
-- 🔧 **94% funcional** - [Ver status detalhado](docs/SEMANA2_PRONTIDAO.md)
+- 🔧 **94% funcional** - [Ver status detalhado](docs/Testing/003_SEMANA2_PRONTIDAO.md)
+
+### 🔗 Integração Open Finance (Novo!)
+
+- ✅ **Pluggy conectado** - Mercado Pago + Sandbox ativos
+- ✅ **REST API funcional** - Autenticação, contas, transações, identidade
+- ✅ **Dados reais recuperados** - Saldo, transações com categoria automática
+- 🔄 **Em desenvolvimento** - Sincronização automática e expansão para Itaú
+- 📖 **[Guia Completo](docs/Integracao_PROXIMO_CHAT.md)** - Contexto rápido e roadmap
 
 ## 🚀 **Funcionalidades**
 
@@ -63,37 +74,55 @@ Sistema Python avançado que automatiza completamente o processamento de extrato
 - ✅ **Backup automático** com versionamento no SQLite
 - ✅ **Limpeza inteligente** de categorias duplicadas
 
+### 🔗 **Integração Open Finance (Beta)** 🆕
+
+- ✅ **Acesso automatizado** a dados bancários via Open Finance Brasil
+- ✅ **Pluggy integrado** - Agregador certificado pelo Banco Central
+- ✅ **OAuth2 seguro** - Sem compartilhar senha do banco
+- ✅ **Múltiplas contas** - Mercado Pago funcionando, Itaú em teste
+- 🔄 **Sincronização automática** - Importação de transações sem planilhas
+- 📖 **Compliance LGPD** - Regulado pelo BCB, certificações ISO 27001/PCI DSS
+- 🔐 **[Ver documentação completa](docs/Integracao_PROXIMO_CHAT.md)**
+
 ## 📁 **Estrutura do Projeto**
 
 ```
 Financeiro/
+├── config/                            # ⚙️ Configurações centralizadas
+│   ├── config.ini                     # 🔐 Credenciais (não versionado)
+│   └── config.example.ini             # 📋 Template de configuração
+│
 ├── backend/src/                       # 🚀 Scripts principais
 │   ├── agente_financeiro.py           # 🤖 Processador principal (98.2% precisão)
 │   ├── atualiza_dicionario.py         # 📚 Atualiza base de Excel consolidado
 │   ├── atualiza_dicionario_controle.py # 📋 Sync com Controle_pessoal.xlsm
 │   ├── limpar_categorias.py           # 🧹 Limpeza de duplicatas inteligente
-│   ├── agente_financeiro_completo.bat # 🎯 Automação completa com validações
+│   ├── /integrations/                 # 🔗 Integrações externas
+│   │   ├── pluggy_client.py           # 🏦 Cliente Open Finance (Pluggy)
+│   │   └── pluggy_sync.py             # � Sincronização de transações
+│   ├── agente_financeiro_completo.bat # 🎯 Automação completa
 │   ├── agente_financeiro_simples.bat  # ⚡ Automação simplificada
-│   ├── agente_financeiro.bat          # 📊 Executor individual
-│   ├── atualiza_dicionario.bat        # 📚 Atualizador de dicionário
-│   ├── atualiza_dicionario_controle.bat # 📋 Atualizador de controle
-│   └── config.ini                     # ⚙️ Configurações do sistema
-├── dados/                             # � Dados locais (protegidos)
-│   ├── db/financeiro.db              # 🗄️ Base SQLite (584 categorias otimizadas)
-│   └── planilhas/                    # 📈 Extratos e relatórios Excel
-│       ├── AAAAMM_Extrato.txt        # 💳 Arquivos PIX
-│       ├── AAAAMM_Itau.xls           # 🏦 Cartão Itaú
-│       ├── AAAAMM_Latam.xls          # ✈️ Cartão Latam
-│       └── consolidado_categorizado.xlsx # 📊 Saída final ordenada
-├── .gitignore                        # 🛡️ Proteção de dados sensíveis
-└── README.md                         # 📖 Documentação completa
+│   └── *.bat                          # 📊 Scripts de automação Windows
+│
+├── dados/                             # 📊 Dados locais (protegidos)
+│   ├── db/financeiro.db               # 🗄️ Base SQLite (584 categorias)
+│   └── planilhas/                     # 📈 Extratos e relatórios Excel
+│       ├── AAAAMM_Extrato.txt         # 💳 Arquivos PIX
+│       ├── AAAAMM_Itau.xls            # 🏦 Cartão Itaú
+│       ├── AAAAMM_Latam.xls           # ✈️ Cartão Latam
+│       └── consolidado_categorizado.xlsx # 📊 Saída final
+│
+├── docs/                              # � Documentação profissional
+│   ├── README.md                      # 📖 Índice completo
+│   ├── Integracao_PROXIMO_CHAT.md    # � Contexto Open Finance
+│   ├── /Desenvolvimento/              # � Arquitetura e guias
+│   ├── /Integracao/                   # 🔗 Open Finance, APIs
+│   └── /Testing/                      # 🧪 Testes e qualidade
+│
+├── tests/                             # 🧪 Testes automatizados
+├── .gitignore                         # 🛡️ Proteção de dados sensíveis
+└── README.md                          # 📖 Este arquivo
 ```
-
-├── dados/ # 📊 Dados locais (não versionado)
-│ ├── db/financeiro.db # 🗄️ Base de dados principal
-│ └── planilhas/ # 📈 Extratos e relatórios
-├── .gitignore # 🛡️ Proteção de dados sensíveis
-└── README.md # 📖 Documentação
 
 ````
 
@@ -384,23 +413,55 @@ git push origin feature/nova-funcionalidade
 graph LR
     A[v1.0 Base] --> B[v1.5 Scripts]
     B --> C[v2.0 Automação ⭐]
-    C --> D[v2.1 Dashboard]
-    D --> E[v2.2 Mobile]
-    E --> F[v3.0 IA Avançada]
+    C --> D[v2.1 Open Finance ⭐]
+    D --> E[v2.2 Dashboard]
+    E --> F[v2.3 Mobile]
+    F --> G[v3.0 IA Avançada]
 ```
 
 - **v1.0-1.5**: Fundação e scripts básicos
-- **v2.0**: **Automação completa** (atual) - 98.2% precisão ⭐
-- **v2.1**: Interface web e análise preditiva
-- **v2.2**: Mobile e integração bancária
-- **v3.0**: IA generativa e marketplace
+- **v2.0**: Automação completa - 98.2% precisão ✅
+- **v2.1**: **Open Finance integrado** (atual) - Pluggy + Docs reorganizadas ⭐
+- **v2.2**: Interface web e análise preditiva 🔄
+- **v2.3**: Mobile (Android/iOS) 📱
+- **v3.0**: IA avançada, multi-banco, marketplace �
+
+---
+
+## 📚 **Documentação Completa**
+
+### **🚀 Início Rápido**
+
+- [📖 Índice da Documentação](docs/README.md) - Navegação completa
+- [🚀 Integracao_PROXIMO_CHAT.md](docs/Integracao_PROXIMO_CHAT.md) - **Contexto Open Finance**
+- [⚙️ Configuração](config/README.md) - Setup de credenciais
+
+### **🔧 Desenvolvimento**
+
+- [001_DOCUMENTACAO_TECNICA.md](docs/Desenvolvimento/001_DOCUMENTACAO_TECNICA.md) - Arquitetura
+- [002_GUIA_USUARIO.md](docs/Desenvolvimento/002_GUIA_USUARIO.md) - Manual de uso
+- [007_REORGANIZACAO_COMPLETA.md](docs/Desenvolvimento/007_REORGANIZACAO_COMPLETA.md) - Histórico da reorganização
+
+### **🔗 Open Finance**
+
+- [001_INTEGRACAO_PLUGGY.md](docs/Integracao/001_INTEGRACAO_PLUGGY.md) - Guia completo Pluggy
+- [003_ARQUITETURA_PLUGGY.md](docs/Integracao/003_ARQUITETURA_PLUGGY.md) - Decisões técnicas (REST vs SDK)
+- [004_SEGURANCA_OPENFINANCE.md](docs/Integracao/004_SEGURANCA_OPENFINANCE.md) - Compliance LGPD/BCB
+
+### **🧪 Testes e Qualidade**
+
+- [001_TESTING.md](docs/Testing/001_TESTING.md) - Estratégia de testes
+- [003_SEMANA2_PRONTIDAO.md](docs/Testing/003_SEMANA2_PRONTIDAO.md) - Status atual (94% funcional)
+
+---
 
 ## ⚠️ **Importante**
 
 - 🛡️ **Dados sensíveis**: Mantenha seus extratos fora do Git
-- 🔒 **Segurança**: Use sempre `.env` para credenciais
+- 🔒 **Segurança**: Use sempre `.env` para credenciais (migração planejada)
 - 💾 **Backup**: Faça backup regular do `financeiro.db`
 - 🧪 **Teste**: Sempre teste com dados de exemplo primeiro
+- 🔐 **Open Finance**: Credenciais Pluggy em `config/config.ini` (protegido por .gitignore)
 
 ## 📄 **Licença**
 
@@ -408,15 +469,16 @@ Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para de
 
 ## 👨‍💻 **Autor**
 
-**Seu Nome**
+**Luciano Costa Fernandes**
 
-- 🐙 GitHub: [@seu-usuario](https://github.com/seu-usuario)
-- 💼 LinkedIn: [seu-perfil](https://linkedin.com/in/seu-perfil)
-- 📧 Email: seu.email@exemplo.com
+- 🐙 GitHub: [@lutivix](https://github.com/lutivix)
+- � Email: luti_vix@hotmail.com
+- 🏦 Projeto: Agente Financeiro IA v2.1
 
 ---
 
 <div align="center">
   <p>⭐ <strong>Se este projeto te ajudou, considere dar uma estrela!</strong> ⭐</p>
   <p>💡 <strong>Sugestões e contribuições são sempre bem-vindas!</strong> 💡</p>
+  <p>🔗 <strong><a href="docs/README.md">Documentação Completa</a> | <a href="docs/Integracao_PROXIMO_CHAT.md">Open Finance</a> | <a href="CHANGELOG.md">Changelog</a></strong></p>
 </div>
