@@ -1,6 +1,6 @@
-# 🤖 Agente Financeiro IA v2.1
+# 🤖 Agente Financeiro IA v2.2
 
-> **Sistema inteligente de automação financeira com 98.2% de precisão + Open Finance**
+> **Sistema inteligente de automação financeira com 98.2% de precisão + Open Finance + Geração de Excel**
 
 Sistema Python avançado que automatiza completamente o processamento de extratos bancários, cartões de crédito e PIX, utilizando machine learning para categorização inteligente, **integração Open Finance via Pluggy**, e gerando relatórios consolidados prontos para análise.
 
@@ -14,14 +14,37 @@ Sistema Python avançado que automatiza completamente o processamento de extrato
 [![Open Finance](https://img.shields.io/badge/Open%20Finance-Pluggy-success.svg)](docs/Integracao_PROXIMO_CHAT.md)
 [![Docs](https://img.shields.io/badge/Docs-Organized-blue.svg)](docs/README.md)
 
+---
+
+## 🎉 NOVIDADE v2.2.0 - EXCEL OPEN FINANCE!
+
+🚀 **AVANÇO GIGANTE** - Geração completa de Excel consolidado a partir de dados reais do Open Finance:
+
+```
+📊 RESULTADOS NOVEMBRO 2025 (19/10 a 18/11)
+├─ 141 transações processadas (3 contas Itaú)
+├─ 83% categorização automática (117/141)
+├─ 33 parcelas identificadas (1/3, 2/5, etc.)
+├─ 13 moedas estrangeiras convertidas (USD → BRL)
+├─ R$ -12.391,35 em débitos | R$ -9.579,96 em créditos
+└─ Formato 100% compatível com consolidado_temp.xlsx
+```
+
+**🎯 Script:** `backend/src/gerar_excel_pluggy.py`  
+**📄 Output:** `dados/planilhas/consolidado_pluggy_nov2025.xlsx`  
+**🔒 Segurança:** Somente leitura (OAuth2) - sem operações de escrita
+
+---
+
 ## 🏆 **Performance Atual**
 
-### 🎯 Produção (v2.1)
+### 🎯 Produção (v2.2)
 
 - ✅ **98.2% de precisão** na categorização automática (1759/1791 transações)
 - ✅ **584 categorias** otimizadas após limpeza de duplicatas
 - ✅ **Automação completa** com interface menu Windows
 - ✅ **Processamento inteligente** de múltiplas fontes simultâneas
+- 🆕 **Excel Open Finance** - Geração automática de consolidado com dados reais
 - 🆕 **Open Finance integrado** - Acesso automatizado a dados bancários via Pluggy
 - 🆕 **Documentação profissional** - Reorganização completa com padrão de mercado
 

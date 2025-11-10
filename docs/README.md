@@ -1,8 +1,23 @@
 # 📚 Documentação - Agente Financeiro IA
 
 > **Sistema inteligente de automação financeira com 98.2% de precisão**  
-> **Versão:** 2.0.2  
+> **Versão:** 2.2.0  
 > **Última atualização:** 10/11/2025
+
+---
+
+## 🎉 NOVIDADE v2.2.0
+
+**🚀 GERAÇÃO DE EXCEL A PARTIR DO OPEN FINANCE!**
+
+- ✅ 141 transações reais processadas (Novembro 2025)
+- ✅ 83% de categorização automática
+- ✅ Conversão de moedas estrangeiras (USD → BRL)
+- ✅ Identificação de parcelas (1/3, 2/5, etc.)
+- ✅ Formato 100% compatível com `consolidado_temp.xlsx`
+- ✅ Acesso somente leitura (OAuth2 seguro)
+
+📄 **Arquivo gerado:** `dados/planilhas/consolidado_pluggy_nov2025.xlsx`
 
 ---
 

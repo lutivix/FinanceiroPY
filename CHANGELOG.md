@@ -7,6 +7,55 @@ e este projeto adere ao [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
 ---
 
+## [2.2.0] - 2025-11-10 🎉
+
+### 🎯 Principais Mudanças
+
+**AVANÇO GIGANTE!** Geração completa de Excel consolidado a partir de dados reais do Open Finance com categorização inteligente, conversão de moeda e identificação de parcelas.
+
+### ✨ Adicionado
+
+#### **📊 Geração de Excel Open Finance**
+
+- **Script `gerar_excel_pluggy.py`** - Geração completa de Excel consolidado
+  - Fetches de 614 transações reais (3 contas Itaú: 2 cartões + 1 conta corrente)
+  - Período: Ciclo 19-18 (19/10/2025 a 18/11/2025) = 141 transações
+  - Compatibilidade total com formato `consolidado_temp.xlsx`
+  - Categorização inteligente via `CategorizationService` (83% automático)
+  - Conversão automática de moedas estrangeiras (USD, EUR, GBP → BRL)
+  - Identificação de parcelas (1/3, 2/5, etc.) com metadata completa
+  - Mapeamento de fontes usando `get_card_source()` (9 fontes: PIX, Master/Visa Físico/Virtual/Recorrente/Bia/Mae)
+- **Colunas Excel**: Data, Descricao, Fonte, Valor, Categoria, MesComp, Origem_Banco, Tipo_Conta, Categoria_Banco, Tipo_Transacao, Parcela, Provider_ID
+- **Ordenação correta**: MesComp (asc) → Fonte (desc) → Data (asc)
+- **Output**: `dados/planilhas/consolidado_pluggy_nov2025.xlsx`
+
+#### **🔧 Melhorias no Sistema**
+
+- Adicionada categoria `VESTUARIO = "Vestuário"` ao enum `TransactionCategory`
+- Scripts auxiliares:
+  - `verificar_parcelas.py` - Análise de metadata de parcelas (121 transações encontradas)
+  - `atualizar_categoria_vestuario.py` - Verificação de categorias no banco (30 categorias, 565 registros)
+  - `buscar_itau_simples.py` - Fetch simplificado sem emojis (614 transações)
+  - `listar_transacoes_3meses.py` - Demo com Mercado Pago (15 transações)
+
+#### **📈 Resultados Conquistados**
+
+- **141 transações** processadas para Novembro 2025
+- **83% de categorização automática** (117/141 transações)
+- **33 parcelas** identificadas com número/total
+- **13 transações em moeda estrangeira** convertidas para BRL
+- **23 transações** pendentes ("A definir" - 16.3%)
+- **R$ -12.391,35** em débitos totais
+- **Fontes mapeadas**: Visa Bia (28), PIX (28), Master Físico (22), Visa Recorrente (16), Visa Mae (12), Master Virtual (11), Visa Físico (11), Visa Virtual (7), Master Recorrente (6)
+
+### 🔒 Segurança
+
+- Confirmado acesso **somente leitura** via OAuth2 Open Finance
+- Nenhuma operação de escrita possível (transferências, pagamentos, alterações)
+- Dados sensíveis protegidos em `config.ini` (não versionado)
+
+---
+
 ## [2.1.0] - 2025-11-10 🚀
 
 ### 🎉 Principais Mudanças

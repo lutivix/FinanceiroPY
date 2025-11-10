@@ -53,6 +53,7 @@ class TransactionCategory(Enum):
     PADARIA = "Padaria"
     PET = "Pet"
     ROUPA = "Roupa"
+    VESTUARIO = "Vestuário"
     SAUDE = "Saúde"
     SEGURO = "Seguro"
     STREAM = "Stream"
