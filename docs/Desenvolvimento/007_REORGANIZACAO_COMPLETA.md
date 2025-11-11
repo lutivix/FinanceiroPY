@@ -199,94 +199,103 @@ Aplicar padrão de organização profissional baseado no guia do projeto BelgoEs
 
 ---
 
-## 📋 Tarefas Pendentes (Decisões Amanhã)
+## 📋 Tarefas Pendentes - ✅ CONCLUÍDAS (11/11/2025)
 
-### **⚠️ Aguardando Decisão do Usuário**
+### **✅ Decisões Tomadas e Implementadas**
 
-#### **1. Scripts de Teste**
+#### **1. Scripts de Teste** ✅
+
+**Decisão:** Criar `/scripts/testes/` para scripts de teste de API
+
+```
+/scripts/
+├── README.md
+└── testes/
+    ├── teste_pluggy_rest.py ✅ (REST - funcional)
+    ├── verificar_dados_completos.py ✅ (REST - funcional)
+    ├── buscar_itau_simples.py ✅ (REST - funcional)
+    ├── listar_transacoes_3meses.py ✅ (REST - funcional)
+    └── verificar_parcelas.py ✅ (REST - funcional)
+```
+
+**Executado:**
+
+- ✅ Criada pasta `/scripts/testes/`
+- ✅ Criado `/scripts/README.md` com documentação completa
+- ✅ Copiados 5 scripts de teste funcionais
+- ✅ Scripts obsoletos SDK movidos para `_deprecated/`
+
+#### **2. Scripts .bat de Automação** ✅
+
+**Decisão:** Deixar em `/backend/src/` junto com os .py correspondentes
 
 ```
 backend/src/
-├── teste_pluggy.py                  # ❓ Mover para /scripts/testes/ ?
-├── teste_pluggy_rapido.py           # ❓ ou /tests/integration/ ?
-├── teste_pluggy_rest.py
-├── testar_item_pluggy.py
-├── criar_item_pluggy.py
-├── verificar_dados_completos.py
-└── teste_ciclo_19_18.py
+├── agente_financeiro.bat ✅
+├── agente_financeiro_completo.bat ✅
+├── agente_financeiro_simples.bat ✅
+├── atualiza_dicionario.bat ✅
+└── atualiza_dicionario_controle.bat ✅
 ```
 
-**Opções:**
+**Motivo:** Facilita execução (mesmo diretório que os scripts Python)
 
-- A) Mover para `/scripts/testes/`
-- B) Mover para `/tests/integration/`
-- C) Deixar onde está (por enquanto)
+#### **3. Scripts Obsoletos** ✅
 
-#### **2. Scripts .bat de Automação**
+**Decisão:** Mover para `/backend/src/_deprecated/` (não deletar)
 
 ```
-backend/src/
-├── agente_financeiro.bat            # ❓ Mover para /scripts/automacao/ ?
-├── agente_financeiro_completo.bat
-├── agente_financeiro_simples.bat
-├── atualiza_dicionario.bat
-├── atualiza_dicionario_controle.bat
-└── teste_pluggy.bat
+backend/src/_deprecated/
+├── README.md ✅ (documentação completa)
+├── teste_pluggy.py ❌ (SDK)
+├── teste_pluggy_rapido.py ❌ (SDK)
+├── testar_item_pluggy.py ❌ (SDK)
+├── criar_item_pluggy.py ❌ (SDK)
+├── teste_pluggy.bat ❌ (SDK)
+├── pluggy_connect.html ❌ (Widget não funciona)
+├── pluggy_dashboard_help.html ❌ (Desatualizado)
+└── listar_transacoes_itau.py ❌ (Encoding issues)
 ```
 
-**Opções:**
+**Executado:**
 
-- A) Mover para `/scripts/automacao/`
-- B) Deixar em `/backend/src/` (perto do código)
-- C) Mover alguns, deixar outros
+- ✅ Criada pasta `_deprecated/`
+- ✅ Criado `_deprecated/README.md` explicando cada arquivo
+- ✅ Movidos 8 arquivos obsoletos
+- ✅ Documentado motivo e substituições
 
-#### **3. Arquivos HTML**
+#### **4. Consolidar /dados/Scripts/** ✅
 
-```
-backend/src/
-├── pluggy_connect.html              # ❓ Mover para /docs/prototypes/ ?
-└── pluggy_dashboard_help.html       # ❓ ou deletar (obsoletos) ?
-```
+**Decisão:** Manter separados
 
-**Opções:**
+- `/dados/Scripts/` → SQL e scripts de dados
+- `/scripts/` → Scripts de testes e ferramentas
 
-- A) Mover para `/docs/Integracao/prototypes/`
-- B) Deletar (não funcionam)
-- C) Mover para `/dados/Scripts/legacy/`
-
-#### **4. Consolidar /dados/Scripts/ com /scripts/**
-
-```
-/dados/Scripts/  (existente, conteúdo desconhecido)
-/scripts/        (não criado ainda)
-```
-
-**Opções:**
-
-- A) Criar `/scripts/` e consolidar tudo
-- B) Manter separados (dados vs automação)
-- C) Mover apenas scripts de automação
+**Motivo:** Propósitos diferentes (dados vs automação)
 
 ---
 
 ## ✅ Checklist de Conclusão
 
-### **Prioridade ALTA (Concluído)**
+### **Prioridade ALTA (Concluído ✅)**
 
 - [x] Criar `Integracao_PROXIMO_CHAT.md`
 - [x] Reorganizar docs com numeração `XXX_NOME.md`
 - [x] Criar subpastas temáticas (`/Desenvolvimento/`, `/Integracao/`, `/Testing/`)
 - [x] Criar `/docs/README.md` com índice visual
 - [x] Criar READMEs nas subpastas
+- [x] **Criar `/scripts/` e `/scripts/testes/`** ✅
+- [x] **Mover scripts obsoletos para `_deprecated/`** ✅
+- [x] **Documentar scripts deprecados** ✅
 
-### **Prioridade MÉDIA (Concluído)**
+### **Prioridade MÉDIA (Concluído ✅)**
 
 - [x] Criar pasta `/config/` e mover `.ini`
 - [x] Criar `config/README.md` com guia
 - [x] Documentar decisões técnicas Pluggy
 - [x] Documentar segurança e compliance
 
-### **Prioridade BAIXA (Pulado)**
+### **Prioridade BAIXA (Não necessário)**
 
 - [ ] Templates de PR/Issue (não solicitado)
 - [ ] Diagramas adicionais (já tem Mermaid nos docs)

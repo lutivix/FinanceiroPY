@@ -4,14 +4,29 @@ Documentação sobre integrações externas: Open Finance (Pluggy), APIs bancár
 
 ---
 
+## 🎉 **CONQUISTAS v2.2.0** (10/11/2025)
+
+✅ **EXCEL CONSOLIDADO GERADO COM OPEN FINANCE!**
+
+- **141 transações reais** processadas (Itaú - Novembro 2025)
+- **83% categorização automática** via IA
+- **Conversão de moedas** (USD/EUR/GBP → BRL)
+- **Identificação de parcelas** (1/3, 2/5, etc.)
+- **614 transações históricas** fetched (3 contas)
+- **Script:** `backend/src/gerar_excel_pluggy.py`
+- **Output:** `dados/planilhas/consolidado_pluggy_nov2025.xlsx`
+
+---
+
 ## 📂 Documentos
 
-| Arquivo                                                      | Descrição                          | Status          |
-| ------------------------------------------------------------ | ---------------------------------- | --------------- |
-| [001_INTEGRACAO_PLUGGY.md](001_INTEGRACAO_PLUGGY.md)         | Integração Open Finance via Pluggy | ✅ Em uso       |
-| [002_CHECKLIST_PLUGGY.md](002_CHECKLIST_PLUGGY.md)           | Checklist de implementação         | 🔄 Em progresso |
-| [003_ARQUITETURA_PLUGGY.md](003_ARQUITETURA_PLUGGY.md)       | Decisões técnicas REST vs SDK      | 📋 Planejado    |
-| [004_SEGURANCA_OPENFINANCE.md](004_SEGURANCA_OPENFINANCE.md) | Segurança e compliance             | 📋 Planejado    |
+| Arquivo                                                      | Descrição                          | Status         |
+| ------------------------------------------------------------ | ---------------------------------- | -------------- |
+| [001_INTEGRACAO_PLUGGY.md](001_INTEGRACAO_PLUGGY.md)         | Integração Open Finance via Pluggy | ✅ Completo    |
+| [002_CHECKLIST_PLUGGY.md](002_CHECKLIST_PLUGGY.md)           | Checklist de implementação         | ✅ Concluído   |
+| [003_ARQUITETURA_PLUGGY.md](003_ARQUITETURA_PLUGGY.md)       | Decisões técnicas REST vs SDK      | ✅ Documentado |
+| [004_SEGURANCA_OPENFINANCE.md](004_SEGURANCA_OPENFINANCE.md) | Segurança e compliance             | ✅ Documentado |
+| [005_PROXIMOS_PASSOS.md](005_PROXIMOS_PASSOS.md)             | **Roadmap e próximas features**    | 🎯 **LEIA!**   |
 
 ---
 
@@ -21,39 +36,51 @@ Documentação sobre integrações externas: Open Finance (Pluggy), APIs bancár
 
 **Contexto rápido essencial para IA e próximas sessões:**
 
-- ✅ O que já funciona (REST API working)
+- ✅ O que já funciona (REST API + Excel working!)
 - 🔑 Credenciais e segurança
 - ❌ O que NÃO usar (SDK com bug)
-- 🎯 Próximos passos (roadmap)
-- 📊 Dados reais obtidos
+- 🎯 Próximos passos (roadmap atualizado)
+- 📊 Dados reais obtidos (614 transações)
 - 💡 Decisões técnicas
 
 ---
 
 ## 🎯 Integrações Ativas
 
-### **1. Open Finance (Pluggy)**
+### **1. Open Finance (Pluggy) - ✅ PRODUÇÃO**
 
-- **Status:** ✅ Funcional (REST API)
+- **Status:** ✅ Funcional e produzindo Excel
 - **Contas conectadas:**
-  - Mercado Pago (real)
+  - **Itaú (REAL):** 3 contas (2 cartões + 1 corrente) ✅
+    - LATAM PASS VISA PLATINUM (6259) - R$ 15.159,75
+    - PERSON MULTIPLO BLACK (4059) - R$ 18.272,58
+    - Conta Corrente (00002663-4) - R$ 129,06
+  - Mercado Pago (real, pouca atividade)
   - Sandbox (teste)
 - **Dados acessados:**
   - ✅ Saldo da conta
-  - ✅ Transações com categoria
+  - ✅ Transações com categoria bancária
   - ✅ Dados de identidade
-  - ✅ Investimentos
+  - ✅ Metadata de parcelas (installments)
+  - ✅ Conversão de moedas (amountInAccountCurrency)
+  - ✅ Card numbers para mapeamento de fontes
+- **Processamento:**
+  - ✅ Script `gerar_excel_pluggy.py` funcional
+  - ✅ 614 transações históricas (últimos 3 meses)
+  - ✅ 141 transações Novembro 2025 (19/10-18/11)
+  - ✅ Categorização inteligente 83%
+  - ✅ Mapeamento de 9 fontes (PIX, Master/Visa)
+  - ✅ Excel compatível com `consolidado_temp.xlsx`
 - **Ver:** [001_INTEGRACAO_PLUGGY.md](001_INTEGRACAO_PLUGGY.md)
 
-### **2. Itaú (Planejado)**
+### **2. Outras Instituições (Futuro)**
 
-- **Status:** 📋 Planejado
-- **Método:** Open Finance via Pluggy
+- **Status:** 📋 Disponível para conectar
+- **Método:** Open Finance via Pluggy Dashboard
 - **Próximos passos:**
-  - Conectar via Dashboard
-  - Testar recuperação de dados
-  - Comparar com arquivos XLS manuais
-  - Implementar sincronização automática
+  - Conectar outras contas bancárias se necessário
+  - Cartões de outros bancos
+  - Contas de investimento
 
 ---
 
@@ -72,10 +99,17 @@ Documentação sobre integrações externas: Open Finance (Pluggy), APIs bancár
 ```
 backend/src/
 ├── integrations/
-│   ├── pluggy_client.py      # ⚠️ Precisa refatorar (ainda usa SDK)
-│   └── pluggy_sync.py         # Serviço de sincronização (não testado)
+│   ├── pluggy_client.py      # ⚠️ Legado (SDK) - Substituir por REST
+│   └── pluggy_sync.py         # ⚠️ Precisa atualizar para REST
 │
-└── [Scripts de teste]
+├── [Scripts de Produção] ✅
+│   ├── gerar_excel_pluggy.py          # ✅ WORKING - Geração Excel consolidado
+│   ├── buscar_itau_simples.py         # ✅ WORKING - Fetch 614 transações
+│   ├── verificar_parcelas.py          # ✅ WORKING - Análise installments
+│   ├── listar_transacoes_3meses.py    # ✅ WORKING - Demo Mercado Pago
+│   └── atualizar_categoria_vestuario.py # ✅ WORKING - Manutenção DB
+│
+└── [Scripts de teste/validação]
     ├── teste_pluggy_rest.py           # ✅ WORKING - REST API
     ├── verificar_dados_completos.py   # ✅ WORKING - Dados completos
     ├── teste_pluggy.py                # ❌ Obsoleto (SDK)
@@ -131,39 +165,55 @@ backend/src/
 
 ## 🎯 Roadmap
 
-### **Fase 1: Segurança** 🔐
+### ✅ **Fase 1: Fundação** (CONCLUÍDA - v2.1.0)
+
+- ✅ Integração REST API Pluggy
+- ✅ Autenticação OAuth2
+- ✅ Conexão Itaú (3 contas)
+- ✅ Fetch de transações
+- ✅ Documentação técnica
+
+### ✅ **Fase 2: Geração de Excel** (CONCLUÍDA - v2.2.0)
+
+- ✅ Script `gerar_excel_pluggy.py`
+- ✅ Mapeamento de fontes (9 sources)
+- ✅ Categorização inteligente (83%)
+- ✅ Conversão de moedas (USD/EUR/GBP → BRL)
+- ✅ Identificação de parcelas
+- ✅ Formato compatível com `consolidado_temp.xlsx`
+- ✅ 614 transações processadas
+
+### 🔄 **Fase 3: Integração com Fluxo Principal** (PRÓXIMO)
+
+- [ ] Integrar `gerar_excel_pluggy.py` com `agente_financeiro.py`
+- [ ] Opção no menu: "Gerar consolidado Open Finance"
+- [ ] Detecção de duplicatas (provider_id vs manual)
+- [ ] Merge inteligente (Open Finance + arquivos manuais)
+- [ ] Validação cruzada de valores
+
+### 📋 **Fase 4: Automação** (FUTURO)
+
+- [ ] Sincronização automática mensal
+- [ ] Script scheduled (cron/task scheduler)
+- [ ] Notificações de novas transações
+- [ ] Categorização pendente (relatório "A definir")
+- [ ] Comparativo automático (esperado vs real)
+
+### 🏦 **Fase 5: Expansão** (FUTURO)
+
+- [ ] Conectar outras contas bancárias
+- [ ] Contas de investimento
+- [ ] Cartões de crédito adicionais
+- [ ] Relatórios consolidados multi-conta
+- [ ] Dashboard web (futuro distante)
+
+### 🔐 **Fase 6: Segurança e Compliance** (CONTÍNUO)
 
 - [ ] Migrar credenciais para `.env`
 - [ ] Implementar rotação de API keys
 - [ ] Documentar compliance LGPD
-
-### **Fase 2: Refatoração** 🔧
-
-- [ ] Refatorar `pluggy_client.py` para REST API
-- [ ] Remover dependência do `pluggy-sdk`
-- [ ] Implementar error handling robusto
-- [ ] Adicionar logging estruturado
-
-### **Fase 3: Sincronização** 🔄
-
-- [ ] Atualizar `pluggy_sync.py` para REST
-- [ ] Mapear Pluggy → Transaction model
-- [ ] Implementar sync incremental
-- [ ] Detectar e prevenir duplicatas
-
-### **Fase 4: Expansão** 🏦
-
-- [ ] Conectar Itaú via Pluggy
-- [ ] Testar com múltiplas contas
-- [ ] Validar categorização automática
-- [ ] Comparar manual vs Open Finance
-
-### **Fase 5: Automação** 🤖
-
-- [ ] Integrar com `agente_financeiro.py`
-- [ ] Script de sincronização automática
-- [ ] Adicionar ao fluxo mensal
-- [ ] Relatórios consolidados
+- [ ] Audit log de acessos
+- [ ] Criptografia de dados sensíveis
 
 ---
 
@@ -196,4 +246,4 @@ backend/src/
 ---
 
 **Criado em:** 10/11/2025  
-**Última atualização:** 10/11/2025
+**Última atualização:** 11/11/2025 (v2.2.0 - Excel Open Finance funcionando!)

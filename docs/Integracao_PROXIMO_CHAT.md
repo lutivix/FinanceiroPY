@@ -1,8 +1,108 @@
 # 🚀 Integração Open Finance (Pluggy) - Contexto Rápido
 
 > **📌 Documento para IA/Próximas Sessões**  
-> **Última atualização:** 10/11/2025  
-> **Status:** ✅ REST API funcionando | Sandbox + Mercado Pago Real conectados
+> **Última atualização:** 11/11/2025  
+> **Status:** ✅ FASE 1 COMPLETA | **2.318 transações** importadas | **Banco de dados** sincronizado
+
+---
+
+## 🎉 CONQUISTAS v2.3.0 (11/11/2025)
+
+### **✅ FASE 1 CONCLUÍDA: IMPORTAÇÃO ANUAL OPEN FINANCE**
+
+- **2.318 transações** importadas para `transacoes_openfinance`
+- **Período:** 19/12/2024 a 11/11/2025 (11 meses completos)
+- **94,7% categorização automática** via CategorizationService (2.194 transações)
+- **124 transações "A definir"** (5,3% - para categorização manual)
+- **Ciclo de faturamento 19-18** implementado e validado
+- **Script:** `backend/src/sync_openfinance_anual.py`
+- **Database:** `dados/db/financeiro.db` → tabela `transacoes_openfinance`
+
+### **📊 Distribuição por Mês (Ciclo 19-18):**
+
+```
+Janeiro 2025:   281 transações (19/12/24 a 18/01/25)
+Fevereiro 2025: 266 transações (19/01/25 a 18/02/25)
+Março 2025:     188 transações (19/02/25 a 18/03/25)
+Abril 2025:     193 transações (19/03/25 a 18/04/25)
+Maio 2025:      186 transações (19/04/25 a 18/05/25)
+Junho 2025:     216 transações (19/05/25 a 18/06/25)
+Julho 2025:     205 transações (19/06/25 a 18/07/25)
+Agosto 2025:    198 transações (19/07/25 a 18/08/25)
+Setembro 2025:  233 transações (19/08/25 a 18/09/25)
+Outubro 2025:   211 transações (19/09/25 a 18/10/25)
+Novembro 2025:  141 transações (19/10/25 a 10/11/25) ← Mês atual
+```
+
+### **💳 Distribuição por Fonte:**
+
+```
+Visa Virtual:       716 transações
+PIX:                523 transações
+Visa Bia:           510 transações
+Visa Recorrente:    231 transações
+Visa Físico:        190 transações
+Visa Mae:           148 transações
+```
+
+### **🏷️ Top 10 Categorias:**
+
+```
+1. Mercado:   256 | 2. Compras: 175 | 3. Padaria: 158
+4. Lazer:     149 | 5. Stream:  138 | 6. A definir: 124
+7. Cartão:    120 | 8. Casa:    119 | 9. Esporte: 109
+10. Feira:     97
+```
+
+### **🗄️ Estrutura da Tabela `transacoes_openfinance` (21 campos):**
+
+```sql
+- Identificação: id, provider_id (UNIQUE), account_id
+- Dados: data, descricao, valor
+- Categorização: categoria (usuário), categoria_banco, tag
+- Origem: fonte, pagador, cartao_final
+- Período: mes_comp (ciclo 19-18)
+- Banco: tipo_transacao, tipo_conta, origem_banco
+- Parcelas: parcela_numero, parcela_total, data_compra
+- Moeda: moeda_original, valor_moeda_original
+- Controle: origem_dado, sincronizado_em
+- Auditoria: created_at, updated_at, metadata_json
+```
+
+---
+
+## � CONQUISTAS v2.2.0 (10-11/11/2025)
+
+### **✅ EXCEL CONSOLIDADO OPEN FINANCE FUNCIONANDO!**
+
+- **141 transações processadas** (Novembro 2025 - Ciclo 19/10 a 18/11)
+- **614 transações históricas** fetched (3 contas Itaú: 2 cartões + 1 corrente)
+- **83% categorização automática** via CategorizationService
+- **Conversão de moedas** (USD/EUR/GBP → BRL automático)
+- **Identificação de parcelas** (1/3, 2/5, etc.) com metadata completa
+- **Formato 100% compatível** com consolidado_temp.xlsx
+- **Script:** `backend/src/gerar_excel_pluggy.py`
+- **Output:** `dados/planilhas/consolidado_pluggy_nov2025.xlsx`
+
+### **📊 Resultados Novembro 2025:**
+
+```
+Total: 141 transações
+├─ Débitos (130): R$ -12.391,35
+├─ Créditos (11): R$ -9.579,96
+├─ Categorizado: 117/141 (83%)
+├─ Parcelas: 33 identificadas
+└─ Moedas: 13 USD convertidas
+
+Fontes:
+├─ Visa Bia: 28 | PIX: 28 | Master Físico: 22
+├─ Visa Recorrente: 16 | Visa Mae: 12
+└─ Master Virtual: 11 | Visa Físico: 11 | Visa Virtual: 7 | Master Recorrente: 6
+
+Top Categorias:
+├─ A definir: 23 (16.3%) | Mercado: 16 | Cartão: 10
+└─ Compras: 8 | Esporte: 7 | Stream: 7 | Casa: 7
+```
 
 ---
 
@@ -13,15 +113,23 @@
 - **Serviço:** Pluggy (agregador Open Finance Brasil)
 - **Conta criada:** Meu Pluggy Dashboard
 - **Contas conectadas:**
+  - 🏦 **Itaú (REAL)** - Item ID: `60cbf151-aaed-45c7-afac-f2aab15e6299`
+    - LATAM PASS VISA PLATINUM (6259) - R$ 15.159,75
+    - PERSON MULTIPLO BLACK (4059) - R$ 18.272,58
+    - Conta Corrente (00002663-4) - R$ 129,06
   - 🏦 **Mercado Pago** (real) - Item ID: `879f822e-ad2b-48bb-8137-cf761ab1a1a3`
   - 🧪 **Sandbox** (teste) - Item ID: `06f300c4-75e0-4a2f-bbea-e0fb1a1a13cf`
 
 ### ✅ **Dados Recuperados com Sucesso**
 
-- ✅ **Saldo da conta** (R$ 6,68 no Mercado Pago)
-- ✅ **Transações** com categoria automática
+- ✅ **Saldo das contas** (3 contas Itaú + Mercado Pago)
+- ✅ **614 transações históricas** (últimos 3 meses)
+- ✅ **Transações com categoria bancária** automática
+- ✅ **Metadata de parcelas** (installments, purchaseDate, billId)
+- ✅ **Conversão de moedas** (amountInAccountCurrency)
+- ✅ **Card numbers** para mapeamento de fontes
 - ✅ **Dados de identidade** (nome, CPF, endereço, telefone)
-- ✅ **Investimentos** (consulta funciona, mas vazia no MP)
+- ✅ **Excel consolidado** compatível com sistema existente
 
 ---
 
@@ -87,23 +195,40 @@ transactions = requests.get(
 
 ## 📂 ARQUIVOS RELEVANTES
 
-### **Scripts Funcionais:**
+### **✅ Scripts de Produção (backend/src/):**
 
-- ✅ `backend/src/teste_pluggy_rest.py` - **Exemplo working de REST API**
-- ✅ `backend/src/verificar_dados_completos.py` - **Recupera todos os dados (conta, transações, identidade, investimentos)**
+- ✅ **`sync_openfinance_anual.py`** - **NOVO!** Sincronização anual (12 meses) para banco de dados
+- ✅ **`gerar_excel_pluggy.py`** - Geração de Excel consolidado Open Finance
+- ✅ `atualizar_categoria_vestuario.py` - Manutenção de categorias
+- ✅ `limpar_categorias.py` - Limpeza de duplicatas no banco
 
-### **Scripts Obsoletos (não usar):**
+### **✅ Scripts de Teste de API (scripts/testes/):**
 
-- ❌ `teste_pluggy.py` - Usa SDK (não funciona)
-- ❌ `teste_pluggy_rapido.py` - Usa SDK (não funciona)
-- ❌ `testar_item_pluggy.py` - Usa SDK (retorna 403)
-- ❌ `criar_item_pluggy.py` - Usa SDK (não funciona)
-- ❌ `pluggy_connect.html` - Widget (CDN com problemas)
+- ✅ `teste_pluggy_rest.py` - Teste REST API Pluggy
+- ✅ `verificar_dados_completos.py` - Validação completa (contas, transações, identidade)
+- ✅ `buscar_itau_simples.py` - Fetch 614 transações Itaú sem emojis
+- ✅ `listar_transacoes_3meses.py` - Demo Mercado Pago (15 transações)
+- ✅ `verificar_parcelas.py` - Análise de metadata de parcelas (121 encontradas)
 
-### **Código de Integração:**
+### **❌ Scripts Obsoletos (backend/src/\_deprecated/):**
 
-- ⚠️ `backend/src/integrations/pluggy_client.py` - **PRECISA REFATORAR** (ainda usa SDK)
-- ⚠️ `backend/src/integrations/pluggy_sync.py` - Serviço de sincronização (não testado)
+**NÃO USAR! Movidos para \_deprecated/**
+
+- ❌ `teste_pluggy.py` - Usa SDK (403 Forbidden)
+- ❌ `teste_pluggy_rapido.py` - Usa SDK (403 Forbidden)
+- ❌ `testar_item_pluggy.py` - Usa SDK (403 Forbidden)
+- ❌ `criar_item_pluggy.py` - Usa SDK (403 Forbidden)
+- ❌ `teste_pluggy.bat` - Chama SDK obsoleto
+- ❌ `pluggy_connect.html` - Widget não funciona
+- ❌ `pluggy_dashboard_help.html` - Desatualizado
+- ❌ `listar_transacoes_itau.py` - Problemas de encoding
+
+**Ver:** `backend/src/_deprecated/README.md` para detalhes
+
+### **⚠️ Módulos Legados (backend/src/integrations/):**
+
+- ⚠️ `pluggy_client.py` - **Ainda usa SDK** - Precisa refatorar para REST
+- ⚠️ `pluggy_sync.py` - Precisa atualizar para REST API
 
 ### **Documentação:**
 
@@ -114,43 +239,95 @@ transactions = requests.get(
 
 ## 🎯 PRÓXIMOS PASSOS (ROADMAP)
 
-### **Fase 1: Segurança** 🔐
+### ✅ **Fase 1: Fundação** (CONCLUÍDA - v2.1.0)
 
-- [ ] Criar `.env` na raiz do projeto
-- [ ] Instalar `python-decouple`
-- [ ] Migrar credenciais de `config.ini` para `.env`
-- [ ] Atualizar `.gitignore` para incluir `.env`
-- [ ] Atualizar scripts para usar `decouple.config()`
+- [x] Integração REST API Pluggy
+- [x] Autenticação OAuth2
+- [x] Conexão Mercado Pago
+- [x] Conexão Itaú (3 contas)
+- [x] Fetch de transações
+- [x] Documentação técnica
 
-### **Fase 2: Refatoração** 🔧
+### ✅ **Fase 2: Geração de Excel** (CONCLUÍDA - v2.2.0)
 
-- [ ] Refatorar `pluggy_client.py` para usar REST API (não SDK)
-- [ ] Implementar refresh automático de API key (expira em 2h)
-- [ ] Adicionar error handling e retry logic
-- [ ] Implementar logging adequado
+- [x] Script `gerar_excel_pluggy.py`
+- [x] Mapeamento de fontes (9 sources)
+- [x] Categorização inteligente (83%)
+- [x] Conversão de moedas (USD/EUR/GBP → BRL)
+- [x] Identificação de parcelas
+- [x] Formato compatível com `consolidado_temp.xlsx`
+- [x] 614 transações processadas
+- [x] Organização de scripts (`/scripts/`, `/_deprecated/`)
+
+### ✅ **Fase 3: Banco de Dados Anual** (CONCLUÍDA - v2.3.0)
+
+- [x] Criação da tabela `transacoes_openfinance` (21 campos)
+- [x] Script `sync_openfinance_anual.py`
+- [x] Importação de 12 meses (2.318 transações)
+- [x] Ciclo de faturamento 19-18 implementado
+- [x] Categorização automática (94,7%)
+- [x] Mapeamento de fontes (6 tipos)
+- [x] Metadata JSON completo
+- [x] Prevenção de duplicatas (provider_id UNIQUE)
+- [x] Validação de período (Jan-Nov 2025)
+
+### 🔄 **Fase 4: Dashboard Automático** (PRÓXIMA)
+
+- [ ] Gerar dashboard HTML/Excel com dados de `transacoes_openfinance`
+- [ ] Comparação Real vs Ideal (budget tracking)
+- [ ] Gráficos: mensal, por categoria, por fonte
+- [ ] Evolução anual (Janeiro a Novembro)
+- [ ] Alertas de gastos acima do orçamento
+- [ ] Export para Excel compatível com `Controle_pessoal.xlsm`
+
+### 📋 **Fase 5: Automação** (FUTURO)
+
+- [ ] Sincronização semanal automática
+- [ ] Dashboard atualizado automaticamente
+- [ ] Notificações de novos gastos
+- [ ] Relatório semanal por email
+- [ ] Integração com planilha Excel existente
+
+### 🔄 **Fase 3: Integração com Fluxo Principal** (PRÓXIMO)
+
+- [ ] Integrar `gerar_excel_pluggy.py` com `agente_financeiro.py`
+- [ ] Opção no menu: "Gerar consolidado Open Finance"
+- [ ] Detecção de duplicatas (provider_id vs manual)
+- [ ] Merge inteligente (Open Finance + arquivos manuais)
+- [ ] Validação cruzada de valores
+
+### 📋 **Fase 4: Automação** (FUTURO)
+
+- [ ] Sincronização automática mensal
+- [ ] Script scheduled (cron/task scheduler)
+- [ ] Notificações de novas transações
+- [ ] Categorização pendente (relatório "A definir")
+- [ ] Comparativo automático (esperado vs real)
+
+### 🏦 **Fase 5: Expansão** (FUTURO)
+
+- [ ] Conectar outras contas bancárias se necessário
+- [ ] Cartões de outros bancos
+- [ ] Contas de investimento
+- [ ] Relatórios consolidados multi-conta
+- [ ] Dashboard web (futuro distante)
+
+### 🔐 **Fase 6: Segurança e Compliance** (CONTÍNUO)
+
+- [ ] Migrar credenciais para `.env`
+- [ ] Implementar rotação de API keys
+- [ ] Documentar compliance LGPD
+- [ ] Audit log de acessos
+- [ ] Criptografia de dados sensíveis
+
+### 🔧 **Fase 7: Refatoração Técnica** (OPCIONAL)
+
+- [ ] Refatorar `pluggy_client.py` para REST API
+- [ ] Atualizar `pluggy_sync.py` para REST
 - [ ] Remover dependência do `pluggy-sdk`
-
-### **Fase 3: Sincronização** 🔄
-
-- [ ] Atualizar `pluggy_sync.py` para trabalhar com REST API
-- [ ] Mapear campos de transação Pluggy → Transaction model
-- [ ] Implementar detecção de duplicatas
-- [ ] Criar lógica de sincronização incremental
-- [ ] Testar com dados reais do Mercado Pago
-
-### **Fase 4: Expansão** 🏦
-
-- [ ] Conectar conta Itaú via Dashboard
-- [ ] Testar com múltiplas contas
-- [ ] Validar categorização automática
-- [ ] Comparar com dados manuais existentes
-
-### **Fase 5: Automação** 🤖
-
-- [ ] Integrar com `agente_financeiro.py`
-- [ ] Criar script de sincronização automática
-- [ ] Adicionar ao fluxo de processamento mensal
-- [ ] Criar relatórios consolidados (manual + Open Finance)
+- [ ] Implementar error handling robusto
+- [ ] Logging estruturado
+- [ ] Testes automatizados
 
 ---
 
