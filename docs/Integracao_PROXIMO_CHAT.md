@@ -2,7 +2,170 @@
 
 > **📌 Documento para IA/Próximas Sessões**  
 > **Última atualização:** 11/11/2025  
-> **Status:** ✅ FASE 1 COMPLETA | **2.318 transações** importadas | **Banco de dados** sincronizado
+> **Status:** ✅ FASE 2 COMPLETA | **Dashboard Interativo** funcionando | **Rede local** habilitada
+
+---
+
+## 🎉 CONQUISTAS v2.4.0 (11/11/2025)
+
+### **✅ FASE 2 CONCLUÍDA: DASHBOARD INTERATIVO PLOTLY DASH**
+
+- **Framework:** Plotly Dash 3.2.0 + Bootstrap Components
+- **Servidor:** Flask localhost:8050 (acessível na rede local)
+- **Dados:** 2.022 transações DEBIT (R$ 320.523,45)
+- **Período:** 11 meses (tipo_transacao='DEBIT' apenas)
+- **Filtros interativos:** Mês, Categoria, Fonte (real-time)
+- **Script:** `backend/src/dashboard_dash.py`
+- **Acesso:** http://localhost:8050 ou http://192.168.7.216:8050 (rede)
+
+### **📊 Características do Dashboard:**
+
+**4 Cards de Resumo (sempre globais):**
+
+```
+├─ Total Gasto: R$ 320.523,45
+├─ Média Mensal: R$ 29.138,50
+├─ Total Transações: 2.022
+└─ Meses Analisados: 11
+```
+
+**6 Gráficos Interativos:**
+
+```
+1. Evolução Mensal (scatter+lines) OU Real vs Ideal por Fonte (barras 3-cores)
+   ├─ Exibe Evolução quando filtro = "Todos os Meses"
+   └─ Exibe Real vs Ideal por Fonte quando filtra mês específico
+
+2. Real vs Ideal por Categoria (barras verticais 3-cores)
+   ├─ Real (laranja): Gasto atual
+   ├─ Ideal (azul): Orçamento definido
+   └─ Diferença (verde/vermelho): Performance (economizou/excedeu)
+
+3. Gastos por Fonte (pizza/donut)
+   └─ Distribuição percentual por fonte de pagamento
+
+4. Gastos por Categoria (pizza/donut)
+   └─ Distribuição percentual por categoria
+
+5. Distribuição de Transações por Mês (linha)
+   └─ Oculto quando filtra mês específico (perde relevância)
+
+6. Acumulado Anual (área)
+   └─ Oculto quando filtra mês específico (perde relevância)
+```
+
+### **🎨 Design e Organização Visual:**
+
+**Sistema de Cores Padronizado:**
+
+```css
+Real:       rgb(255, 140, 0)  /* Laranja */
+Ideal:      rgb(0, 123, 255)  /* Azul */
+Diferença:
+  ├─ Verde: rgb(40, 167, 69)   /* Economizou (real < ideal) */
+  └─ Vermelho: rgb(220, 53, 69) /* Excedeu (real > ideal) */
+```
+
+**Layout Responsivo (Bootstrap):**
+
+```
+┌─────────────────────────────────────────────────┐
+│  [Filtro Mês ▼]  [Filtro Categoria ▼]  [Fonte ▼]│
+├─────────────────────────────────────────────────┤
+│  💰 Total    │  📊 Média   │  🔢 Trans  │  📅 Meses │
+├───────────────────────────┬─────────────────────┤
+│  Evolução/Fonte (70%)     │  Gastos Fonte (30%) │
+├───────────────────────────┼─────────────────────┤
+│  Real vs Ideal Cat (70%)  │  Gastos Cat (30%)   │
+├───────────────────────────┴─────────────────────┤
+│  Distribuição Transações (oculto se mês único)  │
+├─────────────────────────────────────────────────┤
+│  Acumulado Anual (oculto se mês único)          │
+└─────────────────────────────────────────────────┘
+```
+
+**Orientação de Gráficos:**
+
+```
+├─ Barras verticais: Real vs Ideal (melhor comparação visual)
+├─ Pizza/Donut: Distribuição percentual (intuitivo)
+├─ Linhas: Evolução temporal (tendência clara)
+└─ Área: Acumulado (crescimento progressivo)
+```
+
+**Sistema de 3 Barras (Performance Visual):**
+
+```python
+# Implementado em: Real vs Ideal por Categoria E por Fonte
+for item in dados:
+    real = valor_gasto
+    ideal = orcamento_definido
+    diferenca = abs(real - ideal)
+    cor = verde if real < ideal else vermelho
+
+# Resultado: 3 barras lado a lado com hover informativo
+```
+
+**Smart Filtering (UX Inteligente):**
+
+```python
+# Cards: Sempre mostram dados globais (df_global)
+# Motivo: Manter contexto estável para referência
+
+# Gráficos: Respondem aos filtros (df filtrado)
+# Motivo: Permitir análise detalhada
+
+# Visibilidade contextual:
+if mes_selecionado == 'TODOS':
+    mostrar: [Evolução Mensal, Distribuição, Acumulado]
+else:
+    mostrar: [Real vs Ideal por Fonte]
+    ocultar: [Distribuição, Acumulado] # Perdem relevância
+```
+
+### **💾 Orçamento Ideal (ORCAMENTO_IDEAL):**
+
+```python
+# 33 categorias com metas mensais (R$ 26.670/mês total)
+Top 3:
+├─ Mercado: R$ 4.200
+├─ Casa: R$ 3.400
+└─ LF: R$ 2.400
+
+Fonte: Controle_pessoal.xlsm (planilha de controle)
+```
+
+### **🌐 Configuração de Rede:**
+
+```python
+# backend/src/dashboard_dash.py linha 561
+app.run(debug=True, host='0.0.0.0', port=8050)
+
+# host='0.0.0.0' → Aceita conexões de qualquer IP da rede
+# Acesso local: http://localhost:8050
+# Acesso rede: http://192.168.7.216:8050
+```
+
+**⚠️ Considerações de Segurança:**
+
+- Debug mode habilitado (hot reload para desenvolvimento)
+- Sem autenticação (uso interno/doméstico)
+- Para produção: desabilitar debug + adicionar auth
+
+### **🔧 Filtros Implementados:**
+
+```python
+@callback(
+    Output(...),  # 11 outputs: 4 cards + 6 graphs + 1 style
+    Input('filtro-mes', 'value'),
+    Input('filtro-categoria', 'value'),
+    Input('filtro-fonte', 'value')
+)
+def atualizar_dashboard(mes, categoria, fonte):
+    # 1. Cards: sempre df_global (imunes a filtros)
+    # 2. Graphs: df filtrado conforme seleção
+    # 3. Visibilidade: condicional baseada em filtro mês
+```
 
 ---
 
@@ -54,7 +217,70 @@ Visa Mae:           148 transações
 10. Feira:     97
 ```
 
-### **🗄️ Estrutura da Tabela `transacoes_openfinance` (21 campos):**
+### **� Arquivos Relevantes:**
+
+- ✅ **`sync_openfinance_anual.py`** - Sincronização anual (12 meses) para banco de dados
+- ✅ **`dashboard_dash.py`** - **NOVO!** Dashboard interativo Plotly Dash com filtros real-time
+- ✅ **`gerar_excel_pluggy.py`** - Geração de Excel mensal Pluggy
+- ✅ **`agente_financeiro.py`** - Agente principal (processamento manual txt)
+- ✅ **`atualiza_dicionario.py`** - Atualização do dicionário de categorização
+- ✅ **`config.ini`** - Credenciais Pluggy (NÃO versionado)
+- ✅ **`abrir_firewall_dashboard.bat`** - **NOVO!** Script para liberar porta 8050 (admin)
+
+---
+
+## 📊 ROADMAP E PRÓXIMOS PASSOS
+
+### **✅ FASE 1 - Importação Anual** (CONCLUÍDA)
+
+- [x] Script sync_openfinance_anual.py
+- [x] Ciclo 19-18 implementado
+- [x] 2.318 transações importadas
+- [x] Categorização automática (94,7%)
+
+### **✅ FASE 2 - Dashboard Interativo** (CONCLUÍDA)
+
+- [x] Escolha de framework (Plotly Dash)
+- [x] Instalação e configuração
+- [x] Layout responsivo com Bootstrap
+- [x] 3 filtros interativos (Mês/Categoria/Fonte)
+- [x] 4 cards de resumo (globais)
+- [x] 6 gráficos dinâmicos
+- [x] Sistema de 3 barras (Real/Ideal/Diferença)
+- [x] **Design e reorganização visual completa:**
+  - [x] Cores padronizadas (laranja/azul/verde-vermelho)
+  - [x] Layout 70/30 (gráficos principais maiores)
+  - [x] Barras verticais para comparação
+  - [x] Pizza/donut para distribuição percentual
+  - [x] Hover tooltips informativos
+  - [x] Visibilidade contextual (ocultar gráficos irrelevantes)
+- [x] Smart filtering (UX inteligente)
+- [x] Acesso rede local (host=0.0.0.0)
+- [x] Orçamento ideal integrado (33 categorias)
+
+### **🔄 FASE 3 - Refinamentos** (PRÓXIMO)
+
+- [ ] **ORCAMENTO_IDEAL por fonte** (mapear posteriormente)
+  - Atualmente: ideal distribuído proporcionalmente quando filtra mês
+  - Ideal: mapear orçamento específico por fonte de pagamento
+- [ ] Export para Excel a partir do dashboard
+- [ ] Gráficos adicionais (tendências, previsões)
+- [ ] Modo escuro (dark theme)
+- [ ] Autenticação básica (user/password)
+- [ ] Deploy em servidor (produção)
+- [ ] Botão "Atualizar Dados" (recarregar do banco sem reiniciar)
+
+### **🔮 FASE 4 - Automação** (FUTURO)
+
+- [ ] Sincronização automática diária
+- [ ] Alertas de orçamento (e-mail/notificação)
+- [ ] Machine Learning para categorização
+- [ ] API REST para integração externa
+- [ ] Mobile responsivo otimizado
+
+---
+
+## 🗄️ ESTRUTURA DA TABELA `transacoes_openfinance` (21 campos):\*\*
 
 ```sql
 - Identificação: id, provider_id (UNIQUE), account_id
@@ -71,7 +297,7 @@ Visa Mae:           148 transações
 
 ---
 
-## � CONQUISTAS v2.2.0 (10-11/11/2025)
+## 💡 CONQUISTAS v2.2.0 (10-11/11/2025)
 
 ### **✅ EXCEL CONSOLIDADO OPEN FINANCE FUNCIONANDO!**
 
@@ -197,7 +423,55 @@ transactions = requests.get(
 
 ### **✅ Scripts de Produção (backend/src/):**
 
-- ✅ **`sync_openfinance_anual.py`** - **NOVO!** Sincronização anual (12 meses) para banco de dados
+- ✅ **`dashboard_dash.py`** - **NOVO!** Dashboard interativo Plotly Dash (562 linhas)
+
+  - Framework: Dash 3.2.0 + Bootstrap
+  - Servidor: Flask localhost:8050
+  - Filtros: Mês, Categoria, Fonte (real-time)
+  - Gráficos: 6 dinâmicos com smart visibility
+  - Sistema 3-barras: Real/Ideal/Diferença
+  - Acesso rede: host='0.0.0.0'
+
+- ✅ **`sync_openfinance_anual.py`** - Sincronização anual banco de dados
+
+  - Fetches: 12 meses de transações
+  - Ciclo: 19-18 (dia faturamento)
+  - Output: tabela transacoes_openfinance
+  - Categorização: CategorizationService (94,7%)
+
+- ✅ **`gerar_excel_pluggy.py`** - Geração Excel mensal
+- ✅ **`agente_financeiro.py`** - Processamento manual txt
+- ✅ **`atualiza_dicionario.py`** - Atualização dicionário categorização
+- ✅ **`limpar_categorias.py`** - Reset categorias "A definir"
+
+### **✅ Configuração:**
+
+- ✅ **`config.ini`** - Credenciais Pluggy (NÃO versionado)
+- ✅ **`config.example.ini`** - Template de configuração
+- ✅ **`requirements.txt`** - Dependências Python
+  ```
+  dash==3.2.0
+  dash-bootstrap-components==2.0.4
+  plotly==5.24.1
+  pandas, sqlite3, requests
+  ```
+
+### **✅ Utilitários:**
+
+- ✅ **`abrir_firewall_dashboard.bat`** - **NOVO!** Libera porta 8050 (requer admin)
+- ✅ **`setup.bat`** / **`setup.sh`** - Instalação ambiente
+
+### **✅ Banco de Dados:**
+
+- ✅ **`dados/db/financeiro.db`** - SQLite database
+  - Tabela: `transacoes_openfinance` (2.318 registros)
+  - Campos: 21 (incluindo metadata_json)
+  - Indexado: provider_id (UNIQUE), data, categoria
+
+---
+
+## 🛠️ SOLUÇÃO TÉCNICA (IMPORTANTE!)
+
 - ✅ **`gerar_excel_pluggy.py`** - Geração de Excel consolidado Open Finance
 - ✅ `atualizar_categoria_vestuario.py` - Manutenção de categorias
 - ✅ `limpar_categorias.py` - Limpeza de duplicatas no banco
