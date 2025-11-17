@@ -4,17 +4,26 @@ Documentação sobre integrações externas: Open Finance (Pluggy), APIs bancár
 
 ---
 
-## 🎉 **CONQUISTAS v2.2.0** (10/11/2025)
+## 🎉 **CONQUISTAS v2.4.0** (11/11/2025)
 
-✅ **EXCEL CONSOLIDADO GERADO COM OPEN FINANCE!**
+### ✅ **FASE 2 CONCLUÍDA: DASHBOARD INTERATIVO PLOTLY DASH**
 
-- **141 transações reais** processadas (Itaú - Novembro 2025)
-- **83% categorização automática** via IA
-- **Conversão de moedas** (USD/EUR/GBP → BRL)
-- **Identificação de parcelas** (1/3, 2/5, etc.)
-- **614 transações históricas** fetched (3 contas)
-- **Script:** `backend/src/gerar_excel_pluggy.py`
-- **Output:** `dados/planilhas/consolidado_pluggy_nov2025.xlsx`
+- **Framework:** Plotly Dash 3.2.0 + Bootstrap Components
+- **Servidor:** Flask localhost:8050 (acessível na rede local)
+- **Dados:** 2.022 transações DEBIT (R$ 320.523,45 em 11 meses)
+- **Filtros interativos:** Mês, Categoria, Fonte (real-time)
+- **6 gráficos dinâmicos** com sistema de 3 barras (Real/Ideal/Diferença)
+- **Design completo:** Cores padronizadas, layout 70/30, smart filtering
+- **Script:** `backend/src/dashboard_dash.py` (562 linhas)
+- **Acesso:** http://localhost:8050 ou rede local (host=0.0.0.0)
+
+### ✅ **FASE 1 CONCLUÍDA: IMPORTAÇÃO ANUAL**
+
+- **2.318 transações** importadas para banco de dados
+- **94,7% categorização automática** via CategorizationService
+- **Ciclo 19-18** implementado e validado
+- **Script:** `backend/src/sync_openfinance_anual.py`
+- **Database:** `dados/db/financeiro.db` → tabela `transacoes_openfinance`
 
 ---
 
@@ -30,22 +39,7 @@ Documentação sobre integrações externas: Open Finance (Pluggy), APIs bancár
 
 ---
 
-## 🚀 **LEIA PRIMEIRO!**
-
-### [📌 Integracao_PROXIMO_CHAT.md](../Integracao_PROXIMO_CHAT.md)
-
-**Contexto rápido essencial para IA e próximas sessões:**
-
-- ✅ O que já funciona (REST API + Excel working!)
-- 🔑 Credenciais e segurança
-- ❌ O que NÃO usar (SDK com bug)
-- 🎯 Próximos passos (roadmap atualizado)
-- 📊 Dados reais obtidos (614 transações)
-- 💡 Decisões técnicas
-
----
-
-## 🎯 Integrações Ativas
+## 📂 Documentos
 
 ### **1. Open Finance (Pluggy) - ✅ PRODUÇÃO**
 
@@ -65,12 +59,12 @@ Documentação sobre integrações externas: Open Finance (Pluggy), APIs bancár
   - ✅ Conversão de moedas (amountInAccountCurrency)
   - ✅ Card numbers para mapeamento de fontes
 - **Processamento:**
-  - ✅ Script `gerar_excel_pluggy.py` funcional
-  - ✅ 614 transações históricas (últimos 3 meses)
-  - ✅ 141 transações Novembro 2025 (19/10-18/11)
-  - ✅ Categorização inteligente 83%
-  - ✅ Mapeamento de 9 fontes (PIX, Master/Visa)
-  - ✅ Excel compatível com `consolidado_temp.xlsx`
+  - ✅ Dashboard interativo Plotly Dash (`dashboard_dash.py`)
+  - ✅ Sincronização anual banco de dados (`sync_openfinance_anual.py`)
+  - ✅ Script Excel mensal (`gerar_excel_pluggy.py`)
+  - ✅ 2.318 transações em banco (11 meses)
+  - ✅ Categorização automática 94,7%
+  - ✅ Mapeamento de fontes (PIX, Visa, Master)
 - **Ver:** [001_INTEGRACAO_PLUGGY.md](001_INTEGRACAO_PLUGGY.md)
 
 ### **2. Outras Instituições (Futuro)**
@@ -98,24 +92,20 @@ Documentação sobre integrações externas: Open Finance (Pluggy), APIs bancár
 
 ```
 backend/src/
-├── integrations/
-│   ├── pluggy_client.py      # ⚠️ Legado (SDK) - Substituir por REST
-│   └── pluggy_sync.py         # ⚠️ Precisa atualizar para REST
-│
 ├── [Scripts de Produção] ✅
-│   ├── gerar_excel_pluggy.py          # ✅ WORKING - Geração Excel consolidado
-│   ├── buscar_itau_simples.py         # ✅ WORKING - Fetch 614 transações
-│   ├── verificar_parcelas.py          # ✅ WORKING - Análise installments
-│   ├── listar_transacoes_3meses.py    # ✅ WORKING - Demo Mercado Pago
-│   └── atualizar_categoria_vestuario.py # ✅ WORKING - Manutenção DB
+│   ├── dashboard_dash.py              # ✅ Dashboard interativo Plotly Dash
+│   ├── sync_openfinance_anual.py      # ✅ Sincronização anual (12 meses)
+│   ├── gerar_excel_pluggy.py          # ✅ Geração Excel mensal
+│   ├── agente_financeiro.py           # ✅ Agente principal
+│   └── atualiza_dicionario.py         # ✅ Atualização dicionário
 │
-└── [Scripts de teste/validação]
-    ├── teste_pluggy_rest.py           # ✅ WORKING - REST API
-    ├── verificar_dados_completos.py   # ✅ WORKING - Dados completos
-    ├── teste_pluggy.py                # ❌ Obsoleto (SDK)
-    ├── teste_pluggy_rapido.py         # ❌ Obsoleto (SDK)
-    ├── testar_item_pluggy.py          # ❌ Obsoleto (SDK)
-    └── criar_item_pluggy.py           # ❌ Obsoleto (SDK)
+├── [Utilitários]
+│   ├── abrir_firewall_dashboard.bat   # Script auxiliar firewall
+│   └── config.ini                     # Credenciais (NÃO versionado)
+│
+└── [Legado/Teste]
+    ├── gerar_dashboard.py             # Dashboard HTML estático (referência)
+    └── integrations/                  # SDK antigo (não usar)
 ```
 
 ---
@@ -165,55 +155,47 @@ backend/src/
 
 ## 🎯 Roadmap
 
-### ✅ **Fase 1: Fundação** (CONCLUÍDA - v2.1.0)
+### ✅ **Fase 1: Importação Anual** (CONCLUÍDA - v2.3.0)
 
-- ✅ Integração REST API Pluggy
-- ✅ Autenticação OAuth2
-- ✅ Conexão Itaú (3 contas)
-- ✅ Fetch de transações
-- ✅ Documentação técnica
+- ✅ Script `sync_openfinance_anual.py`
+- ✅ Ciclo 19-18 implementado
+- ✅ 2.318 transações importadas
+- ✅ Categorização automática 94,7%
+- ✅ Banco de dados `transacoes_openfinance`
 
-### ✅ **Fase 2: Geração de Excel** (CONCLUÍDA - v2.2.0)
+### ✅ **Fase 2: Dashboard Interativo** (CONCLUÍDA - v2.4.0)
 
-- ✅ Script `gerar_excel_pluggy.py`
-- ✅ Mapeamento de fontes (9 sources)
-- ✅ Categorização inteligente (83%)
-- ✅ Conversão de moedas (USD/EUR/GBP → BRL)
-- ✅ Identificação de parcelas
-- ✅ Formato compatível com `consolidado_temp.xlsx`
-- ✅ 614 transações processadas
+- ✅ Framework Plotly Dash + Bootstrap
+- ✅ 6 gráficos dinâmicos
+- ✅ Sistema 3 barras (Real/Ideal/Diferença)
+- ✅ Design e organização visual
+- ✅ Smart filtering (UX inteligente)
+- ✅ Acesso rede local (host=0.0.0.0)
 
-### 🔄 **Fase 3: Integração com Fluxo Principal** (PRÓXIMO)
+### 🔄 **Fase 3: Refinamentos** (PRÓXIMO)
 
-- [ ] Integrar `gerar_excel_pluggy.py` com `agente_financeiro.py`
-- [ ] Opção no menu: "Gerar consolidado Open Finance"
-- [ ] Detecção de duplicatas (provider_id vs manual)
-- [ ] Merge inteligente (Open Finance + arquivos manuais)
+- [ ] ORCAMENTO_IDEAL por fonte
+- [ ] Export Excel do dashboard
+- [ ] Botão atualizar dados (sem reiniciar)
+- [ ] Gráficos adicionais (tendências)
+- [ ] Modo escuro (dark theme)
+- [ ] Autenticação básica
+
+### 📋 **Fase 4: Integração com Fluxo Principal** (FUTURO)
+
+- [ ] Integrar com `agente_financeiro.py`
+- [ ] Merge inteligente (Open Finance + manual)
+- [ ] Detecção de duplicatas
 - [ ] Validação cruzada de valores
 
-### 📋 **Fase 4: Automação** (FUTURO)
+### 🤖 **Fase 5: Automação** (FUTURO)
 
 - [ ] Sincronização automática mensal
-- [ ] Script scheduled (cron/task scheduler)
 - [ ] Notificações de novas transações
-- [ ] Categorização pendente (relatório "A definir")
-- [ ] Comparativo automático (esperado vs real)
+- [ ] Alertas de orçamento
+- [ ] Machine Learning categorização
 
-### 🏦 **Fase 5: Expansão** (FUTURO)
-
-- [ ] Conectar outras contas bancárias
-- [ ] Contas de investimento
-- [ ] Cartões de crédito adicionais
-- [ ] Relatórios consolidados multi-conta
-- [ ] Dashboard web (futuro distante)
-
-### 🔐 **Fase 6: Segurança e Compliance** (CONTÍNUO)
-
-- [ ] Migrar credenciais para `.env`
-- [ ] Implementar rotação de API keys
-- [ ] Documentar compliance LGPD
-- [ ] Audit log de acessos
-- [ ] Criptografia de dados sensíveis
+**Ver detalhes:** [005_PROXIMOS_PASSOS.md](005_PROXIMOS_PASSOS.md)
 
 ---
 
@@ -246,4 +228,4 @@ backend/src/
 ---
 
 **Criado em:** 10/11/2025  
-**Última atualização:** 11/11/2025 (v2.2.0 - Excel Open Finance funcionando!)
+**Última atualização:** 17/11/2025 (v2.4.0 - Dashboard Plotly Dash funcionando!)

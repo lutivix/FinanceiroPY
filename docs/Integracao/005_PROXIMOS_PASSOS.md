@@ -1,31 +1,83 @@
 # 🎯 Próximos Passos - Open Finance
 
-> **Versão:** 2.2.0  
-> **Data:** 11/11/2025  
-> **Status:** Roadmap após conquista Excel Open Finance
+> **Versão:** 2.4.0  
+> **Data:** 17/11/2025  
+> **Status:** Roadmap após Dashboard Interativo
 
 ---
 
 ## 🎉 Onde Estamos
 
-✅ **CONQUISTAS v2.2.0:**
+✅ **CONQUISTAS v2.4.0:**
 
-- Excel consolidado gerado com Open Finance (141 transações Nov/2025)
-- 614 transações históricas fetched (3 contas Itaú)
-- Categorização inteligente 83%
-- Conversão de moedas automática
-- Identificação de parcelas
-- Script `gerar_excel_pluggy.py` funcional
+- **Dashboard interativo Plotly Dash** funcionando (localhost:8050)
+- **6 gráficos dinâmicos** com sistema 3 barras (Real/Ideal/Diferença)
+- **Filtros real-time** (Mês, Categoria, Fonte)
+- **Design completo:** cores padronizadas, layout 70/30, smart filtering
+- **Acesso rede local** habilitado (host=0.0.0.0)
+- **2.022 transações DEBIT** processadas (R$ 320.523,45 em 11 meses)
+- **Script:** `backend/src/dashboard_dash.py` (562 linhas)
+
+✅ **CONQUISTAS v2.3.0:**
+
+- **2.318 transações** importadas para banco de dados
+- **94,7% categorização automática** via CategorizationService
+- **Ciclo 19-18** implementado e validado
+- **Script:** `backend/src/sync_openfinance_anual.py`
 
 ---
 
 ## 🚀 Próximos Passos Recomendados
 
-### **OPÇÃO A: Integração com Fluxo Principal** 🔗
+### **OPÇÃO A: Refinamentos do Dashboard** 🎨
+
+**Objetivo:** Melhorar funcionalidades e UX do dashboard
+
+**Prioridade:** ⭐⭐⭐⭐⭐ (Alta)  
+**Esforço:** Baixo-Médio (1-2 dias)  
+**Impacto:** Alto
+
+**Tarefas:**
+
+1. **ORCAMENTO_IDEAL por fonte**
+   - Mapear orçamento mensal para cada fonte (PIX, Visa, etc.)
+   - Atualmente usa distribuição proporcional (não ideal)
+   - Criar dicionário similar ao ORCAMENTO_IDEAL por categoria
+
+2. **Botão "Atualizar Dados"**
+   - Recarregar dados do banco sem reiniciar servidor
+   - Útil após adicionar novas transações
+   - F5 atualmente não busca novos dados
+
+3. **Export para Excel**
+   - Botão para exportar dados filtrados
+   - Mesmo formato do `consolidado_pluggy_nov2025.xlsx`
+   - Permite análise offline dos dados filtrados
+
+4. **Modo escuro (dark theme)**
+   - Alternar entre tema claro/escuro
+   - Melhor para uso noturno
+   - Bootstrap tem suporte nativo
+
+5. **Autenticação básica**
+   - User/password simples
+   - Proteger acesso rede local
+   - Dash tem suporte via dash-auth
+
+**Benefícios:**
+
+- ✅ Melhor experiência de usuário
+- ✅ Mais funcionalidades úteis
+- ✅ Análises mais ricas
+- ✅ Maior segurança
+
+---
+
+### **OPÇÃO B: Integração com Fluxo Principal** 🔗
 
 **Objetivo:** Unificar Open Finance com processamento manual atual
 
-**Prioridade:** ⭐⭐⭐⭐⭐ (Alta)  
+**Prioridade:** ⭐⭐⭐⭐ (Média-Alta)  
 **Esforço:** Médio (2-3 dias)  
 **Impacto:** Muito Alto
 
@@ -66,7 +118,7 @@
 
 ---
 
-### **OPÇÃO B: Automação de Sincronização** 🤖
+### **OPÇÃO C: Automação de Sincronização** 🤖
 
 **Objetivo:** Fetch automático mensal de transações
 
