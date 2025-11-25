@@ -1,6 +1,7 @@
 """
-Sincronização Anual Open Finance - 12 meses de transações
-Busca dados do Pluggy (Jan-Nov 2025) e salva em transacoes_openfinance
+Sincronização Open Finance - Busca transações do Pluggy
+Permite escolher quantos dias retroativos buscar
+Salva em transacoes_openfinance
 """
 import sys
 from pathlib import Path
@@ -233,15 +234,26 @@ class OpenFinanceSync:
         parcela_total = card_metadata.get('totalInstallments')
         data_compra = card_metadata.get('purchaseDate')
         
-        # Fonte (mapear cartão para fonte)
-        banco = account_info['name'].split()[0] if account_info['name'] else 'Desconhecido'
-        fonte_enum = get_card_source(cartao_final, banco) if cartao_final else TransactionSource.PIX
+        # Origem banco (do account)
+        origem_banco = account_info['name'].split()[0] if account_info['name'] else 'Desconhecido'
+        
+        # Fonte (mapear cartão para fonte baseado em origem_banco)
+        # origem_banco: LATAM = Visa, PERSON = Master, itau = PIX
+        if cartao_final:
+            if origem_banco == 'LATAM':
+                fonte_enum = get_card_source(cartao_final, 'Latam')
+            elif origem_banco == 'PERSON':
+                fonte_enum = get_card_source(cartao_final, 'Itau')
+            else:
+                fonte_enum = TransactionSource.PIX
+        else:
+            fonte_enum = TransactionSource.PIX
+        
         fonte = fonte_enum.value if isinstance(fonte_enum, TransactionSource) else str(fonte_enum)
         
         # Tipo de transação e conta
         tipo_transacao = trans.get('type', 'DEBIT')
         tipo_conta = account_info['type']
-        origem_banco = banco
         
         # MesComp
         mes_comp = self.calcular_mes_comp(data)
@@ -340,13 +352,12 @@ class OpenFinanceSync:
         contas = self.buscar_contas(item_id)
         print(f"   Encontradas {len(contas)} contas")
         
-        # Período: 12 meses considerando ciclo 19-18
-        # Janeiro/2025 começa em 19/12/2024, então buscamos desde essa data
+        # Período: N meses retroativos
         date_to = datetime.now()
-        date_from = datetime(2024, 12, 19)  # Início do ciclo Janeiro/2025
+        date_from = date_to - timedelta(days=self.meses_retroativos * 30)
         
         print(f"   Período: {date_from.strftime('%d/%m/%Y')} a {date_to.strftime('%d/%m/%Y')}")
-        print(f"   (Ciclo de faturamento: dia 19 a dia 18 do mês seguinte)")
+        print(f"   (Aprox. {self.meses_retroativos} meses retroativos)")
 
         
         for conta in contas:
@@ -374,28 +385,45 @@ class OpenFinanceSync:
         
         print(f"\n✅ Total importadas: {self.stats['total_importadas']}")
         print(f"⚠️  Total duplicadas (ignoradas): {self.stats['total_duplicadas']}")
-        print(f"🎯 Categorizadas automaticamente: {self.stats['total_categorizadas']} ({self.stats['total_categorizadas']/self.stats['total_importadas']*100:.1f}%)")
-        print(f"❓ A definir: {self.stats['total_a_definir']} ({self.stats['total_a_definir']/self.stats['total_importadas']*100:.1f}%)")
         
-        print("\n📅 Por Mês:")
-        for mes in sorted(self.stats['por_mes'].keys()):
-            print(f"   {mes}: {self.stats['por_mes'][mes]}")
-        
-        print("\n💳 Por Fonte:")
-        for fonte in sorted(self.stats['por_fonte'].items(), key=lambda x: x[1], reverse=True):
-            print(f"   {fonte[0]}: {fonte[1]}")
-        
-        print("\n🏷️  Top 10 Categorias:")
-        top_categorias = sorted(self.stats['por_categoria'].items(), key=lambda x: x[1], reverse=True)[:10]
-        for cat, count in top_categorias:
-            print(f"   {cat}: {count}")
+        if self.stats['total_importadas'] > 0:
+            print(f"🎯 Categorizadas automaticamente: {self.stats['total_categorizadas']} ({self.stats['total_categorizadas']/self.stats['total_importadas']*100:.1f}%)")
+            print(f"❓ A definir: {self.stats['total_a_definir']} ({self.stats['total_a_definir']/self.stats['total_importadas']*100:.1f}%)")
+            
+            print("\n📅 Por Mês:")
+            for mes in sorted(self.stats['por_mes'].keys()):
+                print(f"   {mes}: {self.stats['por_mes'][mes]}")
+            
+            print("\n💳 Por Fonte:")
+            for fonte in sorted(self.stats['por_fonte'].items(), key=lambda x: x[1], reverse=True):
+                print(f"   {fonte[0]}: {fonte[1]}")
+            
+            print("\n🏷️  Top 10 Categorias:")
+            top_categorias = sorted(self.stats['por_categoria'].items(), key=lambda x: x[1], reverse=True)[:10]
+            for cat, count in top_categorias:
+                print(f"   {cat}: {count}")
+        else:
+            print("\nℹ️  Nenhuma transação nova foi importada (todas já existiam no banco)")
         
         print("\n" + "="*70)
     
-    def executar(self):
+    def executar(self, meses_retroativos=None):
         """Executar sincronização completa"""
-        print("🚀 SINCRONIZAÇÃO ANUAL OPEN FINANCE")
+        print("🚀 SINCRONIZAÇÃO OPEN FINANCE")
         print("="*70)
+        
+        # Definir período
+        if meses_retroativos is None:
+            try:
+                meses_input = input("\n📅 Quantos meses retroativos buscar? (padrão: 1): ").strip()
+                self.meses_retroativos = int(meses_input) if meses_input else 1
+            except ValueError:
+                print("⚠️  Valor inválido, usando padrão de 1 mês")
+                self.meses_retroativos = 1
+        else:
+            self.meses_retroativos = meses_retroativos
+        
+        print(f"🔍 Buscando transações dos últimos {self.meses_retroativos} meses...\n")
         
         # 1. Autenticar
         self.autenticar()

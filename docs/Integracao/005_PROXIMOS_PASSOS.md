@@ -40,21 +40,25 @@
 **Tarefas:**
 
 1. **ORCAMENTO_IDEAL por fonte**
+
    - Mapear orçamento mensal para cada fonte (PIX, Visa, etc.)
    - Atualmente usa distribuição proporcional (não ideal)
    - Criar dicionário similar ao ORCAMENTO_IDEAL por categoria
 
 2. **Botão "Atualizar Dados"**
+
    - Recarregar dados do banco sem reiniciar servidor
    - Útil após adicionar novas transações
    - F5 atualmente não busca novos dados
 
 3. **Export para Excel**
+
    - Botão para exportar dados filtrados
    - Mesmo formato do `consolidado_pluggy_nov2025.xlsx`
    - Permite análise offline dos dados filtrados
 
 4. **Modo escuro (dark theme)**
+
    - Alternar entre tema claro/escuro
    - Melhor para uso noturno
    - Bootstrap tem suporte nativo

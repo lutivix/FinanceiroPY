@@ -51,6 +51,20 @@ ORCAMENTO_IDEAL = {
     'Cartao': 80.00
 }
 
+# Orçamento Ideal por Fonte (mensal) - Conforme planilha de controle
+ORCAMENTO_IDEAL_FONTE = {
+    'PIX': 8900.00,
+    'Visa Bia': 4100.00,
+    'Master Físico': 3850.00,
+    'Visa Recorrente': 3114.00,
+    'Visa Físico': 2050.00,
+    'Master Recorrente': 1886.00,
+    'Visa Mae': 1390.00,
+    'Visa Virtual': 880.00,
+    'Master Virtual': 500.00
+    # Total: 26.670,00 (mesmo total do ORCAMENTO_IDEAL por categoria)
+}
+
 # Carregar dados do banco
 def carregar_dados():
     """Carrega dados do banco de dados"""
@@ -317,16 +331,14 @@ def atualizar_dashboard(mes_selecionado, categoria_selecionada, fonte_selecionad
         # Mostrar Real vs Ideal por Fonte (quando filtrando um mês)
         gastos_por_fonte = df.groupby('fonte')['valor_normalizado'].sum().sort_values(ascending=False)
         
-        # Calcular ideal por fonte (proporcional aos gastos reais)
-        total_ideal_mensal = sum(ORCAMENTO_IDEAL.values())
+        # Calcular ideal por fonte usando orçamento mapeado
         ideal_por_fonte = []
         diferenca_por_fonte = []
         diferenca_colors_fonte = []
         
         for i, fonte in enumerate(gastos_por_fonte.index):
-            # Distribuir ideal proporcionalmente aos gastos reais
-            proporcao = gastos_por_fonte[fonte] / gastos_por_fonte.sum() if gastos_por_fonte.sum() > 0 else 0
-            ideal_valor = total_ideal_mensal * proporcao
+            # Buscar ideal mapeado ou usar 0 se fonte não mapeada
+            ideal_valor = ORCAMENTO_IDEAL_FONTE.get(fonte, 0) * num_meses
             ideal_por_fonte.append(ideal_valor)
             
             # Calcular diferença

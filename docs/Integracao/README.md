@@ -17,12 +17,12 @@ Documentação sobre integrações externas: Open Finance (Pluggy), APIs bancár
 - **Script:** `backend/src/dashboard_dash.py` (562 linhas)
 - **Acesso:** http://localhost:8050 ou rede local (host=0.0.0.0)
 
-### ✅ **FASE 1 CONCLUÍDA: IMPORTAÇÃO ANUAL**
+### ✅ **FASE 1 CONCLUÍDA: IMPORTAÇÃO FLEXÍVEL**
 
 - **2.318 transações** importadas para banco de dados
 - **94,7% categorização automática** via CategorizationService
 - **Ciclo 19-18** implementado e validado
-- **Script:** `backend/src/sync_openfinance_anual.py`
+- **Script:** `backend/src/sync_openfinance.py` (com prompt de dias retroativos)
 - **Database:** `dados/db/financeiro.db` → tabela `transacoes_openfinance`
 
 ---
@@ -60,7 +60,7 @@ Documentação sobre integrações externas: Open Finance (Pluggy), APIs bancár
   - ✅ Card numbers para mapeamento de fontes
 - **Processamento:**
   - ✅ Dashboard interativo Plotly Dash (`dashboard_dash.py`)
-  - ✅ Sincronização anual banco de dados (`sync_openfinance_anual.py`)
+  - ✅ Sincronização flexível banco de dados (`sync_openfinance.py`)
   - ✅ Script Excel mensal (`gerar_excel_pluggy.py`)
   - ✅ 2.318 transações em banco (11 meses)
   - ✅ Categorização automática 94,7%
@@ -94,7 +94,7 @@ Documentação sobre integrações externas: Open Finance (Pluggy), APIs bancár
 backend/src/
 ├── [Scripts de Produção] ✅
 │   ├── dashboard_dash.py              # ✅ Dashboard interativo Plotly Dash
-│   ├── sync_openfinance_anual.py      # ✅ Sincronização anual (12 meses)
+│   ├── sync_openfinance.py            # ✅ Sincronização (prompt dias retroativos)
 │   ├── gerar_excel_pluggy.py          # ✅ Geração Excel mensal
 │   ├── agente_financeiro.py           # ✅ Agente principal
 │   └── atualiza_dicionario.py         # ✅ Atualização dicionário
@@ -155,9 +155,9 @@ backend/src/
 
 ## 🎯 Roadmap
 
-### ✅ **Fase 1: Importação Anual** (CONCLUÍDA - v2.3.0)
+### ✅ **Fase 1: Importação Flexível** (CONCLUÍDA - v2.4.0)
 
-- ✅ Script `sync_openfinance_anual.py`
+- ✅ Script `sync_openfinance.py` (com prompt de dias)
 - ✅ Ciclo 19-18 implementado
 - ✅ 2.318 transações importadas
 - ✅ Categorização automática 94,7%
