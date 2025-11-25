@@ -4,38 +4,42 @@ Documentação sobre integrações externas: Open Finance (Pluggy), APIs bancár
 
 ---
 
-## 🎉 **CONQUISTAS v2.4.0** (11/11/2025)
+## 🎉 **CONQUISTAS v2.5.0** (25/11/2025)
 
 ### ✅ **FASE 2 CONCLUÍDA: DASHBOARD INTERATIVO PLOTLY DASH**
 
 - **Framework:** Plotly Dash 3.2.0 + Bootstrap Components
 - **Servidor:** Flask localhost:8050 (acessível na rede local)
-- **Dados:** 2.022 transações DEBIT (R$ 320.523,45 em 11 meses)
+- **Dados:** 2.131 transações DEBIT (11 meses + dados atuais)
 - **Filtros interativos:** Mês, Categoria, Fonte (real-time)
 - **6 gráficos dinâmicos** com sistema de 3 barras (Real/Ideal/Diferença)
 - **Design completo:** Cores padronizadas, layout 70/30, smart filtering
-- **Script:** `backend/src/dashboard_dash.py` (562 linhas)
+- **ORCAMENTO_IDEAL_FONTE:** R$ 26.670/mês mapeado por fonte
+- **Script:** `backend/src/dashboard_dash.py` (577 linhas)
 - **Acesso:** http://localhost:8050 ou rede local (host=0.0.0.0)
 
 ### ✅ **FASE 1 CONCLUÍDA: IMPORTAÇÃO FLEXÍVEL**
 
-- **2.318 transações** importadas para banco de dados
-- **94,7% categorização automática** via CategorizationService
-- **Ciclo 19-18** implementado e validado
-- **Script:** `backend/src/sync_openfinance.py` (com prompt de dias retroativos)
+- **2.131 transações** importadas para banco de dados (atualizado 25/11)
+- **Correção mapeamento fontes:** PERSON=Master, LATAM=Visa
+- **Ciclo 19-18** implementado e validado (MesComp correto)
+- **Sync flexível:** prompt de meses retroativos (padrão: 1 mês)
+- **Auto-sync:** Pluggy atualiza dados automaticamente a cada 24h
+- **Script:** `backend/src/sync_openfinance.py` (com função refresh preparada)
 - **Database:** `dados/db/financeiro.db` → tabela `transacoes_openfinance`
 
 ---
 
 ## 📂 Documentos
 
-| Arquivo                                                      | Descrição                          | Status         |
-| ------------------------------------------------------------ | ---------------------------------- | -------------- |
-| [001_INTEGRACAO_PLUGGY.md](001_INTEGRACAO_PLUGGY.md)         | Integração Open Finance via Pluggy | ✅ Completo    |
-| [002_CHECKLIST_PLUGGY.md](002_CHECKLIST_PLUGGY.md)           | Checklist de implementação         | ✅ Concluído   |
-| [003_ARQUITETURA_PLUGGY.md](003_ARQUITETURA_PLUGGY.md)       | Decisões técnicas REST vs SDK      | ✅ Documentado |
-| [004_SEGURANCA_OPENFINANCE.md](004_SEGURANCA_OPENFINANCE.md) | Segurança e compliance             | ✅ Documentado |
-| [005_PROXIMOS_PASSOS.md](005_PROXIMOS_PASSOS.md)             | **Roadmap e próximas features**    | 🎯 **LEIA!**   |
+| Arquivo                                                      | Descrição                               | Status         |
+| ------------------------------------------------------------ | --------------------------------------- | -------------- |
+| [001_INTEGRACAO_PLUGGY.md](001_INTEGRACAO_PLUGGY.md)         | Integração Open Finance via Pluggy      | ✅ Completo    |
+| [002_CHECKLIST_PLUGGY.md](002_CHECKLIST_PLUGGY.md)           | Checklist de implementação              | ✅ Concluído   |
+| [003_ARQUITETURA_PLUGGY.md](003_ARQUITETURA_PLUGGY.md)       | Decisões técnicas REST vs SDK           | ✅ Documentado |
+| [004_SEGURANCA_OPENFINANCE.md](004_SEGURANCA_OPENFINANCE.md) | Segurança e compliance                  | ✅ Documentado |
+| [005_PROXIMOS_PASSOS.md](005_PROXIMOS_PASSOS.md)             | **Roadmap e próximas features**         | 🎯 **LEIA!**   |
+| [DASHBOARD_GUIA.md](DASHBOARD_GUIA.md)                       | **📊 Guia completo do Dashboard**       | 🆕 **NOVO!**   |
 
 ---
 
@@ -87,6 +91,25 @@ Documentação sobre integrações externas: Open Finance (Pluggy), APIs bancár
 - **Implementação:** REST API (requests)
 - **Autenticação:** X-API-KEY header
 - **Base URL:** `https://api.pluggy.ai`
+
+### **Limitações Plano Free/Trial**
+
+⚠️ **Atualizações:**
+- ❌ **Refresh via API bloqueado** (403 Forbidden)
+  - Endpoint `POST /items/{id}/refresh` não disponível no plano Free
+  - Necessário atualizar manualmente via Dashboard Pluggy
+- ✅ **Auto-sync automático** pelo Pluggy
+  - Dados atualizados automaticamente a cada 24h
+  - Produção: 24h/12h/8h dependendo do plano contratado
+- ✅ **Função refresh implementada** no código
+  - Preparada para uso futuro em produção
+  - Desabilitada por padrão (forcar_atualizacao=False)
+
+💡 **Workflow recomendado:**
+1. Clicar "Atualizar" no Dashboard Pluggy (quando necessário)
+2. Aguardar 10-30s (sincronização com banco)
+3. Rodar `sync_openfinance.py` para buscar novos dados
+4. Alternativamente: aguardar auto-sync diário do Pluggy
 
 ### **Arquivos Relevantes**
 

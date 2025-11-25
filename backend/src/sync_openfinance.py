@@ -127,6 +127,60 @@ class OpenFinanceSync:
         
         print("✅ Tabela criada com sucesso!")
     
+    def atualizar_item(self, item_id):
+        """Forçar atualização do Item com o banco (refresh)"""
+        print("   🔄 Solicitando atualização dos dados bancários...")
+        try:
+            response = requests.post(
+                f'{BASE_URL}/items/{item_id}/refresh',
+                headers=self.headers
+            )
+            
+            if response.status_code in [200, 201]:
+                execution = response.json()
+                execution_id = execution.get('id')
+                print(f"   ⏳ Atualização iniciada (ID: {execution_id[:8]}...)")
+                print("   ⏳ Aguardando sincronização com banco (pode levar 10-30s)...")
+                
+                # Aguardar conclusão (polling)
+                import time
+                max_wait = 60  # 60 segundos no máximo
+                waited = 0
+                
+                while waited < max_wait:
+                    time.sleep(5)
+                    waited += 5
+                    
+                    # Verificar status da execução
+                    status_response = requests.get(
+                        f'{BASE_URL}/items/{item_id}',
+                        headers=self.headers
+                    )
+                    
+                    if status_response.status_code == 200:
+                        item_status = status_response.json().get('status')
+                        if item_status == 'UPDATED':
+                            print("   ✅ Dados bancários atualizados!")
+                            return True
+                        elif item_status == 'LOGIN_ERROR':
+                            print("   ⚠️  Erro de autenticação com banco")
+                            return False
+                    
+                    print(f"   ⏳ Aguardando... ({waited}s)")
+                
+                print("   ⚠️  Timeout na atualização, mas vou tentar buscar os dados mesmo assim")
+                return True
+                
+            else:
+                print(f"   ⚠️  Erro ao solicitar atualização: {response.status_code}")
+                print("   ℹ️  Continuando com dados em cache...")
+                return False
+                
+        except Exception as e:
+            print(f"   ⚠️  Erro ao atualizar: {str(e)}")
+            print("   ℹ️  Continuando com dados em cache...")
+            return False
+    
     def buscar_contas(self, item_id):
         """Buscar contas de um Item"""
         response = requests.get(
@@ -348,6 +402,11 @@ class OpenFinanceSync:
         """Sincronizar todas as contas de um Item"""
         print(f"\n🏦 Sincronizando {nome_item}...")
         
+        # Forçar atualização com banco primeiro (apenas se explicitamente solicitado)
+        # Nota: Não funciona no plano Free (403), use botão Atualizar no Dashboard
+        if self.forcar_atualizacao:
+            self.atualizar_item(item_id)
+        
         # Buscar contas
         contas = self.buscar_contas(item_id)
         print(f"   Encontradas {len(contas)} contas")
@@ -407,10 +466,13 @@ class OpenFinanceSync:
         
         print("\n" + "="*70)
     
-    def executar(self, meses_retroativos=None):
+    def executar(self, meses_retroativos=None, forcar_atualizacao=False):
         """Executar sincronização completa"""
         print("🚀 SINCRONIZAÇÃO OPEN FINANCE")
         print("="*70)
+        
+        # Refresh desabilitado (403 no plano Free, auto-sync 24h pelo Pluggy)
+        self.forcar_atualizacao = forcar_atualizacao
         
         # Definir período
         if meses_retroativos is None:

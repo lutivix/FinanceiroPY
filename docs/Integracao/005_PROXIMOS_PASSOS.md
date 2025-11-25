@@ -1,12 +1,21 @@
 # 🎯 Próximos Passos - Open Finance
 
-> **Versão:** 2.4.0  
-> **Data:** 17/11/2025  
-> **Status:** Roadmap após Dashboard Interativo
+> **Versão:** 2.5.0  
+> **Data:** 25/11/2025  
+> **Status:** Roadmap após Correção Fontes + Refresh
 
 ---
 
 ## 🎉 Onde Estamos
+
+✅ **CONQUISTAS v2.5.0:**
+
+- **Correção mapeamento fontes:** PERSON=Master, LATAM=Visa (703 transações corrigidas)
+- **Sync flexível:** prompt de meses retroativos (não mais fixo em 365 dias)
+- **ORCAMENTO_IDEAL_FONTE:** R$ 26.670/mês mapeado por 9 fontes
+- **Auto-sync Pluggy:** Atualização automática 24h (plano Free)
+- **Função refresh preparada:** Para uso futuro em produção
+- **Database atualizado:** 2.131 transações (25/11/2025)
 
 ✅ **CONQUISTAS v2.4.0:**
 
@@ -14,16 +23,7 @@
 - **6 gráficos dinâmicos** com sistema 3 barras (Real/Ideal/Diferença)
 - **Filtros real-time** (Mês, Categoria, Fonte)
 - **Design completo:** cores padronizadas, layout 70/30, smart filtering
-- **Acesso rede local** habilitado (host=0.0.0.0)
-- **2.022 transações DEBIT** processadas (R$ 320.523,45 em 11 meses)
-- **Script:** `backend/src/dashboard_dash.py` (562 linhas)
-
-✅ **CONQUISTAS v2.3.0:**
-
-- **2.318 transações** importadas para banco de dados
-- **94,7% categorização automática** via CategorizationService
-- **Ciclo 19-18** implementado e validado
-- **Script:** `backend/src/sync_openfinance_anual.py`
+- **Script:** `backend/src/dashboard_dash.py` (577 linhas)
 
 ---
 
@@ -39,11 +39,10 @@
 
 **Tarefas:**
 
-1. **ORCAMENTO_IDEAL por fonte**
+1. ~~**ORCAMENTO_IDEAL por fonte**~~ ✅ **CONCLUÍDO**
 
-   - Mapear orçamento mensal para cada fonte (PIX, Visa, etc.)
-   - Atualmente usa distribuição proporcional (não ideal)
-   - Criar dicionário similar ao ORCAMENTO_IDEAL por categoria
+   - ✅ Dicionário com 9 fontes (R$ 26.670/mês)
+   - ✅ Gráfico fonte usa valores mapeados (não proporcional)
 
 2. **Botão "Atualizar Dados"**
 
