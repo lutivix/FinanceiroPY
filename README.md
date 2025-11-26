@@ -1,8 +1,8 @@
-# 🤖 Agente Financeiro IA v2.2
+# 🤖 Agente Financeiro IA v2.3
 
-> **Sistema inteligente de automação financeira com 98.2% de precisão + Open Finance + Geração de Excel**
+> **Sistema inteligente de automação financeira com 98.2% de precisão + Dashboard Interativo + Open Finance**
 
-Sistema Python avançado que automatiza completamente o processamento de extratos bancários, cartões de crédito e PIX, utilizando machine learning para categorização inteligente, **integração Open Finance via Pluggy**, e gerando relatórios consolidados prontos para análise.
+Sistema Python avançado que automatiza completamente o processamento de extratos bancários, cartões de crédito e PIX, utilizando machine learning para categorização inteligente, **integração Open Finance via Pluggy**, dashboard interativo com análise visual, e gerando relatórios consolidados prontos para análise.
 
 [![Python](https://img.shields.io/badge/Python-3.13+-blue.svg)](https://python.org)
 [![SQLite](https://img.shields.io/badge/Database-SQLite-green.svg)](https://sqlite.org)
@@ -16,7 +16,29 @@ Sistema Python avançado que automatiza completamente o processamento de extrato
 
 ---
 
-## 🎉 NOVIDADE v2.2.0 - EXCEL OPEN FINANCE!
+## 🎉 NOVIDADES v2.3.0 - DASHBOARD INTERATIVO!
+
+🚀 **DASHBOARD COMPLETO** - Visualização interativa com análise em tempo real:
+
+```
+📊 DASHBOARD FEATURES
+├─ 6 cards compactos (Total, Média 12M, Categorizado, Pendentes, Transações, Meses)
+├─ Categorização inline (categorizar "A definir" direto no dashboard)
+├─ Filtros dinâmicos (Mês, Categoria, Fonte) com refresh automático
+├─ 7 gráficos interativos (Real vs Ideal, Evolução, Fontes, etc.)
+├─ Valores normalizados (14.4k ao invés de R$ 14.400)
+├─ Cores inteligentes (verde=economizou, vermelho=excedeu)
+├─ Fontes otimizadas para tela QHD (10-24pt configuráveis)
+└─ Ferramentas Plotly (zoom, pan, download PNG, reset)
+```
+
+**🎯 Script:** `backend/src/dashboard_dash.py`  
+**🌐 Acesso:** http://localhost:8050  
+**📊 Dados:** 2.096 transações • 97.2% categorizadas • R$ 328k total
+
+---
+
+## 📈 NOVIDADE v2.2.0 - EXCEL OPEN FINANCE!
 
 🚀 **AVANÇO GIGANTE** - Geração completa de Excel consolidado a partir de dados reais do Open Finance:
 
@@ -83,11 +105,13 @@ Sistema Python avançado que automatiza completamente o processamento de extrato
 
 ### 📊 **Análise e Relatórios**
 
+- ✅ **Dashboard Interativo** (Dash + Plotly) com categorização inline 🆕
 - ✅ **Consolidação temporal** ordenada por MesComp, Fonte desc e Data
 - ✅ **Exportação Excel** com formatação limpa (Master/Visa sem prefixos)
 - ✅ **Identificação de padrões** de gastos e anomalias
 - ✅ **Filtros inteligentes** para moedas estrangeiras e duplicatas
 - ✅ **Estatísticas de performance** do sistema de categorização
+- ✅ **7 gráficos interativos** (barras, pizza, evolução temporal) 🆕
 
 ### 🔧 **Tratamento de Dados**
 

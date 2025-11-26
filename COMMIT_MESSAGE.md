@@ -1,78 +1,93 @@
-# Commit v2.2.0
+# Commit v2.3.0
 
-Luciano - feat(v2.2): geração Excel Open Finance + categorização inteligente + conversão moeda
+Luciano - feat(v2.3): Dashboard interativo completo + categorização inline + otimizações QHD
 
 ## Resumo
 
-🚀 **AVANÇO GIGANTE!** Implementa geração completa de Excel consolidado a partir de dados reais do Open Finance com categorização inteligente (83%), conversão automática de moedas estrangeiras e identificação de parcelas.
+🚀 **DASHBOARD INTERATIVO COMPLETO!** Implementa visualização em tempo real com análise gráfica, categorização inline e filtros dinâmicos otimizados para telas QHD (2560×1440).
 
 ## Features
 
-### 📊 Geração de Excel Open Finance (`gerar_excel_pluggy.py`)
+### 📊 Dashboard Dash + Plotly (`dashboard_dash.py`)
 
-- Processa 141 transações reais (Novembro 2025 - Ciclo 19/10 a 18/11)
-- Fetches de 614 transações históricas (3 contas Itaú: 2 cartões + 1 corrente)
-- Formato 100% compatível com `consolidado_temp.xlsx`
-- Categorização inteligente via `CategorizationService` (83% automático - 117/141)
-- Conversão automática USD/EUR/GBP → BRL usando `amountInAccountCurrency`
-- Identificação de parcelas com metadata (1/3, 2/5, etc.) - 33 encontradas
-- Mapeamento correto de fontes usando `get_card_source()` (9 fontes)
-- Ordenação: MesComp → Fonte (desc) → Data (asc)
-- Output: `dados/planilhas/consolidado_pluggy_nov2025.xlsx`
+- 6 cards informativos compactos (Total, Média 12M, Categorizado, Pendentes, Transações, Meses)
+- Categorização inline de transações "A definir" direto no dashboard
+- 3 filtros dinâmicos (Mês, Categoria, Fonte) com refresh automático
+- 7 gráficos interativos: Real vs Ideal, Evolução Mensal, Fontes (pizza), Categorias (pizza), Distribuição, Acumulado
+- Pattern-matching callbacks para múltiplos botões de categorização
+- dcc.Store para gerenciamento de estado e refresh
+- Acesso via http://localhost:8050
 
-### 📈 Resultados Novembro 2025
+### 🎨 Otimizações UX para QHD (2560×1440)
+
+- Layout compacto: 6 cards ao invés de 4 (width=2 cada)
+- Fontes ajustadas: textfont 10pt, legend 14pt, title 24pt, tickfont 18pt
+- uniformtext: minsize=10, mode='show' (força tamanho configurado)
+- Valores normalizados: R$ 14.400 → 14.4k (formato k para milhares)
+- Cores inteligentes na 3ª barra: Verde (economizou) / Vermelho (excedeu)
+- Filtros compactos: padding p-2, labels curtos
+
+### 📈 Resultados Dashboard
 
 ```
-Total: 141 transações | Débitos: R$ -12.391,35 | Créditos: R$ -9.579,96
-Categorizado: 83% | Parcelas: 33 | Moedas convertidas: 13 USD
-Fontes: Visa Bia (28), PIX (28), Master Físico (22), Visa Recorrente (16)
-Top: A definir (23), Mercado (16), Cartão (10), Compras (8)
+Transações: 2.096 (após filtrar 24 transferências)
+Total: R$ 328.943,96
+Categorizadas: 97.2% (2.038/2.096)
+Pendentes: 0 (0.0% do total)
+Média 12M: R$ 27.412,00 (fixo)
+Período: 12 meses (Jan-Dez 2025)
 ```
 
-### 🔧 Melhorias
+### 🔧 Melhorias Técnicas
 
-- Adicionada categoria `VESTUARIO` ao enum `TransactionCategory`
-- Scripts auxiliares: `buscar_itau_simples.py`, `verificar_parcelas.py`, `atualizar_categoria_vestuario.py`, `listar_transacoes_3meses.py`
-- Confirmado acesso somente leitura (OAuth2 seguro)
+- Database filtering: Exclusão automática de transferências internas (ITAU VISA/BLACK/MASTER/PGTO FATURA/PAGAMENTO CARTAO)
+- Callbacks otimizados: 11 outputs no callback principal
+- Plotly config: displayModeBar sempre visível com ferramentas (zoom, pan, download PNG, reset)
+- Pattern-matching: Botões e dropdowns dinâmicos com IDs JSON-serializáveis
+- Média 12M fixa: Sempre mostra média de 12 meses independente de filtros
+
+### 🐛 Correções
+
+- titlefont inválido: Mudado para title={'font': {'size': 24}}
+- Fontes não aplicando: Adicionado uniformtext para forçar Plotly a respeitar tamanhos
+- Transferências internas: Filtradas 24 transações (R$ 237k) de pagamentos de cartão
+- Row ID inconsistente: Usado alias rowid as row_id no SQLite para compatibilidade pandas
 
 ### 📝 Documentação
 
-- CHANGELOG.md atualizado com v2.2.0
-- README.md com badge v2.2 e seção "NOVIDADE"
-- docs/README.md destacando nova funcionalidade
+- Criado docs/DASHBOARD_INTERATIVO.md (450+ linhas) - Documentação completa do dashboard
+- Criado docs/SESSAO_2025-11-25_DASHBOARD.md - Resumo da sessão de desenvolvimento
+- README.md atualizado para v2.3
+- CHANGELOG.md com entrada completa v2.3.0
 
 ## Arquivos Modificados
 
 **Novos:**
 
-- `backend/src/gerar_excel_pluggy.py` - Script principal
-- `backend/src/buscar_itau_simples.py` - Fetch sem emojis
-- `backend/src/verificar_parcelas.py` - Análise de parcelas
-- `backend/src/atualizar_categoria_vestuario.py` - Verificação DB
-- `backend/src/listar_transacoes_3meses.py` - Demo Mercado Pago
-- `dados/planilhas/consolidado_pluggy_nov2025.xlsx` - Output gerado
+- `backend/src/dashboard_dash.py` - Dashboard interativo completo
+- `docs/DASHBOARD_INTERATIVO.md` - Documentação completa (450+ linhas)
+- `docs/SESSAO_2025-11-25_DASHBOARD.md` - Resumo da sessão
 
 **Modificados:**
 
-- `backend/src/models/__init__.py` - Add VESTUARIO enum
-- `CHANGELOG.md` - v2.2.0
-- `README.md` - v2.2
-- `docs/README.md` - v2.2.0
+- `README.md` - Versão 2.3, seção Dashboard Interativo
+- `CHANGELOG.md` - Entrada v2.3.0 completa
+- `COMMIT_MESSAGE.md` - Atualizado para v2.3.0
 
 ## Impacto
 
-✨ **Primeira geração real de Excel consolidado usando Open Finance**
+✨ **Dashboard interativo completo para análise financeira em tempo real**
 
-- Compatibilidade total com formato existente
-- Categorização inteligente mantida (83%)
-- Conversão de moeda automática (13 transações)
-- Identificação de parcelas (33 transações)
-- Mapeamento correto de 9 fontes
-- Pronto para produção
+- Visualização gráfica otimizada para tela QHD
+- Categorização inline de pendências direto no dashboard
+- Filtros dinâmicos com atualização instantânea
+- 7 gráficos interativos com ferramentas Plotly
+- 97.2% das transações categorizadas
+- 2.096 transações analisadas em tempo real
 
 ---
 
-🎊 **ARRASAMOS HOJE - CONQUISTA GIGANTE!**
+🎊 **DASHBOARD FINALIZADO - VISUALIZAÇÃO PERFEITA!**
 
 ### Open Finance
 

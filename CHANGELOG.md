@@ -7,6 +7,76 @@ e este projeto adere ao [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
 ---
 
+## [2.3.0] - 2025-11-25 📊
+
+### 🎯 Principais Mudanças
+
+**DASHBOARD INTERATIVO COMPLETO!** Visualização em tempo real com análise gráfica, categorização inline e filtros dinâmicos otimizados para telas QHD.
+
+### ✨ Adicionado
+
+#### **📊 Dashboard Dash + Plotly**
+
+- **Script `dashboard_dash.py`** - Dashboard interativo completo
+  - 6 cards informativos compactos (Total, Média 12M, Categorizado, Pendentes, Transações, Meses)
+  - Categorização inline de transações "A definir" direto no dashboard
+  - 3 filtros dinâmicos (Mês, Categoria, Fonte) com refresh automático
+  - 7 gráficos interativos: Real vs Ideal, Evolução Mensal, Fontes (pizza), Categorias (pizza), Distribuição, Acumulado
+  - Pattern-matching callbacks para múltiplos botões de categorização
+  - dcc.Store para gerenciamento de estado e refresh
+  - Acesso via http://localhost:8050
+
+#### **🎨 Otimizações UX para QHD (2560×1440)**
+
+- **Layout compacto**: 6 cards ao invés de 4 (width=2 cada)
+- **Fontes ajustadas**:
+  - textfont: 10pt (valores nas barras)
+  - legend: 14pt (legendas)
+  - title: 24pt (títulos gráficos)
+  - tickfont: 18pt (eixos)
+  - uniformtext: minsize=10, mode='show' (força tamanho configurado)
+- **Valores normalizados**: R$ 14.400 → 14.4k (formato k para milhares)
+- **Cores inteligentes na 3ª barra**:
+  - Verde: economizou (real < ideal)
+  - Vermelho: excedeu (real > ideal)
+  - Fonte 12pt em negrito, sem sinais +/-
+- **Filtros compactos**: padding p-2, labels curtos
+
+#### **🔧 Melhorias Técnicas**
+
+- **Database filtering**: Exclusão automática de transferências internas (ITAU VISA/BLACK/MASTER/PGTO FATURA/PAGAMENTO CARTAO)
+- **Callbacks otimizados**: 11 outputs no callback principal
+- **Plotly config**: displayModeBar sempre visível com ferramentas (zoom, pan, download PNG, reset)
+- **Pattern-matching**: Botões e dropdowns dinâmicos com IDs JSON-serializáveis
+- **Média 12M fixa**: Sempre mostra média de 12 meses independente de filtros
+
+### 🐛 Corrigido
+
+- **titlefont inválido**: Mudado para `title={'font': {'size': 24}}` (sintaxe correta Plotly)
+- **Fontes não aplicando**: Adicionado `uniformtext` para forçar Plotly a respeitar tamanhos
+- **Transferências internas**: Filtradas 24 transações (R$ 237k) de pagamentos de cartão
+- **Row ID inconsistente**: Usado alias `rowid as row_id` no SQLite para compatibilidade pandas
+
+### 📈 Resultados Dashboard
+
+- **2.096 transações** carregadas (após filtros)
+- **97.2% categorizadas** (2.038/2.096)
+- **0 pendentes** (100% categorizado)
+- **R$ 328.943,96** total
+- **12 meses** de dados (Jan-Dez 2025)
+
+### 📚 Documentação
+
+- Criado `docs/DASHBOARD_INTERATIVO.md` - Documentação completa do dashboard
+  - Arquitetura técnica
+  - Guia de uso
+  - Configurações de fontes e cores
+  - Estatísticas atuais
+  - Limitações conhecidas
+  - Roadmap de melhorias
+
+---
+
 ## [2.2.0] - 2025-11-10 🎉
 
 ### 🎯 Principais Mudanças
