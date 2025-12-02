@@ -1,23 +1,28 @@
 # 📚 Documentação - Agente Financeiro IA
 
 > **Sistema inteligente de automação financeira com 98.2% de precisão**  
-> **Versão:** 2.2.0  
-> **Última atualização:** 10/11/2025
+> **Versão:** 2.3.0  
+> **Última atualização:** 25/11/2025
 
 ---
 
-## 🎉 NOVIDADE v2.2.0
+## 🎉 NOVIDADES v2.3.0
 
-**🚀 GERAÇÃO DE EXCEL A PARTIR DO OPEN FINANCE!**
+**📊 DASHBOARD INTERATIVO + OPEN FINANCE COMPLETO!**
 
+- ✅ Dashboard Plotly Dash com 7 gráficos interativos
+- ✅ Categorização inline de transações pendentes
+- ✅ Filtros dinâmicos (Mês, Categoria, Fonte)
+- ✅ Integração Open Finance via Pluggy (REST API)
 - ✅ 141 transações reais processadas (Novembro 2025)
 - ✅ 83% de categorização automática
 - ✅ Conversão de moedas estrangeiras (USD → BRL)
 - ✅ Identificação de parcelas (1/3, 2/5, etc.)
 - ✅ Formato 100% compatível com `consolidado_temp.xlsx`
-- ✅ Acesso somente leitura (OAuth2 seguro)
 
-📄 **Arquivo gerado:** `dados/planilhas/consolidado_pluggy_nov2025.xlsx`
+📄 **Arquivos gerados:** 
+- `dados/planilhas/consolidado_pluggy_nov2025.xlsx`
+- Dashboard: `http://localhost:8050`
 
 ---
 
@@ -26,7 +31,7 @@
 | Documento                                                   | Descrição                                                       |
 | ----------------------------------------------------------- | --------------------------------------------------------------- |
 | [📖 README Principal](../README.md)                         | Visão geral do projeto, instalação e uso                        |
-| [🚀 Integracao_PROXIMO_CHAT.md](Integracao_PROXIMO_CHAT.md) | **Contexto rápido para IA/próximas sessões sobre Open Finance** |
+| [🔗 Integração Pluggy](Integracao/001_INTEGRACAO_PLUGGY.md) | Guia completo de integração Open Finance via Pluggy            |
 | [📋 CHANGELOG](../CHANGELOG.md)                             | Histórico de versões e mudanças                                 |
 | [🤝 CONTRIBUTING](../CONTRIBUTING.md)                       | Guia de contribuição                                            |
 
@@ -85,9 +90,10 @@ Documentação sobre testes, qualidade e cobertura.
 
 ### 🔗 **Open Finance (Pluggy)**
 
-- [🚀 Integracao_PROXIMO_CHAT.md](Integracao_PROXIMO_CHAT.md) - **LEIA PRIMEIRO!**
-- [Integração Completa](Integracao/001_INTEGRACAO_PLUGGY.md)
-- [Checklist de Implementação](Integracao/002_CHECKLIST_PLUGGY.md)
+- [Integração Completa](Integracao/001_INTEGRACAO_PLUGGY.md) - **Guia principal**
+- [Checklist de Implementação](Integracao/002_CHECKLIST_PLUGGY.md) - Passo a passo
+- [Arquitetura e Decisões](Integracao/003_ARQUITETURA_PLUGGY.md) - Detalhes técnicos
+- [Próximos Passos](Integracao/005_PROXIMOS_PASSOS.md) - Roadmap
 
 ### 🧪 **Testes e Qualidade**
 
@@ -117,11 +123,18 @@ Documentação sobre testes, qualidade e cobertura.
 - **Cobertura:** 35.34%
 - **Meta:** 70% de cobertura
 
+### ✅ **Concluído Recentemente**
+
+- ✅ Dashboard interativo Plotly Dash (v2.3.0)
+- ✅ Integração Open Finance - Pluggy REST API (v2.2.0)
+- ✅ Geração de Excel consolidado Open Finance (v2.2.0)
+- ✅ Categorização inline no dashboard (v2.3.0)
+
 ### 🚧 **Em Desenvolvimento**
 
-- 🔄 Integração Open Finance (Pluggy)
-- 🔄 Migração para .env (segurança)
-- 🔄 Automação completa de sincronização
+- 🔄 Migração credenciais para .env (segurança)
+- 🔄 Automação de sincronização mensal Pluggy
+- 🔄 Merge inteligente Open Finance + Manual
 - 🔄 Expansão para múltiplos bancos
 
 ---

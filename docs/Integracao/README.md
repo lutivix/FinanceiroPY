@@ -39,7 +39,10 @@ Documentação sobre integrações externas: Open Finance (Pluggy), APIs bancár
 | [003_ARQUITETURA_PLUGGY.md](003_ARQUITETURA_PLUGGY.md)       | Decisões técnicas REST vs SDK           | ✅ Documentado |
 | [004_SEGURANCA_OPENFINANCE.md](004_SEGURANCA_OPENFINANCE.md) | Segurança e compliance                  | ✅ Documentado |
 | [005_PROXIMOS_PASSOS.md](005_PROXIMOS_PASSOS.md)             | **Roadmap e próximas features**         | 🎯 **LEIA!**   |
-| [DASHBOARD_GUIA.md](DASHBOARD_GUIA.md)                       | **📊 Guia completo do Dashboard**       | 🆕 **NOVO!**   |
+| [006_SEGURANCA_CREDENCIAIS.md](006_SEGURANCA_CREDENCIAIS.md) | **🔒 Migração para .env (Urgente)**     | ⚠️ **AÇÃO!**   |
+| [007_DASHBOARD_GUIA.md](007_DASHBOARD_GUIA.md)               | **📊 Guia completo do Dashboard**       | 🆕 **NOVO!**   |
+| [008_RESUMO_CORRECOES.md](008_RESUMO_CORRECOES.md)           | **📋 Resumo de correções (02/12)**      | ✅ **INFO**    |
+| [009_DASHBOARD_INTERATIVO.md](009_DASHBOARD_INTERATIVO.md)   | **📊 Dashboard Plotly (v2.3.0)**        | ✅ **PROD**    |
 
 ---
 

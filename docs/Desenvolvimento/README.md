@@ -14,6 +14,9 @@ Documentação técnica, arquitetura, guias de usuário e planejamento do sistem
 | [004_RESUMO_RAPIDO.md](004_RESUMO_RAPIDO.md)                       | Guia rápido de referência                         | 24/10/2025         |
 | [005_ATUALIZACAO_DOCUMENTACAO.md](005_ATUALIZACAO_DOCUMENTACAO.md) | Log de atualizações da documentação               | 28/10/2025         |
 | [006_INDICE_DOCUMENTACAO.md](006_INDICE_DOCUMENTACAO.md)           | Índice detalhado (legado)                         | 24/10/2025         |
+| [007_REORGANIZACAO_COMPLETA.md](007_REORGANIZACAO_COMPLETA.md)     | Reorganização da documentação                     | 10/11/2025         |
+| [008_COMMIT_V2.0.2_CICLO_19-18.md](008_COMMIT_V2.0.2_CICLO_19-18.md) | Commit v2.0.2 - Ciclo 19-18                     | 10/11/2025         |
+| [009_SESSAO_DASHBOARD_25NOV.md](009_SESSAO_DASHBOARD_25NOV.md)     | Sessão desenvolvimento Dashboard                  | 25/11/2025         |
 
 ---
 
