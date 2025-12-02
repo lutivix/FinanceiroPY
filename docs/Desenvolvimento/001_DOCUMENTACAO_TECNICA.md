@@ -33,7 +33,96 @@
 
 ---
 
-## 🔧 **Componentes Principais**
+## � **Ciclo Mensal e Busca de Arquivos**
+
+### **Regra de Negócio: Ciclo 19-18**
+
+O sistema opera com um **ciclo mensal personalizado** que vai do **dia 19 de um mês ao dia 18 do próximo mês**. Esta lógica garante que todas as transações do período correto sejam capturadas.
+
+**Funcionamento:**
+
+```python
+# Determina o mês atual baseado no ciclo 19-18
+if hoje.day >= 19:
+    # A partir do dia 19, o ciclo é do PRÓXIMO mês
+    mes_atual = hoje.month + 1
+    ano_atual = hoje.year
+    if mes_atual > 12:
+        mes_atual = 1
+        ano_atual += 1
+else:
+    # Antes do dia 19, o ciclo é do mês corrente
+    mes_atual = hoje.month
+    ano_atual = hoje.year
+```
+
+**Exemplos práticos:**
+
+| Data Atual | Mês do Ciclo | Arquivo Buscado | Período Coberto |
+| ---------- | ------------ | --------------- | --------------- |
+| 15/10/2025 | Outubro      | 202510\__._     | 19/09 a 18/10   |
+| 19/10/2025 | Novembro     | 202511\__._     | 19/10 a 18/11   |
+| 28/10/2025 | Novembro     | 202511\__._     | 19/10 a 18/11   |
+| 05/11/2025 | Novembro     | 202511\__._     | 19/10 a 18/11   |
+| 19/11/2025 | Dezembro     | 202512\__._     | 19/11 a 18/12   |
+
+### **Processamento de Arquivos**
+
+**Importante:** O sistema **NÃO filtra datas dentro dos arquivos**. Todas as transações presentes no arquivo são processadas, independentemente de suas datas.
+
+**Motivo:**
+
+- ✅ Preserva compras parceladas que aparecem com datas futuras
+- ✅ Mantém transações programadas e agendadas
+- ✅ Captura ajustes e estornos retroativos
+- ✅ Evita perda de informações importantes
+
+**Exemplo:**
+
+Arquivo `202511_Itau.xls` (novembro) pode conter:
+
+- Transações de 19/10 (início do ciclo)
+- Transações de 05/11 (meio do ciclo)
+- Transações de 18/11 (fim do ciclo)
+- **Parcelas futuras** (01/12, 01/01, etc.)
+
+✅ **Todas são processadas!**
+
+### **Busca de Arquivos Retroativos**
+
+```python
+def find_recent_files(months_back: int = 12) -> Dict[str, Path]:
+    """
+    Busca arquivos dos últimos N meses baseado no ciclo 19-18.
+
+    Args:
+        months_back: Quantos meses para trás buscar (padrão: 12)
+
+    Returns:
+        Dicionário com identificador -> caminho do arquivo
+    """
+    # Determina mês atual do ciclo
+    mes_atual = calcular_mes_ciclo(hoje)
+
+    # Busca retroativa
+    for i in range(months_back):
+        ano_mes = calcular_ano_mes(mes_atual - i)
+        buscar_arquivos(ano_mes)
+```
+
+**Arquivos buscados (exemplo em 28/10/2025):**
+
+```
+202511_*.* (Nov 2025) ← Mês atual do ciclo
+202510_*.* (Out 2025)
+202509_*.* (Set 2025)
+...
+202412_*.* (Dez 2024) ← 12 meses atrás
+```
+
+---
+
+## �🔧 **Componentes Principais**
 
 ### **1. agente_financeiro.py**
 
@@ -465,7 +554,99 @@ def monitor_performance():
 
 ---
 
-## 🛡️ **Segurança e Privacidade**
+## � **Troubleshooting e Configuração**
+
+### **Problema: Erro de PATH do Python ao executar .bat**
+
+**Sintoma:**
+
+- Ao executar os arquivos `.bat`, aparece erro "Python não encontrado no PATH"
+- Scripts não executam mesmo com Anaconda instalado
+- VS Code não detecta o interpretador correto
+
+**Causa Raiz:**
+
+- Ambientes Conda não são automaticamente adicionados ao PATH do Windows
+- Arquivos `.bat` tentam executar `python` direto sem especificar o ambiente
+- VS Code pode estar configurado para Python genérico ao invés do ambiente específico
+
+**Solução Implementada:**
+
+1. **Criar ambiente Conda específico para o projeto:**
+
+   ```bash
+   conda create -n financeiro python=3.11 -y
+   conda activate financeiro
+   pip install -r requirements.txt
+   ```
+
+2. **Atualizar todos os arquivos .bat para usar o Conda:**
+
+   ```batch
+   REM Define o caminho do Conda
+   set "CONDA_EXE=C:\ProgramData\anaconda3\Scripts\conda.exe"
+   set "CONDA_ENV=financeiro"
+
+   REM Executa Python via Conda
+   "%CONDA_EXE%" run -n %CONDA_ENV% python agente_financeiro.py
+   ```
+
+3. **Configurar VS Code (.vscode/settings.json):**
+
+   ```json
+   {
+     "python.defaultInterpreterPath": "C:\\Users\\<user>\\.conda\\envs\\financeiro\\python.exe"
+   }
+   ```
+
+4. **Verificar instalação:**
+   ```bash
+   conda env list  # Verificar ambientes disponíveis
+   conda activate financeiro
+   python --version  # Deve mostrar Python 3.11.x
+   pip list  # Verificar pacotes instalados
+   ```
+
+**Arquivos Atualizados:**
+
+- ✅ `agente_financeiro_completo.bat`
+- ✅ `agente_financeiro_simples.bat`
+- ✅ `agente_financeiro.bat`
+- ✅ `atualiza_dicionario.bat`
+- ✅ `atualiza_dicionario_controle.bat`
+- ✅ `.vscode/settings.json`
+
+**Documentação de Referência:**
+
+- 📄 `CONFIGURACAO_AMBIENTE.md` - Guia completo de configuração do ambiente
+
+**Observações Importantes:**
+
+- É normal ter múltiplos Pythons no sistema (Anaconda base + ambientes específicos)
+- Cada projeto deve ter seu próprio ambiente Conda isolado
+- Python global (ex: Python 3.13 standalone) não interfere se usar Conda corretamente
+- O Anaconda base (ex: 3.13) gerencia os ambientes, mas projetos usam versões específicas
+
+**Validação de Sucesso:**
+
+```bash
+# Teste 1: Verificar ambiente
+C:\ProgramData\anaconda3\Scripts\conda.exe env list
+# Deve listar: financeiro
+
+# Teste 2: Verificar dependências
+"C:\Users\<user>\.conda\envs\financeiro\python.exe" -c "import pandas, openpyxl, pytest"
+# Não deve dar erro
+
+# Teste 3: Executar script
+cd backend/src
+"C:\Users\<user>\.conda\envs\financeiro\python.exe" agente_financeiro.py
+# Deve processar transações com sucesso
+```
+
+---
+
+## �🛡️ **Segurança e Privacidade**
 
 ### **Proteção de Dados**
 
@@ -494,5 +675,163 @@ def sanitize_description(desc):
 
 ---
 
-_Documentação técnica atualizada em September 30, 2025_
-_Sistema Agente Financeiro IA v2.0 - 98.2% de precisão_
+## 🔄 **Sincronização Open Finance (v2.3.0)**
+
+### **Script: `sync_openfinance_anual.py`**
+
+Importa **12 meses de transações** do Pluggy Open Finance para o banco de dados SQLite.
+
+**Funcionalidades:**
+
+- ✅ Busca transações de **19/12/2024 a hoje** (considera ciclo 19-18)
+- ✅ Processa **Itaú** (3 contas) e **Mercado Pago**
+- ✅ Categorização automática via `CategorizationService` (94,7%)
+- ✅ Mapeamento de fontes (Visa Físico, Virtual, PIX, etc.)
+- ✅ Cálculo de `mes_comp` baseado em ciclo 19-18
+- ✅ Extração de parcelas (numero, total, data compra)
+- ✅ Conversão de moedas (amountInAccountCurrency)
+- ✅ Prevenção de duplicatas (provider_id UNIQUE)
+- ✅ Relatório detalhado (mês, fonte, categoria)
+
+### **Tabela: `transacoes_openfinance` (21 campos)**
+
+```sql
+CREATE TABLE IF NOT EXISTS transacoes_openfinance (
+    -- Identificação
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    provider_id TEXT UNIQUE NOT NULL,        -- ID único do Pluggy
+    account_id TEXT NOT NULL,                -- ID da conta
+
+    -- Dados da transação
+    data DATE NOT NULL,                      -- Data da transação
+    descricao TEXT NOT NULL,                 -- Descrição
+    valor REAL NOT NULL,                     -- Valor (negativo=débito)
+
+    -- Categorização
+    categoria TEXT,                          -- Categoria do usuário (CategorizationService)
+    categoria_banco TEXT,                    -- Categoria do banco (Pluggy)
+    tag TEXT,                                -- Tags customizadas
+
+    -- Origem
+    fonte TEXT,                              -- TransactionSource (Visa Físico, PIX, etc.)
+    pagador TEXT,                            -- Pagador (futuro)
+    cartao_final TEXT,                       -- 4 últimos dígitos do cartão
+
+    -- Período
+    mes_comp TEXT,                           -- Mês competência (ciclo 19-18)
+
+    -- Metadata bancária
+    tipo_transacao TEXT,                     -- DEBIT/CREDIT
+    tipo_conta TEXT,                         -- BANK/CREDIT
+    origem_banco TEXT,                       -- Itaú/Mercado Pago
+
+    -- Parcelas
+    parcela_numero INTEGER,                  -- Número da parcela atual
+    parcela_total INTEGER,                   -- Total de parcelas
+    data_compra DATE,                        -- Data original da compra
+
+    -- Moeda
+    moeda_original TEXT,                     -- USD, EUR, GBP, BRL
+    valor_moeda_original REAL,               -- Valor na moeda original
+
+    -- Controle
+    origem_dado TEXT DEFAULT 'pluggy',       -- Origem dos dados
+    sincronizado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    -- Auditoria
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    metadata_json TEXT                       -- JSON completo do Pluggy
+);
+
+-- Índices para performance
+CREATE INDEX IF NOT EXISTS idx_openfinance_provider ON transacoes_openfinance(provider_id);
+CREATE INDEX IF NOT EXISTS idx_openfinance_data ON transacoes_openfinance(data);
+CREATE INDEX IF NOT EXISTS idx_openfinance_mes_comp ON transacoes_openfinance(mes_comp);
+CREATE INDEX IF NOT EXISTS idx_openfinance_categoria ON transacoes_openfinance(categoria);
+CREATE INDEX IF NOT EXISTS idx_openfinance_fonte ON transacoes_openfinance(fonte);
+```
+
+### **Ciclo de Faturamento 19-18 (Open Finance)**
+
+**Regra:** Transações de **dia 19 a dia 18 do próximo mês** pertencem ao mês seguinte.
+
+```python
+def calcular_mes_comp(data_transacao):
+    """Calcular MesComp baseado no ciclo 19-18"""
+    dia = data.day
+    mes = data.month
+    ano = data.year
+
+    # Se dia >= 19, pertence ao PRÓXIMO mês
+    if dia >= 19:
+        mes_comp_num = mes + 1
+        ano_comp = ano
+        if mes_comp_num == 13:
+            mes_comp_num = 1
+            ano_comp += 1
+    else:
+        mes_comp_num = mes
+        ano_comp = ano
+
+    return f"{meses[mes_comp_num - 1]} {ano_comp}"
+```
+
+**Exemplos:**
+
+| Data Transação | Mes_Comp      | Período       |
+| -------------- | ------------- | ------------- |
+| 19/10/2025     | Novembro 2025 | 19/10 a 18/11 |
+| 10/11/2025     | Novembro 2025 | 19/10 a 18/11 |
+| 18/11/2025     | Novembro 2025 | 19/10 a 18/11 |
+| 19/11/2025     | Dezembro 2025 | 19/11 a 18/12 |
+
+### **Uso do Script**
+
+```bash
+# Executar sincronização
+py backend/src/sync_openfinance_anual.py
+```
+
+**Resultado Esperado (v2.3.0):**
+
+```
+✅ Total importadas: 2318
+🎯 Categorizadas automaticamente: 2194 (94.7%)
+❓ A definir: 124 (5.3%)
+
+📅 Distribuição Mensal (Jan-Nov 2025):
+   Janeiro:   281 | Fevereiro: 266 | Março:     188
+   Abril:     193 | Maio:      186 | Junho:     216
+   Julho:     205 | Agosto:    198 | Setembro:  233
+   Outubro:   211 | Novembro:  141
+
+💳 Por Fonte:
+   Visa Virtual: 716 | PIX: 523 | Visa Bia: 510
+```
+
+### **Integração com CategorizationService**
+
+```python
+# Criar objeto Transaction temporário para categorização
+temp_transaction = Transaction(
+    date=datetime.strptime(data, '%Y-%m-%d').date(),
+    description=descricao,
+    amount=valor,
+    source=TransactionSource.PIX
+)
+
+# Aplicar categorização inteligente
+categoria_obj = self.categorization_service.categorize_transaction(temp_transaction)
+categoria = categoria_obj.value if categoria_obj else "A definir"
+```
+
+**Taxa de Sucesso:**
+
+- ✅ 94,7% categorizadas automaticamente
+- ❌ 5,3% marcadas como "A definir"
+
+---
+
+_Documentação técnica atualizada em November 11, 2025_
+_Sistema Agente Financeiro IA v2.3.0 - 94.7% de precisão Open Finance_

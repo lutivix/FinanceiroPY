@@ -57,12 +57,8 @@ class CardProcessor(BaseProcessor):
             # Lê arquivo Excel
             df = pd.read_excel(file_path)
             
-            # Extrai informações específicas do cartão
-            final_cartao = self._extract_card_final(df)
-            source = get_card_source(final_cartao, self.bank_name)
-            
-            # Processa transações
-            transactions = self._extract_transactions(df, source, month_ref, file_path)
+            # Processa transações por seção de cartão
+            transactions = self._extract_transactions_by_card(df, month_ref, file_path)
             
             self.stats.files_processed += 1
             self.stats.transactions_extracted += len(transactions)
@@ -92,6 +88,101 @@ class CardProcessor(BaseProcessor):
                 if len(final) >= 4:
                     return final[-4:]
         return None
+    
+    def _extract_transactions_by_card(self, df: pd.DataFrame, month_ref: str, file_path: Path) -> List[Transaction]:
+        """
+        Extrai transações agrupadas por cartão.
+        Cada seção do arquivo corresponde a um cartão específico.
+        
+        Args:
+            df: DataFrame do Excel
+            month_ref: Referência do mês
+            file_path: Caminho do arquivo original
+            
+        Returns:
+            Lista de transações
+        """
+        transactions = []
+        current_card_final = None
+        current_source = None
+        ultima_data = None
+        aguardando_valor_real = False
+        
+        for i, row in df.iterrows():
+            col_a = str(row.iloc[0]).strip()
+            col_b = str(row.iloc[1]).strip()
+            col_d = row.iloc[3] if len(row) > 3 else None
+            valor = pd.to_numeric(col_d, errors="coerce") if col_d is not None else None
+            
+            # Verifica se é linha de final do cartão
+            if "FINAL" in col_a.upper():
+                final = ''.join(filter(str.isdigit, col_a))
+                if len(final) >= 4:
+                    current_card_final = final[-4:]
+                    current_source = get_card_source(current_card_final, self.bank_name)
+                continue
+            
+            # Ignora linhas vazias ou inválidas
+            if not col_b or col_b.strip().upper() in ["NAN", ""]:
+                continue
+            
+            # Se não temos um cartão atual, usa virtual como padrão
+            if current_source is None:
+                current_source = (TransactionSource.ITAU_MASTER_VIRTUAL 
+                                if self.bank_name.lower() == "itau" 
+                                else TransactionSource.LATAM_VISA_VIRTUAL)
+            
+            # Verifica se deve pular esta transação
+            if self.should_skip_transaction(col_b, valor if valor is not None else 0):
+                continue
+            
+            # Processa data
+            try:
+                data = pd.to_datetime(col_a, dayfirst=True, errors="coerce")
+                if pd.notnull(data):
+                    data = data.date()
+                else:
+                    data = None
+                
+                # Tratamento especial para conversões de moeda
+                if "dólar de conversão" in col_b.lower():
+                    ultima_data = data
+                    aguardando_valor_real = True
+                    continue
+                    
+            except:
+                data = None
+            
+            # Usa última data se necessário
+            if pd.isnull(data) and pd.notnull(valor):
+                if aguardando_valor_real:
+                    data = ultima_data
+                    aguardando_valor_real = False
+                else:
+                    continue
+            elif pd.isnull(data):
+                continue
+            
+            # Cria transação se tem valor válido e data válida
+            if pd.notnull(valor) and valor != 0 and data is not None:
+                transaction = Transaction(
+                    date=data,
+                    description=self.normalize_description(col_b),
+                    amount=float(valor),
+                    source=current_source,
+                    category=TransactionCategory.A_DEFINIR,
+                    month_ref=month_ref,
+                    raw_data={
+                        "original_description": col_b,
+                        "file_source": str(file_path),
+                        "bank": self.bank_name,
+                        "card_final": current_card_final
+                    }
+                )
+                
+                transactions.append(transaction)
+        
+        return transactions
     
     def _extract_transactions(self, df: pd.DataFrame, source: TransactionSource, 
                             month_ref: str, file_path: Path) -> List[Transaction]:

@@ -1,0 +1,665 @@
+{
+  "periodo": {
+    "inicio": "2025-08-12",
+    "fim": "2025-11-10"
+  },
+  "resumo": {
+    "total_transacoes": 15,
+    "creditos": {
+      "quantidade": 15,
+      "total": 0.15
+    },
+    "debitos": {
+      "quantidade": 0,
+      "total": 0
+    },
+    "saldo_periodo": 0.15
+  },
+  "transacoes": [
+    {
+      "id": "b043e25b-9759-434c-8109-f52c228941dd",
+      "description": "Rendimentos",
+      "descriptionRaw": "Rendimentos",
+      "currencyCode": "BRL",
+      "amount": 0.01,
+      "amountInAccountCurrency": null,
+      "date": "2025-10-16T04:36:06.610Z",
+      "category": "Proceeds interests and dividends",
+      "categoryId": "03060000",
+      "balance": null,
+      "accountId": "6d6832d7-c07a-4a07-8a51-ee335abd0f64",
+      "providerCode": null,
+      "status": "POSTED",
+      "paymentData": {
+        "payer": null,
+        "paymentMethod": "OTHER",
+        "reason": null,
+        "receiver": {
+          "accountNumber": null,
+          "branchNumber": null,
+          "documentNumber": {
+            "type": "CPF",
+            "value": "991.808.986-53"
+          },
+          "name": null,
+          "routingNumber": null,
+          "routingNumberISPB": null
+        },
+        "receiverReferenceId": null,
+        "referenceNumber": null,
+        "boletoMetadata": null
+      },
+      "type": "CREDIT",
+      "operationType": "RENDIMENTO_APLIC_FINANCEIRA",
+      "creditCardMetadata": null,
+      "acquirerData": null,
+      "merchant": null,
+      "providerId": "B31QDXEB8EKKSDNMK",
+      "order": 0,
+      "createdAt": "2025-11-10T19:36:15.169Z",
+      "updatedAt": "2025-11-10T19:36:15.169Z"
+    },
+    {
+      "id": "ed595c50-318c-46cb-a786-a69c1fdc522b",
+      "description": "Rendimentos",
+      "descriptionRaw": "Rendimentos",
+      "currencyCode": "BRL",
+      "amount": 0.01,
+      "amountInAccountCurrency": null,
+      "date": "2025-10-14T05:14:02.642Z",
+      "category": "Proceeds interests and dividends",
+      "categoryId": "03060000",
+      "balance": null,
+      "accountId": "6d6832d7-c07a-4a07-8a51-ee335abd0f64",
+      "providerCode": null,
+      "status": "POSTED",
+      "paymentData": {
+        "payer": null,
+        "paymentMethod": "OTHER",
+        "reason": null,
+        "receiver": {
+          "accountNumber": null,
+          "branchNumber": null,
+          "documentNumber": {
+            "type": "CPF",
+            "value": "991.808.986-53"
+          },
+          "name": null,
+          "routingNumber": null,
+          "routingNumberISPB": null
+        },
+        "receiverReferenceId": null,
+        "referenceNumber": null,
+        "boletoMetadata": null
+      },
+      "type": "CREDIT",
+      "operationType": "RENDIMENTO_APLIC_FINANCEIRA",
+      "creditCardMetadata": null,
+      "acquirerData": null,
+      "merchant": null,
+      "providerId": "B31Q4779194SDZQQA",
+      "order": 0,
+      "createdAt": "2025-11-10T19:36:15.169Z",
+      "updatedAt": "2025-11-10T19:36:15.169Z"
+    },
+    {
+      "id": "31de6dfa-9cee-41cf-bb8e-2279c1698946",
+      "description": "Rendimentos",
+      "descriptionRaw": "Rendimentos",
+      "currencyCode": "BRL",
+      "amount": 0.01,
+      "amountInAccountCurrency": null,
+      "date": "2025-10-09T04:39:10.726Z",
+      "category": "Proceeds interests and dividends",
+      "categoryId": "03060000",
+      "balance": null,
+      "accountId": "6d6832d7-c07a-4a07-8a51-ee335abd0f64",
+      "providerCode": null,
+      "status": "POSTED",
+      "paymentData": {
+        "payer": null,
+        "paymentMethod": "OTHER",
+        "reason": null,
+        "receiver": {
+          "accountNumber": null,
+          "branchNumber": null,
+          "documentNumber": {
+            "type": "CPF",
+            "value": "991.808.986-53"
+          },
+          "name": null,
+          "routingNumber": null,
+          "routingNumberISPB": null
+        },
+        "receiverReferenceId": null,
+        "referenceNumber": null,
+        "boletoMetadata": null
+      },
+      "type": "CREDIT",
+      "operationType": "RENDIMENTO_APLIC_FINANCEIRA",
+      "creditCardMetadata": null,
+      "acquirerData": null,
+      "merchant": null,
+      "providerId": "B31PBHKQE8XTT7EJ8",
+      "order": 0,
+      "createdAt": "2025-11-10T19:36:15.169Z",
+      "updatedAt": "2025-11-10T19:36:15.169Z"
+    },
+    {
+      "id": "aeb225e8-8d53-4e8f-b925-e5a924dbc162",
+      "description": "Rendimentos",
+      "descriptionRaw": "Rendimentos",
+      "currencyCode": "BRL",
+      "amount": 0.01,
+      "amountInAccountCurrency": null,
+      "date": "2025-10-06T05:01:18.607Z",
+      "category": "Proceeds interests and dividends",
+      "categoryId": "03060000",
+      "balance": null,
+      "accountId": "6d6832d7-c07a-4a07-8a51-ee335abd0f64",
+      "providerCode": null,
+      "status": "POSTED",
+      "paymentData": {
+        "payer": null,
+        "paymentMethod": "OTHER",
+        "reason": null,
+        "receiver": {
+          "accountNumber": null,
+          "branchNumber": null,
+          "documentNumber": {
+            "type": "CPF",
+            "value": "991.808.986-53"
+          },
+          "name": null,
+          "routingNumber": null,
+          "routingNumberISPB": null
+        },
+        "receiverReferenceId": null,
+        "referenceNumber": null,
+        "boletoMetadata": null
+      },
+      "type": "CREDIT",
+      "operationType": "RENDIMENTO_APLIC_FINANCEIRA",
+      "creditCardMetadata": null,
+      "acquirerData": null,
+      "merchant": null,
+      "providerId": "B31NWWHPZEG1YAA15",
+      "order": 0,
+      "createdAt": "2025-11-10T19:36:15.169Z",
+      "updatedAt": "2025-11-10T19:36:15.169Z"
+    },
+    {
+      "id": "ce0e0182-6eb4-4424-abe9-79aca0e1fa92",
+      "description": "Rendimentos",
+      "descriptionRaw": "Rendimentos",
+      "currencyCode": "BRL",
+      "amount": 0.01,
+      "amountInAccountCurrency": null,
+      "date": "2025-09-29T05:05:58.716Z",
+      "category": "Proceeds interests and dividends",
+      "categoryId": "03060000",
+      "balance": null,
+      "accountId": "6d6832d7-c07a-4a07-8a51-ee335abd0f64",
+      "providerCode": null,
+      "status": "POSTED",
+      "paymentData": {
+        "payer": null,
+        "paymentMethod": "OTHER",
+        "reason": null,
+        "receiver": {
+          "accountNumber": null,
+          "branchNumber": null,
+          "documentNumber": {
+            "type": "CPF",
+            "value": "991.808.986-53"
+          },
+          "name": null,
+          "routingNumber": null,
+          "routingNumberISPB": null
+        },
+        "receiverReferenceId": null,
+        "referenceNumber": null,
+        "boletoMetadata": null
+      },
+      "type": "CREDIT",
+      "operationType": "RENDIMENTO_APLIC_FINANCEIRA",
+      "creditCardMetadata": null,
+      "acquirerData": null,
+      "merchant": null,
+      "providerId": "B31MTGXXDBDZYYMMX",
+      "order": 0,
+      "createdAt": "2025-11-10T19:36:15.169Z",
+      "updatedAt": "2025-11-10T19:36:15.169Z"
+    },
+    {
+      "id": "e6f6a40b-de0b-4508-b68d-473f8b86e600",
+      "description": "Rendimentos",
+      "descriptionRaw": "Rendimentos",
+      "currencyCode": "BRL",
+      "amount": 0.01,
+      "amountInAccountCurrency": null,
+      "date": "2025-09-24T04:31:41.463Z",
+      "category": "Proceeds interests and dividends",
+      "categoryId": "03060000",
+      "balance": null,
+      "accountId": "6d6832d7-c07a-4a07-8a51-ee335abd0f64",
+      "providerCode": null,
+      "status": "POSTED",
+      "paymentData": {
+        "payer": null,
+        "paymentMethod": "OTHER",
+        "reason": null,
+        "receiver": {
+          "accountNumber": null,
+          "branchNumber": null,
+          "documentNumber": {
+            "type": "CPF",
+            "value": "991.808.986-53"
+          },
+          "name": null,
+          "routingNumber": null,
+          "routingNumberISPB": null
+        },
+        "receiverReferenceId": null,
+        "referenceNumber": null,
+        "boletoMetadata": null
+      },
+      "type": "CREDIT",
+      "operationType": "RENDIMENTO_APLIC_FINANCEIRA",
+      "creditCardMetadata": null,
+      "acquirerData": null,
+      "merchant": null,
+      "providerId": "B31M1VCQT48MM33C4",
+      "order": 0,
+      "createdAt": "2025-11-10T19:36:15.169Z",
+      "updatedAt": "2025-11-10T19:36:15.169Z"
+    },
+    {
+      "id": "96a0ef3d-978f-42a4-8d30-2ddbc2119f95",
+      "description": "Rendimentos",
+      "descriptionRaw": "Rendimentos",
+      "currencyCode": "BRL",
+      "amount": 0.01,
+      "amountInAccountCurrency": null,
+      "date": "2025-09-19T04:39:53.852Z",
+      "category": "Proceeds interests and dividends",
+      "categoryId": "03060000",
+      "balance": null,
+      "accountId": "6d6832d7-c07a-4a07-8a51-ee335abd0f64",
+      "providerCode": null,
+      "status": "POSTED",
+      "paymentData": {
+        "payer": null,
+        "paymentMethod": "OTHER",
+        "reason": null,
+        "receiver": {
+          "accountNumber": null,
+          "branchNumber": null,
+          "documentNumber": {
+            "type": "CPF",
+            "value": "991.808.986-53"
+          },
+          "name": null,
+          "routingNumber": null,
+          "routingNumberISPB": null
+        },
+        "receiverReferenceId": null,
+        "referenceNumber": null,
+        "boletoMetadata": null
+      },
+      "type": "CREDIT",
+      "operationType": "RENDIMENTO_APLIC_FINANCEIRA",
+      "creditCardMetadata": null,
+      "acquirerData": null,
+      "merchant": null,
+      "providerId": "B31K9AFF8KRS61Y0S",
+      "order": 0,
+      "createdAt": "2025-11-10T19:36:15.169Z",
+      "updatedAt": "2025-11-10T19:36:15.169Z"
+    },
+    {
+      "id": "3903420d-21af-4900-a313-c550071675ac",
+      "description": "Rendimentos",
+      "descriptionRaw": "Rendimentos",
+      "currencyCode": "BRL",
+      "amount": 0.01,
+      "amountInAccountCurrency": null,
+      "date": "2025-09-17T04:36:00.017Z",
+      "category": "Proceeds interests and dividends",
+      "categoryId": "03060000",
+      "balance": null,
+      "accountId": "6d6832d7-c07a-4a07-8a51-ee335abd0f64",
+      "providerCode": null,
+      "status": "POSTED",
+      "paymentData": {
+        "payer": null,
+        "paymentMethod": "OTHER",
+        "reason": null,
+        "receiver": {
+          "accountNumber": null,
+          "branchNumber": null,
+          "documentNumber": {
+            "type": "CPF",
+            "value": "991.808.986-53"
+          },
+          "name": null,
+          "routingNumber": null,
+          "routingNumberISPB": null
+        },
+        "receiverReferenceId": null,
+        "referenceNumber": null,
+        "boletoMetadata": null
+      },
+      "type": "CREDIT",
+      "operationType": "RENDIMENTO_APLIC_FINANCEIRA",
+      "creditCardMetadata": null,
+      "acquirerData": null,
+      "merchant": null,
+      "providerId": "B31JZFQJ330JGH7XB",
+      "order": 0,
+      "createdAt": "2025-11-10T19:36:15.169Z",
+      "updatedAt": "2025-11-10T19:36:15.169Z"
+    },
+    {
+      "id": "1e07ff61-598d-4cfe-96e4-1744a6a81403",
+      "description": "Rendimentos",
+      "descriptionRaw": "Rendimentos",
+      "currencyCode": "BRL",
+      "amount": 0.01,
+      "amountInAccountCurrency": null,
+      "date": "2025-09-09T06:41:49.015Z",
+      "category": "Proceeds interests and dividends",
+      "categoryId": "03060000",
+      "balance": null,
+      "accountId": "6d6832d7-c07a-4a07-8a51-ee335abd0f64",
+      "providerCode": null,
+      "status": "POSTED",
+      "paymentData": {
+        "payer": null,
+        "paymentMethod": "OTHER",
+        "reason": null,
+        "receiver": {
+          "accountNumber": null,
+          "branchNumber": null,
+          "documentNumber": {
+            "type": "CPF",
+            "value": "991.808.986-53"
+          },
+          "name": null,
+          "routingNumber": null,
+          "routingNumberISPB": null
+        },
+        "receiverReferenceId": null,
+        "referenceNumber": null,
+        "boletoMetadata": null
+      },
+      "type": "CREDIT",
+      "operationType": "RENDIMENTO_APLIC_FINANCEIRA",
+      "creditCardMetadata": null,
+      "acquirerData": null,
+      "merchant": null,
+      "providerId": "B31HRM5VH0DZMTZ9Z",
+      "order": 0,
+      "createdAt": "2025-11-10T19:36:15.169Z",
+      "updatedAt": "2025-11-10T19:36:15.169Z"
+    },
+    {
+      "id": "85ff9ff6-8d18-48a3-b77b-b0adef2dc6a3",
+      "description": "Rendimentos",
+      "descriptionRaw": "Rendimentos",
+      "currencyCode": "BRL",
+      "amount": 0.01,
+      "amountInAccountCurrency": null,
+      "date": "2025-09-05T06:52:30.294Z",
+      "category": "Proceeds interests and dividends",
+      "categoryId": "03060000",
+      "balance": null,
+      "accountId": "6d6832d7-c07a-4a07-8a51-ee335abd0f64",
+      "providerCode": null,
+      "status": "POSTED",
+      "paymentData": {
+        "payer": null,
+        "paymentMethod": "OTHER",
+        "reason": null,
+        "receiver": {
+          "accountNumber": null,
+          "branchNumber": null,
+          "documentNumber": {
+            "type": "CPF",
+            "value": "991.808.986-53"
+          },
+          "name": null,
+          "routingNumber": null,
+          "routingNumberISPB": null
+        },
+        "receiverReferenceId": null,
+        "referenceNumber": null,
+        "boletoMetadata": null
+      },
+      "type": "CREDIT",
+      "operationType": "RENDIMENTO_APLIC_FINANCEIRA",
+      "creditCardMetadata": null,
+      "acquirerData": null,
+      "merchant": null,
+      "providerId": "B31H50PM9MADMGGK2",
+      "order": 0,
+      "createdAt": "2025-11-10T19:36:15.169Z",
+      "updatedAt": "2025-11-10T19:36:15.169Z"
+    },
+    {
+      "id": "fed090f5-8049-47ff-ac36-96bf36dfe515",
+      "description": "Rendimentos",
+      "descriptionRaw": "Rendimentos",
+      "currencyCode": "BRL",
+      "amount": 0.01,
+      "amountInAccountCurrency": null,
+      "date": "2025-09-02T05:00:31.806Z",
+      "category": "Proceeds interests and dividends",
+      "categoryId": "03060000",
+      "balance": null,
+      "accountId": "6d6832d7-c07a-4a07-8a51-ee335abd0f64",
+      "providerCode": null,
+      "status": "POSTED",
+      "paymentData": {
+        "payer": null,
+        "paymentMethod": "OTHER",
+        "reason": null,
+        "receiver": {
+          "accountNumber": null,
+          "branchNumber": null,
+          "documentNumber": {
+            "type": "CPF",
+            "value": "991.808.986-53"
+          },
+          "name": null,
+          "routingNumber": null,
+          "routingNumberISPB": null
+        },
+        "receiverReferenceId": null,
+        "referenceNumber": null,
+        "boletoMetadata": null
+      },
+      "type": "CREDIT",
+      "operationType": "RENDIMENTO_APLIC_FINANCEIRA",
+      "creditCardMetadata": null,
+      "acquirerData": null,
+      "merchant": null,
+      "providerId": "B31GNX01GRF1FY2MP",
+      "order": 0,
+      "createdAt": "2025-11-10T19:36:15.169Z",
+      "updatedAt": "2025-11-10T19:36:15.169Z"
+    },
+    {
+      "id": "635cccbb-f6b9-44fb-9465-dd894907fc51",
+      "description": "Rendimentos",
+      "descriptionRaw": "Rendimentos",
+      "currencyCode": "BRL",
+      "amount": 0.01,
+      "amountInAccountCurrency": null,
+      "date": "2025-08-28T06:19:36.862Z",
+      "category": "Proceeds interests and dividends",
+      "categoryId": "03060000",
+      "balance": null,
+      "accountId": "6d6832d7-c07a-4a07-8a51-ee335abd0f64",
+      "providerCode": null,
+      "status": "POSTED",
+      "paymentData": {
+        "payer": null,
+        "paymentMethod": "OTHER",
+        "reason": null,
+        "receiver": {
+          "accountNumber": null,
+          "branchNumber": null,
+          "documentNumber": {
+            "type": "CPF",
+            "value": "991.808.986-53"
+          },
+          "name": null,
+          "routingNumber": null,
+          "routingNumberISPB": null
+        },
+        "receiverReferenceId": null,
+        "referenceNumber": null,
+        "boletoMetadata": null
+      },
+      "type": "CREDIT",
+      "operationType": "RENDIMENTO_APLIC_FINANCEIRA",
+      "creditCardMetadata": null,
+      "acquirerData": null,
+      "merchant": null,
+      "providerId": "B31FXKTN0ZDGTXN3K",
+      "order": 0,
+      "createdAt": "2025-11-10T19:36:15.169Z",
+      "updatedAt": "2025-11-10T19:36:15.169Z"
+    },
+    {
+      "id": "afb48c5e-1195-4206-b550-b00dbc8f2131",
+      "description": "Rendimentos",
+      "descriptionRaw": "Rendimentos",
+      "currencyCode": "BRL",
+      "amount": 0.01,
+      "amountInAccountCurrency": null,
+      "date": "2025-08-21T05:43:43.030Z",
+      "category": "Proceeds interests and dividends",
+      "categoryId": "03060000",
+      "balance": null,
+      "accountId": "6d6832d7-c07a-4a07-8a51-ee335abd0f64",
+      "providerCode": null,
+      "status": "POSTED",
+      "paymentData": {
+        "payer": null,
+        "paymentMethod": "OTHER",
+        "reason": null,
+        "receiver": {
+          "accountNumber": null,
+          "branchNumber": null,
+          "documentNumber": {
+            "type": "CPF",
+            "value": "991.808.986-53"
+          },
+          "name": null,
+          "routingNumber": null,
+          "routingNumberISPB": null
+        },
+        "receiverReferenceId": null,
+        "referenceNumber": null,
+        "boletoMetadata": null
+      },
+      "type": "CREDIT",
+      "operationType": "RENDIMENTO_APLIC_FINANCEIRA",
+      "creditCardMetadata": null,
+      "acquirerData": null,
+      "merchant": null,
+      "providerId": "B31EV3TH76RERP5QD",
+      "order": 0,
+      "createdAt": "2025-11-10T19:36:15.169Z",
+      "updatedAt": "2025-11-10T19:36:15.169Z"
+    },
+    {
+      "id": "65bd289e-8aaa-46f4-ba21-caeabcf4ec30",
+      "description": "Rendimentos",
+      "descriptionRaw": "Rendimentos",
+      "currencyCode": "BRL",
+      "amount": 0.01,
+      "amountInAccountCurrency": null,
+      "date": "2025-08-18T05:38:45.026Z",
+      "category": "Proceeds interests and dividends",
+      "categoryId": "03060000",
+      "balance": null,
+      "accountId": "6d6832d7-c07a-4a07-8a51-ee335abd0f64",
+      "providerCode": null,
+      "status": "POSTED",
+      "paymentData": {
+        "payer": null,
+        "paymentMethod": "OTHER",
+        "reason": null,
+        "receiver": {
+          "accountNumber": null,
+          "branchNumber": null,
+          "documentNumber": {
+            "type": "CPF",
+            "value": "991.808.986-53"
+          },
+          "name": null,
+          "routingNumber": null,
+          "routingNumberISPB": null
+        },
+        "receiverReferenceId": null,
+        "referenceNumber": null,
+        "boletoMetadata": null
+      },
+      "type": "CREDIT",
+      "operationType": "RENDIMENTO_APLIC_FINANCEIRA",
+      "creditCardMetadata": null,
+      "acquirerData": null,
+      "merchant": null,
+      "providerId": "B31ECBS5Q5QVYHC7F",
+      "order": 0,
+      "createdAt": "2025-11-10T19:36:15.169Z",
+      "updatedAt": "2025-11-10T19:36:15.169Z"
+    },
+    {
+      "id": "b0b32229-6a29-4f66-919b-eb650c94f2ae",
+      "description": "Rendimentos",
+      "descriptionRaw": "Rendimentos",
+      "currencyCode": "BRL",
+      "amount": 0.01,
+      "amountInAccountCurrency": null,
+      "date": "2025-08-13T04:44:09.887Z",
+      "category": "Proceeds interests and dividends",
+      "categoryId": "03060000",
+      "balance": null,
+      "accountId": "6d6832d7-c07a-4a07-8a51-ee335abd0f64",
+      "providerCode": null,
+      "status": "POSTED",
+      "paymentData": {
+        "payer": null,
+        "paymentMethod": "OTHER",
+        "reason": null,
+        "receiver": {
+          "accountNumber": null,
+          "branchNumber": null,
+          "documentNumber": {
+            "type": "CPF",
+            "value": "991.808.986-53"
+          },
+          "name": null,
+          "routingNumber": null,
+          "routingNumberISPB": null
+        },
+        "receiverReferenceId": null,
+        "referenceNumber": null,
+        "boletoMetadata": null
+      },
+      "type": "CREDIT",
+      "operationType": "RENDIMENTO_APLIC_FINANCEIRA",
+      "creditCardMetadata": null,
+      "acquirerData": null,
+      "merchant": null,
+      "providerId": "B31DKM02RANYDVSH9",
+      "order": 0,
+      "createdAt": "2025-11-10T19:36:15.169Z",
+      "updatedAt": "2025-11-10T19:36:15.169Z"
+    }
+  ]
+}

@@ -1,12 +1,79 @@
 # 📚 Índice da Documentação - Agente Financeiro IA v2.0
 
+> **Última atualização:** 27 de Outubro de 2025 | **Fase:** Semana 2 Ready 🎯
+
 ## 📖 **Estrutura da Documentação**
 
-### **🏠 [README.md](README.md)**
+### **🚀 [SEMANA2_RESUMO_EXECUTIVO.md](SEMANA2_RESUMO_EXECUTIVO.md)** 🆕 ⭐
+
+**Status rápido - Semana 2** - TL;DR: Estamos 95% prontos
+
+- 🚦 Semáforo de status visual
+- 📊 Números que importam (127 testes, 35.34% cobertura)
+- ⚡ Decisão rápida: Opção A vs B
+- 🔧 Lista de correções necessárias (2-3h)
+- 📈 Roadmap Semana 2 detalhado
+
+**👤 Audiência:** Todos - primeira leitura recomendada hoje!
+
+---
+
+### **🎯 [SEMANA2_PRONTIDAO.md](SEMANA2_PRONTIDAO.md)** 🆕 ⭐
+
+**Análise completa de prontidão** - Relatório detalhado
+
+- 📊 Status geral: 🟡 Quase pronto
+- 🔍 Análise detalhada por componente
+- 🔴 8 testes falhando (models) + solução
+- 🟡 11 erros setup (fixture) + solução
+- 🟢 33 erros teardown (SQLite - não bloqueante)
+- 📈 Cobertura 35.34% por módulo
+- 🎯 Requisitos e checklist para Semana 2
+- 📋 Plano de ação completo
+
+**👤 Audiência:** Desenvolvedores e gestores que precisam de análise técnica
+
+---
+
+### **✅ [SEMANA1_CONCLUSAO.md](SEMANA1_CONCLUSAO.md)** 🆕
+
+**Marco da Semana 1 - Concluída** - Conquistas e métricas
+
+- ✅ 119 testes implementados (100% passando)
+- 📈 35.34% cobertura (meta 25% superada)
+- 📁 Arquitetura de testes completa
+- 📊 Cobertura por módulo detalhada
+- 🛠️ Stack de tecnologias (pytest, coverage, black, flake8)
+- 📝 Documentação criada
+- 🐛 Problemas conhecidos documentados
+- 🎯 Próximos passos (Semana 2)
+
+**👤 Audiência:** Todos - marco histórico do projeto
+
+---
+
+### **⚡ [RESUMO_RAPIDO.md](RESUMO_RAPIDO.md)**
+
+**Guia rápido de orientação** - Quando você está perdido
+
+- 🎯 Estado atual do projeto em bullets
+- 🚀 O que fazer AGORA (próximos 15 dias)
+- 📅 Cronograma visual simplificado
+- 📂 Onde encontrar cada coisa
+- 🛠️ Comandos úteis do dia a dia
+- ✅ Checklist de início de sessão
+- 🆘 O que fazer quando travar
+
+**👤 Audiência:** Desenvolvedores que querem se orientar rapidamente
+
+---
+
+### **🏠 [README.md](../README.md)**
 
 **Visão geral do projeto** - Primeira parada para novos usuários
 
 - ✨ Funcionalidades principais e métricas de performance
+- 🎯 Status atualizado: v2.0 + Semana 1 completa
 - 🚀 Instalação rápida e execução automática
 - 📁 Estrutura do projeto com descrições
 - 🎯 Como usar o sistema e fluxo de trabalho
@@ -42,26 +109,69 @@
 - 📊 Métricas de performance e otimização
 - ⚙️ Configurações avançadas
 - 🧪 Testes e validação
+- 🔧 **Troubleshooting: Erro de PATH do Python** 🆕
+- 🐍 **Configuração de ambiente Conda** 🆕
 
 **👤 Audiência:** Desenvolvedores, contribuidores, usuários técnicos
 
 ---
 
-### **📋 [CHANGELOG.md](CHANGELOG.md)**
+### **🐍 [CONFIGURACAO_AMBIENTE.md](../CONFIGURACAO_AMBIENTE.md)** 🆕
 
-**Histórico de versões** - Evolução do projeto
+**Guia completo de configuração do ambiente Python/Anaconda**
 
-- 🚀 Versão atual v2.0 com todas as novidades
-- 📈 Evolução da performance (70% → 98.2%)
-- ✨ Funcionalidades adicionadas por versão
-- 🔮 Roadmap futuro com versões planejadas
-- 📊 Estatísticas de evolução do sistema
+- ✅ Status dos ambientes Python disponíveis
+- 🎯 Como selecionar o interpretador correto no VS Code
+- 📦 Lista de dependências instaladas
+- 🚀 Comandos para executar os scripts
+- 🔧 Comandos úteis de gerenciamento Conda
+- ⚠️ Observações sobre múltiplos Pythons
+- 📞 Troubleshooting de problemas comuns
+- ✅ Checklist de configuração
 
-**👤 Audiência:** Usuários que querem acompanhar a evolução e contribuidores
+**👤 Audiência:** Desenvolvedores configurando o ambiente pela primeira vez
+
+---
+
+### **🧪 [TESTING.md](TESTING.md)** 🆕
+
+**Guia completo de testes** - Como testar e contribuir com testes
+
+- 🎯 Estrutura de testes do projeto
+- 🚀 Como executar testes (comandos Windows)
+- 📊 Relatórios de cobertura
+- ✅ Como criar novos testes
+- 🔧 Fixtures disponíveis
+- 📈 Métricas de qualidade
+- 🐛 Troubleshooting de testes
+
+**👤 Audiência:** Desenvolvedores e contribuidores
+
+---
+
+### **✅ [SEMANA1_CONCLUSAO.md](SEMANA1_CONCLUSAO.md)** 🆕
+
+**Relatório de conclusão - Infraestrutura de Testes**
+
+- ✅ 119 testes implementados (100% passando)
+- 📊 35.34% de cobertura inicial
+- 📁 Estrutura completa de testes criada
+- 🛠️ Tecnologias implementadas (pytest, coverage, black, flake8)
+- 📈 Cobertura detalhada por módulo
+- 🐛 Problemas conhecidos documentados
+- 🎯 Próximos passos (Semana 2: CI/CD)
+
+**👤 Audiência:** Desenvolvedores acompanhando o progresso do projeto
 
 ---
 
 ## 🎯 **Como Usar Esta Documentação**
+
+### **⚡ Estou perdido! Onde estou?**
+
+1. **Comece com [RESUMO_RAPIDO.md](RESUMO_RAPIDO.md)** → orientação rápida
+2. **Veja [PLANEJAMENTO.md](PLANEJAMENTO.md)** → próximos passos
+3. **Consulte este índice** para encontrar detalhes específicos
 
 ### **🚀 Eu sou novo no projeto**
 
@@ -71,9 +181,10 @@
 
 ### **👨‍💻 Eu quero contribuir**
 
-1. **Leia [README.md](README.md)** → entenda o projeto
+1. **Leia [README.md](../README.md)** → entenda o projeto
 2. **Estude [DOCUMENTACAO_TECNICA.md](DOCUMENTACAO_TECNICA.md)** → arquitetura
-3. **Consulte [CHANGELOG.md](CHANGELOG.md)** → roadmap e histórico
+3. **Consulte [PLANEJAMENTO.md](PLANEJAMENTO.md)** → veja tarefas planejadas
+4. **Verifique [CHANGELOG.md](../CHANGELOG.md)** → histórico e contexto
 
 ### **🔧 Eu tenho um problema**
 
@@ -91,17 +202,36 @@
 
 ## 📁 **Arquivos da Documentação**
 
-```
+````
 Financeiro/
 ├── README.md                    # 🏠 Visão geral (COMECE AQUI)
-├── GUIA_USUARIO.md             # 👤 Manual do usuário
-├── DOCUMENTACAO_TECNICA.md     # 🔧 Documentação técnica
 ├── CHANGELOG.md                # 📋 Histórico de versões
-├── INDICE_DOCUMENTACAO.md      # 📚 Este índice
+├── CONTRIBUTING.md             # 🤝 Guia de contribuição
+├── LICENSE                     # ⚖️ Licença do projeto
+├── docs/                       # 📚 Documentação detalhada
+│   ├── PLANEJAMENTO.md         # 📅 Planejamento estratégico (NOVO!)
+│   ├── RESUMO_RAPIDO.md        # ⚡ Guia rápido de orientação (NOVO!)
+│   ├── GUIA_USUARIO.md        # 👤 Manual do usuário
+│   ├── DOCUMENTACAO_TECNICA.md # 🔧 Documentação técnica
+│   └── INDICE_DOCUMENTACAO.md # 📚 Este índice
 └── backend/src/
     ├── config.ini              # ⚙️ Configurações do sistema
     └── *.py                    # 🐍 Scripts principais
 ```
+
+---
+
+## 📚 **Links Rápidos**
+
+| Documento                | Descrição                         | Audiência         |
+| ------------------------ | --------------------------------- | ----------------- |
+| [README](../README.md)   | Visão geral e início rápido       | Todos             |
+| [RESUMO_RAPIDO](RESUMO_RAPIDO.md) | Orientação rápida quando perdido | Desenvolvedores |
+| [PLANEJAMENTO](PLANEJAMENTO.md) | Roadmap e próximos passos | Desenvolvedores/Gestores |
+| [GUIA_USUARIO](GUIA_USUARIO.md) | Manual prático do usuário | Usuários finais   |
+| [DOCUMENTACAO_TECNICA](DOCUMENTACAO_TECNICA.md) | Detalhes técnicos | Desenvolvedores |
+| [PLANEJAMENTO](PLANEJAMENTO.md) | Roadmap e próximos passos | Desenvolvedores/Gestores |
+| [CHANGELOG](../CHANGELOG.md) | Histórico de mudanças | Todos |
 
 ---
 
@@ -216,3 +346,4 @@ Sua opinião é importante:
 _Esta documentação é mantida com amor pela comunidade_ ❤️
 
 _Última atualização: September 30, 2025 - v2.0.0_ 📅
+````

@@ -1,0 +1,40 @@
+{
+  "description": "Resultados esperados para os arquivos de teste",
+  "sample_pix": {
+    "total_transactions": 10,
+    "expected_categories": {
+      "SUPERMERCADO BOM PRECO LTDA": "Alimentação",
+      "PIX RECEBIDO MARIA SILVA": "Transferência",
+      "FARMACIA SAUDE TOTAL": "Saúde",
+      "RESTAURANTE SABOR CASEIRO": "Alimentação",
+      "POSTO COMBUSTIVEL IPIRANGA": "Transporte",
+      "PIX ENVIADO JOAO SANTOS": "Transferência",
+      "PADARIA PÃO QUENTE": "Alimentação",
+      "UBER *VIAGEM": "Transporte",
+      "CONTA DE LUZ CEMIG": "Contas",
+      "MERCADO ATACADAO": "Alimentação"
+    },
+    "expected_sources": {
+      "all": "PIX"
+    },
+    "total_debit": -2097.00,
+    "total_credit": 1500.00,
+    "balance": -597.00
+  },
+  "normalization_tests": {
+    "input": "SUPERMERCADO ZONA SUL LTDA - SÃO PAULO",
+    "expected_normalized": "SUPERMERCADO ZONA SUL LTDA SAO PAULO",
+    "expected_pattern": "SUPERMERCADO"
+  },
+  "date_formats": [
+    {"input": "15/10/2025", "expected": "2025-10-15"},
+    {"input": "2025-10-15", "expected": "2025-10-15"},
+    {"input": "15-10-2025", "expected": "2025-10-15"}
+  ],
+  "value_formats": [
+    {"input": "-234,50", "expected": -234.50},
+    {"input": "1.500,00", "expected": 1500.00},
+    {"input": "-67.90", "expected": -67.90},
+    {"input": "500", "expected": 500.00}
+  ]
+}

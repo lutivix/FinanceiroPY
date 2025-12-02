@@ -34,6 +34,7 @@ class FileProcessingService:
     def find_recent_files(self, months_back: int = 12) -> Dict[str, Path]:
         """
         Busca arquivos de extratos dos últimos meses.
+        Considera que o ciclo mensal vai do dia 19 de um mês ao dia 18 do próximo.
         
         Args:
             months_back: Quantos meses para trás buscar
@@ -49,15 +50,35 @@ class FileProcessingService:
         
         arquivos_encontrados = {}
         hoje = datetime.today()
-        base_data = hoje.replace(day=1)
         
-        # Se estamos depois do dia 19, busca também o próximo mês
+        # Determina o "mês atual" baseado no ciclo 19-18
+        # Se estamos no dia 19 ou depois, o ciclo atual é do PRÓXIMO mês
+        # Exemplo: 19/10 a 18/11 é o ciclo de NOVEMBRO (arquivo 202511)
         if hoje.day >= 19:
-            base_data = (base_data + timedelta(days=32)).replace(day=1)
+            # Avança para o próximo mês
+            mes_atual = hoje.month + 1
+            ano_atual = hoje.year
+            # Ajusta se passou de dezembro
+            if mes_atual > 12:
+                mes_atual = 1
+                ano_atual += 1
+        else:
+            # Se estamos antes do dia 19, o ciclo atual é do mês corrente
+            # Exemplo: 07/10 está no ciclo que vai de 19/09 a 18/10, então mês atual é 10
+            mes_atual = hoje.month
+            ano_atual = hoje.year
         
         for i in range(months_back):
-            data_ref = base_data - timedelta(days=32 * i)
-            ano_mes = data_ref.strftime("%Y%m")
+            # Calcula o ano e mês da iteração atual
+            mes = mes_atual - i
+            ano = ano_atual
+            
+            # Ajusta ano se o mês ficar negativo
+            while mes <= 0:
+                mes += 12
+                ano -= 1
+            
+            ano_mes = f"{ano:04d}{mes:02d}"
             
             # Padrões de arquivo esperados
             patterns = [
