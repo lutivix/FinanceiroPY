@@ -81,17 +81,19 @@ echo [1] 🔄 Executar Processamento Completo (Recomendado)
 echo [2] 📊 Apenas Processar Transacoes (Agente Principal)  
 echo [3] 📚 Atualizar Dicionario (do Excel consolidado)
 echo [4] 📋 Atualizar Dicionario (do Controle_pessoal.xlsm)
-echo [5] 🧹 Limpar Categorias Duplicadas (Manutencao)
-echo [6] ❌ Sair
+echo [5] 💾 Atualizar Dicionario (do Banco de Dados)
+echo [6] 🧹 Limpar Categorias Duplicadas (Manutencao)
+echo [7] ❌ Sair
 echo.
-set /p opcao="Digite sua opcao (1-6): "
+set /p opcao="Digite sua opcao (1-7): "
 
 if "%opcao%"=="1" goto :completo
 if "%opcao%"=="2" goto :agente
 if "%opcao%"=="3" goto :dicionario
 if "%opcao%"=="4" goto :controle
-if "%opcao%"=="5" goto :limpeza
-if "%opcao%"=="6" goto :sair
+if "%opcao%"=="5" goto :dicionario_db
+if "%opcao%"=="6" goto :limpeza
+if "%opcao%"=="7" goto :sair
 
 echo.
 echo ❌ Opcao invalida! Tente novamente.
@@ -170,6 +172,22 @@ echo        📋 ATUALIZANDO DICIONARIO (CONTROLE)
 echo ========================================================
 echo.
 "%CONDA_EXE%" run -n %CONDA_ENV% python atualiza_dicionario_controle.py
+if errorlevel 1 (
+    echo ❌ Erro na atualização do dicionário!
+    pause
+    goto :inicio
+)
+goto :fim
+
+:dicionario_db
+cls
+echo.
+echo ========================================================
+echo     💾 ATUALIZANDO DICIONARIO (BANCO DE DADOS)
+echo ========================================================
+echo.
+echo 📊 Lendo categorizacoes da tabela lancamentos...
+"%CONDA_EXE%" run -n %CONDA_ENV% python atualiza_dicionario_unificado.py db
 if errorlevel 1 (
     echo ❌ Erro na atualização do dicionário!
     pause

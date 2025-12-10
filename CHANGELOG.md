@@ -7,6 +7,154 @@ e este projeto adere ao [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
 ---
 
+## [2.4.0] - 2025-12-10 🔧
+
+### 🎯 Principais Mudanças
+
+**CORREÇÕES CRÍTICAS + FERRAMENTAS DE MANUTENÇÃO!** Sistema de limpeza de dados, categorização em lote, e redução de 97,9% no banco de dados.
+
+### ✅ Corrigido
+
+#### **🐛 Correções no Dashboard**
+
+- **Duplicatas visuais removidas** - Implementado `drop_duplicates()` em `carregar_dados()` e `carregar_transacoes_pendentes()`
+  - Chave composta: `['data', 'descricao', 'valor', 'fonte']`
+  - Dashboard agora exibe cada transação apenas uma vez
+
+- **Filtro de valor removido** - Eliminado `Valor < 0` das queries SQL
+  - Valores já são normalizados como positivos (`valor_normalizado`)
+  - Dados agora aparecem corretamente no dashboard
+
+- **Filtro de mês aplicado na categorização** - Callback `atualizar_secao_pendentes()` recebe `mes_selecionado`
+  - Função `carregar_transacoes_pendentes()` aceita parâmetro `mes_filtro`
+  - Ao filtrar por "Dezembro 2025", tabela mostra apenas dezembro
+
+- **Limpeza massiva do banco de dados** - Banco reduzido de 116.880 para 2.486 registros
+  - Redução de 97,9% (114.394 registros duplicados removidos)
+  - Backup automático criado: `lancamentos_archive_TIMESTAMP`
+
+### ✨ Adicionado
+
+#### **☑️ Categorização em Lote (dashboard_dash_excel.py)**
+
+- **Checkbox "Selecionar Todos"** no cabeçalho da tabela
+  - Marca/desmarca todos os checkboxes com um clique
+  - Pattern-matching callback com `ALL`
+
+- **Checkboxes individuais** por linha de transação
+  - ID dinâmico: `{'type': 'checkbox-item', 'index': rowid}`
+  - Estado persistente durante interações
+
+- **Controles de categorização em lote**
+  - Dropdown de categoria compartilhado
+  - Botão "Aplicar aos Selecionados"
+  - Feedback visual de sucesso/erro
+  - Refresh automático da tabela após aplicação
+
+- **Callback `aplicar_categoria_lote()`**
+  - Aplica categoria a múltiplas transações simultaneamente
+  - Loop de atualização com `atualizar_categoria_banco()`
+  - Mensagem: "✅ Categoria 'X' aplicada a N transações!"
+
+#### **🔄 Dictionary Updater Unificado (atualiza_dicionario_unificado.py)**
+
+- **Script novo** com 3 fontes de atualização:
+  1. `consolidado` - Excel consolidado_temp.xlsx
+  2. `controle_pessoal` - Controle_pessoal.xlsm (aba Anual)
+  3. `db` - Tabela lancamentos do banco (🆕 NOVO)
+
+- **Função `atualizar_de_db()`**
+  - Lê tabela lancamentos
+  - Filtra apenas categorizados (exceto "A definir")
+  - Exclui INVESTIMENTOS e SALÁRIO
+  - Insere em `categorias_aprendidas` com `fonte_aprendizado='db'`
+
+- **Uso via linha de comando:**
+  ```bash
+  python atualiza_dicionario_unificado.py consolidado
+  python atualiza_dicionario_unificado.py controle_pessoal
+  python atualiza_dicionario_unificado.py db
+  ```
+
+#### **🏛️ Integração no Menu Batch (agente_financeiro_completo.bat)**
+
+- **Opção [5] adicionada** - "Atualizar Dicionário de Categorias do Banco de Dados"
+  - Chama: `py atualiza_dicionario_unificado.py db`
+  - Total de opções: 6 → 7
+
+#### **🗑️ Scripts de Limpeza e Manutenção**
+
+- **limpar_base_lancamentos.py** (162 linhas) - Limpeza completa do banco
+  - Renomeia `lancamentos` → `lancamentos_archive_TIMESTAMP` (backup)
+  - Cria nova tabela `lancamentos`
+  - Importa do consolidado Excel
+  - Complementa Out/Nov do `transacoes_openfinance`
+  - Exibe estatísticas antes/depois com redução percentual
+
+- **complementar_out_nov.py** (186 linhas) - Integração Open Finance
+  - Importa apenas débitos (`tipo_transacao='DEBIT'`)
+  - Filtra Out/Nov 2025
+  - Exclui transferências internas (ITAU VISA/BLACK/MASTER, Pagamento recebido, Rendimentos)
+  - Inseriu 128 registros na base limpa
+
+- **agente_financeiro_mensal.py** (180 linhas) - Atualização mensal
+  - Deleta registros do mês especificado
+  - Importa do consolidado Excel apenas aquele mês
+  - Exibe estatísticas antes/depois com destaque visual
+  - Uso: `python agente_financeiro_mensal.py "Dezembro 2025"`
+
+#### **📚 Documentação Completa**
+
+- **010_SESSAO_CORRECOES_DASHBOARD_10DEZ.md** (1.200+ linhas)
+  - 7 problemas identificados
+  - 9 soluções implementadas com código completo
+  - 6 arquivos criados/modificados
+  - Estatísticas finais (116K → 2.5K registros)
+  - 7 testes práticos de validação
+  - Conhecimento técnico (pattern matching, archive pattern, filtros dinâmicos)
+  - Roadmap de melhorias (curto/médio/longo prazo)
+
+### 📊 Estatísticas
+
+```
+Banco de Dados:
+  Antes da limpeza:   116.880 registros (duplicados)
+  Depois da limpeza:    2.358 registros (consolidado)
+  Complementação OF:      128 registros (Out/Nov)
+  Total final:          2.486 registros
+  Redução:             97,9% (114.394 registros removidos)
+
+Dashboard:
+  Transações válidas:     2.486
+  Categorizadas:          2.234 (89,9%)
+  Pendentes:                252 (10,1%)
+
+Dictionary Updater:
+  Fontes disponíveis: 3 (consolidado, controle_pessoal, db)
+```
+
+### 🔧 Modificado
+
+- **dashboard_dash_excel.py**
+  - Removido filtro `Valor < 0` (linhas ~69-96)
+  - Adicionado `drop_duplicates()` em 2 funções (linhas ~98, ~123)
+  - Parâmetro `mes_filtro` em `carregar_transacoes_pendentes()` (linha ~108)
+  - UI de checkboxes e categorização em lote (linhas ~430-500)
+  - Callbacks para "Selecionar Todos" (linha ~580)
+  - Callbacks para "Aplicar em Lote" (linha ~595)
+  - Callback `atualizar_secao_pendentes()` recebe `mes_selecionado` (linha ~388)
+
+- **agente_financeiro_completo.bat**
+  - Adicionada opção [5] - Atualizar dicionário do banco
+
+### 🚀 Próximos Passos
+
+- [ ] Layout responsivo do dashboard (1 gráfico por linha em 1920x1080) - **PRIORIDADE ALTA**
+- [ ] Teste de performance com 10k+ registros
+- [ ] Validação de integridade referencial no dictionary updater
+
+---
+
 ## [2.3.0] - 2025-11-25 📊
 
 ### 🎯 Principais Mudanças

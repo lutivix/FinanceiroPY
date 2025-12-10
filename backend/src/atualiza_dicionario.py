@@ -48,9 +48,21 @@ conn.commit()
 df_existente = pd.read_sql_query("SELECT * FROM categorias_aprendidas", conn)
 mapa_db = dict(zip(df_existente["descricao"].str.upper().str.strip(), df_existente["categoria"].str.strip()))
 
-# Lê o consolidado
-df_consolidado = pd.read_excel(arquivo_consolidado)
-df_consolidado = df_consolidado.dropna(subset=["Descricao", "Categoria"])
+print(f"📚 Dicionário atual: {len(mapa_db)} entradas")
+
+# Lê transações categorizadas da tabela lancamentos
+print("📊 Lendo transações categorizadas do banco (lancamentos)...")
+query = """
+SELECT DISTINCT Descricao, Categoria 
+FROM lancamentos 
+WHERE Categoria IS NOT NULL 
+  AND Categoria != ''
+  AND Categoria != 'A definir'
+  AND Categoria NOT IN ('INVESTIMENTOS', 'SALÁRIO', 'Salário', 'Investimentos')
+ORDER BY Descricao
+"""
+df_lancamentos = pd.read_sql_query(query, conn)
+print(f"✅ {len(df_lancamentos)} transações categorizadas encontradas")
 
 # Função para limpar datas das descrições
 def limpar_data_descricao(desc):
@@ -61,18 +73,18 @@ def limpar_data_descricao(desc):
     desc = re.sub(r'\s*\d{2}/\d{2}$', '', desc)
     return desc.strip()
 
-# Constrói dicionário novo
-df_consolidado["Descricao"] = df_consolidado["Descricao"].str.upper().str.strip()
-df_consolidado["Categoria"] = df_consolidado["Categoria"].str.strip()
+# Constrói dicionário novo baseado em lancamentos
+df_lancamentos["Descricao"] = df_lancamentos["Descricao"].str.upper().str.strip()
+df_lancamentos["Categoria"] = df_lancamentos["Categoria"].str.strip()
 
 # Limpa datas das descrições antes de adicionar
-df_consolidado["Descricao"] = df_consolidado["Descricao"].apply(limpar_data_descricao)
+df_lancamentos["Descricao"] = df_lancamentos["Descricao"].apply(limpar_data_descricao)
 
 novos = []
-for _, row in df_consolidado.iterrows():
+for _, row in df_lancamentos.iterrows():
     desc = row["Descricao"]
     cat = row["Categoria"]
-    if desc not in mapa_db and cat != "A definir":
+    if desc not in mapa_db:
         novos.append((desc, cat))
 
 # Insere no banco

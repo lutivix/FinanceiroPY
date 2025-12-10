@@ -1,8 +1,8 @@
-# 🤖 Agente Financeiro IA v2.3
+# 🤖 Agente Financeiro IA v2.4
 
 > **Sistema inteligente de automação financeira com 98.2% de precisão + Dashboard Interativo + Open Finance**
 
-Sistema Python avançado que automatiza completamente o processamento de extratos bancários, cartões de crédito e PIX, utilizando machine learning para categorização inteligente, **integração Open Finance via Pluggy**, dashboard interativo com análise visual, e gerando relatórios consolidados prontos para análise.
+Sistema Python avançado que automatiza completamente o processamento de extratos bancários, cartões de crédito e PIX, utilizando machine learning para categorização inteligente, **integração Open Finance via Pluggy**, dashboard interativo com análise visual e categorização em lote, e gerando relatórios consolidados prontos para análise.
 
 [![Python](https://img.shields.io/badge/Python-3.13+-blue.svg)](https://python.org)
 [![SQLite](https://img.shields.io/badge/Database-SQLite-green.svg)](https://sqlite.org)
@@ -16,7 +16,43 @@ Sistema Python avançado que automatiza completamente o processamento de extrato
 
 ---
 
-## 🎉 NOVIDADES v2.3.0 - DASHBOARD INTERATIVO!
+## 🎉 NOVIDADES v2.4.0 - CORREÇÕES E MANUTENÇÃO!O!
+
+🔧 **CORREÇÕES CRÍTICAS** + **FERRAMENTAS DE MANUTENÇÃO** - Sistema 97,9% mais eficiente:
+
+```
+✅ CORREÇÕES IMPLEMENTADAS
+├─ Dashboard sem duplicatas (drop_duplicates em Pandas)
+├─ Filtro de valor removido (valores já são positivos)
+├─ Filtro de mês aplicado na categorização
+├─ ☑️ Categorização em lote com checkboxes
+├─ "Selecionar Todos" + aplicar categoria múltipla
+├─ Dictionary updater unificado (3 fontes: consolidado, controle_pessoal, db)
+└─ Integração no menu batch (opção [5])
+
+🗑️ LIMPEZA MASSIVA DO BANCO
+├─ 116.880 → 2.486 registros (redução de 97,9%)
+├─ Backup automático (lancamentos_archive_TIMESTAMP)
+├─ Reconstrução do zero a partir do consolidado
+├─ Complementação Out/Nov do Open Finance (128 registros)
+└─ Script de atualização mensal (agente_financeiro_mensal.py)
+
+📊 NOVOS SCRIPTS DE MANUTENÇÃO
+├─ limpar_base_lancamentos.py (limpeza + rebuild)
+├─ complementar_out_nov.py (Open Finance integration)
+├─ agente_financeiro_mensal.py (update single month)
+└─ atualiza_dicionario_unificado.py (3 data sources)
+```
+
+**🎯 Scripts:** `backend/src/dashboard_dash_excel.py` + 4 novos scripts  
+**🌐 Acesso:** http://localhost:8051  
+**📊 Dados:** 2.486 transações • 89,9% categorizadas • Base limpa
+
+**📖 Documentação:** [010_SESSAO_CORRECOES_DASHBOARD_10DEZ.md](docs/Desenvolvimento/010_SESSAO_CORRECOES_DASHBOARD_10DEZ.md) (1.200+ linhas)
+
+---
+
+## 📊 VERSÃO v2.3.0 - DASHBOARD INTERATIVO
 
 🚀 **DASHBOARD COMPLETO** - Visualização interativa com análise em tempo real:
 
@@ -510,6 +546,32 @@ graph LR
 - 🧪 **Teste**: Sempre teste com dados de exemplo primeiro
 - 🔐 **Open Finance**: Credenciais Pluggy em `config/config.ini` (protegido por .gitignore)
 
+## 🚀 **Próximos Passos (Roadmap)**
+
+### Em Desenvolvimento (Prioridade Alta)
+- [ ] **Layout Responsivo Dashboard** - 1 gráfico por linha em 1920x1080 (Opção 5 escolhida)
+  - Detecção automática de resolução
+  - Breakpoints: 1920x1080 (1 gráfico/linha), 2560x1440 (2 gráficos/linha)
+  - Altura otimizada dos gráficos (600-700px)
+  - Gráficos de pizza mantidos lado a lado
+
+### Curto Prazo
+- [ ] Teste de performance com 10k+ registros
+- [ ] Validação de integridade referencial no dictionary updater
+- [ ] Exportar relatórios em PDF/Excel
+
+### Médio Prazo
+- [ ] Gráficos adicionais (comparativo ano a ano)
+- [ ] Undo/Redo nas categorizações
+- [ ] Machine Learning para categorização automática aprimorada
+
+### Longo Prazo
+- [ ] Integração contínua com Open Finance (sincronização automática)
+- [ ] API REST para consultas externas
+- [ ] Mobile app (React Native)
+
+---
+
 ## 📄 **Licença**
 
 Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para detalhes.
@@ -519,8 +581,8 @@ Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para de
 **Luciano Costa Fernandes**
 
 - 🐙 GitHub: [@lutivix](https://github.com/lutivix)
-- � Email: luti_vix@hotmail.com
-- 🏦 Projeto: Agente Financeiro IA v2.1
+- � Email: luti.vix@gmail.com
+- 🏦 Projeto: Agente Financeiro IA v2.4
 
 ---
 

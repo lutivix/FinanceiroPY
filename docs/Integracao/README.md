@@ -8,15 +8,29 @@ Documentação sobre integrações externas: Open Finance (Pluggy), APIs bancár
 
 ### ✅ **FASE 2 CONCLUÍDA: DASHBOARD INTERATIVO PLOTLY DASH**
 
+**🎯 Duas versões disponíveis:**
+
+#### **1. Dashboard Excel/TXT (Recomendado)** ⭐
+- **Script:** `backend/src/dashboard_dash_excel.py`
+- **Porta:** 8051 (http://localhost:8051)
+- **Dados:** Tabela `lancamentos` (extratos Excel/TXT processados)
+- **Gratuito:** Funciona indefinidamente
+- **Execução:** `dashboard_dash_excel.bat`
+
+#### **2. Dashboard Open Finance (Futuro)**
+- **Script:** `backend/src/dashboard_dash.py`
+- **Porta:** 8050 (http://localhost:8050)
+- **Dados:** Tabela `transacoes_openfinance` (API Pluggy)
+- **Status:** ⚠️ Requer trial/plano ativo do Pluggy
+- **Execução:** `dashboard_dash.bat`
+
+**Recursos compartilhados:**
 - **Framework:** Plotly Dash 3.2.0 + Bootstrap Components
-- **Servidor:** Flask localhost:8050 (acessível na rede local)
-- **Dados:** 2.131 transações DEBIT (11 meses + dados atuais)
 - **Filtros interativos:** Mês, Categoria, Fonte (real-time)
 - **6 gráficos dinâmicos** com sistema de 3 barras (Real/Ideal/Diferença)
-- **Design completo:** Cores padronizadas, layout 70/30, smart filtering
+- **Categorização inline** para transações pendentes
 - **ORCAMENTO_IDEAL_FONTE:** R$ 26.670/mês mapeado por fonte
-- **Script:** `backend/src/dashboard_dash.py` (577 linhas)
-- **Acesso:** http://localhost:8050 ou rede local (host=0.0.0.0)
+- **Acesso rede local:** host=0.0.0.0
 
 ### ✅ **FASE 1 CONCLUÍDA: IMPORTAÇÃO FLEXÍVEL**
 
@@ -43,6 +57,7 @@ Documentação sobre integrações externas: Open Finance (Pluggy), APIs bancár
 | [007_DASHBOARD_GUIA.md](007_DASHBOARD_GUIA.md)               | **📊 Guia completo do Dashboard**       | 🆕 **NOVO!**   |
 | [008_RESUMO_CORRECOES.md](008_RESUMO_CORRECOES.md)           | **📋 Resumo de correções (02/12)**      | ✅ **INFO**    |
 | [009_DASHBOARD_INTERATIVO.md](009_DASHBOARD_INTERATIVO.md)   | **📊 Dashboard Plotly (v2.3.0)**        | ✅ **PROD**    |
+| [010_DASHBOARD_DUAL.md](010_DASHBOARD_DUAL.md)               | **📊 Dashboard Dual (Excel vs OF)**     | 🆕 **NOVO!**   |
 
 ---
 
