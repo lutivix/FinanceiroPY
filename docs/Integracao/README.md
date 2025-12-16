@@ -58,6 +58,7 @@ Documentação sobre integrações externas: Open Finance (Pluggy), APIs bancár
 | [008_RESUMO_CORRECOES.md](008_RESUMO_CORRECOES.md)           | **📋 Resumo de correções (02/12)**      | ✅ **INFO**    |
 | [009_DASHBOARD_INTERATIVO.md](009_DASHBOARD_INTERATIVO.md)   | **📊 Dashboard Plotly (v2.3.0)**        | ✅ **PROD**    |
 | [010_DASHBOARD_DUAL.md](010_DASHBOARD_DUAL.md)               | **📊 Dashboard Dual (Excel vs OF)**     | 🆕 **NOVO!**   |
+| [011_ALTERNATIVAS_OPEN_FINANCE.md](011_ALTERNATIVAS_OPEN_FINANCE.md) | **🔄 Alternativas ao Pluggy** | 🆕 **IMPORTANTE!** |
 
 ---
 
