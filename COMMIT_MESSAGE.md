@@ -1,3 +1,93 @@
+# Commit v2.5.0
+
+Luciano - feat(v2.5): Dashboard V2 dark theme + estrutura MVC + gráficos interativos
+
+## Resumo
+
+🎨 **NOVO DASHBOARD V2 (DARK THEME)!** Cria interface moderna inspirada em Behance com estrutura MVC organizada, tema escuro profissional, e gráficos interativos funcionais carregando dados reais do SQLite.
+
+## Features
+
+### 🏗️ Estrutura Organizada (MVC-style)
+
+- `backend/src/dashboard_v2/` - Diretório isolado do dashboard antigo
+- **Pages**: `dashboard.py` (funcional), `analytics.py` (placeholder), `transacoes.py` (placeholder)
+- **Components**: `sidebar.py` (navegação lateral com ícones FontAwesome)
+- **Utils**: `database.py` (queries SQLite), `graficos.py` (funções Plotly)
+- **Assets**: `custom_styles.py` (CSS dark theme injetado via app.index_string)
+- **Config**: `config.py` - Centralização de COLORS, FONTS, SPACING, PLOTLY_TEMPLATE
+- Todos os subdiretórios com `__init__.py` para imports corretos
+
+### 🎨 Design Dark Theme (Behance-inspired)
+
+- **Paleta de cores**:
+  - Background: `#0F0F23` (deep blue-black), Cards: `#16213E`
+  - Primary: `#2E86AB` (azul), Success: `#06A77D` (verde), Danger: `#D62246` (vermelho)
+  - Charts: 6 cores vibrantes (`#4ECDC4`, `#95E1D3`, `#FFD369`, `#F38181`, `#AA96DA`, `#2E86AB`)
+- **Tipografia Inter**: 10px (xs) a 28px (4xl) - escala reduzida para Full HD
+- **Espaçamentos compactos**: 4px (xs) a 32px (3xl)
+- **Hover states**: transformY(-2px), brightness(1.05)
+
+### 📊 Dashboard Principal (funcional na porta 8052)
+
+- **3 cards de métricas**: Total gasto, Cartões, Pix + Boletos
+  - Ícones FontAwesome 6 (wallet, credit-card, money-bill-wave)
+  - Container 36×36px com gradiente sutil
+- **Dropdown filtro**: Meses disponíveis carregados do banco + opção "TODOS"
+- **Gráfico hero**: Evolução últimos 12 meses
+  - Linha azul (`#2E86AB`) com área preenchida (`rgba(46, 134, 171, 0.2)`)
+  - Altura 280px, hover unified
+- **2 gráficos laterais**: Top 5 Categorias e Top 5 Fontes
+  - Barras horizontais com valores formatados (R$ 1.234)
+  - Altura 240px cada, flex layout responsivo
+
+### 🔌 Integração Banco de Dados
+
+- **carregar_transacoes(mes_filtro)**: Query SQLite com filtro opcional por mês
+- **calcular_estatisticas(df)**: Total, Cartões (Nubank/Itaú/BTG), Pix/Boleto
+- **obter_meses_disponiveis()**: Lista única de meses ordenados DESC
+- **Callbacks interativos**: 3 gráficos atualizam dinamicamente com dropdown
+
+### 🐛 Correções Técnicas
+
+- **ModuleNotFoundError**: `sys.path.insert(0, backend_path)` + `__init__.py` em todas pastas
+- **CSS injection**: `app.index_string` (método correto, não `html.Style()`)
+- **TypeError duplicate 'xaxis'**: Separado `update_layout()` de `update_xaxes()`/`update_yaxes()`
+- **ValueError duplicate 'hovermode'**: Removido do layout (já em `PLOTLY_TEMPLATE`)
+- **Invalid 'titlefont'**: Mudado para `title: {font: {...}}` (Plotly moderno)
+- **Invalid fillcolor**: Hex+alpha (`#2E86AB30`) → rgba (`rgba(46, 134, 171, 0.2)`)
+
+## Problemas Conhecidos
+
+⚠️ **Layout não otimizado** - Componentes funcionais mas proporções visuais ainda não ideais comparado ao design de referência
+⚠️ **Analytics page** - Apenas placeholder, sem gráficos (Real vs Ideal, Distribuição, Acumulado)
+⚠️ **Transações page** - Apenas placeholder, sem tabela interativa nem categorização inline
+⚠️ **Responsividade** - Ajustado para Full HD mas precisa refinamento de tamanhos relativos
+
+## Próximos Passos
+
+1. **Refinar layout visual**: comparar proporções com Behance, ajustar tamanhos cards vs gráficos
+2. **Implementar Analytics**: gráficos Real vs Ideal, distribuição temporal, acumulado mensal
+3. **Implementar Transações**: tabela com filtros, categorização inline, paginação
+4. **Melhorias UX**: animações sutis, indicadores de progresso, dark/light toggle
+
+## Arquivos Modificados
+
+- `backend/src/dashboard_v2/` - Estrutura completa criada
+- `dashboard_v2.bat` - Script execução Windows
+- `CHANGELOG.md` - Documentação v2.5.0
+
+## Execução
+
+```bash
+py backend/src/dashboard_v2/main.py
+# ou
+dashboard_v2.bat
+# Acesso: http://localhost:8052
+```
+
+---
+
 # Commit v2.3.0
 
 Luciano - feat(v2.3): Dashboard interativo completo + categorização inline + otimizações QHD

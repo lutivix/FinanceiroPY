@@ -7,6 +7,111 @@ e este projeto adere ao [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
 ---
 
+## [2.5.0] - 2025-12-16 🎨
+
+### 🎯 Principais Mudanças
+
+**NOVO DASHBOARD V2 (DARK THEME)!** Interface moderna inspirada em Behance, estrutura MVC organizada, e gráficos interativos com dados reais.
+
+### ✨ Adicionado
+
+#### **🎨 Dashboard V2 - Interface Moderna**
+
+- **Estrutura organizada (MVC-style)**
+  - `backend/src/dashboard_v2/` - Novo diretório isolado do dashboard antigo
+  - `pages/` - dashboard.py, analytics.py (placeholder), transacoes.py (placeholder)
+  - `components/` - sidebar.py (navegação lateral)
+  - `utils/` - database.py (queries SQLite), graficos.py (Plotly charts)
+  - `assets/` - custom_styles.py (CSS dark theme)
+  - `config.py` - Configuração centralizada (cores, fontes, espaçamentos)
+
+- **Tema dark profissional (Behance-inspired)**
+  - Background: `#0F0F23`, Cards: `#16213E`, Primary: `#2E86AB`
+  - Success: `#06A77D`, Danger: `#D62246`
+  - Tipografia Inter com escala reduzida (10-28px)
+  - Espaçamentos compactos (12-32px)
+
+- **Dashboard principal funcional (porta 8052)**
+  - 3 cards de métricas (Total, Cartões, Pix + Boletos) com ícones FontAwesome
+  - Gráfico hero: Evolução últimos 12 meses (linha com área preenchida)
+  - 2 gráficos laterais: Top 5 Categorias e Top 5 Fontes (barras horizontais)
+  - Dropdown de filtro por mês (carrega meses disponíveis do banco)
+
+- **Integração com banco de dados**
+  - `carregar_transacoes(mes_filtro)` - Carrega do SQLite com filtro opcional
+  - `calcular_estatisticas(df)` - Total gasto, por cartões, por pix/boleto
+  - `obter_meses_disponiveis()` - Lista de meses únicos do banco
+
+- **Callbacks interativos**
+  - Roteamento entre páginas (Dashboard, Analytics, Transações)
+  - Atualização dinâmica dos 3 gráficos baseado no filtro de mês
+  - Cálculo de estatísticas em tempo real
+
+- **Execução**
+  - Script: `dashboard_v2.bat` ou `py backend/src/dashboard_v2/main.py`
+  - Porta: 8052 (evita conflito com dashboard antigo na 8051)
+
+### 🐛 Corrigido
+
+#### **Erros técnicos do Dashboard V2**
+
+- **ModuleNotFoundError** - `sys.path.insert(0, ...)` + `__init__.py` em todas subpastas
+- **CSS injection** - Substituído `html.Style()` por `app.index_string` (método correto Dash)
+- **Gráficos sem dados** - Criados callbacks em `main.py` + funções em `utils/graficos.py`
+- **TypeError: duplicate 'xaxis'** - Separado `update_layout()` de `update_xaxes()`/`update_yaxes()`
+- **ValueError: duplicate 'hovermode'** - Removido do `update_layout()` (já em `PLOTLY_TEMPLATE`)
+- **Invalid 'titlefont'** - Mudado para `title: {font: {...}}` (sintaxe Plotly moderna)
+- **Invalid fillcolor '#2E86AB30'** - Convertido para `rgba(46, 134, 171, 0.2)`
+
+### 🔧 Melhorado
+
+#### **Responsividade e escala visual**
+
+- **Dimensões reduzidas para Full HD (1920×1080)**
+  - Fontes: 10px (xs) a 28px (4xl) - redução ~40%
+  - Espaçamentos: 4px (xs) a 32px (3xl) - redução ~30%
+  - Ícones: 36×36px (antes 56×56px)
+  - Gráficos: 240-280px altura (antes 350-400px)
+  - Padding cards/container: 12px (antes 24px)
+
+- **Layout flexbox**
+  - Cards com `flex: 1, minWidth: 200px`
+  - Gráficos com `flexWrap: wrap` para responsividade
+  - Gap reduzido entre elementos (12px)
+
+### ⚠️ Problemas Conhecidos
+
+- **Layout ainda não está otimizado** - Componentes funcionais mas proporções não ideais
+- **Analytics page** - Apenas placeholder, sem gráficos implementados
+- **Transações page** - Apenas placeholder, sem tabela implementada
+- **Categorização inline** - Não implementada ainda (presente apenas no dashboard antigo)
+
+### 📝 Próximos Passos
+
+1. **Refinar layout visual**
+   - Comparar proporções com design de referência Behance
+   - Ajustar tamanhos relativos entre cards e gráficos
+   - Melhorar espaçamento vertical/horizontal
+
+2. **Implementar Analytics**
+   - Gráfico Real vs Ideal por categoria
+   - Distribuição temporal de gastos
+   - Acumulado mensal comparativo
+
+3. **Implementar Transações**
+   - Tabela interativa com todas transações
+   - Filtros por categoria, fonte, status
+   - Categorização inline (dropdown por linha)
+   - Paginação
+
+4. **Melhorias visuais**
+   - Animações sutis (hover, transitions)
+   - Indicadores de progresso (budget usage)
+   - Tooltips informativos
+   - Dark/light mode toggle
+
+---
+
 ## [2.4.0] - 2025-12-10 🔧
 
 ### 🎯 Principais Mudanças
