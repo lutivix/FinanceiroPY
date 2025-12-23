@@ -80,6 +80,7 @@ def create_sidebar():
                         options=[{'label': 'Todos os meses', 'value': 'TODOS'}],
                         value='TODOS',
                         clearable=False,
+                        className='dropdown-sidebar',
                         style={
                             'backgroundColor': COLORS['bg_card'],
                             'borderRadius': '8px'

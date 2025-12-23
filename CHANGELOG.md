@@ -7,6 +7,115 @@ e este projeto adere ao [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
 ---
 
+## [2.7.0] - 2025-12-23 🎯
+
+### 🎯 Principais Mudanças
+
+**PÁGINA IDEALS + EDIÇÃO DE TRANSAÇÕES + ORÇAMENTOS POR FONTE!** Nova página Budget Ideals com comparação Real vs Ideal, edição de categorias em transações via modal, orçamentos específicos por fonte de pagamento, e correções críticas de ordenação cronológica nos gráficos.
+
+### ✨ Adicionado
+
+#### **🎯 Página Budget Ideals - Planejamento Orçamentário**
+
+- **Gráfico de comparação Real vs Ideal + Diferença**
+  - View By: Alterna entre visualização por Category ou Source
+  - Barras verticais para categorias, horizontais para fontes específicas
+  - 3 barras por item: Real (azul), Ideal (verde), Diferença (vermelha/verde)
+  - Altura dinâmica: 700px (categorias verticais), ajustável (horizontais)
+  
+- **5 filtros interativos**
+  - Month: Dropdown com meses disponíveis + "TODOS" (anual × 12)
+  - View By: Category ou Source (controla tipo de visualização)
+  - Category: Filtro específico por categoria
+  - Source: Filtro específico por fonte
+  - Date Range: Seleção de período customizado
+  
+- **4 cards de métricas**
+  - Total Real: Soma dos gastos reais
+  - Total Ideal: Soma dos orçamentos ideais
+  - Difference: Real - Ideal
+  - Status: "Over Budget" (vermelho) ou "On Track" (verde)
+  
+- **Orçamentos específicos por fonte** (5 fontes configuradas)
+  - VISA_REC: LF, Esporte, Stream (3 categorias)
+  - VISA_BIA: Mercado, Feira, Farmácia, Pet, Lazer (5 categorias)
+  - VISA_FIS: Datas, Estética, Compras, Pet (4 categorias)
+  - PIX: Casa, Nita, Utilidades, Faculdade, Esporte (5 categorias)
+  - MASTER_VIRTUAL: Betina, Farmácia (2 categorias)
+  
+- **Lógica de filtros inteligente**
+  - Mantém view_by="category" mesmo quando filtrando por fonte
+  - Aplica orçamento específico da fonte quando disponível
+  - Multiplica por 12 quando mês = "TODOS" (visão anual)
+
+#### **✏️ Edição de Transações**
+
+- **Modal de edição com botão por linha**
+  - Botão "✏️" em cada transação na tabela
+  - Modal com campos: ID, Data, Descrição, Valor, Fonte (readonly)
+  - Dropdown de categoria com texto branco (.dropdown-white-text)
+  - Botão "Salvar" persiste no banco de dados
+  
+- **Database path corrigido**
+  - Path correto: BASE_DIR.parent.parent / 'dados' / 'db' / 'financeiro.db'
+  - Evita erro de "database not found"
+  
+- **Apenas categoria editável**
+  - Campo fonte é read-only para evitar inconsistências
+  - Foco em categorização de transações pendentes
+
+#### **🎨 Melhorias de UI/UX**
+
+- **Dropdown no sidebar abre para cima**
+  - CSS: .dropdown-sidebar com bottom: 100%, top: auto
+  - Evita cortar opções na parte inferior da tela
+  
+- **Texto branco em dropdowns do modal**
+  - Classe .dropdown-white-text resolve problema de contraste
+  - Visível em fundo escuro do modal
+
+### 🔧 Corrigido
+
+#### **📊 Ordenação Cronológica nos Gráficos**
+
+- **Problema**: Meses exibidos em ordem alfabética (Abril, Agosto, Dezembro) ao invés de cronológica
+- **Solução**: 
+  - Conversão de `mes_comp` para datetime com `pd.to_datetime(format='%B %Y')`
+  - Locale handling (pt_BR.UTF-8 ou Portuguese_Brazil.1252)
+  - `.dropna(subset=['data_ordenacao'])` remove conversões falhas
+  - Uso de índices numéricos no eixo X com `ticktext` para labels
+  - Aplicado em: Dashboard (evolução 12 meses), Analytics (acumulado 6 meses)
+  
+- **Resultado**: Gráficos agora mostram meses em ordem cronológica correta
+  - Dashboard: Fevereiro 2025 → Janeiro 2026 (últimos 12 meses)
+  - Analytics: Agosto 2025 → Janeiro 2026 (últimos 6 meses)
+
+#### **💾 Save de Transações**
+
+- **Problema**: Botão salvar não persistia mudanças no banco
+- **Causa**: Database path incorreto (backend/src/dados vs dados)
+- **Solução**: Path absoluto correto usando BASE_DIR.parent.parent
+
+#### **🔍 Filtro por Fonte em Ideals**
+
+- **Problema**: Filtrar por fonte mudava view_by automaticamente para "source"
+- **Solução**: Lógica mantém view_by inalterado, apenas filtra dados
+
+### 📝 Alterado
+
+- **database.py**: Renomeado `rowid` → `id` no DataFrame de transações
+- **graficos.py**: Filtro `valor > 0` para débitos (antes era `< 0`)
+- **config.py**: Adicionados 5 dicionários de orçamento por fonte
+- **sidebar.py**: Link "Ideals" com ícone fa-bullseye
+- **main.py**: 4 novos callbacks para página Ideals + edição de transações
+
+### 🗑️ Removido
+
+- Tentativa de inline editing no DataTable (substituído por modal)
+- categoryorder sem índices numéricos (causava reordenação alfabética)
+
+---
+
 ## [2.6.0] - 2025-12-23 📊
 
 ### 🎯 Principais Mudanças

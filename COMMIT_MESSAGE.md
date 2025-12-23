@@ -1,3 +1,134 @@
+# Commit v2.7.0
+
+Luciano - feat(v2.7): Budget Ideals + edição transações + orçamento por fonte + fix ordenação cronológica
+
+## Resumo
+
+🎯 **PÁGINA IDEALS + EDIÇÃO + ORÇAMENTOS POR FONTE!** Nova página Budget Ideals com comparação Real vs Ideal, edição de categorias em transações via modal, orçamentos específicos por 5 fontes de pagamento, e correções críticas de ordenação cronológica nos gráficos de evolução e acumulado.
+
+## Features
+
+### 🎯 Página Budget Ideals - Planejamento Orçamentário
+
+**Gráfico de comparação interativo**:
+- View By dropdown: Alterna entre Category (vertical) ou Source (horizontal)
+- 3 barras por item: Real (azul), Ideal (verde), Difference (vermelho/verde)
+- Altura dinâmica: 700px categorias, ajustável para fontes
+- Multiplica por 12 quando mês = "TODOS" (visão anual)
+
+**5 filtros simultâneos**:
+- Month: Dropdown com opção "TODOS"
+- View By: Category ou Source
+- Category: Filtro específico
+- Source: Filtro específico
+- Date Range: Período customizado
+
+**4 cards de métricas**: Total Real, Total Ideal, Difference, Status (Over Budget/On Track)
+
+**Orçamentos específicos por fonte** (5 fontes):
+- VISA_REC: LF, Esporte, Stream
+- VISA_BIA: Mercado, Feira, Farmácia, Pet, Lazer
+- VISA_FIS: Datas, Estética, Compras, Pet
+- PIX: Casa, Nita, Utilidades, Faculdade, Esporte
+- MASTER_VIRTUAL: Betina, Farmácia
+
+### ✏️ Edição de Transações
+
+**Modal approach**: Botão "✏️" por linha abre modal de edição
+**Campos**: ID, Data, Descrição, Valor, Fonte (readonly), Categoria (editável)
+**Persistência**: Salva no SQLite, recarrega tabela automaticamente
+**Apenas categoria editável**: Fonte read-only para evitar inconsistências
+
+### 🎨 Melhorias UI/UX
+
+**Dropdown sidebar**: Abre para cima (bottom: 100%, top: auto)
+**Texto modal**: Classe .dropdown-white-text para contraste em fundo escuro
+**Sidebar link**: "Ideals" com ícone fa-bullseye
+
+## Fixes
+
+### 📊 Ordenação Cronológica nos Gráficos
+
+**Problema**: Meses em ordem alfabética (Abril, Agosto, Dezembro) ao invés de cronológica
+
+**Solução implementada**:
+1. Conversão `pd.to_datetime(format='%B %Y')` com locale pt_BR
+2. `.dropna(subset=['data_ordenacao'])` remove conversões falhas (NaT)
+3. Índices numéricos no eixo X + `ticktext` para labels
+4. `.tail(12)` após ordenação para últimos 12 meses
+
+**Aplicado em**:
+- Dashboard: Evolução últimos 12 meses (Fev 2025 → Jan 2026)
+- Analytics: Acumulado últimos 6 meses (Ago 2025 → Jan 2026)
+
+**Resultado**: Gráficos agora respeitam ordem temporal correta
+
+### 💾 Save de Transações
+
+**Problema**: Botão salvar não persistia no banco
+**Causa**: Path incorreto (backend/src/dados vs dados)
+**Solução**: BASE_DIR.parent.parent / 'dados' / 'db' / 'financeiro.db'
+
+### 🔍 Filtro por Fonte em Ideals
+
+**Problema**: Filtrar por fonte mudava view_by para "source"
+**Solução**: Mantém view_by inalterado, aplica orçamento específico da fonte
+
+## Arquivos Modificados
+
+### Novos
+- `backend/src/dashboard_v2/pages/ideals.py` (200+ linhas)
+
+### Modificados
+- `backend/src/dashboard_v2/utils/graficos.py`
+  - criar_grafico_ideals_comparison() com view_by e fontes
+  - criar_grafico_evolucao() com ordenação cronológica
+  - criar_grafico_acumulado() com ordenação cronológica
+  - ORCAMENTO_POR_FONTE mapping
+
+- `backend/src/dashboard_v2/main.py`
+  - Imports: State, ALL
+  - Route: /ideals
+  - Callbacks: atualizar_meses/filtros/grafico/metricas_ideals
+  - Modal editing: toggle_modal_edit, salvar_categoria
+
+- `backend/src/dashboard_v2/config.py`
+  - ORCAMENTO_IDEAL_CAT_VISA_REC/BIA/FIS/PIX/MASTER_VIRTUAL
+  - ICONS['ideals']
+
+- `backend/src/dashboard_v2/components/sidebar.py`
+  - Link Ideals + className='dropdown-sidebar'
+
+- `backend/src/dashboard_v2/assets/custom_styles.py`
+  - .dropdown-white-text, .dropdown-sidebar
+
+- `backend/src/dashboard_v2/utils/database.py`
+  - rowid → id rename
+
+## Validação
+
+✅ Página Ideals renderiza corretamente
+✅ View By alterna entre category/source
+✅ Orçamentos por fonte aplicados corretamente
+✅ Modal de edição abre e salva
+✅ Evolução mostra Fev 2025 → Jan 2026 (12 meses)
+✅ Acumulado mostra Ago 2025 → Jan 2026 (6 meses)
+✅ Sidebar dropdown abre para cima
+✅ Filtros mantêm consistência (view_by não muda ao filtrar fonte)
+
+## Breaking Changes
+
+Nenhuma
+
+## Notas
+
+- UI em inglês (preparação para i18n futuro)
+- Locale handling para meses em português (Janeiro, Fevereiro...)
+- Índices numéricos resolvem definitivamente problema de reordenação do Plotly
+- Modal approach mais confiável que inline DataTable editing
+
+---
+
 # Commit v2.6.0
 
 Luciano - feat(v2.6): Analytics + Transações completas + filtros avançados + subtotal

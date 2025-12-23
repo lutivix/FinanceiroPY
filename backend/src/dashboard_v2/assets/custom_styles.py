@@ -105,6 +105,15 @@ body {{
     color: white !important;
 }}
 
+/* ===== DROPDOWN SIDEBAR (abre para cima) ===== */
+.dropdown-sidebar .Select-menu-outer {{
+    bottom: 100% !important;
+    top: auto !important;
+    margin-bottom: 4px !important;
+    margin-top: 0 !important;
+    z-index: 99999 !important;
+}}
+
 /* ===== DATE PICKER CUSTOMIZATION ===== */
 .DateInput_input {{
     background-color: {COLORS['bg_card']} !important;

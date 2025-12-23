@@ -128,13 +128,48 @@ ORCAMENTO_IDEAL_FONTE = {
     'PIX': 8900.00,
     'Visa Bia': 4100.00,
     'Master Físico': 3850.00,
-    'Visa Recorrente': 3114.00,
+    'Visa Recorrente': 2914.00,
     'Visa Físico': 2050.00,
     'Master Recorrente': 1886.00,
     'Visa Mae': 1390.00,
     'Visa Virtual': 880.00,
     'Master Virtual': 500.00
 }
+
+ORCAMENTO_IDEAL_CAT_VISA_REC = {
+    'LF': 2400.00,
+    'Esporte': 414.00,
+    'Stream': 300.00
+}
+
+ORCAMENTO_IDEAL_CAT_VISA_BIA = {
+    'Mercado': 3300.00,
+    'Feira': 200.00,
+    'Farmácia': 200.00,
+    'Pet': 200.00,
+    'Lazer': 200.00
+}
+
+ORCAMENTO_IDEAL_CAT_VISA_FIS = {
+    'Datas': 1200.00,
+    'Estética': 450.00,
+    'Compras': 200.00,
+    'Pet': 200.00
+}
+
+ORCAMENTO_IDEAL_CAT_MASTER_VIRTUAL = {
+    'Betina': 300.00,
+    'Farmácia': 200.00
+}
+
+ORCAMENTO_IDEAL_CAT_PIX = {
+    'Casa': 3200.00,
+    'Nita': 2100.00,
+    'Utilidades': 1700.00,
+    'Faculdade': 1500.00,
+    'Esporte': 400.00
+}
+
 
 # ===== CONFIGURAÇÃO PLOTLY (tema dark consistente) =====
 PLOTLY_TEMPLATE = {
