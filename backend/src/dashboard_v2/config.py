@@ -178,6 +178,7 @@ ICONS = {
     'dashboard': 'fas fa-chart-line',
     'analytics': 'fas fa-chart-pie',
     'transactions': 'fas fa-list',
+    'ideals': 'fas fa-bullseye',
     'calendar': 'fas fa-calendar-alt',
     'filter': 'fas fa-filter',
     'wallet': 'fas fa-wallet',

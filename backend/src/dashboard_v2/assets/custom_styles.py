@@ -73,6 +73,38 @@ body {{
     color: {COLORS['text_primary']} !important;
 }}
 
+/* ===== DROPDOWN COM TEXTO BRANCO (para modais) ===== */
+.dropdown-white-text .Select-control {{
+    background-color: {COLORS['bg_card']} !important;
+    color: {COLORS['text_primary']} !important;
+}}
+
+.dropdown-white-text .Select-value-label {{
+    color: {COLORS['text_primary']} !important;
+}}
+
+.dropdown-white-text .Select-placeholder {{
+    color: {COLORS['text_secondary']} !important;
+}}
+
+.dropdown-white-text .Select-menu-outer {{
+    background-color: {COLORS['bg_secondary']} !important;
+}}
+
+.dropdown-white-text .Select-option {{
+    color: {COLORS['text_primary']} !important;
+    background-color: transparent !important;
+}}
+
+.dropdown-white-text .Select-option:hover {{
+    background-color: {COLORS['bg_hover']} !important;
+}}
+
+.dropdown-white-text .Select-option.is-selected {{
+    background-color: {COLORS['primary']} !important;
+    color: white !important;
+}}
+
 /* ===== DATE PICKER CUSTOMIZATION ===== */
 .DateInput_input {{
     background-color: {COLORS['bg_card']} !important;

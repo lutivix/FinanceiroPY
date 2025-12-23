@@ -59,9 +59,12 @@ def carregar_transacoes(mes_filtro='TODOS'):
         df['data'] = pd.to_datetime(df['data'], errors='coerce')
         df['valor_normalizado'] = df['valor'].abs()
         
+        # Renomear rowid para id
+        df = df.rename(columns={'rowid': 'id'})
+        
         # Remove duplicatas
         df = df.drop_duplicates(subset=['data', 'descricao', 'valor', 'fonte'], keep='first')
-        df = df.drop_duplicates(subset=['rowid'], keep='first')
+        df = df.drop_duplicates(subset=['id'], keep='first')
     
     return df
 

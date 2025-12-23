@@ -44,6 +44,7 @@ def create_sidebar():
                     create_nav_item('Dashboard', 'dashboard', '/'),
                     create_nav_item('Analytics', 'analytics', '/analytics'),
                     create_nav_item('Transações', 'transactions', '/transacoes'),
+                    create_nav_item('Ideals', 'ideals', '/ideals'),
                 ],
                 style={
                     'padding': f"{SPACING['lg']}px 0"
