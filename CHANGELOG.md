@@ -7,6 +7,88 @@ e este projeto adere ao [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
 ---
 
+## [2.6.0] - 2025-12-23 📊
+
+### 🎯 Principais Mudanças
+
+**FUNCIONALIDADES COMPLETAS DO DASHBOARD V2!** Páginas Analytics e Transações totalmente implementadas com gráficos avançados, filtros múltiplos, ordenação inteligente e subtotal.
+
+### ✨ Adicionado
+
+#### **📈 Página Analytics - Análises Avançadas**
+
+- **3 gráficos analíticos interativos**
+  - **Real vs Ideal**: Comparação mensal entre gastos reais e limites ideais (barras agrupadas)
+  - **Distribuição Temporal**: Análise de gastos por dia da semana (barras horizontais)
+  - **Evolução Acumulada**: Progressão acumulada de gastos no mês (linha com área)
+  
+- **Callbacks dinâmicos**: Todos os gráficos atualizam com filtro de mês global
+- **Layout responsivo**: 3 gráficos empilhados em cards, altura 300px cada
+
+#### **📋 Página Transações - Gerenciamento Completo**
+
+- **5 filtros simultâneos**
+  - **Categoria**: Dropdown com todas as categorias disponíveis + opção "Todas"
+  - **Fonte**: Dropdown com todas as fontes (Nubank, Itaú, BTG, etc.) + opção "Todas"
+  - **Status**: Categorizadas, Pendentes ou Todas
+  - **Mês de Compensação**: Dropdown com meses únicos + opção "Todos"
+  - **Período (Data)**: DatePickerRange para filtro por intervalo de datas
+  
+- **Tabela HTML customizada** (substitui DataTable para evitar erro de chunk JS)
+  - 6 colunas: Data, Descrição, Valor, Categoria, Fonte, Mês
+  - Destaque visual para categorias "A definir" (fundo amarelo)
+  - Limite de 100 transações exibidas
+  - Formatação de valores: R$ 1.234,56
+  
+- **Ordenação inteligente**: mes_comp (crescente) → fonte (decrescente) → data (crescente)
+- **Subtotal dinâmico**: Exibe soma dos valores das transações visíveis com destaque
+- **Layout de filtros**: 2 linhas com flexbox responsivo (wrap), gap 16px
+
+#### **🎨 Estilização DatePicker**
+
+- **Tema escuro completo** para DatePickerRange
+  - Background: `#16213E`, border: `#2D3748`
+  - Calendário: z-index 9999 (sempre visível sobre tabela)
+  - Dias selecionados: cor primária `#2E86AB`
+  - Navegação e headers estilizados (setas, labels)
+  - Hover states sutis (brightness 1.1)
+  
+- **CSS injetado** em `assets/custom_styles.py` (~100 linhas)
+
+### 🐛 Corrigido
+
+- **Filtro de débitos invertido**: Corrigido `df['valor'] < 0` → `df['valor'] > 0` em 4 locais
+  - `database.py`: calcular_estatisticas()
+  - `graficos.py`: criar_grafico_evolucao(), criar_grafico_top_categorias(), criar_grafico_top_fontes()
+  - **Razão**: No banco, débitos (gastos) têm valor POSITIVO, créditos (receitas) têm valor NEGATIVO
+  
+- **Callback error na página Transações**: Removido `prevent_initial_call=True` e validação excessiva que impedia carregamento inicial
+
+- **DatePicker fora do padrão**: Adicionado className e estilos CSS completos para combinar com tema escuro
+
+- **Erro de chunk JavaScript**: Substituído `dash_table.DataTable` por tabela HTML customizada (html.Table)
+
+- **Validação de filtros**: Adicionados null checks para evitar comparações com None
+
+### 🔧 Alterado
+
+- **Formatação de data**: Movida para depois da ordenação em atualizar_tabela_transacoes() para evitar problemas de sort
+- **Filtros de transações**: Callback agora suporta 7 inputs (mes_global + 6 filtros de página)
+- **Estrutura de retorno**: Tabela retorna div com subtotal + tabela HTML ao invés de DataTable
+
+### 📝 Técnico
+
+- **Arquivos modificados**:
+  - `backend/src/dashboard_v2/main.py`: 3 novos callbacks (Analytics), 1 modificado (Transações)
+  - `backend/src/dashboard_v2/utils/graficos.py`: 3 novas funções + 3 correções de filtro
+  - `backend/src/dashboard_v2/utils/database.py`: Correção de filtro débitos
+  - `backend/src/dashboard_v2/pages/transacoes.py`: 2 novos filtros + layout 2 linhas
+  - `backend/src/dashboard_v2/assets/custom_styles.py`: +100 linhas DatePicker CSS
+  
+- **Commits anteriores**: v2.5.0 (16/12) - Dashboard V2 estrutura base
+
+---
+
 ## [2.5.0] - 2025-12-16 🎨
 
 ### 🎯 Principais Mudanças

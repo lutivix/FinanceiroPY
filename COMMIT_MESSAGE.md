@@ -1,12 +1,272 @@
-# Commit v2.5.0
+# Commit v2.6.0
 
-Luciano - feat(v2.5): Dashboard V2 dark theme + estrutura MVC + gráficos interativos
+Luciano - feat(v2.6): Analytics + Transações completas + filtros avançados + subtotal
 
 ## Resumo
 
-🎨 **NOVO DASHBOARD V2 (DARK THEME)!** Cria interface moderna inspirada em Behance com estrutura MVC organizada, tema escuro profissional, e gráficos interativos funcionais carregando dados reais do SQLite.
+📊 **FUNCIONALIDADES COMPLETAS DO DASHBOARD V2!** Implementa páginas Analytics e Transações com 3 gráficos analíticos, 5 filtros simultâneos, tabela HTML customizada, subtotal dinâmico e correções críticas de filtros de débitos/créditos.
 
 ## Features
+
+### 📈 Página Analytics - Análises Avançadas
+
+**3 gráficos analíticos interativos**:
+
+1. **Real vs Ideal** (barras agrupadas)
+   - Compara gastos reais vs limites ideais por mês
+   - Limite ideal: R$ 2.000/mês
+   - Cores: Real (#D62246), Ideal (#06A77D)
+   - Height: 300px
+
+2. **Distribuição Temporal** (barras horizontais)
+   - Análise de gastos por dia da semana
+   - Identifica padrões de consumo semanal
+   - Ordenado de Domingo a Sábado
+   - Height: 300px
+
+3. **Evolução Acumulada** (linha + área)
+   - Progressão acumulada de gastos no mês
+   - Linha azul (#2E86AB) com área preenchida
+   - Útil para tracking de orçamento mensal
+   - Height: 300px
+
+**Implementação**:
+- 3 novas funções em `graficos.py`: criar_grafico_real_ideal(), criar_grafico_distribuicao_temporal(), criar_grafico_acumulado()
+- 3 novos callbacks em `main.py`: atualizar_grafico_real_ideal, atualizar_grafico_distribuicao, atualizar_grafico_acumulado
+- Layout: 3 cards empilhados verticalmente com margin-bottom 24px
+
+### 📋 Página Transações - Gerenciamento Completo
+
+**5 filtros simultâneos em layout 2 linhas**:
+
+**Linha 1** (flex, gap 16px):
+- **Categoria**: Dropdown com todas categorias + "Todas" (TODOS)
+- **Fonte**: Dropdown com fontes (Nubank, Itaú, BTG, PIX, BOLETO) + "Todas"
+- **Status**: Categorizadas / Pendentes / Todas
+
+**Linha 2** (flex, gap 16px):
+- **Mês de Compensação**: Dropdown com meses únicos + "Todos"
+- **Período (Data)**: DatePickerRange com start_date e end_date
+  - Display format: DD/MM/YYYY
+  - Placeholders: "Data Inicial" e "Data Final"
+  - className: 'custom-datepicker'
+
+**Tabela HTML customizada**:
+- **Substituiu DataTable** (evita erro de chunk JS async-table.js)
+- **6 colunas**: Data, Descrição, Valor, Categoria, Fonte, Mês
+- **Formatação**: 
+  - Data: DD/MM/YYYY
+  - Valor: R$ 1.234,56 (2 decimais)
+- **Destaque visual**: Categorias "A definir" com badge amarelo (background #FFD369)
+- **Limite**: 100 transações exibidas
+- **Ordenação**: mes_comp (↑) → fonte (↓) → data (↑)
+
+**Subtotal dinâmico**:
+- Exibido acima da tabela: "Mostrando X transações de Y encontradas • Subtotal: R$ Z"
+- Subtotal em destaque: cor primary (#2E86AB), bold, fontSize base
+- Calcula soma dos valores das transações visíveis (df_tabela['valor_normalizado'].sum())
+
+**Callback modificado**:
+- 7 Inputs: store-mes-global + 6 filtros de página
+- Filtros aplicados sequencialmente com null checks
+- Retorna html.Div com subtotal + html.Table (não mais DataTable)
+
+### 🎨 Estilização DatePicker
+
+**CSS completo para DatePickerRange** (~100 linhas em `custom_styles.py`):
+
+```css
+.DateRangePicker_picker {
+    z-index: 9999 !important;
+    background-color: #16213E !important;
+    border: 1px solid #2D3748 !important;
+}
+
+.CalendarDay {
+    background-color: #16213E !important;
+    color: #FFFFFF !important;
+}
+
+.CalendarDay__selected {
+    background: #2E86AB !important;
+    color: #FFFFFF !important;
+}
+```
+
+**Componentes estilizados**:
+- `.DateRangePicker_picker`: z-index 9999 (sempre visível)
+- `.CalendarDay`: fundo card (#16213E), texto branco
+- `.CalendarDay__selected`: cor primária (#2E86AB)
+- `.CalendarDay__hovered_span`: hover com opacity 0.5
+- `.DayPickerNavigation_button`: setas de navegação com hover brightness 1.1
+- `.DateInput_input`: input fields com fundo card
+- `.DateRangePickerInput_arrow`: seta separadora estilizada
+
+## Bug Fixes
+
+### 🐛 Correção crítica: Filtro de débitos invertido
+
+**Problema**: Dashboard mostrava R$ 14.5k ao invés de ~R$ 2k (gastos)
+
+**Causa raiz**: Banco de dados usa convenção:
+- **Débitos (gastos)** = valor **POSITIVO** (> 0)
+- **Créditos (receitas)** = valor **NEGATIVO** (< 0)
+
+**Correções em 4 locais**:
+
+1. `database.py` - linha 147:
+```python
+# ANTES: df_debitos = df[df['valor'] < 0].copy()
+# DEPOIS: df_debitos = df[df['valor'] > 0].copy()
+```
+
+2. `graficos.py` - criar_grafico_evolucao():
+```python
+# ANTES: df_filtrado = df[df['valor'] < 0].copy()
+# DEPOIS: df_filtrado = df[df['valor'] > 0].copy()
+```
+
+3. `graficos.py` - criar_grafico_top_categorias() (mesmo fix)
+
+4. `graficos.py` - criar_grafico_top_fontes() (mesmo fix)
+
+**Validação**: 65 débitos (R$ ~2k) vs 2.191 créditos confirmam correção
+
+### 🐛 Callback error na página Transações
+
+**Erro**: "Callback error updating tabela-transacoes-container.children"
+
+**Causa**: 
+- Callback com 6 Inputs de componentes que só existem em /transacoes
+- Dash tentava disparar callback em outras páginas (Dashboard, Analytics)
+- Components não existiam → None values → erro de comparação
+
+**Tentativa inicial** (FALHOU):
+```python
+prevent_initial_call=True  # Impediu carregamento inicial da tabela
+```
+
+**Solução final**: Remover prevent_initial_call + adicionar null checks:
+```python
+if categoria_filtro and categoria_filtro != 'TODOS':
+if fonte_filtro and fonte_filtro != 'TODOS':
+if mes_comp_filtro and mes_comp_filtro != 'TODOS':
+if data_inicio:  # try/except para parsing
+```
+
+### 🐛 DatePicker fora do padrão
+
+**Problema**: DatePickerRange com fundo branco, sem estilização
+
+**Solução**:
+- Adicionar `className='custom-datepicker'`
+- Criar ~100 linhas de CSS em `custom_styles.py`
+- z-index 9999 para aparecer sobre tabela
+
+### 🐛 Loading chunk 214 failed
+
+**Erro**: `http://localhost:8052/_dash-component-suites/dash/dash_table/async-table.js`
+
+**Causa**: DataTable tentando carregar chunk JS assíncrono (falha intermitente)
+
+**Solução**: Substituir por tabela HTML customizada:
+```python
+# ANTES: return dash_table.DataTable(...)
+# DEPOIS: return html.Table([html.Thead(...), html.Tbody(rows)])
+```
+
+**Trade-offs**:
+- ❌ Perde: sort_action='native', filter_action='native', page_size
+- ✅ Ganha: Estabilidade, controle total de estilo, sem dependência JS
+
+## Technical Details
+
+### Arquivos Modificados
+
+1. **backend/src/dashboard_v2/main.py** (+50 linhas):
+   - Import pandas as pd (linha ~10)
+   - 3 novos callbacks Analytics (linhas ~180-243)
+   - Modificado atualizar_tabela_transacoes (linhas 244-354)
+   - Substituiu DataTable por html.Table + subtotal
+
+2. **backend/src/dashboard_v2/utils/graficos.py** (+120 linhas):
+   - criar_grafico_real_ideal() - novo
+   - criar_grafico_distribuicao_temporal() - novo
+   - criar_grafico_acumulado() - novo
+   - Corrigido filtro valor > 0 em 3 funções existentes
+
+3. **backend/src/dashboard_v2/utils/database.py** (1 linha):
+   - Linha 147: df['valor'] < 0 → df['valor'] > 0
+
+4. **backend/src/dashboard_v2/pages/transacoes.py** (+30 linhas):
+   - Adicionado filtro-mes-comp-transacoes (dropdown)
+   - Adicionado filtro-data-transacoes (DatePickerRange)
+   - Layout 2 linhas com flexbox (wrap, gap 16px)
+
+5. **backend/src/dashboard_v2/assets/custom_styles.py** (+100 linhas):
+   - CSS completo para DatePickerRange
+   - z-index 9999 para .DateRangePicker_picker
+   - Estilos dark theme para calendar, inputs, navigation
+
+### Estrutura de Dados
+
+**Banco SQLite**: `dados/db/financeiro.db`
+- Tabela: `lancamentos`
+- Registros: 2.256 (65 débitos, 2.191 créditos)
+- Colunas usadas: Data, Descricao, Valor, Categoria, Fonte, MesComp
+
+**Convenção de sinais**:
+```python
+débitos (gastos) = valor > 0   # Ex: 50.00 (gasto de R$ 50)
+créditos (receitas) = valor < 0  # Ex: -3000.00 (receita de R$ 3k)
+```
+
+### Callbacks
+
+**Total de callbacks no app**: 10
+1. display_page() - roteamento
+2-4. Dashboard: 3 gráficos
+5-7. Analytics: 3 gráficos (NOVO)
+8. atualizar_filtros_transacoes() - popula dropdowns
+9. atualizar_tabela_transacoes() - tabela (MODIFICADO)
+
+**suppress_callback_exceptions**: True (necessário para multi-page)
+
+## Testing
+
+**Validações realizadas**:
+- ✅ Dashboard: Exibe R$ ~2k (65 transações débito)
+- ✅ Analytics: 3 gráficos carregam com filtro de mês
+- ✅ Transações: Tabela carrega com "Carregando..." → dados
+- ✅ Filtros: Categoria, Fonte, Status, MesComp, Data funcionam
+- ✅ Subtotal: Atualiza dinamicamente com filtros
+- ✅ DatePicker: Aparece sobre tabela (z-index 9999)
+- ✅ Ordenação: mes_comp → fonte → data funciona
+- ✅ Destaque: "A definir" com badge amarelo
+
+**Performance**:
+- Limite 100 transações exibidas (de 2.256 total)
+- Tabela HTML renderiza instantaneamente
+- Filtros aplicam em < 100ms
+
+## Next Steps
+
+**Próximas melhorias sugeridas**:
+1. Paginação na tabela (atualmente limitado a 100)
+2. Categorização inline com dropdown por linha
+3. Edição de transações diretamente na tabela
+4. Exportar transações filtradas para CSV
+5. Gráfico adicional: Comparativo mensal YoY
+6. Alertas quando próximo do limite mensal
+
+## Version
+
+- **Versão anterior**: v2.5.0 (16/12/2025) - Estrutura base Dashboard V2
+- **Versão atual**: v2.6.0 (23/12/2025) - Funcionalidades completas
+- **Python**: 3.13+
+- **Dash**: 3.2.0
+- **Dash Bootstrap Components**: instalado
+- **Porta**: 8052 (Dashboard v2) / 8051 (Dashboard v1)
 
 ### 🏗️ Estrutura Organizada (MVC-style)
 

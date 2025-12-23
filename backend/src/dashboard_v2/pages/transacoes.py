@@ -33,72 +33,123 @@ def create_transacoes_page():
         
         # Filtros
         html.Div([
+            # Linha 1: Categoria, Fonte, Status
             html.Div([
-                html.Label(
-                    "Categoria",
-                    style={
-                        'color': COLORS['text_secondary'],
-                        'fontSize': FONTS['size']['sm'],
-                        'fontWeight': FONTS['weight']['semibold'],
-                        'marginBottom': '8px',
-                        'display': 'block'
-                    }
-                ),
-                dcc.Dropdown(
-                    id='filtro-categoria-transacoes',
-                    options=[{'label': 'Todas', 'value': 'TODOS'}],
-                    value='TODOS',
-                    clearable=False
-                )
-            ], style={'width': '30%'}),
+                html.Div([
+                    html.Label(
+                        "Categoria",
+                        style={
+                            'color': COLORS['text_secondary'],
+                            'fontSize': FONTS['size']['sm'],
+                            'fontWeight': FONTS['weight']['semibold'],
+                            'marginBottom': '8px',
+                            'display': 'block'
+                        }
+                    ),
+                    dcc.Dropdown(
+                        id='filtro-categoria-transacoes',
+                        options=[{'label': 'Todas', 'value': 'TODOS'}],
+                        value='TODOS',
+                        clearable=False
+                    )
+                ], style={'flex': '1', 'minWidth': '200px'}),
+                
+                html.Div([
+                    html.Label(
+                        "Fonte",
+                        style={
+                            'color': COLORS['text_secondary'],
+                            'fontSize': FONTS['size']['sm'],
+                            'fontWeight': FONTS['weight']['semibold'],
+                            'marginBottom': '8px',
+                            'display': 'block'
+                        }
+                    ),
+                    dcc.Dropdown(
+                        id='filtro-fonte-transacoes',
+                        options=[{'label': 'Todas', 'value': 'TODOS'}],
+                        value='TODOS',
+                        clearable=False
+                    )
+                ], style={'flex': '1', 'minWidth': '200px'}),
+                
+                html.Div([
+                    html.Label(
+                        "Status",
+                        style={
+                            'color': COLORS['text_secondary'],
+                            'fontSize': FONTS['size']['sm'],
+                            'fontWeight': FONTS['weight']['semibold'],
+                            'marginBottom': '8px',
+                            'display': 'block'
+                        }
+                    ),
+                    dcc.Dropdown(
+                        id='filtro-status-transacoes',
+                        options=[
+                            {'label': 'Todas', 'value': 'TODOS'},
+                            {'label': 'Categorizadas', 'value': 'CATEGORIZADAS'},
+                            {'label': 'Pendentes', 'value': 'PENDENTES'}
+                        ],
+                        value='TODOS',
+                        clearable=False
+                    )
+                ], style={'flex': '1', 'minWidth': '200px'}),
+            ], style={
+                'display': 'flex',
+                'flexWrap': 'wrap',
+                'gap': f"{SPACING['lg']}px",
+                'marginBottom': f"{SPACING['md']}px"
+            }),
             
+            # Linha 2: Mês de Compensação e Data
             html.Div([
-                html.Label(
-                    "Fonte",
-                    style={
-                        'color': COLORS['text_secondary'],
-                        'fontSize': FONTS['size']['sm'],
-                        'fontWeight': FONTS['weight']['semibold'],
-                        'marginBottom': '8px',
-                        'display': 'block'
-                    }
-                ),
-                dcc.Dropdown(
-                    id='filtro-fonte-transacoes',
-                    options=[{'label': 'Todas', 'value': 'TODOS'}],
-                    value='TODOS',
-                    clearable=False
-                )
-            ], style={'width': '30%'}),
+                html.Div([
+                    html.Label(
+                        "Mês de Compensação",
+                        style={
+                            'color': COLORS['text_secondary'],
+                            'fontSize': FONTS['size']['sm'],
+                            'fontWeight': FONTS['weight']['semibold'],
+                            'marginBottom': '8px',
+                            'display': 'block'
+                        }
+                    ),
+                    dcc.Dropdown(
+                        id='filtro-mes-comp-transacoes',
+                        options=[{'label': 'Todos', 'value': 'TODOS'}],
+                        value='TODOS',
+                        clearable=False
+                    )
+                ], style={'flex': '1', 'minWidth': '200px'}),
+                
+                html.Div([
+                    html.Label(
+                        "Período (Data)",
+                        style={
+                            'color': COLORS['text_secondary'],
+                            'fontSize': FONTS['size']['sm'],
+                            'fontWeight': FONTS['weight']['semibold'],
+                            'marginBottom': '8px',
+                            'display': 'block'
+                        }
+                    ),
+                    dcc.DatePickerRange(
+                        id='filtro-data-transacoes',
+                        display_format='DD/MM/YYYY',
+                        start_date_placeholder_text='Data Inicial',
+                        end_date_placeholder_text='Data Final',
+                        className='custom-datepicker',
+                        style={'width': '100%'}
+                    )
+                ], style={'flex': '1', 'minWidth': '300px'}),
+            ], style={
+                'display': 'flex',
+                'flexWrap': 'wrap',
+                'gap': f"{SPACING['lg']}px"
+            })
             
-            html.Div([
-                html.Label(
-                    "Status",
-                    style={
-                        'color': COLORS['text_secondary'],
-                        'fontSize': FONTS['size']['sm'],
-                        'fontWeight': FONTS['weight']['semibold'],
-                        'marginBottom': '8px',
-                        'display': 'block'
-                    }
-                ),
-                dcc.Dropdown(
-                    id='filtro-status-transacoes',
-                    options=[
-                        {'label': 'Todas', 'value': 'TODOS'},
-                        {'label': 'Categorizadas', 'value': 'CATEGORIZADAS'},
-                        {'label': 'Pendentes', 'value': 'PENDENTES'}
-                    ],
-                    value='TODOS',
-                    clearable=False
-                )
-            ], style={'width': '30%'}),
-            
-        ], className="custom-card", style={
-            'display': 'flex',
-            'gap': f"{SPACING['lg']}px",
-            'marginBottom': f"{SPACING['xl']}px"
-        }),
+        ], className="custom-card", style={'marginBottom': f"{SPACING['xl']}px"}),
         
         # Tabela de transações
         html.Div([

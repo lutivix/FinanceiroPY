@@ -48,6 +48,7 @@ body {{
     border: 1px solid {COLORS['border']} !important;
     border-radius: 8px !important;
     margin-top: 4px !important;
+    z-index: 9999 !important;
 }}
 
 .Select-option {{
@@ -70,6 +71,85 @@ body {{
 
 .Select-value-label {{
     color: {COLORS['text_primary']} !important;
+}}
+
+/* ===== DATE PICKER CUSTOMIZATION ===== */
+.DateInput_input {{
+    background-color: {COLORS['bg_card']} !important;
+    border: 1px solid {COLORS['border']} !important;
+    color: {COLORS['text_primary']} !important;
+    font-family: {FONTS['family']} !important;
+    font-size: {FONTS['size']['sm']} !important;
+    padding: 8px 12px !important;
+}}
+
+.DateInput_input::placeholder {{
+    color: {COLORS['text_muted']} !important;
+}}
+
+.DateRangePickerInput {{
+    background-color: {COLORS['bg_card']} !important;
+    border: 1px solid {COLORS['border']} !important;
+    border-radius: 8px !important;
+}}
+
+.DateRangePicker_picker {{
+    z-index: 9999 !important;
+    background-color: {COLORS['bg_secondary']} !important;
+    border: 1px solid {COLORS['border']} !important;
+    border-radius: 8px !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5) !important;
+}}
+
+.CalendarDay {{
+    background-color: {COLORS['bg_card']} !important;
+    color: {COLORS['text_primary']} !important;
+    border: 1px solid {COLORS['border']} !important;
+}}
+
+.CalendarDay:hover {{
+    background-color: {COLORS['bg_hover']} !important;
+    border: 1px solid {COLORS['primary']} !important;
+}}
+
+.CalendarDay__selected, .CalendarDay__selected:active, .CalendarDay__selected:hover {{
+    background-color: {COLORS['primary']} !important;
+    border: 1px solid {COLORS['primary']} !important;
+    color: white !important;
+}}
+
+.CalendarDay__selected_span {{
+    background-color: {COLORS['bg_hover']} !important;
+    border: 1px solid {COLORS['border']} !important;
+}}
+
+.CalendarMonth_caption {{
+    color: {COLORS['text_primary']} !important;
+    font-weight: {FONTS['weight']['semibold']} !important;
+}}
+
+.DayPickerNavigation_button {{
+    background-color: {COLORS['bg_card']} !important;
+    border: 1px solid {COLORS['border']} !important;
+}}
+
+.DayPickerNavigation_button:hover {{
+    background-color: {COLORS['bg_hover']} !important;
+    border: 1px solid {COLORS['primary']} !important;
+}}
+
+.DayPickerNavigation_svg__horizontal {{
+    fill: {COLORS['text_primary']} !important;
+}}
+
+.DayPicker_weekHeader {{
+    color: {COLORS['text_secondary']} !important;
+}}
+
+.CalendarDay__blocked_out_of_range {{
+    background-color: {COLORS['bg_primary']} !important;
+    color: {COLORS['text_muted']} !important;
+    border: 1px solid {COLORS['border']} !important;
 }}
 
 /* ===== CARDS ===== */

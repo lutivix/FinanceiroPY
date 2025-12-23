@@ -143,8 +143,8 @@ def calcular_estatisticas(df):
             'num_meses': 0
         }
     
-    # Filtrar apenas débitos (valor negativo)
-    df_debitos = df[df['valor'] < 0].copy()
+    # Filtrar apenas débitos (valor POSITIVO = gastos)
+    df_debitos = df[df['valor'] > 0].copy()
     
     total = df_debitos['valor_normalizado'].sum()
     num_meses = df_debitos['mes_comp'].nunique()

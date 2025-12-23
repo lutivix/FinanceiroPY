@@ -70,10 +70,28 @@ Todas as configurações centralizadas em `config.py`:
 - Espaçamentos (SPACING)
 - Orçamentos (ORCAMENTO_IDEAL, ORCAMENTO_IDEAL_FONTE)
 
-## 🔄 Próximos Passos
+## � Documentação Completa
 
-- [ ] Implementar callbacks dos gráficos (dashboard.py)
-- [ ] Implementar callbacks dos gráficos (analytics.py)
-- [ ] Implementar tabela de transações (transacoes.py)
-- [ ] Adicionar testes unitários
-- [ ] Documentar componentes individuais
+Para documentação detalhada, arquitetura, guias de desenvolvimento e exemplos:
+
+👉 **[docs/V2/](../../../docs/V2/)** - Documentação completa do Dashboard V2
+
+- [Arquitetura](../../../docs/V2/01_ARQUITETURA.md) - Estrutura MVC, diretórios, fluxo de dados
+- [Componentes](../../../docs/V2/02_COMPONENTES.md) - Páginas, sidebar, gráficos
+- [Database](../../../docs/V2/03_DATABASE.md) - Queries, convenções, exemplos
+- [Estilização](../../../docs/V2/04_ESTILIZACAO.md) - Dark theme, cores, fontes
+- [Filtros](../../../docs/V2/05_FILTROS.md) - Callbacks, lógica de filtros
+- [Troubleshooting](../../../docs/V2/06_TROUBLESHOOTING.md) - Problemas comuns e soluções
+
+## ✅ Status
+
+- [x] Estrutura MVC organizada
+- [x] Dashboard principal (3 gráficos + filtro mês)
+- [x] Página Analytics (3 gráficos analíticos)
+- [x] Página Transações (5 filtros + tabela + subtotal)
+- [x] Dark theme completo
+- [x] Callbacks interativos funcionando
+- [ ] Paginação na tabela
+- [ ] Categorização inline
+- [ ] Testes unitários
+- [ ] Export CSV
