@@ -6,6 +6,14 @@ Tabela interativa com filtros
 from dash import html, dcc, dash_table
 from dashboard_v2.config import COLORS, FONTS, SPACING
 
+# Estilo para dropdowns
+dropdown_style = {
+    'backgroundColor': COLORS['bg_card'],
+    'color': COLORS['text_primary'],
+    'borderRadius': '8px',
+    'border': f"1px solid {COLORS['border']}"
+}
+
 def create_transacoes_page():
     """Cria página de Transações"""
     
@@ -48,9 +56,11 @@ def create_transacoes_page():
                     ),
                     dcc.Dropdown(
                         id='filtro-categoria-transacoes',
-                        options=[{'label': 'Todas', 'value': 'TODOS'}],
-                        value='TODOS',
-                        clearable=False
+                        options=[],
+                        value=[],
+                        multi=True,
+                        placeholder='Todas',
+                        style=dropdown_style
                     )
                 ], style={'flex': '1', 'minWidth': '200px'}),
                 
@@ -67,9 +77,11 @@ def create_transacoes_page():
                     ),
                     dcc.Dropdown(
                         id='filtro-fonte-transacoes',
-                        options=[{'label': 'Todas', 'value': 'TODOS'}],
-                        value='TODOS',
-                        clearable=False
+                        options=[],
+                        value=[],
+                        multi=True,
+                        placeholder='Todas',
+                        style=dropdown_style
                     )
                 ], style={'flex': '1', 'minWidth': '200px'}),
                 
@@ -117,9 +129,11 @@ def create_transacoes_page():
                     ),
                     dcc.Dropdown(
                         id='filtro-mes-comp-transacoes',
-                        options=[{'label': 'Todos', 'value': 'TODOS'}],
-                        value='TODOS',
-                        clearable=False
+                        options=[],
+                        value=[],
+                        multi=True,
+                        placeholder='Todos',
+                        style=dropdown_style
                     )
                 ], style={'flex': '1', 'minWidth': '200px'}),
                 
@@ -150,6 +164,70 @@ def create_transacoes_page():
             })
             
         ], className="custom-card", style={'marginBottom': f"{SPACING['xl']}px"}),
+        
+        # Botões de ação em bloco (controlado por callback)
+        html.Div(
+            id='controles-categorizacao-bloco',
+            children=[
+            html.Div([
+                html.Button(
+                    [html.I(className="fas fa-check-square", style={'marginRight': '8px'}), "Selecionar Todos"],
+                    id='btn-selecionar-todos',
+                    n_clicks=0,
+                    style={
+                        'backgroundColor': COLORS['primary'],
+                        'color': 'white',
+                        'border': 'none',
+                        'padding': '10px 20px',
+                        'borderRadius': '6px',
+                        'cursor': 'pointer',
+                        'fontSize': FONTS['size']['sm'],
+                        'fontWeight': FONTS['weight']['semibold']
+                    }
+                ),
+                html.Button(
+                    [html.I(className="fas fa-square", style={'marginRight': '8px'}), "Desselecionar Todos"],
+                    id='btn-desselecionar-todos',
+                    n_clicks=0,
+                    style={
+                        'backgroundColor': COLORS['text_secondary'],
+                        'color': 'white',
+                        'border': 'none',
+                        'padding': '10px 20px',
+                        'borderRadius': '6px',
+                        'cursor': 'pointer',
+                        'fontSize': FONTS['size']['sm'],
+                        'fontWeight': FONTS['weight']['semibold'],
+                        'marginLeft': '10px'
+                    }
+                ),
+                dcc.Dropdown(
+                    id='dropdown-categoria-bloco',
+                    placeholder='Selecione uma categoria',
+                    style={'width': '250px', 'marginLeft': '20px', 'display': 'inline-block'},
+                    className='dropdown-white-text'
+                ),
+                html.Button(
+                    [html.I(className="fas fa-save", style={'marginRight': '8px'}), "Categorizar Selecionados"],
+                    id='btn-categorizar-bloco',
+                    n_clicks=0,
+                    style={
+                        'backgroundColor': COLORS['success'],
+                        'color': 'white',
+                        'border': 'none',
+                        'padding': '10px 20px',
+                        'borderRadius': '6px',
+                        'cursor': 'pointer',
+                        'fontSize': FONTS['size']['sm'],
+                        'fontWeight': FONTS['weight']['semibold'],
+                        'marginLeft': '10px'
+                    }
+                ),
+            ], style={'display': 'flex', 'alignItems': 'center', 'marginBottom': '10px'}),
+            html.Div(id='mensagem-bloco', style={'color': COLORS['success'], 'marginTop': '10px'})
+            ],
+            style={'display': 'none'}  # Inicialmente oculto
+        ),
         
         # Tabela de transações
         html.Div([

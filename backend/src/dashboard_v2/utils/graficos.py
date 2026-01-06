@@ -34,6 +34,9 @@ def criar_grafico_evolucao(mes_selecionado='TODOS'):
     
     # Converter mes_comp para datetime para ordenação cronológica
     import locale
+    from datetime import datetime
+    from dateutil.relativedelta import relativedelta
+    
     try:
         locale.setlocale(locale.LC_TIME, 'pt_BR.UTF-8')
     except:
@@ -47,11 +50,47 @@ def criar_grafico_evolucao(mes_selecionado='TODOS'):
     # Remover linhas onde conversão falhou (NaT)
     evolucao = evolucao.dropna(subset=['data_ordenacao'])
     
+    # Criar dicionário com valores reais
+    valores_reais = dict(zip(evolucao['mes_comp'], evolucao['valor']))
+    
+    # Criar range completo dos últimos 12 meses
+    data_mais_recente = evolucao['data_ordenacao'].max()
+    data_inicial = data_mais_recente - relativedelta(months=11)
+    
+    # Mapeamento de meses em português
+    meses_pt = {
+        1: 'janeiro', 2: 'fevereiro', 3: 'março', 4: 'abril',
+        5: 'maio', 6: 'junho', 7: 'julho', 8: 'agosto',
+        9: 'setembro', 10: 'outubro', 11: 'novembro', 12: 'dezembro'
+    }
+    
+    meses_completos = []
+    data_atual = data_inicial
+    while data_atual <= data_mais_recente:
+        # Gerar nome do mês em português com encoding correto
+        mes_nome = meses_pt[data_atual.month].capitalize()
+        ano = data_atual.year
+        mes_formatado = f"{mes_nome} {ano}"
+        
+        # Procurar mês correspondente nos dados reais (comparação por data)
+        valor = 0
+        for mes_real, val_real in valores_reais.items():
+            data_real = pd.to_datetime(mes_real, format='%B %Y', errors='coerce')
+            if not pd.isna(data_real) and data_real.year == ano and data_real.month == data_atual.month:
+                valor = val_real
+                break
+        
+        meses_completos.append({
+            'mes_comp': mes_formatado,
+            'data_ordenacao': data_atual,
+            'valor': valor
+        })
+        data_atual += relativedelta(months=1)
+    
+    evolucao = pd.DataFrame(meses_completos)
+    
     # Ordenar por data
     evolucao = evolucao.sort_values('data_ordenacao')
-    
-    # Pegar últimos 12 meses
-    evolucao = evolucao.tail(12)
     evolucao = evolucao.reset_index(drop=True)
     
     # Criar labels na ordem correta

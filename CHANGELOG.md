@@ -7,6 +7,46 @@ e este projeto adere ao [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
 ---
 
+## [2.8.0] - 2026-01-06 🎯
+
+### 🎯 Principais Mudanças
+
+**FILTROS MULTI-SELECT!** Transações agora com filtros multi-select (tags/chips) para Categoria, Fonte e Mês de Compensação, permitindo análise de múltiplos critérios simultaneamente.
+
+### ✨ Adicionado
+
+#### **🏷️ Filtros Multi-Select com Tags**
+
+- **3 filtros convertidos para multi-select**
+  - Categoria: Seleção múltipla com tags/chips
+  - Fonte: Seleção múltipla com tags/chips
+  - Mês de Compensação: Seleção múltipla com tags/chips
+  - Visual: Pills/Chips com X para remover individual
+  - Lista vazia = "Todos" (sem filtro aplicado)
+
+### 🔧 Modificado
+
+#### **Lógica de Filtros**
+
+- `atualizar_filtros_transacoes`: Removida opção 'TODOS', lista vazia = todos
+- `atualizar_tabela_transacoes`: Filtros usam `.isin()` para listas ao invés de `==`
+- Dropdowns com `multi=True` ativado
+- Placeholder: "Todas", "Todas", "Todos"
+
+### 🐛 Corrigido
+
+- **Encoding Windows**: Removidos emojis dos prints (UnicodeEncodeError)
+- **Syntax Error**: Código residual de Checklist removido
+- **NameError**: `dropdown_style` definido em transacoes.py
+
+### 📚 Técnico
+
+- `dcc.Dropdown(multi=True)` implementado
+- React-Select com visual de tags automático
+- Filtros suportam combinações múltiplas (Ex: Pet + Compras + Visa Bia + Janeiro 2026)
+
+---
+
 ## [2.7.0] - 2025-12-23 🎯
 
 ### 🎯 Principais Mudanças

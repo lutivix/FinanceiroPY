@@ -21,7 +21,9 @@ def carregar_transacoes(mes_filtro='TODOS'):
     Returns:
         DataFrame com as transações
     """
-    conn = sqlite3.connect(DB_PATH)
+    # Forçar nova conexão a cada chamada (sem cache)
+    conn = sqlite3.connect(DB_PATH, check_same_thread=False, isolation_level=None)
+    conn.execute("PRAGMA read_uncommitted = true")
     
     # Query base
     query = """
@@ -57,6 +59,13 @@ def carregar_transacoes(mes_filtro='TODOS'):
     # Processar dados
     if len(df) > 0:
         df['data'] = pd.to_datetime(df['data'], errors='coerce')
+        
+        # Converter valor para float (caso venha como string)
+        df['valor'] = pd.to_numeric(df['valor'], errors='coerce')
+        
+        # Remover linhas onde valor não pôde ser convertido
+        df = df.dropna(subset=['valor'])
+        
         df['valor_normalizado'] = df['valor'].abs()
         
         # Renomear rowid para id

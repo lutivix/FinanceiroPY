@@ -79,7 +79,6 @@ app.index_string = '''
 app.layout = html.Div([
     # Store para dados globais
     dcc.Store(id='store-mes-global', data='TODOS'),
-    dcc.Store(id='store-dados-transacoes', data={}),
     
     # Location para navegação
     dcc.Location(id='url', refresh=False),
@@ -156,14 +155,10 @@ def atualizar_filtros_transacoes(pathname):
         fontes = obter_fontes()
         meses = obter_meses_disponiveis()
         
-        opcoes_cat = [{'label': 'Todas', 'value': 'TODOS'}] + \
-                     [{'label': cat, 'value': cat} for cat in categorias]
-        
-        opcoes_fonte = [{'label': 'Todas', 'value': 'TODOS'}] + \
-                       [{'label': fonte, 'value': fonte} for fonte in fontes]
-        
-        opcoes_mes = [{'label': 'Todos', 'value': 'TODOS'}] + \
-                     [{'label': mes, 'value': mes} for mes in meses]
+        # Para checkboxes, não precisa da opção "Todas"
+        opcoes_cat = [{'label': cat, 'value': cat} for cat in categorias]
+        opcoes_fonte = [{'label': fonte, 'value': fonte} for fonte in fontes]
+        opcoes_mes = [{'label': mes, 'value': mes} for mes in meses]
         
         return opcoes_cat, opcoes_fonte, opcoes_mes
     
@@ -198,50 +193,56 @@ app.clientside_callback(
 # Callbacks dos gráficos do Dashboard
 @callback(
     Output('grafico-evolucao-hero', 'figure'),
-    Input('store-mes-global', 'data')
+    [Input('store-mes-global', 'data'),
+     Input('url', 'pathname')]
 )
-def atualizar_grafico_evolucao(mes_selecionado):
+def atualizar_grafico_evolucao(mes_selecionado, pathname):
     """Atualiza gráfico de evolução mensal"""
     return criar_grafico_evolucao(mes_selecionado)
 
 @callback(
     Output('grafico-top-categorias', 'figure'),
-    Input('store-mes-global', 'data')
+    [Input('store-mes-global', 'data'),
+     Input('url', 'pathname')]
 )
-def atualizar_grafico_categorias(mes_selecionado):
+def atualizar_grafico_categorias(mes_selecionado, pathname):
     """Atualiza gráfico de top categorias"""
     return criar_grafico_top_categorias(mes_selecionado)
 
 @callback(
     Output('grafico-top-fontes', 'figure'),
-    Input('store-mes-global', 'data')
+    [Input('store-mes-global', 'data'),
+     Input('url', 'pathname')]
 )
-def atualizar_grafico_fontes(mes_selecionado):
+def atualizar_grafico_fontes(mes_selecionado, pathname):
     """Atualiza gráfico de top fontes"""
     return criar_grafico_top_fontes(mes_selecionado)
 
 # Callbacks dos gráficos da página Analytics
 @callback(
     Output('grafico-real-ideal-analytics', 'figure'),
-    Input('store-mes-global', 'data')
+    [Input('store-mes-global', 'data'),
+     Input('url', 'pathname')]
 )
-def atualizar_grafico_real_ideal(mes_selecionado):
+def atualizar_grafico_real_ideal(mes_selecionado, pathname):
     """Atualiza gráfico Real vs Ideal"""
     return criar_grafico_real_ideal(mes_selecionado)
 
 @callback(
     Output('grafico-distribuicao-temporal', 'figure'),
-    Input('store-mes-global', 'data')
+    [Input('store-mes-global', 'data'),
+     Input('url', 'pathname')]
 )
-def atualizar_grafico_distribuicao(mes_selecionado):
+def atualizar_grafico_distribuicao(mes_selecionado, pathname):
     """Atualiza gráfico de distribuição temporal"""
     return criar_grafico_distribuicao_temporal(mes_selecionado)
 
 @callback(
     Output('grafico-acumulado', 'figure'),
-    Input('store-mes-global', 'data')
+    [Input('store-mes-global', 'data'),
+     Input('url', 'pathname')]
 )
-def atualizar_grafico_acumulado(mes_selecionado):
+def atualizar_grafico_acumulado(mes_selecionado, pathname):
     """Atualiza gráfico de acumulado mensal"""
     return criar_grafico_acumulado(mes_selecionado)
 
@@ -272,20 +273,21 @@ def atualizar_tabela_transacoes(mes_selecionado, categoria_filtro, fonte_filtro,
     # Aplicar filtros
     df_filtrado = df[df['valor'] > 0].copy()  # Apenas débitos
     
-    if categoria_filtro and categoria_filtro != 'TODOS':
-        df_filtrado = df_filtrado[df_filtrado['categoria'] == categoria_filtro]
+    # Filtros multi-select (listas)
+    if categoria_filtro and len(categoria_filtro) > 0:
+        df_filtrado = df_filtrado[df_filtrado['categoria'].isin(categoria_filtro)]
     
-    if fonte_filtro and fonte_filtro != 'TODOS':
-        df_filtrado = df_filtrado[df_filtrado['fonte'] == fonte_filtro]
+    if fonte_filtro and len(fonte_filtro) > 0:
+        df_filtrado = df_filtrado[df_filtrado['fonte'].isin(fonte_filtro)]
     
     if status_filtro == 'CATEGORIZADAS':
         df_filtrado = df_filtrado[df_filtrado['categoria'] != 'A definir']
     elif status_filtro == 'PENDENTES':
         df_filtrado = df_filtrado[df_filtrado['categoria'] == 'A definir']
     
-    # Filtro de mês de compensação
-    if mes_comp_filtro and mes_comp_filtro != 'TODOS':
-        df_filtrado = df_filtrado[df_filtrado['mes_comp'] == mes_comp_filtro]
+    # Filtro de mês de compensação (multi-select)
+    if mes_comp_filtro and len(mes_comp_filtro) > 0:
+        df_filtrado = df_filtrado[df_filtrado['mes_comp'].isin(mes_comp_filtro)]
     
     # Filtro de data
     if data_inicio:
@@ -318,7 +320,7 @@ def atualizar_tabela_transacoes(mes_selecionado, categoria_filtro, fonte_filtro,
     # Obter listas de categorias disponíveis
     categorias_disponiveis = sorted(df['categoria'].unique().tolist())
     
-    # Criar tabela simples com botões de edição
+    # Criar tabela simples com checkboxes e botões de edição
     rows = []
     for idx, row in df_tabela.iterrows():
         categoria_style = {
@@ -329,6 +331,14 @@ def atualizar_tabela_transacoes(mes_selecionado, categoria_filtro, fonte_filtro,
             'fontWeight': 'bold',
             'display': 'inline-block'
         } if row['categoria'] == 'A definir' else {'display': 'inline-block'}
+        
+        # Checkbox apenas para itens "A definir"
+        checkbox = dcc.Checklist(
+            id={'type': 'checkbox-transacao', 'index': row['id']},
+            options=[{'label': '', 'value': row['id']}],
+            value=[],
+            style={'margin': '0'}
+        ) if row['categoria'] == 'A definir' else ''
         
         # Botão de edição apenas para itens "A definir"
         edit_button = html.Button(
@@ -347,6 +357,7 @@ def atualizar_tabela_transacoes(mes_selecionado, categoria_filtro, fonte_filtro,
         ) if row['categoria'] == 'A definir' else ''
         
         rows.append(html.Tr([
+            html.Td(checkbox, style={'padding': '12px', 'borderBottom': f"1px solid {COLORS['border']}", 'textAlign': 'center'}),
             html.Td(row['data'], style={'padding': '12px', 'borderBottom': f"1px solid {COLORS['border']}"}),
             html.Td(row['descricao'], style={'padding': '12px', 'borderBottom': f"1px solid {COLORS['border']}"}),
             html.Td(f"R$ {row['valor_normalizado']:,.2f}", style={'padding': '12px', 'borderBottom': f"1px solid {COLORS['border']}"}),
@@ -402,6 +413,7 @@ def atualizar_tabela_transacoes(mes_selecionado, categoria_filtro, fonte_filtro,
         html.Div([
             html.Table([
                 html.Thead(html.Tr([
+                    html.Th('☑', style={'padding': '12px', 'textAlign': 'center', 'borderBottom': f"2px solid {COLORS['border']}", 'color': COLORS['text_primary'], 'fontWeight': 'bold', 'width': '50px'}),
                     html.Th('Data', style={'padding': '12px', 'textAlign': 'left', 'borderBottom': f"2px solid {COLORS['border']}", 'color': COLORS['text_primary'], 'fontWeight': 'bold'}),
                     html.Th('Descrição', style={'padding': '12px', 'textAlign': 'left', 'borderBottom': f"2px solid {COLORS['border']}", 'color': COLORS['text_primary'], 'fontWeight': 'bold'}),
                     html.Th('Valor', style={'padding': '12px', 'textAlign': 'left', 'borderBottom': f"2px solid {COLORS['border']}", 'color': COLORS['text_primary'], 'fontWeight': 'bold'}),
@@ -665,16 +677,121 @@ def atualizar_metricas_ideals(mes_selecionado, view_by, categoria_filtro, fonte_
         create_metric_card("Status", status_text, status_color),
     ], style={'display': 'flex', 'gap': f"{SPACING['lg']}px", 'flexWrap': 'wrap'})
 
+# Callback para popular dropdown de categoria em bloco
+@callback(
+    Output('dropdown-categoria-bloco', 'options'),
+    [Input('url', 'pathname'),
+     Input('filtro-status-transacoes', 'value')]
+)
+def popular_dropdown_categoria_bloco(pathname, status_filtro):
+    """Popula dropdown de categoria para categorização em bloco"""
+    import sqlite3
+    
+    db_path = BASE_DIR.parent.parent / 'dados' / 'db' / 'financeiro.db'
+    conn = sqlite3.connect(db_path)
+    
+    query = "SELECT DISTINCT Categoria FROM lancamentos WHERE Categoria != 'A definir' ORDER BY Categoria"
+    categorias = pd.read_sql_query(query, conn)['Categoria'].tolist()
+    conn.close()
+    
+    return [{'label': cat, 'value': cat} for cat in categorias]
+
+# Callback para controlar visibilidade dos controles de categorização em bloco
+@callback(
+    Output('controles-categorizacao-bloco', 'style'),
+    [Input('filtro-status-transacoes', 'value')]
+)
+def toggle_controles_categorizacao(status_filtro):
+    """Mostra/oculta controles de categorização em bloco baseado no filtro de status"""
+    if status_filtro == 'PENDENTES':
+        return {'marginBottom': f"{SPACING['md']}px"}
+    else:
+        return {'display': 'none'}
+
+# Callback para categorização em bloco
+@callback(
+    [Output('mensagem-bloco', 'children'),
+     Output('mensagem-bloco', 'style'),
+     Output('tabela-transacoes-container', 'children', allow_duplicate=True)],
+    [Input('btn-categorizar-bloco', 'n_clicks')],
+    [State('dropdown-categoria-bloco', 'value'),
+     State({'type': 'checkbox-transacao', 'index': ALL}, 'value'),
+     State({'type': 'checkbox-transacao', 'index': ALL}, 'id'),
+     State('store-mes-global', 'data'),
+     State('filtro-categoria-transacoes', 'value'),
+     State('filtro-fonte-transacoes', 'value'),
+     State('filtro-status-transacoes', 'value'),
+     State('filtro-mes-comp-transacoes', 'value'),
+     State('filtro-data-transacoes', 'start_date'),
+     State('filtro-data-transacoes', 'end_date')],
+    prevent_initial_call=True
+)
+def categorizar_bloco(n_clicks, categoria, checkboxes_values, checkboxes_ids, mes_selecionado, 
+                      categoria_filtro, fonte_filtro, status_filtro, mes_comp_filtro, data_inicio, data_fim):
+    """Categoriza múltiplas transações de uma vez"""
+    from dash import no_update
+    import sqlite3
+    
+    if not n_clicks or not categoria:
+        return no_update, no_update, no_update
+    
+    # Coletar IDs selecionados
+    ids_selecionados = []
+    for values, id_dict in zip(checkboxes_values, checkboxes_ids):
+        if values:  # Se checkbox marcado
+            ids_selecionados.append(id_dict['index'])
+    
+    if not ids_selecionados:
+        return "Nenhuma transação selecionada", {'color': COLORS['danger'], 'marginTop': '10px'}, no_update
+    
+    # Atualizar banco de dados
+    db_path = BASE_DIR.parent.parent / 'dados' / 'db' / 'financeiro.db'
+    conn = sqlite3.connect(db_path)
+    cursor = conn.cursor()
+    
+    placeholders = ','.join('?' * len(ids_selecionados))
+    query = f"UPDATE lancamentos SET Categoria = ? WHERE rowid IN ({placeholders})"
+    cursor.execute(query, [categoria] + ids_selecionados)
+    
+    conn.commit()
+    conn.close()
+    
+    # Recarregar tabela
+    tabela_atualizada = atualizar_tabela_transacoes(mes_selecionado, categoria_filtro, fonte_filtro, 
+                                                     status_filtro, mes_comp_filtro, data_inicio, data_fim)
+    
+    mensagem = f"✓ {len(ids_selecionados)} transação(ões) categorizada(s) como '{categoria}'"
+    return mensagem, {'color': COLORS['success'], 'marginTop': '10px', 'fontWeight': 'bold'}, tabela_atualizada
+
+# Health check endpoint para monitoramento
+@app.server.route('/health')
+def health_check():
+    """Endpoint para verificar se o servidor está respondendo"""
+    try:
+        # Testar acesso ao banco
+        meses = obter_meses_disponiveis()
+        return {'status': 'ok', 'meses_disponiveis': len(meses)}, 200
+    except Exception as e:
+        return {'status': 'error', 'message': str(e)}, 500
+
 # ===== MAIN =====
 if __name__ == '__main__':
-    print("🚀 Iniciando Dashboard Financeiro v2.0...")
-    print("📊 Acesse: http://localhost:8052")
-    print("🎨 Design: Dark Theme Professional")
-    print("📱 Páginas: Dashboard | Analytics | Transações | Ideals")
-    print("\n✨ Desenvolvido com Dash + Plotly\n")
+    import os
+    
+    # Configurações de ambiente
+    DEBUG_MODE = os.getenv('DASH_DEBUG', 'False').lower() == 'true'
+    PORT = int(os.getenv('DASH_PORT', '8052'))
+    HOST = os.getenv('DASH_HOST', '0.0.0.0')
+    
+    print(">> Iniciando Dashboard Financeiro v2.0...")
+    print(f">> Acesse: http://localhost:{PORT}")
+    print(">> Design: Dark Theme Professional")
+    print(">> Paginas: Dashboard | Analytics | Transacoes | Ideals")
+    print(f">> Modo: {'Desenvolvimento (DEBUG)' if DEBUG_MODE else 'Producao'}")
+    print("\n>> Desenvolvido com Dash + Plotly\n")
     
     app.run(
-        host='0.0.0.0',
-        port=8052,
-        debug=True
+        host=HOST,
+        port=PORT,
+        debug=DEBUG_MODE
     )

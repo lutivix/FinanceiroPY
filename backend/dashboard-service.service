@@ -1,0 +1,16 @@
+[Unit]
+Description=Dashboard Financeiro v2
+After=network.target
+
+[Service]
+Type=simple
+User=www-data
+Group=www-data
+WorkingDirectory=/path/to/Financeiro/backend/src/dashboard_v2
+Environment="PATH=/path/to/venv/bin"
+ExecStart=/path/to/venv/bin/gunicorn wsgi:server --bind 0.0.0.0:8052 --workers 4 --threads 2 --timeout 120
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target

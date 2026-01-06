@@ -1,3 +1,215 @@
+# Commit v2.9.0
+
+Luciano - feat(deploy): Configuração completa para deploy em produção com WSGI servers
+
+## Resumo
+
+🚀 **DEPLOY PRODUCTION READY!** Dashboard v2 agora pronto para produção com servidores WSGI (Gunicorn/Waitress), scripts automatizados, health check endpoint, e documentação completa incluindo Nginx reverse proxy, HTTPS, Systemd service e troubleshooting.
+
+## Features
+
+### 🚀 Deploy em Produção
+
+**WSGI Entry Point**:
+- `backend/src/dashboard_v2/wsgi.py`: Entry point para servidores WSGI
+- Exporta `server = app.server` para Gunicorn/Waitress
+- Compatível com qualquer servidor WSGI padrão
+
+**Scripts Automatizados**:
+- `backend/start-dashboard-prod.bat`: Windows (Waitress, 4 threads)
+- `backend/start-dashboard-prod.sh`: Linux/Mac (Gunicorn, 4 workers + 2 threads)
+- Execução simples com um comando
+
+**Configuração como Serviço**:
+- `backend/dashboard-service.service`: Template Systemd
+- Reinicialização automática (restart on failure)
+- Logs integrados com journalctl
+
+### 📦 Dependências de Produção
+
+**requirements-dashboard.txt**:
+- dash>=2.14.0
+- dash-bootstrap-components>=1.5.0
+- plotly>=5.18.0
+- pandas>=1.5.0
+- gunicorn>=21.2.0 (Linux)
+- waitress>=2.1.2 (Windows)
+
+### 🔧 Melhorias no Main
+
+**Variáveis de Ambiente**:
+- `DASH_DEBUG`: true/false (default: false)
+- `DASH_PORT`: porta customizada (default: 8052)
+- `DASH_HOST`: host binding (default: 0.0.0.0)
+
+**Health Check Endpoint**:
+- `/health`: Status do servidor + teste de DB
+- Response: `{'status': 'ok', 'meses_disponiveis': N}`
+- Para monitoramento automatizado
+
+**Debug Mode**:
+- Desabilitado por padrão em produção
+- Habilitável via env var ou código
+- Modo visível nos logs de startup
+
+## Documentation
+
+### 📚 Docs Completas
+
+**docs/Deploy/DEPLOY_DASHBOARD_V2.md** (guia completo):
+- ✅ Instalação passo a passo
+- 🪟 Deploy Windows (Waitress + NSSM)
+- 🐧 Deploy Linux (Gunicorn + Systemd)
+- 🌐 Nginx Reverse Proxy (config completa)
+- 🔒 HTTPS com Let's Encrypt
+- 🐛 Troubleshooting (10+ casos comuns)
+- 📊 Monitoramento e health checks
+- 🎯 Checklist de deploy
+
+**backend/README_DEPLOY.md** (quick start):
+- ⚡ Comandos para deploy imediato
+- 🛠️ Comandos úteis (dev vs prod)
+- 📦 Dependências resumidas
+- 🔧 Variáveis de ambiente
+
+## Technical Details
+
+### Servidor WSGI
+
+**Gunicorn (Linux/Mac)**:
+```bash
+gunicorn wsgi:server --bind 0.0.0.0:8052 --workers 4 --threads 2 --timeout 120
+```
+
+**Waitress (Windows)**:
+```cmd
+waitress-serve --host=0.0.0.0 --port=8052 --threads=4 wsgi:server
+```
+
+### Nginx Config
+
+- Reverse proxy para porta 8052
+- WebSocket support (Dash callbacks)
+- Timeouts ajustados (120s)
+- Headers corretos (X-Forwarded-*)
+
+### Systemd Service
+
+- Restart automático (RestartSec=10)
+- Logs via journalctl
+- Inicialização com boot (enable)
+
+## Files Changed
+
+- `backend/src/dashboard_v2/wsgi.py`: ✨ NEW - WSGI entry point
+- `backend/src/dashboard_v2/main.py`: Health check + env vars + debug mode
+- `backend/requirements-dashboard.txt`: ✨ NEW - Dependências de produção
+- `backend/start-dashboard-prod.bat`: ✨ NEW - Script Windows
+- `backend/start-dashboard-prod.sh`: ✨ NEW - Script Linux/Mac
+- `backend/dashboard-service.service`: ✨ NEW - Template Systemd
+- `docs/Deploy/DEPLOY_DASHBOARD_V2.md`: ✨ NEW - Documentação completa (500+ linhas)
+- `backend/README_DEPLOY.md`: ✨ NEW - Quick start guide
+- `COMMIT_MESSAGE.md`: Este commit
+
+## Migration Guide
+
+### De Dev para Prod
+
+**Antes (desenvolvimento)**:
+```bash
+cd backend/src/dashboard_v2
+python main.py  # Servidor dev do Flask
+```
+
+**Agora (produção)**:
+```bash
+cd backend
+pip install -r requirements-dashboard.txt
+start-dashboard-prod.bat  # Windows
+# OU
+./start-dashboard-prod.sh  # Linux
+```
+
+### Configurar como Serviço
+
+**Windows**:
+- Usar NSSM (Non-Sucking Service Manager)
+- Ou Agendador de Tarefas (schtasks)
+
+**Linux**:
+1. Copiar `dashboard-service.service` para `/etc/systemd/system/`
+2. Ajustar caminhos no arquivo
+3. `sudo systemctl enable dashboard-financeiro`
+4. `sudo systemctl start dashboard-financeiro`
+
+## Testing
+
+- [x] Health check endpoint funcionando
+- [x] Gunicorn rodando (4 workers)
+- [x] Waitress rodando (4 threads)
+- [x] Debug desabilitado por padrão
+- [x] Env vars funcionando
+- [x] Logs sendo gerados
+- [x] Syntax OK em main.py
+
+## Notes
+
+- Dashboard agora **production-ready** para deploy real
+- Suporta Windows Server, Linux (Ubuntu/Debian/CentOS), Mac
+- Escalável (ajustar workers/threads conforme carga)
+- Documentação completa com todos os cenários
+
+---
+
+# Commit v2.8.0
+
+Luciano - feat(v2.8): Filtros multi-select com tags/chips para análise multi-critério
+
+## Resumo
+
+🏷️ **FILTROS MULTI-SELECT!** Transações agora com filtros multi-select (tags/chips) para Categoria, Fonte e Mês de Compensação. Selecione múltiplos valores simultaneamente para análises cruzadas (Ex: Pet + Compras + Visa Bia + Janeiro). Visual com pills/chips removíveis, powered by React-Select.
+
+## Features
+
+### 🏷️ Filtros Multi-Select com Tags
+
+**3 filtros convertidos**:
+- Categoria: Multi-select com tags
+- Fonte: Multi-select com tags
+- Mês de Compensação: Multi-select com tags
+- Visual: Pills/Chips com X individual
+- Lista vazia = "Todos" (sem filtro)
+
+**Lógica atualizada**:
+- `atualizar_filtros_transacoes`: Remove opção 'TODOS', lista [] = todos
+- `atualizar_tabela_transacoes`: Filtros com `.isin()` para listas
+- Suporta combinações múltiplas (Ex: 3 categorias + 2 fontes + 1 mês)
+- Dropdowns com `multi=True` (React-Select)
+
+## Fixes
+
+### 🐛 Correções
+
+- **Encoding Windows**: Removidos emojis dos prints (UnicodeEncodeError cp1252)
+- **Syntax Error**: Código residual de Checklist em transacoes.py removido
+- **NameError**: `dropdown_style` definido no módulo transacoes
+
+## Technical
+
+- `dcc.Dropdown(multi=True, value=[], placeholder='Todas/Todos')`
+- React-Select automático para tags
+- Filtros: `df[df['column'].isin(list_values)]` ao invés de `==`
+- Empty list handling: `if lista and len(lista) > 0`
+
+## Files Changed
+
+- `backend/src/dashboard_v2/pages/transacoes.py`: 3 dropdowns multi-select + dropdown_style
+- `backend/src/dashboard_v2/main.py`: Callbacks atualizar_filtros + atualizar_tabela + prints sem emoji
+- `CHANGELOG.md`: v2.8.0 documentado
+- `COMMIT_MESSAGE.md`: Este commit
+
+---
+
 # Commit v2.7.0
 
 Luciano - feat(v2.7): Budget Ideals + edição transações + orçamento por fonte + fix ordenação cronológica
