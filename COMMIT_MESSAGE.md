@@ -1,6 +1,6 @@
 # Commit v2.9.0
 
-Luciano - feat(deploy): Configuração completa para deploy em produção com WSGI servers
+Luciano - feat(deploy): Configuração completa para deploy em produção com WSGI servers (over dash 2 ajustes)
 
 ## Resumo
 
