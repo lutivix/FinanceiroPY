@@ -72,6 +72,7 @@ class Transaction:
     source: TransactionSource = TransactionSource.PIX
     category: TransactionCategory = TransactionCategory.A_DEFINIR
     month_ref: str = ""
+    mes_comp: str = ""  # Mês de compensação (formato: YYYY-MM) extraído do nome do arquivo
     raw_data: Dict[str, Any] = field(default_factory=dict)
     created_at: datetime = field(default_factory=datetime.now)
     updated_at: Optional[datetime] = None
@@ -118,6 +119,7 @@ class Transaction:
             "source": self.source.value,
             "category": self.category.value,
             "month_ref": self.month_ref,
+            "mes_comp": self.mes_comp,
             "raw_data": self.raw_data,
             "created_at": self.created_at.isoformat(),
             "updated_at": self.updated_at.isoformat() if self.updated_at else None
@@ -133,6 +135,10 @@ class Transaction:
         data['created_at'] = datetime.fromisoformat(data['created_at'])
         if data['updated_at']:
             data['updated_at'] = datetime.fromisoformat(data['updated_at'])
+        
+        # mes_comp pode não existir em dados antigos
+        if 'mes_comp' not in data:
+            data['mes_comp'] = ""
         
         return cls(**data)
 

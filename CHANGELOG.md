@@ -7,6 +7,104 @@ e este projeto adere ao [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
 ---
 
+## [2.8.0] - 2026-01-13 🔧
+
+### 🎯 Principais Mudanças
+
+**CORREÇÕES CRÍTICAS + ORÇAMENTO SEMANAL!** Versão focada em correções de bugs críticos do Dashboard V2 e novo módulo de análise de orçamento semanal.
+
+### 🐛 Corrigido
+
+#### **Dashboard V2 - Correções Críticas**
+
+- **Março 2025 ausente nos gráficos**
+  - Problema: `pd.to_datetime` não reconhece "março" com acento no Windows
+  - Solução: Função `converter_mes_para_data()` com mapeamento manual de meses
+  - Arquivo: `backend/src/dashboard_v2/utils/graficos.py`
+
+- **Ideal Mensal variando com filtros**
+  - Problema: Card mostrava média calculada ao invés de valor fixo
+  - Solução: `IDEAL_MENSAL_TOTAL = 26.670` fixo em `config.py`
+  - Arquivo: `backend/src/dashboard_v2/pages/dashboard.py`
+
+- **Batch categorization não aparecendo**
+  - Problema: Import `SPACING` ausente causava erro no callback
+  - Solução: Adicionado `SPACING` aos imports de `config.py`
+  - Arquivo: `backend/src/dashboard_v2/main.py`
+
+- **Dezembro 2025 Master: R$ 4.044 ao invés de R$ 9.124**
+  - Problema: Deduplicação removia 20 transações válidas
+  - Causa: Open Finance tinha transações até 23/11 com mes_comp vazio
+  - Solução: 
+    - Campo `mes_comp` adicionado ao modelo `Transaction`
+    - Deduplicação usa `mes_comp` na chave (data+descrição+valor+fonte+mes_comp)
+    - Open Finance filtrado até 30/11 e exclui mes_comp dezembro
+    - Processamento de arquivos apenas >= 202512
+  - Arquivos: `models/__init__.py`, `processors/cards.py`, `services/financial_agent_service.py`
+
+### ✨ Adicionado
+
+#### **📊 Novo Módulo: Budget Analysis**
+
+- **Estrutura completa de análise semanal**
+  - `backend/src/budget_analysis/` - Módulo modular e documentado
+  - `models.py` - 5 modelos de dados (WeekOfMonth, RecurringTransaction, WeeklyBudget, etc.)
+  - `person_mapper.py` - Mapeamento pessoa-cartão (Usuário/Bia/Mãe)
+  - `recurring_analyzer.py` - Identificador de transações recorrentes
+  - `weekly_budget_calculator.py` - Calculador de orçamento semanal
+  - `README.md` - Documentação completa do módulo
+
+- **Script Principal: analisar_padroes_semanais.py**
+  - Análise de transações recorrentes (mínimo 3 meses)
+  - Cálculo de médias semanais para categorias variáveis
+  - Semanas fixas: 1-7, 8-14, 15-21, 22-28, 29-31
+  - Arredondamento conservador (para menos)
+  - Export JSON + relatório console
+  - Parâmetros: `--months-history`, `--min-recurrence`, `--output`
+
+- **Recursos de Análise**
+  - Normalização de descrições (remove números, caracteres especiais)
+  - Confiança de recorrência (ocorrências/meses analisados)
+  - Dia típico calculado por mediana
+  - Consolidação por semana/categoria/pessoa/fonte
+  - Categorias variáveis: Mercado, Combustível, Padaria, Lanche, Lazer, Compras
+
+### 🔧 Modificado
+
+#### **Modelo de Dados**
+
+- **Transaction**: Campo `mes_comp` adicionado (formato YYYY-MM)
+- **Métodos atualizados**: `to_dict()` e `from_dict()` incluem `mes_comp`
+- **Processadores**: Extraem `mes_comp` do nome do arquivo (202512_Itau.xls → 2025-12)
+
+#### **Deduplicação**
+
+- Chave agora inclui `mes_comp`: `data+descrição+valor+fonte+mes_comp`
+- Open Finance e Excel não conflitam se mes_comp diferente
+- Transações sem mes_comp compatíveis com dados antigos
+
+#### **Processamento de Arquivos**
+
+- `find_recent_files()`: Ignora arquivos < 202512 (dezembro 2025)
+- Open Finance: Filtrado até 30/11/2025, exclui mes_comp dezembro
+- Excel: Cartões sempre incluídos, PIX filtrado por data
+
+### 📚 Documentação
+
+- README principal atualizado para v2.8.0
+- Dashboard V2 README atualizado com correções
+- Budget Analysis README criado (metodologia, uso, exemplos)
+- CHANGELOG atualizado com todas as mudanças
+
+### 🔬 Técnico
+
+- **Person Mappings**: Usuário (Master), Bia (Visa Físico/Virtual/Bia), Mãe (Visa Mãe)
+- **Semanas do Mês**: Enum com ranges fixos e método `from_day()`
+- **Análise Conservadora**: Mínimo 3 meses, arredondamento floor, tolerância ±2 dias
+- **Logging Detalhado**: Debug logs para rastreamento de transações
+
+---
+
 ## [2.8.0] - 2026-01-06 🎯
 
 ### 🎯 Principais Mudanças

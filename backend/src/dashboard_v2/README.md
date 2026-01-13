@@ -1,10 +1,23 @@
-# Dashboard Financeiro v2.0 - Estrutura
+# Dashboard Financeiro v2.8.0 - Estrutura
+
+**Versão:** 2.8.0  
+**Data:** Janeiro 2026  
+**Status:** ✅ Produção
+
+## 🎯 Correções Críticas v2.8.0
+
+Esta versão corrige problemas importantes identificados:
+
+✅ **Março 2025** - Corrigido encoding Windows (pd.to_datetime → mapeamento manual)  
+✅ **Ideal Mensal** - Fixado em R$ 26.670 (não varia com filtros)  
+✅ **Batch Categorization** - Import SPACING corrigido, controles visíveis  
+✅ **Dezembro Master** - 57 transações preservadas (mes_comp na deduplicação)
 
 ```
 dashboard_v2/
-├── __init__.py                    # Pacote principal
+├── __init__.py                    # Pacote principal (v2.8.0)
 ├── main.py                        # App Dash (executa aqui)
-├── config.py                      # Configurações (cores, fontes, orçamentos)
+├── config.py                      # Configurações (cores, fontes, orçamentos (IDEAL_MENSAL_TOTAL))
 │
 ├── assets/                        # Arquivos estáticos
 │   └── custom_styles.py          # CSS customizado
@@ -13,12 +26,13 @@ dashboard_v2/
 │   └── sidebar.py                # Sidebar com navegação
 │
 ├── pages/                         # Páginas do dashboard
-│   ├── dashboard.py              # Página principal (overview)
+│   ├── dashboard.py              # Página principal (overview + Ideal Mensal fixo)
 │   ├── analytics.py              # Análises detalhadas
-│   └── transacoes.py             # Lista/categorização
+│   └── transacoes.py             # Lista/categorização (batch com SPACING)
 │
 └── utils/                         # Utilitários
-    └── database.py               # Funções de banco de dados
+    ├── database.py               # Funções de banco de dados
+    └── graficos.py               # Geração de gráficos (converter_mes_para_data)
 ```
 
 ## 🚀 Como Executar

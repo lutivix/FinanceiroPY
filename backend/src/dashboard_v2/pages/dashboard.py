@@ -5,7 +5,7 @@ Página Dashboard - Visão geral financeira
 
 from dash import html, dcc
 import plotly.graph_objects as go
-from dashboard_v2.config import COLORS, FONTS, SPACING, PLOTLY_TEMPLATE, ORCAMENTO_IDEAL
+from dashboard_v2.config import COLORS, FONTS, SPACING, PLOTLY_TEMPLATE, ORCAMENTO_IDEAL, IDEAL_MENSAL_TOTAL
 
 def create_dashboard_page(stats, df_month=None):
     """
@@ -51,12 +51,12 @@ def create_dashboard_page(stats, df_month=None):
                 )
             ], style={'flex': '1', 'minWidth': '280px'}),
             
-            # Card 2: Média Mensal
+            # Card 2: Ideal Mensal (fixo, não muda com filtro)
             html.Div([
                 create_main_card(
-                    label="Média Mensal",
-                    value=f"R$ {stats['media_mensal']/1000:.1f}k",
-                    subtitle=f"Últimos {stats['num_meses']} meses",
+                    label="Ideal Mensal",
+                    value=f"R$ {IDEAL_MENSAL_TOTAL/1000:.1f}k",
+                    subtitle="Orçamento planejado",
                     icon="trending_up",
                     color=COLORS['info']
                 )

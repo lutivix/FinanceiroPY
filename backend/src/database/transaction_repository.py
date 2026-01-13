@@ -193,6 +193,12 @@ class TransactionRepository:
         # Determina se deve verificar duplicatas
         should_check_dupes = skip_duplicates if skip_duplicates is not None else self.enable_deduplication
         
+        # DEBUG: Mostrar totais de Dezembro 2025 Master ANTES da deduplicação
+        debug_dez_master = [t for t in transactions if t.month_ref == 'Dezembro 2025' and 'Master' in t.source.value]
+        if debug_dez_master:
+            total_dez_master = sum(abs(t.amount) for t in debug_dez_master)
+            logger.info(f"🔍 DEBUG: Dezembro 2025 Master ANTES deduplicacao: {len(debug_dez_master)} transacoes = R$ {total_dez_master:,.2f}")
+        
         saved_count = 0
         duplicates_count = 0
         
@@ -232,6 +238,13 @@ class TransactionRepository:
                         logger.warning(f"⚠️ Erro ao salvar transação individual: {e}")
                 
                 conn.commit()
+                
+                # DEBUG: Mostrar totais de Dezembro 2025 Master DEPOIS da deduplicação
+                if debug_dez_master:
+                    saved_dez_master = [t for t in transactions if t.month_ref == 'Dezembro 2025' and 'Master' in t.source.value]
+                    # Contar quantos foram realmente salvos (não eram duplicatas)
+                    saved_count_dez = saved_count  # Aproximação
+                    logger.info(f"🔍 DEBUG: Dezembro 2025 Master DEPOIS deduplicacao: {saved_count}/{len(transactions)} salvas, {duplicates_count} duplicatas removidas")
                 
                 # Log com estatísticas
                 if duplicates_count > 0:

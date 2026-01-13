@@ -124,20 +124,50 @@ ORCAMENTO_IDEAL = {
     'Cartao': 80.00
 }
 
+# Soma total do orçamento ideal mensal (fixo, não muda com filtros)
+# Usa apenas valores das categorias principais (com acento), evitando duplicatas
+IDEAL_MENSAL_TOTAL = sum([
+    4200.00,  # Mercado
+    3400.00,  # Casa
+    2400.00,  # LF
+    2100.00,  # Nita
+    1700.00,  # Utilidades
+    1700.00,  # Esporte
+    1500.00,  # Faculdade
+    1200.00,  # Pet
+    1200.00,  # Compras
+    1200.00,  # Datas
+    850.00,   # Estética
+    650.00,   # Combustível
+    650.00,   # Betina
+    600.00,   # Farmácia
+    500.00,   # Lazer
+    500.00,   # Stream
+    400.00,   # Carro
+    350.00,   # Seguro
+    350.00,   # Saúde
+    300.00,   # Hobby
+    300.00,   # Padaria
+    200.00,   # Feira
+    140.00,   # Transporte
+    100.00,   # Vestuário
+    100.00,   # Eventos
+    80.00,    # Cartão
+])  # Total: R$ 26.670,00
+
 ORCAMENTO_IDEAL_FONTE = {
     'PIX': 8900.00,
     'Visa Bia': 4100.00,
     'Master Físico': 3850.00,
-    'Visa Recorrente': 2914.00,
+    'Visa Recorrente': 714.00,
     'Visa Físico': 2050.00,
     'Master Recorrente': 1886.00,
     'Visa Mae': 1390.00,
     'Visa Virtual': 880.00,
-    'Master Virtual': 500.00
+    'Master Virtual': 2700.00
 }
 
-ORCAMENTO_IDEAL_CAT_VISA_REC = {
-    'LF': 2400.00,
+ORCAMENTO_IDEAL_CAT_VISA_REC = {    
     'Esporte': 414.00,
     'Stream': 300.00
 }
@@ -158,6 +188,7 @@ ORCAMENTO_IDEAL_CAT_VISA_FIS = {
 }
 
 ORCAMENTO_IDEAL_CAT_MASTER_VIRTUAL = {
+    'LF': 2400.00,
     'Betina': 300.00,
     'Farmácia': 200.00
 }

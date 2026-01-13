@@ -32,22 +32,34 @@ def criar_grafico_evolucao(mes_selecionado='TODOS'):
     # Agrupar por mês
     evolucao = df_debitos.groupby('mes_comp')['valor'].sum().reset_index()
     
-    # Converter mes_comp para datetime para ordenação cronológica
-    import locale
+    # Converter mes_comp para datetime usando mapeamento manual (fix para março no Windows)
     from datetime import datetime
     from dateutil.relativedelta import relativedelta
     
-    try:
-        locale.setlocale(locale.LC_TIME, 'pt_BR.UTF-8')
-    except:
+    # Mapeamento manual de meses em português para número
+    meses_map = {
+        'janeiro': 1, 'fevereiro': 2, 'março': 3, 'abril': 4,
+        'maio': 5, 'junho': 6, 'julho': 7, 'agosto': 8,
+        'setembro': 9, 'outubro': 10, 'novembro': 11, 'dezembro': 12
+    }
+    
+    def converter_mes_para_data(mes_comp_str):
+        """Converte 'Março 2025' para datetime(2025, 3, 1)"""
         try:
-            locale.setlocale(locale.LC_TIME, 'Portuguese_Brazil.1252')
+            partes = mes_comp_str.split()
+            if len(partes) == 2:
+                mes_nome = partes[0].lower()
+                ano = int(partes[1])
+                mes_num = meses_map.get(mes_nome)
+                if mes_num:
+                    return datetime(ano, mes_num, 1)
         except:
             pass
+        return None
     
-    evolucao['data_ordenacao'] = pd.to_datetime(evolucao['mes_comp'], format='%B %Y', errors='coerce')
+    evolucao['data_ordenacao'] = evolucao['mes_comp'].apply(converter_mes_para_data)
     
-    # Remover linhas onde conversão falhou (NaT)
+    # Remover linhas onde conversão falhou (None)
     evolucao = evolucao.dropna(subset=['data_ordenacao'])
     
     # Criar dicionário com valores reais
@@ -72,11 +84,11 @@ def criar_grafico_evolucao(mes_selecionado='TODOS'):
         ano = data_atual.year
         mes_formatado = f"{mes_nome} {ano}"
         
-        # Procurar mês correspondente nos dados reais (comparação por data)
+        # Procurar mês correspondente nos dados reais (comparação por data usando a função manual)
         valor = 0
         for mes_real, val_real in valores_reais.items():
-            data_real = pd.to_datetime(mes_real, format='%B %Y', errors='coerce')
-            if not pd.isna(data_real) and data_real.year == ano and data_real.month == data_atual.month:
+            data_real = converter_mes_para_data(mes_real)
+            if data_real and data_real.year == ano and data_real.month == data_atual.month:
                 valor = val_real
                 break
         

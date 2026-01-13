@@ -1,6 +1,6 @@
-# 🤖 Agente Financeiro IA v2.4
+# 🤖 Agente Financeiro IA v2.8
 
-> **Sistema inteligente de automação financeira com 98.2% de precisão + Dashboard Interativo + Open Finance**
+> **Sistema inteligente de automação financeira com 98.2% de precisão + Dashboard Interativo + Open Finance + Análise Semanal**
 
 ---
 
@@ -33,7 +33,52 @@ Sistema Python avançado que automatiza completamente o processamento de extrato
 
 ---
 
-## 🎉 NOVIDADES v2.4.0 - CORREÇÕES E MANUTENÇÃO!O!
+## 🎉 NOVIDADES v2.8.0 - CORREÇÕES CRÍTICAS + ANÁLISE SEMANAL
+
+🔧 **CORREÇÕES CRÍTICAS DE DEZEMBRO 2025** + **NOVO MÓDULO DE ORÇAMENTO SEMANAL**:
+
+```
+✅ CORREÇÕES IMPLEMENTADAS
+├─ Dashboard V2 atualizado para versão 2.8.0
+├─ Março 2025 corrigido (pd.to_datetime com mapeamento manual de meses)
+├─ Ideal Mensal fixo em R$ 26.670 (não varia com filtros)
+├─ Batch categorization restaurado (import SPACING corrigido)
+├─ Dezembro Master corrigido: 57 transações = R$ 9.124,97
+│   ├─ mes_comp adicionado ao modelo Transaction
+│   ├─ Deduplicação usa mes_comp na chave
+│   ├─ Open Finance filtrado até 30/11/2025
+│   └─ Processamento apenas arquivos >= 202512
+└─ Open Finance: cartões excluídos de mes_comp dezembro
+
+📊 NOVO MÓDULO: BUDGET ANALYSIS
+├─ Identificação automática de transações recorrentes
+├─ Cálculo de orçamento semanal (dias 1-7, 8-14, 15-21, 22-28, 29-31)
+├─ Mapeamento pessoa-cartão (Usuário/Bia/Mãe)
+├─ Médias semanais para categorias variáveis
+├─ Arredondamento conservador (para menos)
+├─ Exportação JSON + relatório console
+└─ Script: analisar_padroes_semanais.py
+
+🔍 ANÁLISE DE RECORRÊNCIAS
+├─ Mínimo 3 meses para considerar recorrente
+├─ Normalização de descrição (categoria + texto)
+├─ Tolerância ±2 dias para agrupamento
+├─ Confiança calculada (ocorrências/meses analisados)
+└─ Identificação de contas fixas vs variáveis
+```
+
+**🎯 Dashboard:** `backend/src/dashboard_v2/main.py` (v2.8.0)  
+**🌐 Acesso:** http://localhost:8051  
+**📊 Análise Semanal:** `python backend/src/analisar_padroes_semanais.py`  
+**📂 Módulo:** `backend/src/budget_analysis/`
+
+**📖 Documentação:** 
+- [Dashboard V2 Config](backend/src/dashboard_v2/config.py)
+- [Budget Analysis README](backend/src/budget_analysis/README.md)
+
+---
+
+## 📊 VERSÃO v2.4.0 - CORREÇÕES E MANUTENÇÃO
 
 🔧 **CORREÇÕES CRÍTICAS** + **FERRAMENTAS DE MANUTENÇÃO** - Sistema 97,9% mais eficiente:
 

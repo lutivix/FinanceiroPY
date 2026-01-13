@@ -60,6 +60,8 @@ python main.py
 
 3. **Transações** (`/transacoes`)
    - 5 filtros simultâneos
+   - **Filtros multi-select** (Categoria, Fonte, Mês de Compensação)
+   - Visual com tags/chips removíveis
    - Tabela com 100 transações
    - Subtotal dinâmico
    - Ordenação inteligente
@@ -77,6 +79,8 @@ python main.py
 
 - **v2.5.0** (16/12/2025) - Estrutura base, Dashboard principal
 - **v2.6.0** (23/12/2025) - Analytics + Transações completas
+- **v2.7.0** (23/12/2025) - Correções e melhorias gerais
+- **v2.8.0** (06/01/2026) - **Filtros multi-select** com tags/chips (Categoria, Fonte, Mês)
 
 ## 🔗 Links Úteis
 

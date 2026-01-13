@@ -47,8 +47,8 @@ ORCAMENTO_IDEAL = {
     'Vestuário': 100.00,
     'Vestuario': 100.00,
     'Eventos': 100.00,
-    'Cartão': 80.00,
-    'Cartao': 80.00
+    'Cartão': 80.00
+    # Total: 26.670,00 
 }
 
 # Orçamento Ideal por Fonte (mensal) - Conforme planilha de controle

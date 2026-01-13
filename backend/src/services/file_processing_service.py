@@ -35,6 +35,7 @@ class FileProcessingService:
         """
         Busca arquivos de extratos dos últimos meses.
         Considera que o ciclo mensal vai do dia 19 de um mês ao dia 18 do próximo.
+        IMPORTANTE: Apenas arquivos >= 202512 (dezembro 2025) - Open Finance cobre até novembro 2025.
         
         Args:
             months_back: Quantos meses para trás buscar
@@ -79,6 +80,11 @@ class FileProcessingService:
                 ano -= 1
             
             ano_mes = f"{ano:04d}{mes:02d}"
+            
+            # FILTRO: Ignora arquivos anteriores a dezembro 2025 (202512)
+            if int(ano_mes) < 202512:
+                logger.debug(f"⏭️ Ignorando {ano_mes} (anterior a dezembro 2025)")
+                continue
             
             # Padrões de arquivo esperados
             patterns = [

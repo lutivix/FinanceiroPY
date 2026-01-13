@@ -90,15 +90,41 @@ class FinancialAgentService:
                 
                 if openfinance_transactions:
                     openfinance_count = len(openfinance_transactions)
-                    all_transactions.extend(openfinance_transactions)
+                    
+                    # FILTRAR Open Finance: EXCLUIR mes_comp = dezembro 2025
+                    from datetime import datetime, date
+                    limite_data = date(2025, 11, 18)
+                    openfinance_filtered = []
+                    removed_by_date = 0
+                    removed_by_mescomp = 0
+                    
+                    for t in openfinance_transactions:
+                        # Excluir se data > 18/11/2025
+                        if t.date > limite_data:
+                            removed_by_date += 1
+                            continue
+                        # Excluir se mes_comp = dezembro 2025
+                        if hasattr(t, 'mes_comp') and t.mes_comp and '2025-12' in str(t.mes_comp):
+                            removed_by_mescomp += 1
+                            continue
+                        openfinance_filtered.append(t)
+                    
+                    if removed_by_date > 0:
+                        logger.info(f"🚫 {removed_by_date} transações do Open Finance removidas (após 18/11/2025)")
+                    if removed_by_mescomp > 0:
+                        logger.info(f"🚫 {removed_by_mescomp} transações do Open Finance removidas (mes_comp dezembro 2025)")
+                    
+                    all_transactions.extend(openfinance_filtered)
+                    openfinance_count = len(openfinance_filtered)
                     logger.info(f"✅ {openfinance_count} transações carregadas do Open Finance")
                     
                     # Mostra range de datas do Open Finance
                     min_date, max_date = self.openfinance_loader.get_date_range()
                     if min_date and max_date:
-                        openfinance_max_date = max_date  # Armazena para filtrar Excel
+                        # LIMITE FIXO: Usar apenas até 18/11/2025 para evitar ambiguidade com cartões
+                        openfinance_max_date = "2025-11-18"
                         logger.info(f"📅 Período Open Finance: {min_date} a {max_date}")
-                        logger.info(f"🔒 Dados do Excel serão filtrados: apenas após {max_date}")
+                        logger.info(f"🔒 Data limite ajustada para: {openfinance_max_date}")
                 else:
                     logger.info("ℹ️ Nenhum dado do Open Finance disponível")
             
@@ -108,13 +134,20 @@ class FinancialAgentService:
             
             if excel_transactions:
                 # Filtra Excel: só aceita transações APÓS última data do Open Finance
+                # IMPORTANTE: Para CARTÕES, sempre incluir (devido ao mes_comp)
                 if openfinance_max_date:
                     from datetime import datetime
                     max_date_obj = datetime.fromisoformat(openfinance_max_date).date()
-                    filtered_excel = [
-                        t for t in excel_transactions 
-                        if t.date > max_date_obj
-                    ]
+                    
+                    filtered_excel = []
+                    for t in excel_transactions:
+                        # Cartões: SEMPRE incluir (dedup usa mes_comp)
+                        if 'Master' in t.source.value or 'Visa' in t.source.value:
+                            filtered_excel.append(t)
+                        # PIX/Extrato: Filtrar por data
+                        elif t.date > max_date_obj:
+                            filtered_excel.append(t)
+                    
                     excel_filtered_count = len(excel_transactions) - len(filtered_excel)
                     if excel_filtered_count > 0:
                         logger.info(
@@ -139,8 +172,22 @@ class FinancialAgentService:
             # 3.5. Remove duplicatas in-memory ANTES de categorizar
             logger.info("🔍 Etapa 2.5: Removendo duplicatas in-memory")
             original_count = len(all_transactions)
+            
+            # DEBUG: Contar Dezembro 2025 Master ANTES da deduplicação in-memory
+            debug_dez_master_before = [t for t in all_transactions if t.month_ref == 'Dezembro 2025' and 'Master' in t.source.value]
+            if debug_dez_master_before:
+                total_before = sum(abs(t.amount) for t in debug_dez_master_before)
+                logger.info(f"🔍 DEBUG: Dezembro 2025 Master ANTES dedup in-memory: {len(debug_dez_master_before)} transacoes = R$ {total_before:,.2f}")
+            
             all_transactions = self._deduplicate_in_memory(all_transactions)
             duplicates_removed = original_count - len(all_transactions)
+            
+            # DEBUG: Contar Dezembro 2025 Master DEPOIS da deduplicação in-memory
+            debug_dez_master_after = [t for t in all_transactions if t.month_ref == 'Dezembro 2025' and 'Master' in t.source.value]
+            if debug_dez_master_after:
+                total_after = sum(abs(t.amount) for t in debug_dez_master_after)
+                logger.info(f"🔍 DEBUG: Dezembro 2025 Master DEPOIS dedup in-memory: {len(debug_dez_master_after)} transacoes = R$ {total_after:,.2f}")
+            
             if duplicates_removed > 0:
                 logger.info(
                     f"✅ {duplicates_removed} duplicatas removidas in-memory "
@@ -482,13 +529,20 @@ class FinancialAgentService:
         duplicates_found = 0
         
         for transaction in transactions:
-            # Gera chave de deduplicação
+            # Gera chave de deduplicação incluindo mes_comp (crítico para cartões)
+            # Cartões com mesma data/valor mas mes_comp diferente NÃO são duplicatas
+            mes_comp_str = transaction.mes_comp if hasattr(transaction, 'mes_comp') and transaction.mes_comp else ""
             dedup_key = DeduplicationHelper.generate_dedup_key(
                 data=transaction.date.isoformat(),
                 descricao=transaction.description,
                 valor=transaction.amount,
                 fonte=transaction.source.value
-            )
+            ) + f"_mescomp_{mes_comp_str}"
+            
+            # # DEBUG: Mostrar mes_comp para transações Master de dezembro
+            # if 'Master' in transaction.source.value and transaction.date.month == 12 and transaction.date.year == 2025:
+            #     origem = "OF" if (transaction.id and transaction.id.startswith("openfinance-")) else "Excel"
+            #     logger.info(f"🔍 DEBUG dedup [{origem}] {transaction.date} {transaction.description[:30]} = R$ {transaction.amount:.2f} | mes_comp={mes_comp_str}")
             
             if dedup_key in seen_keys:
                 duplicates_found += 1

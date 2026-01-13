@@ -1,5 +1,5 @@
 """
-Dashboard Financeiro v2.0
+Dashboard Financeiro v2.8.0
 App principal com sidebar e navegação entre páginas
 """
 
@@ -15,7 +15,7 @@ from dash import Dash, html, dcc, Input, Output, State, callback, ALL
 import dash_bootstrap_components as dbc
 
 # Imports locais
-from dashboard_v2.config import COLORS, FONTS
+from dashboard_v2.config import COLORS, FONTS, SPACING
 from dashboard_v2.components.sidebar import create_sidebar
 from dashboard_v2.assets.custom_styles import get_custom_css
 from dashboard_v2.pages.dashboard import create_dashboard_page
@@ -615,7 +615,7 @@ def atualizar_grafico_ideals(mes_selecionado, view_by, categoria_filtro, fonte_f
 )
 def atualizar_metricas_ideals(mes_selecionado, view_by, categoria_filtro, fonte_filtro, data_inicio, data_fim):
     """Atualiza cards de métricas (Total Real, Ideal, Diff, Status)"""
-    from dashboard_v2.config import ORCAMENTO_IDEAL, ORCAMENTO_IDEAL_FONTE, SPACING
+    from dashboard_v2.config import ORCAMENTO_IDEAL, ORCAMENTO_IDEAL_FONTE, SPACING, IDEAL_MENSAL_TOTAL
     
     df = carregar_transacoes(mes_selecionado)
     
@@ -648,9 +648,8 @@ def atualizar_metricas_ideals(mes_selecionado, view_by, categoria_filtro, fonte_
         ideal_total = ORCAMENTO_IDEAL_FONTE.get(fonte_filtro, 0) * multiplier
     else:
         real_total = df_debitos['valor_normalizado'].sum()
-        # Somar todos os ideais de categorias presentes nos dados
-        categorias_presentes = df_debitos['categoria'].unique()
-        ideal_total = sum(ORCAMENTO_IDEAL.get(cat, 0) for cat in categorias_presentes) * multiplier
+        # Usar o ideal mensal total fixo (R$ 26.670), não filtrar por categorias presentes
+        ideal_total = IDEAL_MENSAL_TOTAL * multiplier
     
     diff_total = real_total - ideal_total
     diff_percent = (diff_total / ideal_total * 100) if ideal_total > 0 else 0
@@ -703,9 +702,13 @@ def popular_dropdown_categoria_bloco(pathname, status_filtro):
 )
 def toggle_controles_categorizacao(status_filtro):
     """Mostra/oculta controles de categorização em bloco baseado no filtro de status"""
+    print(f"Toggle controles - Status filtro: {status_filtro}")
     if status_filtro == 'PENDENTES':
-        return {'marginBottom': f"{SPACING['md']}px"}
+        style = {'marginBottom': f"{SPACING['md']}px", 'display': 'block'}
+        print("Mostrando controles de categorizacao")
+        return style
     else:
+        print("Ocultando controles de categorizacao")
         return {'display': 'none'}
 
 # Callback para categorização em bloco

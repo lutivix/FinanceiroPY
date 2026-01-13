@@ -53,12 +53,41 @@ class CardProcessor(BaseProcessor):
         transactions = []
         month_ref = self.extract_month_reference(file_path)
         
+        # Extrai mes_comp do nome do arquivo (formato: 202512_Itau.xls -> 2025-12)
+        mes_comp = ""
+        filename = file_path.stem
+        apenas_numeros = ''.join(filter(str.isdigit, filename))
+        if len(apenas_numeros) >= 6:
+            ano = apenas_numeros[:4]
+            mes = apenas_numeros[4:6]
+            mes_comp = f"{ano}-{mes}"
+        
         try:
             # Lê arquivo Excel
             df = pd.read_excel(file_path)
             
+            # DEBUG: Mostrar totais do arquivo
+            logger.info(f"🔍 DEBUG {file_path.name}: {len(df)} linhas lidas do Excel")
+            
             # Processa transações por seção de cartão
-            transactions = self._extract_transactions_by_card(df, month_ref, file_path)
+            transactions = self._extract_transactions_by_card(df, month_ref, file_path, mes_comp)
+            
+            # DEBUG: Mostrar quantas transações foram extraídas
+            if month_ref == 'Dezembro 2025':
+                total_value = sum(abs(t.amount) for t in transactions)
+                
+                # Contar por source
+                from collections import Counter
+                source_counts = Counter([t.source.value for t in transactions])
+                source_values = {}
+                for source_name in source_counts.keys():
+                    source_txs = [t for t in transactions if t.source.value == source_name]
+                    source_values[source_name] = sum(abs(t.amount) for t in source_txs)
+                
+                logger.info(f"🔍 DEBUG {file_path.name} - Dezembro 2025 TOTAL: {len(transactions)} transacoes = R$ {total_value:,.2f}")
+                logger.info(f"🔍 DEBUG {file_path.name} - Distribuição por source:")
+                for source_name, count in source_counts.items():
+                    logger.info(f"   {source_name}: {count} transacoes = R$ {source_values[source_name]:,.2f}")
             
             self.stats.files_processed += 1
             self.stats.transactions_extracted += len(transactions)
@@ -89,7 +118,7 @@ class CardProcessor(BaseProcessor):
                     return final[-4:]
         return None
     
-    def _extract_transactions_by_card(self, df: pd.DataFrame, month_ref: str, file_path: Path) -> List[Transaction]:
+    def _extract_transactions_by_card(self, df: pd.DataFrame, month_ref: str, file_path: Path, mes_comp: str = "") -> List[Transaction]:
         """
         Extrai transações agrupadas por cartão.
         Cada seção do arquivo corresponde a um cartão específico.
@@ -98,6 +127,7 @@ class CardProcessor(BaseProcessor):
             df: DataFrame do Excel
             month_ref: Referência do mês
             file_path: Caminho do arquivo original
+            mes_comp: Mês de compensação (formato YYYY-MM)
             
         Returns:
             Lista de transações
@@ -131,6 +161,9 @@ class CardProcessor(BaseProcessor):
                 current_source = (TransactionSource.ITAU_MASTER_VIRTUAL 
                                 if self.bank_name.lower() == "itau" 
                                 else TransactionSource.LATAM_VISA_VIRTUAL)
+                # DEBUG: Avisar quando usa source default
+                if month_ref == 'Dezembro 2025':
+                    logger.debug(f"🔍 Usando source default para {self.bank_name}: {current_source.value}")
             
             # Verifica se deve pular esta transação
             if self.should_skip_transaction(col_b, valor if valor is not None else 0):
@@ -172,6 +205,7 @@ class CardProcessor(BaseProcessor):
                     source=current_source,
                     category=TransactionCategory.A_DEFINIR,
                     month_ref=month_ref,
+                    mes_comp=mes_comp,
                     raw_data={
                         "original_description": col_b,
                         "file_source": str(file_path),
