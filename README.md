@@ -2,6 +2,23 @@
 
 > **Sistema inteligente de automação financeira com 98.2% de precisão + Dashboard Interativo + Open Finance**
 
+---
+
+## ⚠️ **AVISO IMPORTANTE PARA NOVOS CHATS**
+
+**🛡️ PRESERVAÇÃO DA DOCUMENTAÇÃO**
+
+Este projeto possui documentação extensa e cuidadosamente organizada. **NÃO DELETE** pontos, seções ou informações da documentação existente a menos que seja **ESTRITAMENTE NECESSÁRIO** e solicitado explicitamente.
+
+**Diretrizes:**
+- ✅ **PODE:** Adicionar novas seções, atualizar informações desatualizadas, corrigir erros factuais
+- ❌ **NÃO PODE:** Remover seções existentes, resumir/condensar conteúdo, deletar informações históricas
+- 📚 **Referências:** [docs/README.md](docs/README.md), [docs/V2/README.md](docs/V2/README.md), [CHANGELOG.md](CHANGELOG.md)
+
+**Razão:** Informações são frequentemente removidas indevidamente durante atualizações, causando perda de contexto histórico e decisões técnicas importantes.
+
+---
+
 Sistema Python avançado que automatiza completamente o processamento de extratos bancários, cartões de crédito e PIX, utilizando machine learning para categorização inteligente, **integração Open Finance via Pluggy**, dashboard interativo com análise visual e categorização em lote, e gerando relatórios consolidados prontos para análise.
 
 [![Python](https://img.shields.io/badge/Python-3.13+-blue.svg)](https://python.org)

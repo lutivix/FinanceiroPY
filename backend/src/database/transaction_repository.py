@@ -10,6 +10,7 @@ from datetime import date, datetime
 import json
 
 from models import Transaction, TransactionSource, TransactionCategory
+from utils import DeduplicationHelper
 
 logger = logging.getLogger(__name__)
 
@@ -17,8 +18,11 @@ logger = logging.getLogger(__name__)
 class TransactionRepository:
     """Repositório para gerenciar transações no banco de dados."""
     
-    def __init__(self, db_path: Path):
+    def __init__(self, db_path: Path, enable_deduplication: bool = True):
         self.db_path = db_path
+        self.enable_deduplication = enable_deduplication
+        self.dedup_helper = DeduplicationHelper()
+        self.dedup_stats = {'checked': 0, 'duplicates_skipped': 0}
         self._ensure_table_exists()
     
     def _ensure_table_exists(self):
@@ -119,22 +123,93 @@ class TransactionRepository:
             logger.error(f"❌ Erro ao salvar transação: {e}")
             return False
     
-    def save_transactions(self, transactions: List[Transaction]) -> int:
+    def check_duplicate(self, transaction: Transaction) -> bool:
+        """
+        Verifica se uma transação já existe no banco (duplicata).
+        
+        Usa normalização de descrição para detectar duplicatas mesmo quando:
+        - Descrição tem datas (dd/mm) ou parcelas (x/y) variáveis
+        - Há pequenas diferenças de formatação
+        
+        Args:
+            transaction: Transação a verificar
+            
+        Returns:
+            True se já existe (duplicata), False se é nova
+        """
+        try:
+            with sqlite3.connect(self.db_path) as conn:
+                cursor = conn.cursor()
+                
+                # Normaliza descrição para comparação
+                desc_norm = self.dedup_helper.normalize_description_for_dedup(
+                    transaction.description
+                )
+                
+                # Busca transações com mesma data, valor aproximado e fonte
+                cursor.execute("""
+                    SELECT Descricao FROM lancamentos 
+                    WHERE Data = ? 
+                    AND ABS(Valor - ?) < 0.01
+                    AND UPPER(Fonte) = UPPER(?)
+                """, (
+                    transaction.date.isoformat(),
+                    float(transaction.amount),
+                    transaction.source.value
+                ))
+                
+                existing_descs = cursor.fetchall()
+                
+                # Compara descrições normalizadas
+                for (existing_desc,) in existing_descs:
+                    existing_norm = self.dedup_helper.normalize_description_for_dedup(
+                        existing_desc
+                    )
+                    if existing_norm == desc_norm:
+                        logger.debug(
+                            f"🔍 Duplicata detectada: '{transaction.description}' "
+                            f"vs '{existing_desc}'",
+                        )
+                        return True  # Duplicata encontrada
+                
+                return False  # Não é duplicata
+                
+        except Exception as e:
+            logger.warning(f"⚠️ Erro ao verificar duplicata: {e}")
+            return False  # Em caso de erro, assume que não é duplicata
+    
+    def save_transactions(self, transactions: List[Transaction], skip_duplicates: bool = None) -> int:
         """
         Salva múltiplas transações no banco.
         
         Args:
             transactions: Lista de transações
+            skip_duplicates: Se True, verifica duplicatas antes de inserir.
+                           Se None, usa a configuração do repositório (self.enable_deduplication)
             
         Returns:
             Número de transações salvas com sucesso
         """
+        # Determina se deve verificar duplicatas
+        should_check_dupes = skip_duplicates if skip_duplicates is not None else self.enable_deduplication
+        
         saved_count = 0
+        duplicates_count = 0
+        
         try:
             with sqlite3.connect(self.db_path) as conn:
                 cursor = conn.cursor()
                 
                 for transaction in transactions:
+                    # Verifica duplicata se habilitado
+                    if should_check_dupes:
+                        self.dedup_stats['checked'] += 1
+                        if self.check_duplicate(transaction):
+                            duplicates_count += 1
+                            self.dedup_stats['duplicates_skipped'] += 1
+                            logger.debug(f"⏭️  Duplicata ignorada: {transaction.description}")
+                            continue  # Pula esta transação
+                    
                     try:
                         cursor.execute("""
                             INSERT OR REPLACE INTO lancamentos 
@@ -157,7 +232,16 @@ class TransactionRepository:
                         logger.warning(f"⚠️ Erro ao salvar transação individual: {e}")
                 
                 conn.commit()
-                logger.info(f"✅ {saved_count}/{len(transactions)} transações salvas")
+                
+                # Log com estatísticas
+                if duplicates_count > 0:
+                    logger.info(
+                        f"✅ {saved_count}/{len(transactions)} transações salvas "
+                        f"({duplicates_count} duplicatas ignoradas)"
+                    )
+                else:
+                    logger.info(f"✅ {saved_count}/{len(transactions)} transações salvas")
+                    
         except Exception as e:
             logger.error(f"❌ Erro ao salvar transações em lote: {e}")
         
@@ -328,6 +412,19 @@ class TransactionRepository:
             logger.error(f"❌ Erro ao gerar resumo mensal: {e}")
         
         return summary
+    
+    def get_deduplication_stats(self) -> Dict[str, int]:
+        """
+        Retorna estatísticas de deduplicação da sessão atual.
+        
+        Returns:
+            Dicionário com 'checked' e 'duplicates_skipped'
+        """
+        return self.dedup_stats.copy()
+    
+    def reset_deduplication_stats(self):
+        """Reseta as estatísticas de deduplicação."""
+        self.dedup_stats = {'checked': 0, 'duplicates_skipped': 0}
     
     def get_stats(self) -> Dict[str, Any]:
         """
