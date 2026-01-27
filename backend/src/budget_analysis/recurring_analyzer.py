@@ -29,14 +29,14 @@ class RecurringAnalyzer:
     """
     
     def __init__(self, 
-                 min_months: int = 3,
+                 min_months: int = 6,
                  day_tolerance: int = 2,
                  person_mapper: PersonMapper = None):
         """
         Inicializa o analisador.
         
         Args:
-            min_months: Mínimo de meses para considerar recorrente (padrão: 3)
+            min_months: Mínimo de meses para considerar recorrente (padrão: 6)
             day_tolerance: Tolerância de dias para agrupar (padrão: ±2)
             person_mapper: Mapeador de pessoas (opcional)
         """
@@ -62,8 +62,8 @@ class RecurringAnalyzer:
         """
         logger.info(f"Analisando {len(transactions)} transações...")
         
-        # Filtra apenas despesas (valores negativos)
-        expenses = [t for t in transactions if t.amount < 0]
+        # Filtra apenas despesas (valores positivos = débitos)
+        expenses = [t for t in transactions if t.amount > 0]
         logger.info(f"Despesas para análise: {len(expenses)}")
         
         # Agrupa por chave de matching (categoria + descrição normalizada)
@@ -212,7 +212,7 @@ class RecurringAnalyzer:
             avg_amount = self._calculate_avg_amount(transactions)
             unique_months = self._count_unique_months(transactions)
             confidence = self._calculate_confidence(unique_months, months_analyzed)
-            person = self.person_mapper.get_person(source)
+            person = self.person_mapper.get_person(source, first.description)
             
             # Padrão mensal
             monthly_pattern = {}
@@ -228,7 +228,7 @@ class RecurringAnalyzer:
                 week_of_month=week,
                 source=source,
                 person=person,
-                occurrences=len(transactions),
+                occurrences=unique_months,  # Usa meses únicos, não total de transações
                 months_analyzed=months_analyzed,
                 confidence=confidence,
                 last_seen=max(t.date for t in transactions),

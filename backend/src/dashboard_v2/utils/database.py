@@ -200,3 +200,152 @@ def atualizar_categoria(rowid, nova_categoria):
     except Exception as e:
         print(f"❌ Erro ao atualizar categoria: {e}")
         return False
+
+def obter_orcamento_mais_recente():
+    """
+    Retorna o orçamento semanal mais recente do banco.
+    
+    Returns:
+        Dict com data de geração e dados do orçamento
+    """
+    try:
+        conn = sqlite3.connect(DB_PATH)
+        
+        # Busca data mais recente
+        query_date = "SELECT MAX(generated_at) FROM weekly_budgets"
+        latest_date = pd.read_sql_query(query_date, conn).iloc[0, 0]
+        
+        if not latest_date:
+            conn.close()
+            return None
+        
+        # Busca dados do orçamento
+        query_budgets = f"""
+        SELECT 
+            week_number,
+            category,
+            source,
+            person,
+            expected_amount,
+            is_recurring,
+            recurring_items
+        FROM weekly_budgets
+        WHERE generated_at = '{latest_date}'
+        ORDER BY week_number, category
+        """
+        
+        df = pd.read_sql_query(query_budgets, conn)
+        conn.close()
+        
+        return {
+            'generated_at': latest_date,
+            'budgets': df.to_dict('records')
+        }
+    
+    except Exception as e:
+        print(f"❌ Erro ao buscar orçamento: {e}")
+        return None
+
+
+def obter_resumo_orcamento_semanal():
+    """
+    Retorna resumo consolidado do orçamento por semana.
+    
+    Returns:
+        Dict com totais por semana, pessoa e categoria
+    """
+    try:
+        conn = sqlite3.connect(DB_PATH)
+        
+        # Busca data mais recente
+        query_date = "SELECT MAX(generated_at) FROM weekly_budgets"
+        latest_date = pd.read_sql_query(query_date, conn).iloc[0, 0]
+        
+        if not latest_date:
+            conn.close()
+            return {}
+        
+        # Resumo por semana
+        query = f"""
+        SELECT 
+            week_number,
+            person,
+            category,
+            SUM(expected_amount) as total
+        FROM weekly_budgets
+        WHERE generated_at = '{latest_date}'
+        GROUP BY week_number, person, category
+        ORDER BY week_number
+        """
+        
+        df = pd.read_sql_query(query, conn)
+        conn.close()
+        
+        # Organiza por semana
+        summary = {}
+        for week in df['week_number'].unique():
+            week_data = df[df['week_number'] == week]
+            summary[int(week)] = {
+                'total': week_data['total'].sum(),
+                'by_person': week_data.groupby('person')['total'].sum().to_dict(),
+                'by_category': week_data.groupby('category')['total'].sum().to_dict()
+            }
+        
+        return {
+            'generated_at': latest_date,
+            'summary': summary
+        }
+    
+    except Exception as e:
+        print(f"❌ Erro ao gerar resumo de orçamento: {e}")
+        return {}
+
+
+def obter_meses_orcamento_disponiveis():
+    """
+    Retorna lista de meses com orçamento disponível.
+    
+    Returns:
+        List de dicts com label e value para dropdown
+    """
+    try:
+        conn = sqlite3.connect(DB_PATH)
+        
+        query = """
+        SELECT DISTINCT generated_at
+        FROM weekly_budgets
+        ORDER BY generated_at DESC
+        """
+        
+        df = pd.read_sql_query(query, conn)
+        conn.close()
+        
+        if df.empty:
+            return [{'label': 'Nenhum orçamento disponível', 'value': 'none'}]
+        
+        meses = []
+        for date_str in df['generated_at']:
+            # Converte YYYY-MM-DD para formato legível
+            try:
+                date_obj = pd.to_datetime(date_str)
+                # Formato: 13 de Janeiro de 2026
+                label = date_obj.strftime('%d de %B de %Y')
+                # Traduz mês para português
+                meses_pt = {
+                    'January': 'Janeiro', 'February': 'Fevereiro', 'March': 'Março',
+                    'April': 'Abril', 'May': 'Maio', 'June': 'Junho',
+                    'July': 'Julho', 'August': 'Agosto', 'September': 'Setembro',
+                    'October': 'Outubro', 'November': 'Novembro', 'December': 'Dezembro'
+                }
+                for eng, pt in meses_pt.items():
+                    label = label.replace(eng, pt)
+                value = date_str
+                meses.append({'label': label, 'value': value})
+            except:
+                continue
+        
+        return meses if meses else [{'label': 'Atual', 'value': 'current'}]
+    
+    except Exception as e:
+        print(f"❌ Erro ao buscar meses de orçamento: {e}")
+        return [{'label': 'Atual', 'value': 'current'}]

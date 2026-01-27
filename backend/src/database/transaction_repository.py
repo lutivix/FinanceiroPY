@@ -302,10 +302,10 @@ class TransactionRepository:
             with sqlite3.connect(self.db_path) as conn:
                 cursor = conn.cursor()
                 cursor.execute("""
-                    SELECT id, date, description, amount, source, category, month_ref, raw_data, created_at, updated_at
+                    SELECT id, Data, Descricao, Valor, Fonte, Categoria, MesComp, raw_data, created_at, updated_at
                     FROM lancamentos 
-                    WHERE date BETWEEN ? AND ?
-                    ORDER BY date DESC, created_at DESC
+                    WHERE Data BETWEEN ? AND ?
+                    ORDER BY Data DESC, created_at DESC
                 """, (start_date.isoformat(), end_date.isoformat()))
                 
                 for row in cursor.fetchall():

@@ -117,10 +117,10 @@ class WeeklyBudgetCalculator:
         """
         budgets = []
         
-        # Filtra transações variáveis
+        # Filtra transações variáveis (valores positivos = débitos)
         variable_txns = [
             t for t in transactions 
-            if t.category in VARIABLE_CATEGORIES and t.amount < 0
+            if t.category in VARIABLE_CATEGORIES and t.amount > 0
         ]
         
         if not variable_txns:

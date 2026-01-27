@@ -22,12 +22,16 @@ from dashboard_v2.pages.dashboard import create_dashboard_page
 from dashboard_v2.pages.analytics import create_analytics_page
 from dashboard_v2.pages.transacoes import create_transacoes_page
 from dashboard_v2.pages.ideals import create_ideals_page
+from dashboard_v2.pages.budget import create_budget_page
 from dashboard_v2.utils.database import (
     carregar_transacoes, 
     obter_meses_disponiveis, 
     calcular_estatisticas,
     obter_categorias,
-    obter_fontes
+    obter_fontes,
+    obter_orcamento_mais_recente,
+    obter_resumo_orcamento_semanal,
+    obter_meses_orcamento_disponiveis
 )
 from dashboard_v2.utils.graficos import (
     criar_grafico_evolucao,
@@ -38,6 +42,7 @@ from dashboard_v2.utils.graficos import (
     criar_grafico_acumulado,
     criar_grafico_ideals_comparison
 )
+from dashboard_v2.callbacks.budget_callbacks import register_budget_callbacks
 
 # Inicializar app
 app = Dash(
@@ -100,6 +105,9 @@ app.layout = html.Div([
     ])
 ])
 
+# Registrar callbacks de Budget
+register_budget_callbacks(app)
+
 # ===== CALLBACKS =====
 
 @callback(
@@ -139,6 +147,8 @@ def display_page(pathname, mes_selecionado):
         return create_transacoes_page()
     elif pathname == '/ideals':
         return create_ideals_page()
+    elif pathname == '/budget':
+        return create_budget_page()
     else:  # Default: dashboard
         return create_dashboard_page(stats, df)
 
@@ -780,18 +790,31 @@ def health_check():
 # ===== MAIN =====
 if __name__ == '__main__':
     import os
+    from dashboard_v2.utils.database import DB_PATH
     
     # Configurações de ambiente
     DEBUG_MODE = os.getenv('DASH_DEBUG', 'False').lower() == 'true'
     PORT = int(os.getenv('DASH_PORT', '8052'))
     HOST = os.getenv('DASH_HOST', '0.0.0.0')
     
+    print("=" * 60)
     print(">> Iniciando Dashboard Financeiro v2.0...")
     print(f">> Acesse: http://localhost:{PORT}")
     print(">> Design: Dark Theme Professional")
     print(">> Paginas: Dashboard | Analytics | Transacoes | Ideals")
     print(f">> Modo: {'Desenvolvimento (DEBUG)' if DEBUG_MODE else 'Producao'}")
-    print("\n>> Desenvolvido com Dash + Plotly\n")
+    print(f">> Base Dir: {BASE_DIR}")
+    print(f">> DB Path: {DB_PATH}")
+    print(f">> DB Existe? {'SIM' if Path(DB_PATH).exists() else 'NAO'}")
+    print("\n>> Desenvolvido com Dash + Plotly")
+    print("=" * 60)
+    print()
+    
+    # Testar conexão do banco antes de iniciar
+    if not Path(DB_PATH).exists():
+        print(f"ERRO: Banco nao encontrado em: {DB_PATH}")
+        print("Configure a variavel DB_PATH ou ajuste a estrutura de pastas.")
+        sys.exit(1)
     
     app.run(
         host=HOST,
