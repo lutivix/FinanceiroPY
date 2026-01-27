@@ -1,0 +1,5894 @@
+{
+  "generated_at": "2026-01-13",
+  "recurring_transactions": {
+    "total": 135,
+    "items": [
+      {
+        "description": "IOF",
+        "category": "Cartão",
+        "person": "Usuário",
+        "source": "PIX",
+        "avg_amount": 19.08,
+        "typical_day": 3,
+        "week": 1,
+        "occurrences": 10,
+        "confidence": 0.83
+      },
+      {
+        "description": "IOF COMPRA INTERNACIONA",
+        "category": "Cartão",
+        "person": "Usuário",
+        "source": "Master Virtual",
+        "avg_amount": 2.23,
+        "typical_day": 4,
+        "week": 1,
+        "occurrences": 3,
+        "confidence": 0.25
+      },
+      {
+        "description": "PostoColorado",
+        "category": "Combustível",
+        "person": "Bia",
+        "source": "Visa Bia",
+        "avg_amount": 50.0,
+        "typical_day": 2,
+        "week": 1,
+        "occurrences": 3,
+        "confidence": 0.25
+      },
+      {
+        "description": "MICHELI FLORES",
+        "category": "Feira",
+        "person": "Bia",
+        "source": "Visa Bia",
+        "avg_amount": 43.0,
+        "typical_day": 4,
+        "week": 1,
+        "occurrences": 3,
+        "confidence": 0.25
+      },
+      {
+        "description": "BRAVO ES",
+        "category": "Lazer",
+        "person": "Bia",
+        "source": "Visa Bia",
+        "avg_amount": 5.91,
+        "typical_day": 5,
+        "week": 1,
+        "occurrences": 4,
+        "confidence": 0.33
+      },
+      {
+        "description": "IFD*IFOOD CLUB",
+        "category": "Lazer",
+        "person": "Desconhecido",
+        "source": "Visa Recorrente",
+        "avg_amount": 5.95,
+        "typical_day": 2,
+        "week": 1,
+        "occurrences": 6,
+        "confidence": 0.5
+      },
+      {
+        "description": "SUPERMERCADOS BH  02/02",
+        "category": "Mercado",
+        "person": "Usuário",
+        "source": "Master Físico",
+        "avg_amount": 199.57,
+        "typical_day": 7,
+        "week": 1,
+        "occurrences": 3,
+        "confidence": 0.25
+      },
+      {
+        "description": "PIX TRANSF EDITH F",
+        "category": "Nita",
+        "person": "Usuário",
+        "source": "PIX",
+        "avg_amount": 1418.37,
+        "typical_day": 7,
+        "week": 1,
+        "occurrences": 11,
+        "confidence": 0.92
+      },
+      {
+        "description": "AMAZONPRIMEBR",
+        "category": "Stream",
+        "person": "Desconhecido",
+        "source": "Visa Recorrente",
+        "avg_amount": 19.89,
+        "typical_day": 4,
+        "week": 1,
+        "occurrences": 12,
+        "confidence": 1.0
+      },
+      {
+        "description": "Uber UBER *ONE HELP.UB",
+        "category": "Transporte",
+        "person": "Usuário",
+        "source": "Master Recorrente",
+        "avg_amount": 19.89,
+        "typical_day": 4,
+        "week": 1,
+        "occurrences": 4,
+        "confidence": 0.33
+      },
+      {
+        "description": "DA  EDP ES 190015025294",
+        "category": "Utilidades",
+        "person": "Usuário",
+        "source": "PIX",
+        "avg_amount": 557.8,
+        "typical_day": 7,
+        "week": 1,
+        "occurrences": 12,
+        "confidence": 1.0
+      },
+      {
+        "description": "DEB AUTOR VERISURE ALARM",
+        "category": "Utilidades",
+        "person": "Usuário",
+        "source": "PIX",
+        "avg_amount": 234.21,
+        "typical_day": 6,
+        "week": 1,
+        "occurrences": 12,
+        "confidence": 1.0
+      },
+      {
+        "description": "PIX TRANSF RODRIGO",
+        "category": "Carro",
+        "person": "Usuário",
+        "source": "PIX",
+        "avg_amount": 37.5,
+        "typical_day": 11,
+        "week": 2,
+        "occurrences": 4,
+        "confidence": 0.33
+      },
+      {
+        "description": "PIX TRANSF BIANCA",
+        "category": "Casa",
+        "person": "Usuário",
+        "source": "PIX",
+        "avg_amount": 400.0,
+        "typical_day": 12,
+        "week": 2,
+        "occurrences": 3,
+        "confidence": 0.25
+      },
+      {
+        "description": "PIX TRANSF KENIA E",
+        "category": "Casa",
+        "person": "Usuário",
+        "source": "PIX",
+        "avg_amount": 195.5,
+        "typical_day": 14,
+        "week": 2,
+        "occurrences": 12,
+        "confidence": 1.0
+      },
+      {
+        "description": "COMERCIAL HELKER LTDA",
+        "category": "Combustível",
+        "person": "Bia",
+        "source": "Visa Bia",
+        "avg_amount": 24.87,
+        "typical_day": 14,
+        "week": 2,
+        "occurrences": 10,
+        "confidence": 0.83
+      },
+      {
+        "description": "AUTO POSTO R M",
+        "category": "Combustível",
+        "person": "Usuário",
+        "source": "Master Físico",
+        "avg_amount": 127.53,
+        "typical_day": 12,
+        "week": 2,
+        "occurrences": 6,
+        "confidence": 0.5
+      },
+      {
+        "description": "PAYGO",
+        "category": "Compras",
+        "person": "Bia",
+        "source": "Visa Bia",
+        "avg_amount": 13.52,
+        "typical_day": 12,
+        "week": 2,
+        "occurrences": 3,
+        "confidence": 0.25
+      },
+      {
+        "description": "PIX TRANSF PHILIPE",
+        "category": "Esporte",
+        "person": "Usuário",
+        "source": "PIX",
+        "avg_amount": 122.72,
+        "typical_day": 9,
+        "week": 2,
+        "occurrences": 10,
+        "confidence": 0.83
+      },
+      {
+        "description": "CAMILA OLIVE-CT ESPACO",
+        "category": "Estética",
+        "person": "Bia",
+        "source": "Visa Físico",
+        "avg_amount": 78.67,
+        "typical_day": 14,
+        "week": 2,
+        "occurrences": 4,
+        "confidence": 0.33
+      },
+      {
+        "description": "27535280Lorena",
+        "category": "Estética",
+        "person": "Usuário",
+        "source": "Master Físico",
+        "avg_amount": 102.5,
+        "typical_day": 8,
+        "week": 2,
+        "occurrences": 6,
+        "confidence": 0.5
+      },
+      {
+        "description": "PAG BOLETO MULTIVIX VILA VELHA  ENSINO",
+        "category": "Faculdade",
+        "person": "Usuário",
+        "source": "PIX",
+        "avg_amount": 1530.96,
+        "typical_day": 10,
+        "week": 2,
+        "occurrences": 4,
+        "confidence": 0.33
+      },
+      {
+        "description": "BRAVO ES",
+        "category": "Lazer",
+        "person": "Usuário",
+        "source": "Master Físico",
+        "avg_amount": 16.5,
+        "typical_day": 11,
+        "week": 2,
+        "occurrences": 5,
+        "confidence": 0.42
+      },
+      {
+        "description": "KATIAGOMESDE",
+        "category": "Lazer",
+        "person": "Usuário",
+        "source": "Master Físico",
+        "avg_amount": 49.28,
+        "typical_day": 13,
+        "week": 2,
+        "occurrences": 7,
+        "confidence": 0.58
+      },
+      {
+        "description": "CACAU SHOW",
+        "category": "Lazer",
+        "person": "Bia",
+        "source": "Visa Bia",
+        "avg_amount": 21.96,
+        "typical_day": 13,
+        "week": 2,
+        "occurrences": 4,
+        "confidence": 0.33
+      },
+      {
+        "description": "IFD*PROJETO FOOD LTDA",
+        "category": "Lazer",
+        "person": "Bia",
+        "source": "Visa Bia",
+        "avg_amount": 85.46,
+        "typical_day": 14,
+        "week": 2,
+        "occurrences": 3,
+        "confidence": 0.25
+      },
+      {
+        "description": "CARONE GAIVOTAS",
+        "category": "Mercado",
+        "person": "Bia",
+        "source": "Visa Bia",
+        "avg_amount": 296.83,
+        "typical_day": 11,
+        "week": 2,
+        "occurrences": 6,
+        "confidence": 0.5
+      },
+      {
+        "description": "CARONE GAIVO-CT   02/02",
+        "category": "Mercado",
+        "person": "Bia",
+        "source": "Visa Físico",
+        "avg_amount": 247.5,
+        "typical_day": 14,
+        "week": 2,
+        "occurrences": 4,
+        "confidence": 0.33
+      },
+      {
+        "description": "SUPERMERCADO-CT RIM",
+        "category": "Mercado",
+        "person": "Bia",
+        "source": "Visa Físico",
+        "avg_amount": 155.02,
+        "typical_day": 13,
+        "week": 2,
+        "occurrences": 3,
+        "confidence": 0.25
+      },
+      {
+        "description": "Casafruti das Americas",
+        "category": "Mercado",
+        "person": "Usuário",
+        "source": "Master Físico",
+        "avg_amount": 68.99,
+        "typical_day": 12,
+        "week": 2,
+        "occurrences": 4,
+        "confidence": 0.33
+      },
+      {
+        "description": "JIM.COM* HELKER DOCE",
+        "category": "Padaria",
+        "person": "Usuário",
+        "source": "Master Físico",
+        "avg_amount": 26.62,
+        "typical_day": 11,
+        "week": 2,
+        "occurrences": 3,
+        "confidence": 0.25
+      },
+      {
+        "description": "PADARIA E CONFEITARIA",
+        "category": "Padaria",
+        "person": "Usuário",
+        "source": "Master Físico",
+        "avg_amount": 12.21,
+        "typical_day": 13,
+        "week": 2,
+        "occurrences": 6,
+        "confidence": 0.5
+      },
+      {
+        "description": "HELKER DOCE TRADICAO",
+        "category": "Padaria",
+        "person": "Usuário",
+        "source": "Master Físico",
+        "avg_amount": 25.66,
+        "typical_day": 9,
+        "week": 2,
+        "occurrences": 3,
+        "confidence": 0.25
+      },
+      {
+        "description": "PADARIA JARDINS",
+        "category": "Padaria",
+        "person": "Bia",
+        "source": "Visa Bia",
+        "avg_amount": 25.54,
+        "typical_day": 14,
+        "week": 2,
+        "occurrences": 6,
+        "confidence": 0.5
+      },
+      {
+        "description": "SHOP CAO PET-CT TER LT",
+        "category": "Pet",
+        "person": "Mãe",
+        "source": "Visa Mae",
+        "avg_amount": 126.3,
+        "typical_day": 12,
+        "week": 2,
+        "occurrences": 6,
+        "confidence": 0.5
+      },
+      {
+        "description": "ITAU SEG AP PF     05/12",
+        "category": "Seguro",
+        "person": "Usuário",
+        "source": "PIX",
+        "avg_amount": 308.77,
+        "typical_day": 8,
+        "week": 2,
+        "occurrences": 4,
+        "confidence": 0.33
+      },
+      {
+        "description": "APPLE.COM/BILL",
+        "category": "Stream",
+        "person": "Bia",
+        "source": "Visa Bia",
+        "avg_amount": 37.34,
+        "typical_day": 12,
+        "week": 2,
+        "occurrences": 12,
+        "confidence": 1.0
+      },
+      {
+        "description": "NETFLIX ENTRETENIMENTO",
+        "category": "Stream",
+        "person": "Desconhecido",
+        "source": "Visa Recorrente",
+        "avg_amount": 59.9,
+        "typical_day": 13,
+        "week": 2,
+        "occurrences": 3,
+        "confidence": 0.25
+      },
+      {
+        "description": "NETFLIX.COM",
+        "category": "Stream",
+        "person": "Desconhecido",
+        "source": "Visa Recorrente",
+        "avg_amount": 59.9,
+        "typical_day": 13,
+        "week": 2,
+        "occurrences": 8,
+        "confidence": 0.67
+      },
+      {
+        "description": "PAG TIT INT 001",
+        "category": "Utilidades",
+        "person": "Usuário",
+        "source": "PIX",
+        "avg_amount": 127.72,
+        "typical_day": 10,
+        "week": 2,
+        "occurrences": 4,
+        "confidence": 0.33
+      },
+      {
+        "description": "DA  CESAN 07003994",
+        "category": "Utilidades",
+        "person": "Usuário",
+        "source": "PIX",
+        "avg_amount": 263.47,
+        "typical_day": 8,
+        "week": 2,
+        "occurrences": 12,
+        "confidence": 1.0
+      },
+      {
+        "description": "PAG BOLETO LOGA ADMINISTRACAO DE ATIVOS",
+        "category": "Utilidades",
+        "person": "Usuário",
+        "source": "PIX",
+        "avg_amount": 118.94,
+        "typical_day": 10,
+        "week": 2,
+        "occurrences": 3,
+        "confidence": 0.25
+      },
+      {
+        "description": "DELCI PEREIRA DA S06/06",
+        "category": "Betina",
+        "person": "Usuário",
+        "source": "Master Virtual",
+        "avg_amount": 256.8,
+        "typical_day": 19,
+        "week": 3,
+        "occurrences": 5,
+        "confidence": 0.42
+      },
+      {
+        "description": "DELCI PEREIRA DA  04/06",
+        "category": "Betina",
+        "person": "Bia",
+        "source": "Visa Virtual",
+        "avg_amount": 148.25,
+        "typical_day": 15,
+        "week": 3,
+        "occurrences": 3,
+        "confidence": 0.25
+      },
+      {
+        "description": "PHARMAPELE VILA VE06/06",
+        "category": "Betina",
+        "person": "Usuário",
+        "source": "Master Virtual",
+        "avg_amount": 301.7,
+        "typical_day": 19,
+        "week": 3,
+        "occurrences": 6,
+        "confidence": 0.5
+      },
+      {
+        "description": "PHARMIC           03/03",
+        "category": "Betina",
+        "person": "Bia",
+        "source": "Visa Virtual",
+        "avg_amount": 410.25,
+        "typical_day": 19,
+        "week": 3,
+        "occurrences": 3,
+        "confidence": 0.25
+      },
+      {
+        "description": "M. G. VILA VELHA C05/10",
+        "category": "Carro",
+        "person": "Usuário",
+        "source": "Master Físico",
+        "avg_amount": 130.19,
+        "typical_day": 19,
+        "week": 3,
+        "occurrences": 4,
+        "confidence": 0.33
+      },
+      {
+        "description": "LAVAJATO",
+        "category": "Carro",
+        "person": "Usuário",
+        "source": "Master Físico",
+        "avg_amount": 76.66,
+        "typical_day": 16,
+        "week": 3,
+        "occurrences": 3,
+        "confidence": 0.25
+      },
+      {
+        "description": "ANUIDADE DIFERENCI08/12",
+        "category": "Cartão",
+        "person": "Mãe",
+        "source": "Visa Mae",
+        "avg_amount": 31.0,
+        "typical_day": 19,
+        "week": 3,
+        "occurrences": 7,
+        "confidence": 0.58
+      },
+      {
+        "description": "ANUIDADE DIFERENCI08/12",
+        "category": "Cartão",
+        "person": "Bia",
+        "source": "Visa Bia",
+        "avg_amount": 30.5,
+        "typical_day": 19,
+        "week": 3,
+        "occurrences": 11,
+        "confidence": 0.92
+      },
+      {
+        "description": "ANUIDADE DIFERENCI08/12",
+        "category": "Cartão",
+        "person": "Bia",
+        "source": "Visa Físico",
+        "avg_amount": 61.0,
+        "typical_day": 19,
+        "week": 3,
+        "occurrences": 11,
+        "confidence": 0.92
+      },
+      {
+        "description": "GOLD ESQUADRIAS   06/06",
+        "category": "Cartão",
+        "person": "Usuário",
+        "source": "Master Físico",
+        "avg_amount": 124.2,
+        "typical_day": 19,
+        "week": 3,
+        "occurrences": 6,
+        "confidence": 0.5
+      },
+      {
+        "description": "VILA BOMBAS LTDA  05/05",
+        "category": "Casa",
+        "person": "Usuário",
+        "source": "Master Físico",
+        "avg_amount": 114.0,
+        "typical_day": 19,
+        "week": 3,
+        "occurrences": 5,
+        "confidence": 0.42
+      },
+      {
+        "description": "POSTO 2001",
+        "category": "Combustível",
+        "person": "Usuário",
+        "source": "Master Físico",
+        "avg_amount": 185.42,
+        "typical_day": 19,
+        "week": 3,
+        "occurrences": 6,
+        "confidence": 0.5
+      },
+      {
+        "description": "COMERCIAL HE-CT  LTDA",
+        "category": "Combustível",
+        "person": "Mãe",
+        "source": "Visa Mae",
+        "avg_amount": 120.0,
+        "typical_day": 21,
+        "week": 3,
+        "occurrences": 5,
+        "confidence": 0.42
+      },
+      {
+        "description": "MERCADOLIVRE*2PRODUTO",
+        "category": "Compras",
+        "person": "Usuário",
+        "source": "Master Recorrente",
+        "avg_amount": 158.43,
+        "typical_day": 18,
+        "week": 3,
+        "occurrences": 3,
+        "confidence": 0.25
+      },
+      {
+        "description": "ADMINISTRADORA",
+        "category": "Compras",
+        "person": "Bia",
+        "source": "Visa Bia",
+        "avg_amount": 11.13,
+        "typical_day": 19,
+        "week": 3,
+        "occurrences": 9,
+        "confidence": 0.75
+      },
+      {
+        "description": "E-LENS.COM.BR     05/06",
+        "category": "Compras",
+        "person": "Usuário",
+        "source": "Master Virtual",
+        "avg_amount": 144.86,
+        "typical_day": 19,
+        "week": 3,
+        "occurrences": 5,
+        "confidence": 0.42
+      },
+      {
+        "description": "MERCADOPAGO *PICHA04/12",
+        "category": "Compras",
+        "person": "Usuário",
+        "source": "Master Virtual",
+        "avg_amount": 76.2,
+        "typical_day": 18,
+        "week": 3,
+        "occurrences": 4,
+        "confidence": 0.33
+      },
+      {
+        "description": "12 FBO OTICAS DINI05/10",
+        "category": "Compras",
+        "person": "Bia",
+        "source": "Visa Físico",
+        "avg_amount": 133.9,
+        "typical_day": 19,
+        "week": 3,
+        "occurrences": 5,
+        "confidence": 0.42
+      },
+      {
+        "description": "PG *NANIBLU KSFIT 04/04",
+        "category": "Compras",
+        "person": "Bia",
+        "source": "Visa Virtual",
+        "avg_amount": 114.64,
+        "typical_day": 19,
+        "week": 3,
+        "occurrences": 3,
+        "confidence": 0.25
+      },
+      {
+        "description": "ACQUAMARE         03/03",
+        "category": "Compras",
+        "person": "Usuário",
+        "source": "Master Físico",
+        "avg_amount": 321.98,
+        "typical_day": 19,
+        "week": 3,
+        "occurrences": 3,
+        "confidence": 0.25
+      },
+      {
+        "description": "LOS NETO PAULO NUN06/06",
+        "category": "Datas",
+        "person": "Usuário",
+        "source": "Master Físico",
+        "avg_amount": 72.53,
+        "typical_day": 19,
+        "week": 3,
+        "occurrences": 5,
+        "confidence": 0.42
+      },
+      {
+        "description": "FRAGRANCE MAISON  05/05",
+        "category": "Datas",
+        "person": "Usuário",
+        "source": "Master Físico",
+        "avg_amount": 236.8,
+        "typical_day": 19,
+        "week": 3,
+        "occurrences": 7,
+        "confidence": 0.58
+      },
+      {
+        "description": "MLP    *MAGAZINELU06/06",
+        "category": "Datas",
+        "person": "Usuário",
+        "source": "Master Virtual",
+        "avg_amount": 93.3,
+        "typical_day": 19,
+        "week": 3,
+        "occurrences": 6,
+        "confidence": 0.5
+      },
+      {
+        "description": "CROSSFIT BRAVO",
+        "category": "Esporte",
+        "person": "Desconhecido",
+        "source": "Visa Recorrente",
+        "avg_amount": 217.52,
+        "typical_day": 17,
+        "week": 3,
+        "occurrences": 12,
+        "confidence": 1.0
+      },
+      {
+        "description": "PIX TRANSF RAFFAEL",
+        "category": "Esporte",
+        "person": "Usuário",
+        "source": "PIX",
+        "avg_amount": 394.28,
+        "typical_day": 21,
+        "week": 3,
+        "occurrences": 7,
+        "confidence": 0.58
+      },
+      {
+        "description": "MOVIMENT ACADEMIA 04/04",
+        "category": "Esporte",
+        "person": "Mãe",
+        "source": "Visa Mae",
+        "avg_amount": 209.9,
+        "typical_day": 19,
+        "week": 3,
+        "occurrences": 8,
+        "confidence": 0.67
+      },
+      {
+        "description": "PG *SUPLEY LABORA 03/03",
+        "category": "Esporte",
+        "person": "Bia",
+        "source": "Visa Virtual",
+        "avg_amount": 104.38,
+        "typical_day": 19,
+        "week": 3,
+        "occurrences": 3,
+        "confidence": 0.25
+      },
+      {
+        "description": "PIX TRANSF Kamilla20/09",
+        "category": "Esporte",
+        "person": "Usuário",
+        "source": "PIX",
+        "avg_amount": 955.55,
+        "typical_day": 21,
+        "week": 3,
+        "occurrences": 9,
+        "confidence": 0.75
+      },
+      {
+        "description": "PIX QRS PAGFACIL IP",
+        "category": "Estética",
+        "person": "Usuário",
+        "source": "PIX",
+        "avg_amount": 2.0,
+        "typical_day": 19,
+        "week": 3,
+        "occurrences": 11,
+        "confidence": 0.92
+      },
+      {
+        "description": "VICTORIA FREITAS  05/08",
+        "category": "Estética",
+        "person": "Bia",
+        "source": "Visa Físico",
+        "avg_amount": 698.75,
+        "typical_day": 19,
+        "week": 3,
+        "occurrences": 4,
+        "confidence": 0.33
+      },
+      {
+        "description": "VICTORIA FRE-CT   03/04",
+        "category": "Estética",
+        "person": "Bia",
+        "source": "Visa Físico",
+        "avg_amount": 652.41,
+        "typical_day": 19,
+        "week": 3,
+        "occurrences": 3,
+        "confidence": 0.25
+      },
+      {
+        "description": "SEMPRE BELA VV    03/03",
+        "category": "Estética",
+        "person": "Bia",
+        "source": "Visa Bia",
+        "avg_amount": 53.41,
+        "typical_day": 19,
+        "week": 3,
+        "occurrences": 3,
+        "confidence": 0.25
+      },
+      {
+        "description": "DROGASIL2867      01/03",
+        "category": "Farmácia",
+        "person": "Usuário",
+        "source": "Master Físico",
+        "avg_amount": 152.78,
+        "typical_day": 18,
+        "week": 3,
+        "occurrences": 4,
+        "confidence": 0.33
+      },
+      {
+        "description": "DROGASIL2867-CT   01/02",
+        "category": "Farmácia",
+        "person": "Mãe",
+        "source": "Visa Mae",
+        "avg_amount": 80.44,
+        "typical_day": 18,
+        "week": 3,
+        "occurrences": 12,
+        "confidence": 1.0
+      },
+      {
+        "description": "DROGARIA NOV*5201801/04",
+        "category": "Farmácia",
+        "person": "Usuário",
+        "source": "Master Virtual",
+        "avg_amount": 119.74,
+        "typical_day": 19,
+        "week": 3,
+        "occurrences": 7,
+        "confidence": 0.58
+      },
+      {
+        "description": "DROGASIL2867",
+        "category": "Farmácia",
+        "person": "Bia",
+        "source": "Visa Bia",
+        "avg_amount": 114.98,
+        "typical_day": 19,
+        "week": 3,
+        "occurrences": 7,
+        "confidence": 0.58
+      },
+      {
+        "description": "DROGARIAS PACHECO",
+        "category": "Farmácia",
+        "person": "Usuário",
+        "source": "Master Físico",
+        "avg_amount": 92.59,
+        "typical_day": 19,
+        "week": 3,
+        "occurrences": 5,
+        "confidence": 0.42
+      },
+      {
+        "description": "DROGARIA MINAS MAI03/03",
+        "category": "Farmácia",
+        "person": "Usuário",
+        "source": "Master Virtual",
+        "avg_amount": 103.74,
+        "typical_day": 19,
+        "week": 3,
+        "occurrences": 3,
+        "confidence": 0.25
+      },
+      {
+        "description": "AdautoXavier-CT",
+        "category": "Feira",
+        "person": "Bia",
+        "source": "Visa Físico",
+        "avg_amount": 61.33,
+        "typical_day": 15,
+        "week": 3,
+        "occurrences": 3,
+        "confidence": 0.25
+      },
+      {
+        "description": "PauloCesarNu-CT",
+        "category": "Feira",
+        "person": "Bia",
+        "source": "Visa Físico",
+        "avg_amount": 12.5,
+        "typical_day": 15,
+        "week": 3,
+        "occurrences": 4,
+        "confidence": 0.33
+      },
+      {
+        "description": "PAYPAL *IRACINGCOMM (USD 149.25)",
+        "category": "Hobby",
+        "person": "Desconhecido",
+        "source": "Visa Recorrente",
+        "avg_amount": 339.48,
+        "typical_day": 19,
+        "week": 3,
+        "occurrences": 3,
+        "confidence": 0.25
+      },
+      {
+        "description": "MICROSOFT-G130508996",
+        "category": "LF",
+        "person": "Desconhecido",
+        "source": "Visa Recorrente",
+        "avg_amount": 62.23,
+        "typical_day": 19,
+        "week": 3,
+        "occurrences": 12,
+        "confidence": 1.0
+      },
+      {
+        "description": "MagaluPay*KaBuM   07/10",
+        "category": "LF",
+        "person": "Usuário",
+        "source": "Master Virtual",
+        "avg_amount": 1116.86,
+        "typical_day": 19,
+        "week": 3,
+        "occurrences": 6,
+        "confidence": 0.5
+      },
+      {
+        "description": "MLP    *KaBuM -KaB06/10",
+        "category": "LF",
+        "person": "Usuário",
+        "source": "Master Virtual",
+        "avg_amount": 1081.42,
+        "typical_day": 19,
+        "week": 3,
+        "occurrences": 6,
+        "confidence": 0.5
+      },
+      {
+        "description": "PAYPAL *ATLASSIANUS (USD 35.00)",
+        "category": "LF",
+        "person": "Desconhecido",
+        "source": "Visa Recorrente",
+        "avg_amount": 237.56,
+        "typical_day": 19,
+        "week": 3,
+        "occurrences": 10,
+        "confidence": 0.83
+      },
+      {
+        "description": "IFD*TF ALIMENTOS E SER",
+        "category": "Lazer",
+        "person": "Usuário",
+        "source": "Master Físico",
+        "avg_amount": 73.08,
+        "typical_day": 17,
+        "week": 3,
+        "occurrences": 8,
+        "confidence": 0.67
+      },
+      {
+        "description": "IFD*IFOOD CLUB",
+        "category": "Lazer",
+        "person": "Usuário",
+        "source": "Master Físico",
+        "avg_amount": 5.95,
+        "typical_day": 17,
+        "week": 3,
+        "occurrences": 5,
+        "confidence": 0.42
+      },
+      {
+        "description": "BAR E RESTAURANTE PERF",
+        "category": "Lazer",
+        "person": "Usuário",
+        "source": "Master Físico",
+        "avg_amount": 157.29,
+        "typical_day": 17,
+        "week": 3,
+        "occurrences": 5,
+        "confidence": 0.42
+      },
+      {
+        "description": "IFD*projeto food ltda",
+        "category": "Lazer",
+        "person": "Usuário",
+        "source": "Master Físico",
+        "avg_amount": 135.61,
+        "typical_day": 20,
+        "week": 3,
+        "occurrences": 3,
+        "confidence": 0.25
+      },
+      {
+        "description": "CASAFRUTI DA-CT ERICAS",
+        "category": "Mercado",
+        "person": "Bia",
+        "source": "Visa Físico",
+        "avg_amount": 176.32,
+        "typical_day": 17,
+        "week": 3,
+        "occurrences": 5,
+        "confidence": 0.42
+      },
+      {
+        "description": "CASAFRUTI DAS AMERICAS",
+        "category": "Mercado",
+        "person": "Bia",
+        "source": "Visa Bia",
+        "avg_amount": 128.41,
+        "typical_day": 20,
+        "week": 3,
+        "occurrences": 11,
+        "confidence": 0.92
+      },
+      {
+        "description": "SUPERMERCADO PERIM",
+        "category": "Mercado",
+        "person": "Bia",
+        "source": "Visa Bia",
+        "avg_amount": 225.09,
+        "typical_day": 20,
+        "week": 3,
+        "occurrences": 7,
+        "confidence": 0.58
+      },
+      {
+        "description": "GALERIA DOS PAES",
+        "category": "Padaria",
+        "person": "Bia",
+        "source": "Visa Bia",
+        "avg_amount": 11.36,
+        "typical_day": 16,
+        "week": 3,
+        "occurrences": 8,
+        "confidence": 0.67
+      },
+      {
+        "description": "HELKER DOCES E CONFEI",
+        "category": "Padaria",
+        "person": "Usuário",
+        "source": "Master Físico",
+        "avg_amount": 22.0,
+        "typical_day": 16,
+        "week": 3,
+        "occurrences": 8,
+        "confidence": 0.67
+      },
+      {
+        "description": "LEVEI UM BOLO",
+        "category": "Padaria",
+        "person": "Usuário",
+        "source": "Master Físico",
+        "avg_amount": 71.37,
+        "typical_day": 20,
+        "week": 3,
+        "occurrences": 3,
+        "confidence": 0.25
+      },
+      {
+        "description": "ANA PAULA AMBROSIO ALM",
+        "category": "Padaria",
+        "person": "Usuário",
+        "source": "Master Físico",
+        "avg_amount": 13.46,
+        "typical_day": 16,
+        "week": 3,
+        "occurrences": 6,
+        "confidence": 0.5
+      },
+      {
+        "description": "ANA PAULA AMBROSIO ALM",
+        "category": "Padaria",
+        "person": "Bia",
+        "source": "Visa Bia",
+        "avg_amount": 10.17,
+        "typical_day": 19,
+        "week": 3,
+        "occurrences": 4,
+        "confidence": 0.33
+      },
+      {
+        "description": "PIX TRANSF LEILANE",
+        "category": "Pet",
+        "person": "Usuário",
+        "source": "PIX",
+        "avg_amount": 137.5,
+        "typical_day": 16,
+        "week": 3,
+        "occurrences": 3,
+        "confidence": 0.25
+      },
+      {
+        "description": "ROSIVALDO ALVES DE NO",
+        "category": "Pet",
+        "person": "Bia",
+        "source": "Visa Bia",
+        "avg_amount": 81.84,
+        "typical_day": 15,
+        "week": 3,
+        "occurrences": 4,
+        "confidence": 0.33
+      },
+      {
+        "description": "55195054Adelaide  03/04",
+        "category": "Pet",
+        "person": "Usuário",
+        "source": "Master Físico",
+        "avg_amount": 322.83,
+        "typical_day": 20,
+        "week": 3,
+        "occurrences": 5,
+        "confidence": 0.42
+      },
+      {
+        "description": "ONCOPET           05/05",
+        "category": "Pet",
+        "person": "Usuário",
+        "source": "Master Físico",
+        "avg_amount": 204.16,
+        "typical_day": 19,
+        "week": 3,
+        "occurrences": 5,
+        "confidence": 0.42
+      },
+      {
+        "description": "EVO*Animales      04/04",
+        "category": "Pet",
+        "person": "Usuário",
+        "source": "Master Físico",
+        "avg_amount": 207.0,
+        "typical_day": 19,
+        "week": 3,
+        "occurrences": 5,
+        "confidence": 0.42
+      },
+      {
+        "description": "SOS HOSP VETERINAR02/02",
+        "category": "Pet",
+        "person": "Usuário",
+        "source": "Master Físico",
+        "avg_amount": 358.49,
+        "typical_day": 19,
+        "week": 3,
+        "occurrences": 4,
+        "confidence": 0.33
+      },
+      {
+        "description": "CONSULTORIO ODONTO05/05",
+        "category": "Saúde",
+        "person": "Usuário",
+        "source": "Master Físico",
+        "avg_amount": 250.0,
+        "typical_day": 19,
+        "week": 3,
+        "occurrences": 5,
+        "confidence": 0.42
+      },
+      {
+        "description": "METLIFE SEGUROS",
+        "category": "Seguro",
+        "person": "Usuário",
+        "source": "Master Recorrente",
+        "avg_amount": 333.18,
+        "typical_day": 20,
+        "week": 3,
+        "occurrences": 8,
+        "confidence": 0.67
+      },
+      {
+        "description": "APPLE.COM/BILL",
+        "category": "Stream",
+        "person": "Usuário",
+        "source": "Master Recorrente",
+        "avg_amount": 119.78,
+        "typical_day": 21,
+        "week": 3,
+        "occurrences": 12,
+        "confidence": 1.0
+      },
+      {
+        "description": "Amazon Prime Canais",
+        "category": "Stream",
+        "person": "Desconhecido",
+        "source": "Visa Recorrente",
+        "avg_amount": 24.9,
+        "typical_day": 18,
+        "week": 3,
+        "occurrences": 4,
+        "confidence": 0.33
+      },
+      {
+        "description": "Paramount+",
+        "category": "Stream",
+        "person": "Desconhecido",
+        "source": "Visa Recorrente",
+        "avg_amount": 27.89,
+        "typical_day": 15,
+        "week": 3,
+        "occurrences": 3,
+        "confidence": 0.25
+      },
+      {
+        "description": "UBER * PENDING",
+        "category": "Transporte",
+        "person": "Desconhecido",
+        "source": "Visa Recorrente",
+        "avg_amount": 16.74,
+        "typical_day": 17,
+        "week": 3,
+        "occurrences": 12,
+        "confidence": 1.0
+      },
+      {
+        "description": "PIX QRS CLARO",
+        "category": "Utilidades",
+        "person": "Usuário",
+        "source": "PIX",
+        "avg_amount": 103.51,
+        "typical_day": 17,
+        "week": 3,
+        "occurrences": 3,
+        "confidence": 0.25
+      },
+      {
+        "description": "DA  CLARO CELULAR  38828",
+        "category": "Utilidades",
+        "person": "Usuário",
+        "source": "PIX",
+        "avg_amount": 302.8,
+        "typical_day": 16,
+        "week": 3,
+        "occurrences": 10,
+        "confidence": 0.83
+      },
+      {
+        "description": "PIX QRS DEPARTAMENT",
+        "category": "Carro",
+        "person": "Usuário",
+        "source": "PIX",
+        "avg_amount": 479.74,
+        "typical_day": 22,
+        "week": 4,
+        "occurrences": 3,
+        "confidence": 0.25
+      },
+      {
+        "description": "Marcosdemagalhaes",
+        "category": "Carro",
+        "person": "Usuário",
+        "source": "Master Físico",
+        "avg_amount": 136.66,
+        "typical_day": 27,
+        "week": 4,
+        "occurrences": 3,
+        "confidence": 0.25
+      },
+      {
+        "description": "CONECTA",
+        "category": "Casa",
+        "person": "Usuário",
+        "source": "Master Físico",
+        "avg_amount": 97.51,
+        "typical_day": 24,
+        "week": 4,
+        "occurrences": 4,
+        "confidence": 0.33
+      },
+      {
+        "description": "PIX TRANSF JACO MI",
+        "category": "Casa",
+        "person": "Usuário",
+        "source": "PIX",
+        "avg_amount": 275.0,
+        "typical_day": 22,
+        "week": 4,
+        "occurrences": 3,
+        "confidence": 0.25
+      },
+      {
+        "description": "AUTO POSTO 2001 LTDA",
+        "category": "Combustível",
+        "person": "Usuário",
+        "source": "Master Físico",
+        "avg_amount": 169.98,
+        "typical_day": 26,
+        "week": 4,
+        "occurrences": 3,
+        "confidence": 0.25
+      },
+      {
+        "description": "MLP*KaBuM KaBuM   03/10",
+        "category": "Compras",
+        "person": "Bia",
+        "source": "Visa Virtual",
+        "avg_amount": 121.08,
+        "typical_day": 25,
+        "week": 4,
+        "occurrences": 3,
+        "confidence": 0.25
+      },
+      {
+        "description": "PIX TRANSF KELEN C",
+        "category": "Datas",
+        "person": "Usuário",
+        "source": "PIX",
+        "avg_amount": 245.25,
+        "typical_day": 22,
+        "week": 4,
+        "occurrences": 4,
+        "confidence": 0.33
+      },
+      {
+        "description": "CROSSFIT BRAVO",
+        "category": "Esporte",
+        "person": "Usuário",
+        "source": "Master Recorrente",
+        "avg_amount": 217.55,
+        "typical_day": 23,
+        "week": 4,
+        "occurrences": 12,
+        "confidence": 1.0
+      },
+      {
+        "description": "52247051VINICIUS",
+        "category": "Estética",
+        "person": "Usuário",
+        "source": "Master Físico",
+        "avg_amount": 78.88,
+        "typical_day": 26,
+        "week": 4,
+        "occurrences": 9,
+        "confidence": 0.75
+      },
+      {
+        "description": "CAMILA OLIVEIRA ESPACO",
+        "category": "Estética",
+        "person": "Bia",
+        "source": "Visa Bia",
+        "avg_amount": 100.25,
+        "typical_day": 26,
+        "week": 4,
+        "occurrences": 5,
+        "confidence": 0.42
+      },
+      {
+        "description": "ADAUTOXAVIER",
+        "category": "Feira",
+        "person": "Bia",
+        "source": "Visa Bia",
+        "avg_amount": 56.71,
+        "typical_day": 22,
+        "week": 4,
+        "occurrences": 5,
+        "confidence": 0.42
+      },
+      {
+        "description": "SOLIMAR LUIZ HELMER 153",
+        "category": "Feira",
+        "person": "Bia",
+        "source": "Visa Bia",
+        "avg_amount": 29.8,
+        "typical_day": 22,
+        "week": 4,
+        "occurrences": 3,
+        "confidence": 0.25
+      },
+      {
+        "description": "VIRTUAL RACING SCHOOL (USD 4.99)",
+        "category": "Hobby",
+        "person": "Desconhecido",
+        "source": "Visa Recorrente",
+        "avg_amount": 26.55,
+        "typical_day": 24,
+        "week": 4,
+        "occurrences": 10,
+        "confidence": 0.83
+      },
+      {
+        "description": "IFOOD CLUB",
+        "category": "Lazer",
+        "person": "Bia",
+        "source": "Visa Bia",
+        "avg_amount": 6.75,
+        "typical_day": 23,
+        "week": 4,
+        "occurrences": 5,
+        "confidence": 0.42
+      },
+      {
+        "description": "UNIVERSIDADE DO ACAI",
+        "category": "Lazer",
+        "person": "Bia",
+        "source": "Visa Bia",
+        "avg_amount": 10.0,
+        "typical_day": 22,
+        "week": 4,
+        "occurrences": 6,
+        "confidence": 0.5
+      },
+      {
+        "description": "IFD*IFOOD CLUB",
+        "category": "Lazer",
+        "person": "Bia",
+        "source": "Visa Bia",
+        "avg_amount": 5.95,
+        "typical_day": 23,
+        "week": 4,
+        "occurrences": 7,
+        "confidence": 0.58
+      },
+      {
+        "description": "SUPERMERCADOS PERIM",
+        "category": "Mercado",
+        "person": "Bia",
+        "source": "Visa Bia",
+        "avg_amount": 987.65,
+        "typical_day": 22,
+        "week": 4,
+        "occurrences": 12,
+        "confidence": 1.0
+      },
+      {
+        "description": "PADARIA E CONFEITARIA",
+        "category": "Padaria",
+        "person": "Bia",
+        "source": "Visa Bia",
+        "avg_amount": 18.12,
+        "typical_day": 24,
+        "week": 4,
+        "occurrences": 3,
+        "confidence": 0.25
+      },
+      {
+        "description": "COBASI VILA VELHA",
+        "category": "Pet",
+        "person": "Bia",
+        "source": "Visa Bia",
+        "avg_amount": 127.52,
+        "typical_day": 24,
+        "week": 4,
+        "occurrences": 4,
+        "confidence": 0.33
+      },
+      {
+        "description": "COBASI VILA VELHA",
+        "category": "Pet",
+        "person": "Usuário",
+        "source": "Master Físico",
+        "avg_amount": 127.9,
+        "typical_day": 23,
+        "week": 4,
+        "occurrences": 3,
+        "confidence": 0.25
+      },
+      {
+        "description": "PAYPAL *DISNEYPLUS",
+        "category": "Stream",
+        "person": "Desconhecido",
+        "source": "Visa Recorrente",
+        "avg_amount": 63.4,
+        "typical_day": 27,
+        "week": 4,
+        "occurrences": 8,
+        "confidence": 0.67
+      },
+      {
+        "description": "J E L ACADEMIA IT",
+        "category": "Esporte",
+        "person": "Desconhecido",
+        "source": "Visa Recorrente",
+        "avg_amount": 181.62,
+        "typical_day": 29,
+        "week": 5,
+        "occurrences": 11,
+        "confidence": 0.92
+      }
+    ]
+  },
+  "weekly_budgets": {
+    "total_budgets": 172,
+    "monthly_total": 35262.77,
+    "by_week": [
+      {
+        "week": 1,
+        "week_days": "1-7",
+        "total_expected": 4461.9,
+        "by_person": {
+          "Usuário": 3342.15,
+          "Bia": 898.91,
+          "Desconhecido": 30.84,
+          "Mãe": 190.0
+        },
+        "by_category": {
+          "Utilidades": 792.01,
+          "Lazer": 201.86,
+          "Stream": 19.89,
+          "Nita": 1418.37,
+          "Cartão": 21.31,
+          "Mercado": 832.57,
+          "Feira": 43.0,
+          "Combustível": 568.0,
+          "Transporte": 19.89,
+          "Compras": 486.0,
+          "Padaria": 59.0
+        },
+        "budgets": [
+          {
+            "week": 1,
+            "week_days": "1-7",
+            "category": "Utilidades",
+            "source": "PIX",
+            "person": "Usuário",
+            "expected_amount": 792.01,
+            "recurring_items": [
+              "DA  EDP ES 190015025294",
+              "DEB AUTOR VERISURE ALARM"
+            ],
+            "is_variable": false,
+            "calculation_method": "recurring"
+          },
+          {
+            "week": 1,
+            "week_days": "1-7",
+            "category": "Lazer",
+            "source": "Visa Bia",
+            "person": "Bia",
+            "expected_amount": 45.91,
+            "recurring_items": [
+              "BRAVO ES"
+            ],
+            "is_variable": true,
+            "calculation_method": "mixed"
+          },
+          {
+            "week": 1,
+            "week_days": "1-7",
+            "category": "Stream",
+            "source": "Visa Recorrente",
+            "person": "Desconhecido",
+            "expected_amount": 19.89,
+            "recurring_items": [
+              "AMAZONPRIMEBR"
+            ],
+            "is_variable": false,
+            "calculation_method": "recurring"
+          },
+          {
+            "week": 1,
+            "week_days": "1-7",
+            "category": "Nita",
+            "source": "PIX",
+            "person": "Usuário",
+            "expected_amount": 1418.37,
+            "recurring_items": [
+              "PIX TRANSF EDITH F"
+            ],
+            "is_variable": false,
+            "calculation_method": "recurring"
+          },
+          {
+            "week": 1,
+            "week_days": "1-7",
+            "category": "Cartão",
+            "source": "PIX",
+            "person": "Usuário",
+            "expected_amount": 19.08,
+            "recurring_items": [
+              "IOF"
+            ],
+            "is_variable": false,
+            "calculation_method": "recurring"
+          },
+          {
+            "week": 1,
+            "week_days": "1-7",
+            "category": "Mercado",
+            "source": "Master Físico",
+            "person": "Usuário",
+            "expected_amount": 340.57,
+            "recurring_items": [
+              "SUPERMERCADOS BH  02/02"
+            ],
+            "is_variable": true,
+            "calculation_method": "mixed"
+          },
+          {
+            "week": 1,
+            "week_days": "1-7",
+            "category": "Cartão",
+            "source": "Master Virtual",
+            "person": "Usuário",
+            "expected_amount": 2.23,
+            "recurring_items": [
+              "IOF COMPRA INTERNACIONA"
+            ],
+            "is_variable": false,
+            "calculation_method": "recurring"
+          },
+          {
+            "week": 1,
+            "week_days": "1-7",
+            "category": "Feira",
+            "source": "Visa Bia",
+            "person": "Bia",
+            "expected_amount": 43.0,
+            "recurring_items": [
+              "MICHELI FLORES"
+            ],
+            "is_variable": false,
+            "calculation_method": "recurring"
+          },
+          {
+            "week": 1,
+            "week_days": "1-7",
+            "category": "Combustível",
+            "source": "Visa Bia",
+            "person": "Bia",
+            "expected_amount": 86.0,
+            "recurring_items": [
+              "PostoColorado"
+            ],
+            "is_variable": true,
+            "calculation_method": "mixed"
+          },
+          {
+            "week": 1,
+            "week_days": "1-7",
+            "category": "Lazer",
+            "source": "Visa Recorrente",
+            "person": "Desconhecido",
+            "expected_amount": 10.95,
+            "recurring_items": [
+              "IFD*IFOOD CLUB"
+            ],
+            "is_variable": true,
+            "calculation_method": "mixed"
+          },
+          {
+            "week": 1,
+            "week_days": "1-7",
+            "category": "Transporte",
+            "source": "Master Recorrente",
+            "person": "Usuário",
+            "expected_amount": 19.89,
+            "recurring_items": [
+              "Uber UBER *ONE HELP.UB"
+            ],
+            "is_variable": false,
+            "calculation_method": "recurring"
+          },
+          {
+            "week": 1,
+            "week_days": "1-7",
+            "category": "Mercado",
+            "source": "Visa Mae",
+            "person": "Mãe",
+            "expected_amount": 70,
+            "recurring_items": [],
+            "is_variable": true,
+            "calculation_method": "average"
+          },
+          {
+            "week": 1,
+            "week_days": "1-7",
+            "category": "Mercado",
+            "source": "Visa Físico",
+            "person": "Bia",
+            "expected_amount": 177,
+            "recurring_items": [],
+            "is_variable": true,
+            "calculation_method": "average"
+          },
+          {
+            "week": 1,
+            "week_days": "1-7",
+            "category": "Lazer",
+            "source": "Master Físico",
+            "person": "Usuário",
+            "expected_amount": 74,
+            "recurring_items": [],
+            "is_variable": true,
+            "calculation_method": "average"
+          },
+          {
+            "week": 1,
+            "week_days": "1-7",
+            "category": "Compras",
+            "source": "Master Recorrente",
+            "person": "Usuário",
+            "expected_amount": 85,
+            "recurring_items": [],
+            "is_variable": true,
+            "calculation_method": "average"
+          },
+          {
+            "week": 1,
+            "week_days": "1-7",
+            "category": "Compras",
+            "source": "Visa Virtual",
+            "person": "Bia",
+            "expected_amount": 98,
+            "recurring_items": [],
+            "is_variable": true,
+            "calculation_method": "average"
+          },
+          {
+            "week": 1,
+            "week_days": "1-7",
+            "category": "Lazer",
+            "source": "PIX",
+            "person": "Usuário",
+            "expected_amount": 71,
+            "recurring_items": [],
+            "is_variable": true,
+            "calculation_method": "average"
+          },
+          {
+            "week": 1,
+            "week_days": "1-7",
+            "category": "Padaria",
+            "source": "Master Físico",
+            "person": "Usuário",
+            "expected_amount": 18,
+            "recurring_items": [],
+            "is_variable": true,
+            "calculation_method": "average"
+          },
+          {
+            "week": 1,
+            "week_days": "1-7",
+            "category": "Compras",
+            "source": "Visa Bia",
+            "person": "Bia",
+            "expected_amount": 33,
+            "recurring_items": [],
+            "is_variable": true,
+            "calculation_method": "average"
+          },
+          {
+            "week": 1,
+            "week_days": "1-7",
+            "category": "Mercado",
+            "source": "Visa Bia",
+            "person": "Bia",
+            "expected_amount": 145,
+            "recurring_items": [],
+            "is_variable": true,
+            "calculation_method": "average"
+          },
+          {
+            "week": 1,
+            "week_days": "1-7",
+            "category": "Compras",
+            "source": "Master Virtual",
+            "person": "Usuário",
+            "expected_amount": 123,
+            "recurring_items": [],
+            "is_variable": true,
+            "calculation_method": "average"
+          },
+          {
+            "week": 1,
+            "week_days": "1-7",
+            "category": "Compras",
+            "source": "Master Físico",
+            "person": "Usuário",
+            "expected_amount": 76,
+            "recurring_items": [],
+            "is_variable": true,
+            "calculation_method": "average"
+          },
+          {
+            "week": 1,
+            "week_days": "1-7",
+            "category": "Combustível",
+            "source": "Visa Físico",
+            "person": "Bia",
+            "expected_amount": 159,
+            "recurring_items": [],
+            "is_variable": true,
+            "calculation_method": "average"
+          },
+          {
+            "week": 1,
+            "week_days": "1-7",
+            "category": "Padaria",
+            "source": "Visa Físico",
+            "person": "Bia",
+            "expected_amount": 19,
+            "recurring_items": [],
+            "is_variable": true,
+            "calculation_method": "average"
+          },
+          {
+            "week": 1,
+            "week_days": "1-7",
+            "category": "Padaria",
+            "source": "Visa Bia",
+            "person": "Bia",
+            "expected_amount": 22,
+            "recurring_items": [],
+            "is_variable": true,
+            "calculation_method": "average"
+          },
+          {
+            "week": 1,
+            "week_days": "1-7",
+            "category": "Combustível",
+            "source": "Master Físico",
+            "person": "Usuário",
+            "expected_amount": 203,
+            "recurring_items": [],
+            "is_variable": true,
+            "calculation_method": "average"
+          },
+          {
+            "week": 1,
+            "week_days": "1-7",
+            "category": "Compras",
+            "source": "Visa Físico",
+            "person": "Bia",
+            "expected_amount": 71,
+            "recurring_items": [],
+            "is_variable": true,
+            "calculation_method": "average"
+          },
+          {
+            "week": 1,
+            "week_days": "1-7",
+            "category": "Combustível",
+            "source": "Visa Mae",
+            "person": "Mãe",
+            "expected_amount": 120,
+            "recurring_items": [],
+            "is_variable": true,
+            "calculation_method": "average"
+          },
+          {
+            "week": 1,
+            "week_days": "1-7",
+            "category": "Mercado",
+            "source": "PIX",
+            "person": "Usuário",
+            "expected_amount": 100,
+            "recurring_items": [],
+            "is_variable": true,
+            "calculation_method": "average"
+          }
+        ]
+      },
+      {
+        "week": 2,
+        "week_days": "8-14",
+        "total_expected": 6701.68,
+        "by_person": {
+          "Usuário": 4520.87,
+          "Bia": 1866.71,
+          "Mãe": 194.3,
+          "Desconhecido": 119.8
+        },
+        "by_category": {
+          "Utilidades": 510.13,
+          "Casa": 595.5,
+          "Padaria": 126.03,
+          "Esporte": 122.72,
+          "Compras": 500.52,
+          "Stream": 157.14,
+          "Mercado": 1624.34,
+          "Pet": 126.3,
+          "Faculdade": 1530.96,
+          "Estética": 181.17,
+          "Carro": 37.5,
+          "Lazer": 483.2,
+          "Combustível": 397.4,
+          "Seguro": 308.77
+        },
+        "budgets": [
+          {
+            "week": 2,
+            "week_days": "8-14",
+            "category": "Utilidades",
+            "source": "PIX",
+            "person": "Usuário",
+            "expected_amount": 510.13,
+            "recurring_items": [
+              "PAG TIT INT 001",
+              "DA  CESAN 07003994",
+              "PAG BOLETO LOGA ADMINISTRACAO DE ATIVOS"
+            ],
+            "is_variable": false,
+            "calculation_method": "recurring"
+          },
+          {
+            "week": 2,
+            "week_days": "8-14",
+            "category": "Casa",
+            "source": "PIX",
+            "person": "Usuário",
+            "expected_amount": 595.5,
+            "recurring_items": [
+              "PIX TRANSF BIANCA",
+              "PIX TRANSF KENIA E"
+            ],
+            "is_variable": false,
+            "calculation_method": "recurring"
+          },
+          {
+            "week": 2,
+            "week_days": "8-14",
+            "category": "Padaria",
+            "source": "Master Físico",
+            "person": "Usuário",
+            "expected_amount": 80.49,
+            "recurring_items": [
+              "JIM.COM* HELKER DOCE",
+              "PADARIA E CONFEITARIA",
+              "HELKER DOCE TRADICAO"
+            ],
+            "is_variable": true,
+            "calculation_method": "mixed"
+          },
+          {
+            "week": 2,
+            "week_days": "8-14",
+            "category": "Esporte",
+            "source": "PIX",
+            "person": "Usuário",
+            "expected_amount": 122.72,
+            "recurring_items": [
+              "PIX TRANSF PHILIPE"
+            ],
+            "is_variable": false,
+            "calculation_method": "recurring"
+          },
+          {
+            "week": 2,
+            "week_days": "8-14",
+            "category": "Compras",
+            "source": "Visa Bia",
+            "person": "Bia",
+            "expected_amount": 24.52,
+            "recurring_items": [
+              "PAYGO"
+            ],
+            "is_variable": true,
+            "calculation_method": "mixed"
+          },
+          {
+            "week": 2,
+            "week_days": "8-14",
+            "category": "Stream",
+            "source": "Visa Bia",
+            "person": "Bia",
+            "expected_amount": 37.34,
+            "recurring_items": [
+              "APPLE.COM/BILL"
+            ],
+            "is_variable": false,
+            "calculation_method": "recurring"
+          },
+          {
+            "week": 2,
+            "week_days": "8-14",
+            "category": "Mercado",
+            "source": "Visa Bia",
+            "person": "Bia",
+            "expected_amount": 468.83,
+            "recurring_items": [
+              "CARONE GAIVOTAS"
+            ],
+            "is_variable": true,
+            "calculation_method": "mixed"
+          },
+          {
+            "week": 2,
+            "week_days": "8-14",
+            "category": "Pet",
+            "source": "Visa Mae",
+            "person": "Mãe",
+            "expected_amount": 126.3,
+            "recurring_items": [
+              "SHOP CAO PET-CT TER LT"
+            ],
+            "is_variable": false,
+            "calculation_method": "recurring"
+          },
+          {
+            "week": 2,
+            "week_days": "8-14",
+            "category": "Faculdade",
+            "source": "PIX",
+            "person": "Usuário",
+            "expected_amount": 1530.96,
+            "recurring_items": [
+              "PAG BOLETO MULTIVIX VILA VELHA  ENSINO"
+            ],
+            "is_variable": false,
+            "calculation_method": "recurring"
+          },
+          {
+            "week": 2,
+            "week_days": "8-14",
+            "category": "Estética",
+            "source": "Visa Físico",
+            "person": "Bia",
+            "expected_amount": 78.67,
+            "recurring_items": [
+              "CAMILA OLIVE-CT ESPACO"
+            ],
+            "is_variable": false,
+            "calculation_method": "recurring"
+          },
+          {
+            "week": 2,
+            "week_days": "8-14",
+            "category": "Carro",
+            "source": "PIX",
+            "person": "Usuário",
+            "expected_amount": 37.5,
+            "recurring_items": [
+              "PIX TRANSF RODRIGO"
+            ],
+            "is_variable": false,
+            "calculation_method": "recurring"
+          },
+          {
+            "week": 2,
+            "week_days": "8-14",
+            "category": "Lazer",
+            "source": "Master Físico",
+            "person": "Usuário",
+            "expected_amount": 210.78,
+            "recurring_items": [
+              "BRAVO ES",
+              "KATIAGOMESDE"
+            ],
+            "is_variable": true,
+            "calculation_method": "mixed"
+          },
+          {
+            "week": 2,
+            "week_days": "8-14",
+            "category": "Stream",
+            "source": "Visa Recorrente",
+            "person": "Desconhecido",
+            "expected_amount": 119.8,
+            "recurring_items": [
+              "NETFLIX ENTRETENIMENTO",
+              "NETFLIX.COM"
+            ],
+            "is_variable": false,
+            "calculation_method": "recurring"
+          },
+          {
+            "week": 2,
+            "week_days": "8-14",
+            "category": "Combustível",
+            "source": "Visa Bia",
+            "person": "Bia",
+            "expected_amount": 68.87,
+            "recurring_items": [
+              "COMERCIAL HELKER LTDA"
+            ],
+            "is_variable": true,
+            "calculation_method": "mixed"
+          },
+          {
+            "week": 2,
+            "week_days": "8-14",
+            "category": "Mercado",
+            "source": "Visa Físico",
+            "person": "Bia",
+            "expected_amount": 612.52,
+            "recurring_items": [
+              "CARONE GAIVO-CT   02/02",
+              "SUPERMERCADO-CT RIM"
+            ],
+            "is_variable": true,
+            "calculation_method": "mixed"
+          },
+          {
+            "week": 2,
+            "week_days": "8-14",
+            "category": "Lazer",
+            "source": "Visa Bia",
+            "person": "Bia",
+            "expected_amount": 147.42,
+            "recurring_items": [
+              "CACAU SHOW",
+              "IFD*PROJETO FOOD LTDA"
+            ],
+            "is_variable": true,
+            "calculation_method": "mixed"
+          },
+          {
+            "week": 2,
+            "week_days": "8-14",
+            "category": "Combustível",
+            "source": "Master Físico",
+            "person": "Usuário",
+            "expected_amount": 295.53,
+            "recurring_items": [
+              "AUTO POSTO R M"
+            ],
+            "is_variable": true,
+            "calculation_method": "mixed"
+          },
+          {
+            "week": 2,
+            "week_days": "8-14",
+            "category": "Estética",
+            "source": "Master Físico",
+            "person": "Usuário",
+            "expected_amount": 102.5,
+            "recurring_items": [
+              "27535280Lorena"
+            ],
+            "is_variable": false,
+            "calculation_method": "recurring"
+          },
+          {
+            "week": 2,
+            "week_days": "8-14",
+            "category": "Padaria",
+            "source": "Visa Bia",
+            "person": "Bia",
+            "expected_amount": 35.54,
+            "recurring_items": [
+              "PADARIA JARDINS"
+            ],
+            "is_variable": true,
+            "calculation_method": "mixed"
+          },
+          {
+            "week": 2,
+            "week_days": "8-14",
+            "category": "Mercado",
+            "source": "Master Físico",
+            "person": "Usuário",
+            "expected_amount": 169.99,
+            "recurring_items": [
+              "Casafruti das Americas"
+            ],
+            "is_variable": true,
+            "calculation_method": "mixed"
+          },
+          {
+            "week": 2,
+            "week_days": "8-14",
+            "category": "Seguro",
+            "source": "PIX",
+            "person": "Usuário",
+            "expected_amount": 308.77,
+            "recurring_items": [
+              "ITAU SEG AP PF     05/12"
+            ],
+            "is_variable": false,
+            "calculation_method": "recurring"
+          },
+          {
+            "week": 2,
+            "week_days": "8-14",
+            "category": "Padaria",
+            "source": "Visa Físico",
+            "person": "Bia",
+            "expected_amount": 10,
+            "recurring_items": [],
+            "is_variable": true,
+            "calculation_method": "average"
+          },
+          {
+            "week": 2,
+            "week_days": "8-14",
+            "category": "Compras",
+            "source": "Master Virtual",
+            "person": "Usuário",
+            "expected_amount": 48,
+            "recurring_items": [],
+            "is_variable": true,
+            "calculation_method": "average"
+          },
+          {
+            "week": 2,
+            "week_days": "8-14",
+            "category": "Compras",
+            "source": "Visa Físico",
+            "person": "Bia",
+            "expected_amount": 123,
+            "recurring_items": [],
+            "is_variable": true,
+            "calculation_method": "average"
+          },
+          {
+            "week": 2,
+            "week_days": "8-14",
+            "category": "Mercado",
+            "source": "Visa Mae",
+            "person": "Mãe",
+            "expected_amount": 68,
+            "recurring_items": [],
+            "is_variable": true,
+            "calculation_method": "average"
+          },
+          {
+            "week": 2,
+            "week_days": "8-14",
+            "category": "Compras",
+            "source": "Visa Virtual",
+            "person": "Bia",
+            "expected_amount": 212,
+            "recurring_items": [],
+            "is_variable": true,
+            "calculation_method": "average"
+          },
+          {
+            "week": 2,
+            "week_days": "8-14",
+            "category": "Compras",
+            "source": "PIX",
+            "person": "Usuário",
+            "expected_amount": 68,
+            "recurring_items": [],
+            "is_variable": true,
+            "calculation_method": "average"
+          },
+          {
+            "week": 2,
+            "week_days": "8-14",
+            "category": "Mercado",
+            "source": "PIX",
+            "person": "Usuário",
+            "expected_amount": 305,
+            "recurring_items": [],
+            "is_variable": true,
+            "calculation_method": "average"
+          },
+          {
+            "week": 2,
+            "week_days": "8-14",
+            "category": "Combustível",
+            "source": "Visa Físico",
+            "person": "Bia",
+            "expected_amount": 33,
+            "recurring_items": [],
+            "is_variable": true,
+            "calculation_method": "average"
+          },
+          {
+            "week": 2,
+            "week_days": "8-14",
+            "category": "Compras",
+            "source": "Master Físico",
+            "person": "Usuário",
+            "expected_amount": 25,
+            "recurring_items": [],
+            "is_variable": true,
+            "calculation_method": "average"
+          },
+          {
+            "week": 2,
+            "week_days": "8-14",
+            "category": "Lazer",
+            "source": "PIX",
+            "person": "Usuário",
+            "expected_amount": 110,
+            "recurring_items": [],
+            "is_variable": true,
+            "calculation_method": "average"
+          },
+          {
+            "week": 2,
+            "week_days": "8-14",
+            "category": "Lazer",
+            "source": "Visa Físico",
+            "person": "Bia",
+            "expected_amount": 15,
+            "recurring_items": [],
+            "is_variable": true,
+            "calculation_method": "average"
+          }
+        ]
+      },
+      {
+        "week": 3,
+        "week_days": "15-21",
+        "total_expected": 16346.32,
+        "by_person": {
+          "Usuário": 10282.04,
+          "Mãe": 647.34,
+          "Bia": 4490.62,
+          "Desconhecido": 926.32
+        },
+        "by_category": {
+          "Lazer": 717.93,
+          "Farmácia": 664.27,
+          "Mercado": 1429.82,
+          "Pet": 1311.82,
+          "Esporte": 1881.63,
+          "Transporte": 16.74,
+          "Compras": 1747.14,
+          "Combustível": 834.42,
+          "Stream": 172.57,
+          "Cartão": 246.7,
+          "LF": 2498.07,
+          "Utilidades": 406.31,
+          "Estética": 1406.57,
+          "Padaria": 175.36,
+          "Seguro": 333.18,
+          "Betina": 1117.0,
+          "Casa": 114.0,
+          "Carro": 206.85,
+          "Datas": 402.63,
+          "Feira": 73.83,
+          "Saúde": 250.0,
+          "Hobby": 339.48
+        },
+        "budgets": [
+          {
+            "week": 3,
+            "week_days": "15-21",
+            "category": "Lazer",
+            "source": "Master Físico",
+            "person": "Usuário",
+            "expected_amount": 448.93,
+            "recurring_items": [
+              "IFD*TF ALIMENTOS E SER",
+              "IFD*IFOOD CLUB",
+              "BAR E RESTAURANTE PERF",
+              "IFD*projeto food ltda"
+            ],
+            "is_variable": true,
+            "calculation_method": "mixed"
+          },
+          {
+            "week": 3,
+            "week_days": "15-21",
+            "category": "Farmácia",
+            "source": "Master Físico",
+            "person": "Usuário",
+            "expected_amount": 245.37,
+            "recurring_items": [
+              "DROGASIL2867      01/03",
+              "DROGARIAS PACHECO"
+            ],
+            "is_variable": false,
+            "calculation_method": "recurring"
+          },
+          {
+            "week": 3,
+            "week_days": "15-21",
+            "category": "Farmácia",
+            "source": "Visa Mae",
+            "person": "Mãe",
+            "expected_amount": 80.44,
+            "recurring_items": [
+              "DROGASIL2867-CT   01/02"
+            ],
+            "is_variable": false,
+            "calculation_method": "recurring"
+          },
+          {
+            "week": 3,
+            "week_days": "15-21",
+            "category": "Mercado",
+            "source": "Visa Físico",
+            "person": "Bia",
+            "expected_amount": 326.32,
+            "recurring_items": [
+              "CASAFRUTI DA-CT ERICAS"
+            ],
+            "is_variable": true,
+            "calculation_method": "mixed"
+          },
+          {
+            "week": 3,
+            "week_days": "15-21",
+            "category": "Farmácia",
+            "source": "Master Virtual",
+            "person": "Usuário",
+            "expected_amount": 223.48,
+            "recurring_items": [
+              "DROGARIA NOV*5201801/04",
+              "DROGARIA MINAS MAI03/03"
+            ],
+            "is_variable": false,
+            "calculation_method": "recurring"
+          },
+          {
+            "week": 3,
+            "week_days": "15-21",
+            "category": "Pet",
+            "source": "PIX",
+            "person": "Usuário",
+            "expected_amount": 137.5,
+            "recurring_items": [
+              "PIX TRANSF LEILANE"
+            ],
+            "is_variable": false,
+            "calculation_method": "recurring"
+          },
+          {
+            "week": 3,
+            "week_days": "15-21",
+            "category": "Esporte",
+            "source": "Visa Recorrente",
+            "person": "Desconhecido",
+            "expected_amount": 217.52,
+            "recurring_items": [
+              "CROSSFIT BRAVO"
+            ],
+            "is_variable": false,
+            "calculation_method": "recurring"
+          },
+          {
+            "week": 3,
+            "week_days": "15-21",
+            "category": "Mercado",
+            "source": "Visa Bia",
+            "person": "Bia",
+            "expected_amount": 823.5,
+            "recurring_items": [
+              "CASAFRUTI DAS AMERICAS",
+              "SUPERMERCADO PERIM"
+            ],
+            "is_variable": true,
+            "calculation_method": "mixed"
+          },
+          {
+            "week": 3,
+            "week_days": "15-21",
+            "category": "Transporte",
+            "source": "Visa Recorrente",
+            "person": "Desconhecido",
+            "expected_amount": 16.74,
+            "recurring_items": [
+              "UBER * PENDING"
+            ],
+            "is_variable": false,
+            "calculation_method": "recurring"
+          },
+          {
+            "week": 3,
+            "week_days": "15-21",
+            "category": "Compras",
+            "source": "Master Recorrente",
+            "person": "Usuário",
+            "expected_amount": 293.43,
+            "recurring_items": [
+              "MERCADOLIVRE*2PRODUTO"
+            ],
+            "is_variable": true,
+            "calculation_method": "mixed"
+          },
+          {
+            "week": 3,
+            "week_days": "15-21",
+            "category": "Farmácia",
+            "source": "Visa Bia",
+            "person": "Bia",
+            "expected_amount": 114.98,
+            "recurring_items": [
+              "DROGASIL2867"
+            ],
+            "is_variable": false,
+            "calculation_method": "recurring"
+          },
+          {
+            "week": 3,
+            "week_days": "15-21",
+            "category": "Combustível",
+            "source": "Master Físico",
+            "person": "Usuário",
+            "expected_amount": 284.42,
+            "recurring_items": [
+              "POSTO 2001"
+            ],
+            "is_variable": true,
+            "calculation_method": "mixed"
+          },
+          {
+            "week": 3,
+            "week_days": "15-21",
+            "category": "Stream",
+            "source": "Master Recorrente",
+            "person": "Usuário",
+            "expected_amount": 119.78,
+            "recurring_items": [
+              "APPLE.COM/BILL"
+            ],
+            "is_variable": false,
+            "calculation_method": "recurring"
+          },
+          {
+            "week": 3,
+            "week_days": "15-21",
+            "category": "Pet",
+            "source": "Visa Bia",
+            "person": "Bia",
+            "expected_amount": 81.84,
+            "recurring_items": [
+              "ROSIVALDO ALVES DE NO"
+            ],
+            "is_variable": false,
+            "calculation_method": "recurring"
+          },
+          {
+            "week": 3,
+            "week_days": "15-21",
+            "category": "Compras",
+            "source": "Visa Bia",
+            "person": "Bia",
+            "expected_amount": 56.13,
+            "recurring_items": [
+              "ADMINISTRADORA"
+            ],
+            "is_variable": true,
+            "calculation_method": "mixed"
+          },
+          {
+            "week": 3,
+            "week_days": "15-21",
+            "category": "Cartão",
+            "source": "Visa Mae",
+            "person": "Mãe",
+            "expected_amount": 31.0,
+            "recurring_items": [
+              "ANUIDADE DIFERENCI08/12"
+            ],
+            "is_variable": false,
+            "calculation_method": "recurring"
+          },
+          {
+            "week": 3,
+            "week_days": "15-21",
+            "category": "Cartão",
+            "source": "Visa Bia",
+            "person": "Bia",
+            "expected_amount": 30.5,
+            "recurring_items": [
+              "ANUIDADE DIFERENCI08/12"
+            ],
+            "is_variable": false,
+            "calculation_method": "recurring"
+          },
+          {
+            "week": 3,
+            "week_days": "15-21",
+            "category": "Cartão",
+            "source": "Visa Físico",
+            "person": "Bia",
+            "expected_amount": 61.0,
+            "recurring_items": [
+              "ANUIDADE DIFERENCI08/12"
+            ],
+            "is_variable": false,
+            "calculation_method": "recurring"
+          },
+          {
+            "week": 3,
+            "week_days": "15-21",
+            "category": "LF",
+            "source": "Visa Recorrente",
+            "person": "Desconhecido",
+            "expected_amount": 299.79,
+            "recurring_items": [
+              "MICROSOFT-G130508996",
+              "PAYPAL *ATLASSIANUS (USD 35.00)"
+            ],
+            "is_variable": false,
+            "calculation_method": "recurring"
+          },
+          {
+            "week": 3,
+            "week_days": "15-21",
+            "category": "Utilidades",
+            "source": "PIX",
+            "person": "Usuário",
+            "expected_amount": 406.31,
+            "recurring_items": [
+              "PIX QRS CLARO",
+              "DA  CLARO CELULAR  38828"
+            ],
+            "is_variable": false,
+            "calculation_method": "recurring"
+          },
+          {
+            "week": 3,
+            "week_days": "15-21",
+            "category": "Esporte",
+            "source": "PIX",
+            "person": "Usuário",
+            "expected_amount": 1349.83,
+            "recurring_items": [
+              "PIX TRANSF RAFFAEL",
+              "PIX TRANSF Kamilla20/09"
+            ],
+            "is_variable": false,
+            "calculation_method": "recurring"
+          },
+          {
+            "week": 3,
+            "week_days": "15-21",
+            "category": "Combustível",
+            "source": "Visa Mae",
+            "person": "Mãe",
+            "expected_amount": 240.0,
+            "recurring_items": [
+              "COMERCIAL HE-CT  LTDA"
+            ],
+            "is_variable": true,
+            "calculation_method": "mixed"
+          },
+          {
+            "week": 3,
+            "week_days": "15-21",
+            "category": "Estética",
+            "source": "PIX",
+            "person": "Usuário",
+            "expected_amount": 2.0,
+            "recurring_items": [
+              "PIX QRS PAGFACIL IP"
+            ],
+            "is_variable": false,
+            "calculation_method": "recurring"
+          },
+          {
+            "week": 3,
+            "week_days": "15-21",
+            "category": "Stream",
+            "source": "Visa Recorrente",
+            "person": "Desconhecido",
+            "expected_amount": 52.79,
+            "recurring_items": [
+              "Amazon Prime Canais",
+              "Paramount+"
+            ],
+            "is_variable": false,
+            "calculation_method": "recurring"
+          },
+          {
+            "week": 3,
+            "week_days": "15-21",
+            "category": "Padaria",
+            "source": "Visa Bia",
+            "person": "Bia",
+            "expected_amount": 33.53,
+            "recurring_items": [
+              "GALERIA DOS PAES",
+              "ANA PAULA AMBROSIO ALM"
+            ],
+            "is_variable": true,
+            "calculation_method": "mixed"
+          },
+          {
+            "week": 3,
+            "week_days": "15-21",
+            "category": "Seguro",
+            "source": "Master Recorrente",
+            "person": "Usuário",
+            "expected_amount": 333.18,
+            "recurring_items": [
+              "METLIFE SEGUROS"
+            ],
+            "is_variable": false,
+            "calculation_method": "recurring"
+          },
+          {
+            "week": 3,
+            "week_days": "15-21",
+            "category": "LF",
+            "source": "Master Virtual",
+            "person": "Usuário",
+            "expected_amount": 2198.28,
+            "recurring_items": [
+              "MagaluPay*KaBuM   07/10",
+              "MLP    *KaBuM -KaB06/10"
+            ],
+            "is_variable": false,
+            "calculation_method": "recurring"
+          },
+          {
+            "week": 3,
+            "week_days": "15-21",
+            "category": "Cartão",
+            "source": "Master Físico",
+            "person": "Usuário",
+            "expected_amount": 124.2,
+            "recurring_items": [
+              "GOLD ESQUADRIAS   06/06"
+            ],
+            "is_variable": false,
+            "calculation_method": "recurring"
+          },
+          {
+            "week": 3,
+            "week_days": "15-21",
+            "category": "Betina",
+            "source": "Master Virtual",
+            "person": "Usuário",
+            "expected_amount": 558.5,
+            "recurring_items": [
+              "DELCI PEREIRA DA S06/06",
+              "PHARMAPELE VILA VE06/06"
+            ],
+            "is_variable": false,
+            "calculation_method": "recurring"
+          },
+          {
+            "week": 3,
+            "week_days": "15-21",
+            "category": "Casa",
+            "source": "Master Físico",
+            "person": "Usuário",
+            "expected_amount": 114.0,
+            "recurring_items": [
+              "VILA BOMBAS LTDA  05/05"
+            ],
+            "is_variable": false,
+            "calculation_method": "recurring"
+          },
+          {
+            "week": 3,
+            "week_days": "15-21",
+            "category": "Compras",
+            "source": "Master Virtual",
+            "person": "Usuário",
+            "expected_amount": 356.06,
+            "recurring_items": [
+              "E-LENS.COM.BR     05/06",
+              "MERCADOPAGO *PICHA04/12"
+            ],
+            "is_variable": true,
+            "calculation_method": "mixed"
+          },
+          {
+            "week": 3,
+            "week_days": "15-21",
+            "category": "Carro",
+            "source": "Master Físico",
+            "person": "Usuário",
+            "expected_amount": 206.85,
+            "recurring_items": [
+              "M. G. VILA VELHA C05/10",
+              "LAVAJATO"
+            ],
+            "is_variable": false,
+            "calculation_method": "recurring"
+          },
+          {
+            "week": 3,
+            "week_days": "15-21",
+            "category": "Pet",
+            "source": "Master Físico",
+            "person": "Usuário",
+            "expected_amount": 1092.48,
+            "recurring_items": [
+              "55195054Adelaide  03/04",
+              "ONCOPET           05/05",
+              "EVO*Animales      04/04",
+              "SOS HOSP VETERINAR02/02"
+            ],
+            "is_variable": false,
+            "calculation_method": "recurring"
+          },
+          {
+            "week": 3,
+            "week_days": "15-21",
+            "category": "Compras",
+            "source": "Visa Físico",
+            "person": "Bia",
+            "expected_amount": 198.9,
+            "recurring_items": [
+              "12 FBO OTICAS DINI05/10"
+            ],
+            "is_variable": true,
+            "calculation_method": "mixed"
+          },
+          {
+            "week": 3,
+            "week_days": "15-21",
+            "category": "Estética",
+            "source": "Visa Físico",
+            "person": "Bia",
+            "expected_amount": 1351.16,
+            "recurring_items": [
+              "VICTORIA FREITAS  05/08",
+              "VICTORIA FRE-CT   03/04"
+            ],
+            "is_variable": false,
+            "calculation_method": "recurring"
+          },
+          {
+            "week": 3,
+            "week_days": "15-21",
+            "category": "Esporte",
+            "source": "Visa Mae",
+            "person": "Mãe",
+            "expected_amount": 209.9,
+            "recurring_items": [
+              "MOVIMENT ACADEMIA 04/04"
+            ],
+            "is_variable": false,
+            "calculation_method": "recurring"
+          },
+          {
+            "week": 3,
+            "week_days": "15-21",
+            "category": "Betina",
+            "source": "Visa Virtual",
+            "person": "Bia",
+            "expected_amount": 558.5,
+            "recurring_items": [
+              "DELCI PEREIRA DA  04/06",
+              "PHARMIC           03/03"
+            ],
+            "is_variable": false,
+            "calculation_method": "recurring"
+          },
+          {
+            "week": 3,
+            "week_days": "15-21",
+            "category": "Esporte",
+            "source": "Visa Virtual",
+            "person": "Bia",
+            "expected_amount": 104.38,
+            "recurring_items": [
+              "PG *SUPLEY LABORA 03/03"
+            ],
+            "is_variable": false,
+            "calculation_method": "recurring"
+          },
+          {
+            "week": 3,
+            "week_days": "15-21",
+            "category": "Datas",
+            "source": "Master Físico",
+            "person": "Usuário",
+            "expected_amount": 309.33,
+            "recurring_items": [
+              "LOS NETO PAULO NUN06/06",
+              "FRAGRANCE MAISON  05/05"
+            ],
+            "is_variable": false,
+            "calculation_method": "recurring"
+          },
+          {
+            "week": 3,
+            "week_days": "15-21",
+            "category": "Datas",
+            "source": "Master Virtual",
+            "person": "Usuário",
+            "expected_amount": 93.3,
+            "recurring_items": [
+              "MLP    *MAGAZINELU06/06"
+            ],
+            "is_variable": false,
+            "calculation_method": "recurring"
+          },
+          {
+            "week": 3,
+            "week_days": "15-21",
+            "category": "Compras",
+            "source": "Visa Virtual",
+            "person": "Bia",
+            "expected_amount": 272.64,
+            "recurring_items": [
+              "PG *NANIBLU KSFIT 04/04"
+            ],
+            "is_variable": true,
+            "calculation_method": "mixed"
+          },
+          {
+            "week": 3,
+            "week_days": "15-21",
+            "category": "Estética",
+            "source": "Visa Bia",
+            "person": "Bia",
+            "expected_amount": 53.41,
+            "recurring_items": [
+              "SEMPRE BELA VV    03/03"
+            ],
+            "is_variable": false,
+            "calculation_method": "recurring"
+          },
+          {
+            "week": 3,
+            "week_days": "15-21",
+            "category": "Feira",
+            "source": "Visa Físico",
+            "person": "Bia",
+            "expected_amount": 73.83,
+            "recurring_items": [
+              "AdautoXavier-CT",
+              "PauloCesarNu-CT"
+            ],
+            "is_variable": false,
+            "calculation_method": "recurring"
+          },
+          {
+            "week": 3,
+            "week_days": "15-21",
+            "category": "Padaria",
+            "source": "Master Físico",
+            "person": "Usuário",
+            "expected_amount": 130.83,
+            "recurring_items": [
+              "HELKER DOCES E CONFEI",
+              "LEVEI UM BOLO",
+              "ANA PAULA AMBROSIO ALM"
+            ],
+            "is_variable": true,
+            "calculation_method": "mixed"
+          },
+          {
+            "week": 3,
+            "week_days": "15-21",
+            "category": "Saúde",
+            "source": "Master Físico",
+            "person": "Usuário",
+            "expected_amount": 250.0,
+            "recurring_items": [
+              "CONSULTORIO ODONTO05/05"
+            ],
+            "is_variable": false,
+            "calculation_method": "recurring"
+          },
+          {
+            "week": 3,
+            "week_days": "15-21",
+            "category": "Compras",
+            "source": "Master Físico",
+            "person": "Usuário",
+            "expected_amount": 449.98,
+            "recurring_items": [
+              "ACQUAMARE         03/03"
+            ],
+            "is_variable": true,
+            "calculation_method": "mixed"
+          },
+          {
+            "week": 3,
+            "week_days": "15-21",
+            "category": "Hobby",
+            "source": "Visa Recorrente",
+            "person": "Desconhecido",
+            "expected_amount": 339.48,
+            "recurring_items": [
+              "PAYPAL *IRACINGCOMM (USD 149.25)"
+            ],
+            "is_variable": false,
+            "calculation_method": "recurring"
+          },
+          {
+            "week": 3,
+            "week_days": "15-21",
+            "category": "Compras",
+            "source": "PIX",
+            "person": "Usuário",
+            "expected_amount": 120,
+            "recurring_items": [],
+            "is_variable": true,
+            "calculation_method": "average"
+          },
+          {
+            "week": 3,
+            "week_days": "15-21",
+            "category": "Mercado",
+            "source": "Visa Mae",
+            "person": "Mãe",
+            "expected_amount": 86,
+            "recurring_items": [],
+            "is_variable": true,
+            "calculation_method": "average"
+          },
+          {
+            "week": 3,
+            "week_days": "15-21",
+            "category": "Lazer",
+            "source": "Visa Bia",
+            "person": "Bia",
+            "expected_amount": 66,
+            "recurring_items": [],
+            "is_variable": true,
+            "calculation_method": "average"
+          },
+          {
+            "week": 3,
+            "week_days": "15-21",
+            "category": "Combustível",
+            "source": "Visa Bia",
+            "person": "Bia",
+            "expected_amount": 60,
+            "recurring_items": [],
+            "is_variable": true,
+            "calculation_method": "average"
+          },
+          {
+            "week": 3,
+            "week_days": "15-21",
+            "category": "Lazer",
+            "source": "Visa Virtual",
+            "person": "Bia",
+            "expected_amount": 75,
+            "recurring_items": [],
+            "is_variable": true,
+            "calculation_method": "average"
+          },
+          {
+            "week": 3,
+            "week_days": "15-21",
+            "category": "Lazer",
+            "source": "Visa Físico",
+            "person": "Bia",
+            "expected_amount": 88,
+            "recurring_items": [],
+            "is_variable": true,
+            "calculation_method": "average"
+          },
+          {
+            "week": 3,
+            "week_days": "15-21",
+            "category": "Padaria",
+            "source": "Visa Físico",
+            "person": "Bia",
+            "expected_amount": 11,
+            "recurring_items": [],
+            "is_variable": true,
+            "calculation_method": "average"
+          },
+          {
+            "week": 3,
+            "week_days": "15-21",
+            "category": "Mercado",
+            "source": "Master Físico",
+            "person": "Usuário",
+            "expected_amount": 194,
+            "recurring_items": [],
+            "is_variable": true,
+            "calculation_method": "average"
+          },
+          {
+            "week": 3,
+            "week_days": "15-21",
+            "category": "Combustível",
+            "source": "Visa Físico",
+            "person": "Bia",
+            "expected_amount": 50,
+            "recurring_items": [],
+            "is_variable": true,
+            "calculation_method": "average"
+          },
+          {
+            "week": 3,
+            "week_days": "15-21",
+            "category": "Combustível",
+            "source": "PIX",
+            "person": "Usuário",
+            "expected_amount": 200,
+            "recurring_items": [],
+            "is_variable": true,
+            "calculation_method": "average"
+          },
+          {
+            "week": 3,
+            "week_days": "15-21",
+            "category": "Lazer",
+            "source": "PIX",
+            "person": "Usuário",
+            "expected_amount": 40,
+            "recurring_items": [],
+            "is_variable": true,
+            "calculation_method": "average"
+          }
+        ]
+      },
+      {
+        "week": 4,
+        "week_days": "22-28",
+        "total_expected": 6066.25,
+        "by_person": {
+          "Usuário": 2494.47,
+          "Bia": 3284.83,
+          "Desconhecido": 99.95,
+          "Mãe": 187.0
+        },
+        "by_category": {
+          "Casa": 372.51,
+          "Esporte": 217.55,
+          "Estética": 179.13,
+          "Lazer": 151.7,
+          "Mercado": 2294.65,
+          "Carro": 616.4,
+          "Feira": 86.51,
+          "Combustível": 746.98,
+          "Padaria": 48.12,
+          "Datas": 245.25,
+          "Hobby": 26.55,
+          "Compras": 696.08,
+          "Pet": 255.42,
+          "Stream": 63.4,
+          "Lanche": 66.0
+        },
+        "budgets": [
+          {
+            "week": 4,
+            "week_days": "22-28",
+            "category": "Casa",
+            "source": "Master Físico",
+            "person": "Usuário",
+            "expected_amount": 97.51,
+            "recurring_items": [
+              "CONECTA"
+            ],
+            "is_variable": false,
+            "calculation_method": "recurring"
+          },
+          {
+            "week": 4,
+            "week_days": "22-28",
+            "category": "Esporte",
+            "source": "Master Recorrente",
+            "person": "Usuário",
+            "expected_amount": 217.55,
+            "recurring_items": [
+              "CROSSFIT BRAVO"
+            ],
+            "is_variable": false,
+            "calculation_method": "recurring"
+          },
+          {
+            "week": 4,
+            "week_days": "22-28",
+            "category": "Estética",
+            "source": "Master Físico",
+            "person": "Usuário",
+            "expected_amount": 78.88,
+            "recurring_items": [
+              "52247051VINICIUS"
+            ],
+            "is_variable": false,
+            "calculation_method": "recurring"
+          },
+          {
+            "week": 4,
+            "week_days": "22-28",
+            "category": "Casa",
+            "source": "PIX",
+            "person": "Usuário",
+            "expected_amount": 275.0,
+            "recurring_items": [
+              "PIX TRANSF JACO MI"
+            ],
+            "is_variable": false,
+            "calculation_method": "recurring"
+          },
+          {
+            "week": 4,
+            "week_days": "22-28",
+            "category": "Lazer",
+            "source": "Visa Bia",
+            "person": "Bia",
+            "expected_amount": 42.7,
+            "recurring_items": [
+              "IFOOD CLUB",
+              "UNIVERSIDADE DO ACAI",
+              "IFD*IFOOD CLUB"
+            ],
+            "is_variable": true,
+            "calculation_method": "mixed"
+          },
+          {
+            "week": 4,
+            "week_days": "22-28",
+            "category": "Mercado",
+            "source": "Visa Bia",
+            "person": "Bia",
+            "expected_amount": 1520.65,
+            "recurring_items": [
+              "SUPERMERCADOS PERIM"
+            ],
+            "is_variable": true,
+            "calculation_method": "mixed"
+          },
+          {
+            "week": 4,
+            "week_days": "22-28",
+            "category": "Carro",
+            "source": "PIX",
+            "person": "Usuário",
+            "expected_amount": 479.74,
+            "recurring_items": [
+              "PIX QRS DEPARTAMENT"
+            ],
+            "is_variable": false,
+            "calculation_method": "recurring"
+          },
+          {
+            "week": 4,
+            "week_days": "22-28",
+            "category": "Feira",
+            "source": "Visa Bia",
+            "person": "Bia",
+            "expected_amount": 86.51,
+            "recurring_items": [
+              "ADAUTOXAVIER",
+              "SOLIMAR LUIZ HELMER 153"
+            ],
+            "is_variable": false,
+            "calculation_method": "recurring"
+          },
+          {
+            "week": 4,
+            "week_days": "22-28",
+            "category": "Estética",
+            "source": "Visa Bia",
+            "person": "Bia",
+            "expected_amount": 100.25,
+            "recurring_items": [
+              "CAMILA OLIVEIRA ESPACO"
+            ],
+            "is_variable": false,
+            "calculation_method": "recurring"
+          },
+          {
+            "week": 4,
+            "week_days": "22-28",
+            "category": "Combustível",
+            "source": "Master Físico",
+            "person": "Usuário",
+            "expected_amount": 326.98,
+            "recurring_items": [
+              "AUTO POSTO 2001 LTDA"
+            ],
+            "is_variable": true,
+            "calculation_method": "mixed"
+          },
+          {
+            "week": 4,
+            "week_days": "22-28",
+            "category": "Padaria",
+            "source": "Visa Bia",
+            "person": "Bia",
+            "expected_amount": 34.12,
+            "recurring_items": [
+              "PADARIA E CONFEITARIA"
+            ],
+            "is_variable": true,
+            "calculation_method": "mixed"
+          },
+          {
+            "week": 4,
+            "week_days": "22-28",
+            "category": "Datas",
+            "source": "PIX",
+            "person": "Usuário",
+            "expected_amount": 245.25,
+            "recurring_items": [
+              "PIX TRANSF KELEN C"
+            ],
+            "is_variable": false,
+            "calculation_method": "recurring"
+          },
+          {
+            "week": 4,
+            "week_days": "22-28",
+            "category": "Hobby",
+            "source": "Visa Recorrente",
+            "person": "Desconhecido",
+            "expected_amount": 26.55,
+            "recurring_items": [
+              "VIRTUAL RACING SCHOOL (USD 4.99)"
+            ],
+            "is_variable": false,
+            "calculation_method": "recurring"
+          },
+          {
+            "week": 4,
+            "week_days": "22-28",
+            "category": "Compras",
+            "source": "Visa Virtual",
+            "person": "Bia",
+            "expected_amount": 332.08,
+            "recurring_items": [
+              "MLP*KaBuM KaBuM   03/10"
+            ],
+            "is_variable": true,
+            "calculation_method": "mixed"
+          },
+          {
+            "week": 4,
+            "week_days": "22-28",
+            "category": "Pet",
+            "source": "Visa Bia",
+            "person": "Bia",
+            "expected_amount": 127.52,
+            "recurring_items": [
+              "COBASI VILA VELHA"
+            ],
+            "is_variable": false,
+            "calculation_method": "recurring"
+          },
+          {
+            "week": 4,
+            "week_days": "22-28",
+            "category": "Stream",
+            "source": "Visa Recorrente",
+            "person": "Desconhecido",
+            "expected_amount": 63.4,
+            "recurring_items": [
+              "PAYPAL *DISNEYPLUS"
+            ],
+            "is_variable": false,
+            "calculation_method": "recurring"
+          },
+          {
+            "week": 4,
+            "week_days": "22-28",
+            "category": "Pet",
+            "source": "Master Físico",
+            "person": "Usuário",
+            "expected_amount": 127.9,
+            "recurring_items": [
+              "COBASI VILA VELHA"
+            ],
+            "is_variable": false,
+            "calculation_method": "recurring"
+          },
+          {
+            "week": 4,
+            "week_days": "22-28",
+            "category": "Carro",
+            "source": "Master Físico",
+            "person": "Usuário",
+            "expected_amount": 136.66,
+            "recurring_items": [
+              "Marcosdemagalhaes"
+            ],
+            "is_variable": false,
+            "calculation_method": "recurring"
+          },
+          {
+            "week": 4,
+            "week_days": "22-28",
+            "category": "Padaria",
+            "source": "Master Físico",
+            "person": "Usuário",
+            "expected_amount": 14,
+            "recurring_items": [],
+            "is_variable": true,
+            "calculation_method": "average"
+          },
+          {
+            "week": 4,
+            "week_days": "22-28",
+            "category": "Mercado",
+            "source": "Visa Mae",
+            "person": "Mãe",
+            "expected_amount": 67,
+            "recurring_items": [],
+            "is_variable": true,
+            "calculation_method": "average"
+          },
+          {
+            "week": 4,
+            "week_days": "22-28",
+            "category": "Lazer",
+            "source": "Visa Recorrente",
+            "person": "Desconhecido",
+            "expected_amount": 10,
+            "recurring_items": [],
+            "is_variable": true,
+            "calculation_method": "average"
+          },
+          {
+            "week": 4,
+            "week_days": "22-28",
+            "category": "Mercado",
+            "source": "PIX",
+            "person": "Usuário",
+            "expected_amount": 130,
+            "recurring_items": [],
+            "is_variable": true,
+            "calculation_method": "average"
+          },
+          {
+            "week": 4,
+            "week_days": "22-28",
+            "category": "Compras",
+            "source": "Master Físico",
+            "person": "Usuário",
+            "expected_amount": 102,
+            "recurring_items": [],
+            "is_variable": true,
+            "calculation_method": "average"
+          },
+          {
+            "week": 4,
+            "week_days": "22-28",
+            "category": "Lazer",
+            "source": "Master Físico",
+            "person": "Usuário",
+            "expected_amount": 73,
+            "recurring_items": [],
+            "is_variable": true,
+            "calculation_method": "average"
+          },
+          {
+            "week": 4,
+            "week_days": "22-28",
+            "category": "Compras",
+            "source": "Visa Bia",
+            "person": "Bia",
+            "expected_amount": 69,
+            "recurring_items": [],
+            "is_variable": true,
+            "calculation_method": "average"
+          },
+          {
+            "week": 4,
+            "week_days": "22-28",
+            "category": "Compras",
+            "source": "Master Recorrente",
+            "person": "Usuário",
+            "expected_amount": 71,
+            "recurring_items": [],
+            "is_variable": true,
+            "calculation_method": "average"
+          },
+          {
+            "week": 4,
+            "week_days": "22-28",
+            "category": "Combustível",
+            "source": "Visa Mae",
+            "person": "Mãe",
+            "expected_amount": 120,
+            "recurring_items": [],
+            "is_variable": true,
+            "calculation_method": "average"
+          },
+          {
+            "week": 4,
+            "week_days": "22-28",
+            "category": "Combustível",
+            "source": "Visa Bia",
+            "person": "Bia",
+            "expected_amount": 73,
+            "recurring_items": [],
+            "is_variable": true,
+            "calculation_method": "average"
+          },
+          {
+            "week": 4,
+            "week_days": "22-28",
+            "category": "Lazer",
+            "source": "PIX",
+            "person": "Usuário",
+            "expected_amount": 26,
+            "recurring_items": [],
+            "is_variable": true,
+            "calculation_method": "average"
+          },
+          {
+            "week": 4,
+            "week_days": "22-28",
+            "category": "Combustível",
+            "source": "Visa Físico",
+            "person": "Bia",
+            "expected_amount": 227,
+            "recurring_items": [],
+            "is_variable": true,
+            "calculation_method": "average"
+          },
+          {
+            "week": 4,
+            "week_days": "22-28",
+            "category": "Compras",
+            "source": "Visa Físico",
+            "person": "Bia",
+            "expected_amount": 122,
+            "recurring_items": [],
+            "is_variable": true,
+            "calculation_method": "average"
+          },
+          {
+            "week": 4,
+            "week_days": "22-28",
+            "category": "Mercado",
+            "source": "Visa Virtual",
+            "person": "Bia",
+            "expected_amount": 142,
+            "recurring_items": [],
+            "is_variable": true,
+            "calculation_method": "average"
+          },
+          {
+            "week": 4,
+            "week_days": "22-28",
+            "category": "Mercado",
+            "source": "Master Físico",
+            "person": "Usuário",
+            "expected_amount": 93,
+            "recurring_items": [],
+            "is_variable": true,
+            "calculation_method": "average"
+          },
+          {
+            "week": 4,
+            "week_days": "22-28",
+            "category": "Mercado",
+            "source": "Visa Físico",
+            "person": "Bia",
+            "expected_amount": 342,
+            "recurring_items": [],
+            "is_variable": true,
+            "calculation_method": "average"
+          },
+          {
+            "week": 4,
+            "week_days": "22-28",
+            "category": "Lanche",
+            "source": "Visa Bia",
+            "person": "Bia",
+            "expected_amount": 66,
+            "recurring_items": [],
+            "is_variable": true,
+            "calculation_method": "average"
+          }
+        ]
+      },
+      {
+        "week": 5,
+        "week_days": "29-31",
+        "total_expected": 1686.62,
+        "by_person": {
+          "Desconhecido": 181.62,
+          "Bia": 816.0,
+          "Usuário": 493.0,
+          "Mãe": 196.0
+        },
+        "by_category": {
+          "Esporte": 181.62,
+          "Compras": 663.0,
+          "Lazer": 334.0,
+          "Mercado": 260.0,
+          "Padaria": 30.0,
+          "Combustível": 218.0
+        },
+        "budgets": [
+          {
+            "week": 5,
+            "week_days": "29-31",
+            "category": "Esporte",
+            "source": "Visa Recorrente",
+            "person": "Desconhecido",
+            "expected_amount": 181.62,
+            "recurring_items": [
+              "J E L ACADEMIA IT"
+            ],
+            "is_variable": false,
+            "calculation_method": "recurring"
+          },
+          {
+            "week": 5,
+            "week_days": "29-31",
+            "category": "Compras",
+            "source": "Visa Bia",
+            "person": "Bia",
+            "expected_amount": 143,
+            "recurring_items": [],
+            "is_variable": true,
+            "calculation_method": "average"
+          },
+          {
+            "week": 5,
+            "week_days": "29-31",
+            "category": "Lazer",
+            "source": "Master Físico",
+            "person": "Usuário",
+            "expected_amount": 95,
+            "recurring_items": [],
+            "is_variable": true,
+            "calculation_method": "average"
+          },
+          {
+            "week": 5,
+            "week_days": "29-31",
+            "category": "Mercado",
+            "source": "Visa Mae",
+            "person": "Mãe",
+            "expected_amount": 76,
+            "recurring_items": [],
+            "is_variable": true,
+            "calculation_method": "average"
+          },
+          {
+            "week": 5,
+            "week_days": "29-31",
+            "category": "Mercado",
+            "source": "Visa Bia",
+            "person": "Bia",
+            "expected_amount": 155,
+            "recurring_items": [],
+            "is_variable": true,
+            "calculation_method": "average"
+          },
+          {
+            "week": 5,
+            "week_days": "29-31",
+            "category": "Compras",
+            "source": "Master Recorrente",
+            "person": "Usuário",
+            "expected_amount": 193,
+            "recurring_items": [],
+            "is_variable": true,
+            "calculation_method": "average"
+          },
+          {
+            "week": 5,
+            "week_days": "29-31",
+            "category": "Lazer",
+            "source": "PIX",
+            "person": "Usuário",
+            "expected_amount": 45,
+            "recurring_items": [],
+            "is_variable": true,
+            "calculation_method": "average"
+          },
+          {
+            "week": 5,
+            "week_days": "29-31",
+            "category": "Lazer",
+            "source": "Visa Bia",
+            "person": "Bia",
+            "expected_amount": 60,
+            "recurring_items": [],
+            "is_variable": true,
+            "calculation_method": "average"
+          },
+          {
+            "week": 5,
+            "week_days": "29-31",
+            "category": "Compras",
+            "source": "Visa Físico",
+            "person": "Bia",
+            "expected_amount": 123,
+            "recurring_items": [],
+            "is_variable": true,
+            "calculation_method": "average"
+          },
+          {
+            "week": 5,
+            "week_days": "29-31",
+            "category": "Padaria",
+            "source": "Master Físico",
+            "person": "Usuário",
+            "expected_amount": 19,
+            "recurring_items": [],
+            "is_variable": true,
+            "calculation_method": "average"
+          },
+          {
+            "week": 5,
+            "week_days": "29-31",
+            "category": "Compras",
+            "source": "Visa Virtual",
+            "person": "Bia",
+            "expected_amount": 92,
+            "recurring_items": [],
+            "is_variable": true,
+            "calculation_method": "average"
+          },
+          {
+            "week": 5,
+            "week_days": "29-31",
+            "category": "Padaria",
+            "source": "Visa Bia",
+            "person": "Bia",
+            "expected_amount": 11,
+            "recurring_items": [],
+            "is_variable": true,
+            "calculation_method": "average"
+          },
+          {
+            "week": 5,
+            "week_days": "29-31",
+            "category": "Combustível",
+            "source": "Visa Bia",
+            "person": "Bia",
+            "expected_amount": 81,
+            "recurring_items": [],
+            "is_variable": true,
+            "calculation_method": "average"
+          },
+          {
+            "week": 5,
+            "week_days": "29-31",
+            "category": "Combustível",
+            "source": "Visa Mae",
+            "person": "Mãe",
+            "expected_amount": 120,
+            "recurring_items": [],
+            "is_variable": true,
+            "calculation_method": "average"
+          },
+          {
+            "week": 5,
+            "week_days": "29-31",
+            "category": "Combustível",
+            "source": "Visa Físico",
+            "person": "Bia",
+            "expected_amount": 17,
+            "recurring_items": [],
+            "is_variable": true,
+            "calculation_method": "average"
+          },
+          {
+            "week": 5,
+            "week_days": "29-31",
+            "category": "Mercado",
+            "source": "Master Físico",
+            "person": "Usuário",
+            "expected_amount": 29,
+            "recurring_items": [],
+            "is_variable": true,
+            "calculation_method": "average"
+          },
+          {
+            "week": 5,
+            "week_days": "29-31",
+            "category": "Lazer",
+            "source": "Visa Físico",
+            "person": "Bia",
+            "expected_amount": 134,
+            "recurring_items": [],
+            "is_variable": true,
+            "calculation_method": "average"
+          },
+          {
+            "week": 5,
+            "week_days": "29-31",
+            "category": "Compras",
+            "source": "Master Físico",
+            "person": "Usuário",
+            "expected_amount": 112,
+            "recurring_items": [],
+            "is_variable": true,
+            "calculation_method": "average"
+          }
+        ]
+      }
+    ],
+    "detailed_budgets": [
+      {
+        "week": 2,
+        "week_days": "8-14",
+        "category": "Utilidades",
+        "source": "PIX",
+        "person": "Usuário",
+        "expected_amount": 510.13,
+        "recurring_items": [
+          "PAG TIT INT 001",
+          "DA  CESAN 07003994",
+          "PAG BOLETO LOGA ADMINISTRACAO DE ATIVOS"
+        ],
+        "is_variable": false,
+        "calculation_method": "recurring"
+      },
+      {
+        "week": 2,
+        "week_days": "8-14",
+        "category": "Casa",
+        "source": "PIX",
+        "person": "Usuário",
+        "expected_amount": 595.5,
+        "recurring_items": [
+          "PIX TRANSF BIANCA",
+          "PIX TRANSF KENIA E"
+        ],
+        "is_variable": false,
+        "calculation_method": "recurring"
+      },
+      {
+        "week": 3,
+        "week_days": "15-21",
+        "category": "Lazer",
+        "source": "Master Físico",
+        "person": "Usuário",
+        "expected_amount": 448.93,
+        "recurring_items": [
+          "IFD*TF ALIMENTOS E SER",
+          "IFD*IFOOD CLUB",
+          "BAR E RESTAURANTE PERF",
+          "IFD*projeto food ltda"
+        ],
+        "is_variable": true,
+        "calculation_method": "mixed"
+      },
+      {
+        "week": 3,
+        "week_days": "15-21",
+        "category": "Farmácia",
+        "source": "Master Físico",
+        "person": "Usuário",
+        "expected_amount": 245.37,
+        "recurring_items": [
+          "DROGASIL2867      01/03",
+          "DROGARIAS PACHECO"
+        ],
+        "is_variable": false,
+        "calculation_method": "recurring"
+      },
+      {
+        "week": 3,
+        "week_days": "15-21",
+        "category": "Farmácia",
+        "source": "Visa Mae",
+        "person": "Mãe",
+        "expected_amount": 80.44,
+        "recurring_items": [
+          "DROGASIL2867-CT   01/02"
+        ],
+        "is_variable": false,
+        "calculation_method": "recurring"
+      },
+      {
+        "week": 2,
+        "week_days": "8-14",
+        "category": "Padaria",
+        "source": "Master Físico",
+        "person": "Usuário",
+        "expected_amount": 80.49,
+        "recurring_items": [
+          "JIM.COM* HELKER DOCE",
+          "PADARIA E CONFEITARIA",
+          "HELKER DOCE TRADICAO"
+        ],
+        "is_variable": true,
+        "calculation_method": "mixed"
+      },
+      {
+        "week": 3,
+        "week_days": "15-21",
+        "category": "Mercado",
+        "source": "Visa Físico",
+        "person": "Bia",
+        "expected_amount": 326.32,
+        "recurring_items": [
+          "CASAFRUTI DA-CT ERICAS"
+        ],
+        "is_variable": true,
+        "calculation_method": "mixed"
+      },
+      {
+        "week": 3,
+        "week_days": "15-21",
+        "category": "Farmácia",
+        "source": "Master Virtual",
+        "person": "Usuário",
+        "expected_amount": 223.48,
+        "recurring_items": [
+          "DROGARIA NOV*5201801/04",
+          "DROGARIA MINAS MAI03/03"
+        ],
+        "is_variable": false,
+        "calculation_method": "recurring"
+      },
+      {
+        "week": 1,
+        "week_days": "1-7",
+        "category": "Utilidades",
+        "source": "PIX",
+        "person": "Usuário",
+        "expected_amount": 792.01,
+        "recurring_items": [
+          "DA  EDP ES 190015025294",
+          "DEB AUTOR VERISURE ALARM"
+        ],
+        "is_variable": false,
+        "calculation_method": "recurring"
+      },
+      {
+        "week": 3,
+        "week_days": "15-21",
+        "category": "Pet",
+        "source": "PIX",
+        "person": "Usuário",
+        "expected_amount": 137.5,
+        "recurring_items": [
+          "PIX TRANSF LEILANE"
+        ],
+        "is_variable": false,
+        "calculation_method": "recurring"
+      },
+      {
+        "week": 1,
+        "week_days": "1-7",
+        "category": "Lazer",
+        "source": "Visa Bia",
+        "person": "Bia",
+        "expected_amount": 45.91,
+        "recurring_items": [
+          "BRAVO ES"
+        ],
+        "is_variable": true,
+        "calculation_method": "mixed"
+      },
+      {
+        "week": 2,
+        "week_days": "8-14",
+        "category": "Esporte",
+        "source": "PIX",
+        "person": "Usuário",
+        "expected_amount": 122.72,
+        "recurring_items": [
+          "PIX TRANSF PHILIPE"
+        ],
+        "is_variable": false,
+        "calculation_method": "recurring"
+      },
+      {
+        "week": 1,
+        "week_days": "1-7",
+        "category": "Stream",
+        "source": "Visa Recorrente",
+        "person": "Desconhecido",
+        "expected_amount": 19.89,
+        "recurring_items": [
+          "AMAZONPRIMEBR"
+        ],
+        "is_variable": false,
+        "calculation_method": "recurring"
+      },
+      {
+        "week": 2,
+        "week_days": "8-14",
+        "category": "Compras",
+        "source": "Visa Bia",
+        "person": "Bia",
+        "expected_amount": 24.52,
+        "recurring_items": [
+          "PAYGO"
+        ],
+        "is_variable": true,
+        "calculation_method": "mixed"
+      },
+      {
+        "week": 2,
+        "week_days": "8-14",
+        "category": "Stream",
+        "source": "Visa Bia",
+        "person": "Bia",
+        "expected_amount": 37.34,
+        "recurring_items": [
+          "APPLE.COM/BILL"
+        ],
+        "is_variable": false,
+        "calculation_method": "recurring"
+      },
+      {
+        "week": 5,
+        "week_days": "29-31",
+        "category": "Esporte",
+        "source": "Visa Recorrente",
+        "person": "Desconhecido",
+        "expected_amount": 181.62,
+        "recurring_items": [
+          "J E L ACADEMIA IT"
+        ],
+        "is_variable": false,
+        "calculation_method": "recurring"
+      },
+      {
+        "week": 3,
+        "week_days": "15-21",
+        "category": "Esporte",
+        "source": "Visa Recorrente",
+        "person": "Desconhecido",
+        "expected_amount": 217.52,
+        "recurring_items": [
+          "CROSSFIT BRAVO"
+        ],
+        "is_variable": false,
+        "calculation_method": "recurring"
+      },
+      {
+        "week": 4,
+        "week_days": "22-28",
+        "category": "Casa",
+        "source": "Master Físico",
+        "person": "Usuário",
+        "expected_amount": 97.51,
+        "recurring_items": [
+          "CONECTA"
+        ],
+        "is_variable": false,
+        "calculation_method": "recurring"
+      },
+      {
+        "week": 4,
+        "week_days": "22-28",
+        "category": "Esporte",
+        "source": "Master Recorrente",
+        "person": "Usuário",
+        "expected_amount": 217.55,
+        "recurring_items": [
+          "CROSSFIT BRAVO"
+        ],
+        "is_variable": false,
+        "calculation_method": "recurring"
+      },
+      {
+        "week": 3,
+        "week_days": "15-21",
+        "category": "Mercado",
+        "source": "Visa Bia",
+        "person": "Bia",
+        "expected_amount": 823.5,
+        "recurring_items": [
+          "CASAFRUTI DAS AMERICAS",
+          "SUPERMERCADO PERIM"
+        ],
+        "is_variable": true,
+        "calculation_method": "mixed"
+      },
+      {
+        "week": 3,
+        "week_days": "15-21",
+        "category": "Transporte",
+        "source": "Visa Recorrente",
+        "person": "Desconhecido",
+        "expected_amount": 16.74,
+        "recurring_items": [
+          "UBER * PENDING"
+        ],
+        "is_variable": false,
+        "calculation_method": "recurring"
+      },
+      {
+        "week": 3,
+        "week_days": "15-21",
+        "category": "Compras",
+        "source": "Master Recorrente",
+        "person": "Usuário",
+        "expected_amount": 293.43,
+        "recurring_items": [
+          "MERCADOLIVRE*2PRODUTO"
+        ],
+        "is_variable": true,
+        "calculation_method": "mixed"
+      },
+      {
+        "week": 2,
+        "week_days": "8-14",
+        "category": "Mercado",
+        "source": "Visa Bia",
+        "person": "Bia",
+        "expected_amount": 468.83,
+        "recurring_items": [
+          "CARONE GAIVOTAS"
+        ],
+        "is_variable": true,
+        "calculation_method": "mixed"
+      },
+      {
+        "week": 3,
+        "week_days": "15-21",
+        "category": "Farmácia",
+        "source": "Visa Bia",
+        "person": "Bia",
+        "expected_amount": 114.98,
+        "recurring_items": [
+          "DROGASIL2867"
+        ],
+        "is_variable": false,
+        "calculation_method": "recurring"
+      },
+      {
+        "week": 2,
+        "week_days": "8-14",
+        "category": "Pet",
+        "source": "Visa Mae",
+        "person": "Mãe",
+        "expected_amount": 126.3,
+        "recurring_items": [
+          "SHOP CAO PET-CT TER LT"
+        ],
+        "is_variable": false,
+        "calculation_method": "recurring"
+      },
+      {
+        "week": 4,
+        "week_days": "22-28",
+        "category": "Estética",
+        "source": "Master Físico",
+        "person": "Usuário",
+        "expected_amount": 78.88,
+        "recurring_items": [
+          "52247051VINICIUS"
+        ],
+        "is_variable": false,
+        "calculation_method": "recurring"
+      },
+      {
+        "week": 3,
+        "week_days": "15-21",
+        "category": "Combustível",
+        "source": "Master Físico",
+        "person": "Usuário",
+        "expected_amount": 284.42,
+        "recurring_items": [
+          "POSTO 2001"
+        ],
+        "is_variable": true,
+        "calculation_method": "mixed"
+      },
+      {
+        "week": 3,
+        "week_days": "15-21",
+        "category": "Stream",
+        "source": "Master Recorrente",
+        "person": "Usuário",
+        "expected_amount": 119.78,
+        "recurring_items": [
+          "APPLE.COM/BILL"
+        ],
+        "is_variable": false,
+        "calculation_method": "recurring"
+      },
+      {
+        "week": 4,
+        "week_days": "22-28",
+        "category": "Casa",
+        "source": "PIX",
+        "person": "Usuário",
+        "expected_amount": 275.0,
+        "recurring_items": [
+          "PIX TRANSF JACO MI"
+        ],
+        "is_variable": false,
+        "calculation_method": "recurring"
+      },
+      {
+        "week": 4,
+        "week_days": "22-28",
+        "category": "Lazer",
+        "source": "Visa Bia",
+        "person": "Bia",
+        "expected_amount": 42.7,
+        "recurring_items": [
+          "IFOOD CLUB",
+          "UNIVERSIDADE DO ACAI",
+          "IFD*IFOOD CLUB"
+        ],
+        "is_variable": true,
+        "calculation_method": "mixed"
+      },
+      {
+        "week": 4,
+        "week_days": "22-28",
+        "category": "Mercado",
+        "source": "Visa Bia",
+        "person": "Bia",
+        "expected_amount": 1520.65,
+        "recurring_items": [
+          "SUPERMERCADOS PERIM"
+        ],
+        "is_variable": true,
+        "calculation_method": "mixed"
+      },
+      {
+        "week": 3,
+        "week_days": "15-21",
+        "category": "Pet",
+        "source": "Visa Bia",
+        "person": "Bia",
+        "expected_amount": 81.84,
+        "recurring_items": [
+          "ROSIVALDO ALVES DE NO"
+        ],
+        "is_variable": false,
+        "calculation_method": "recurring"
+      },
+      {
+        "week": 1,
+        "week_days": "1-7",
+        "category": "Nita",
+        "source": "PIX",
+        "person": "Usuário",
+        "expected_amount": 1418.37,
+        "recurring_items": [
+          "PIX TRANSF EDITH F"
+        ],
+        "is_variable": false,
+        "calculation_method": "recurring"
+      },
+      {
+        "week": 3,
+        "week_days": "15-21",
+        "category": "Compras",
+        "source": "Visa Bia",
+        "person": "Bia",
+        "expected_amount": 56.13,
+        "recurring_items": [
+          "ADMINISTRADORA"
+        ],
+        "is_variable": true,
+        "calculation_method": "mixed"
+      },
+      {
+        "week": 3,
+        "week_days": "15-21",
+        "category": "Cartão",
+        "source": "Visa Mae",
+        "person": "Mãe",
+        "expected_amount": 31.0,
+        "recurring_items": [
+          "ANUIDADE DIFERENCI08/12"
+        ],
+        "is_variable": false,
+        "calculation_method": "recurring"
+      },
+      {
+        "week": 3,
+        "week_days": "15-21",
+        "category": "Cartão",
+        "source": "Visa Bia",
+        "person": "Bia",
+        "expected_amount": 30.5,
+        "recurring_items": [
+          "ANUIDADE DIFERENCI08/12"
+        ],
+        "is_variable": false,
+        "calculation_method": "recurring"
+      },
+      {
+        "week": 3,
+        "week_days": "15-21",
+        "category": "Cartão",
+        "source": "Visa Físico",
+        "person": "Bia",
+        "expected_amount": 61.0,
+        "recurring_items": [
+          "ANUIDADE DIFERENCI08/12"
+        ],
+        "is_variable": false,
+        "calculation_method": "recurring"
+      },
+      {
+        "week": 4,
+        "week_days": "22-28",
+        "category": "Carro",
+        "source": "PIX",
+        "person": "Usuário",
+        "expected_amount": 479.74,
+        "recurring_items": [
+          "PIX QRS DEPARTAMENT"
+        ],
+        "is_variable": false,
+        "calculation_method": "recurring"
+      },
+      {
+        "week": 3,
+        "week_days": "15-21",
+        "category": "LF",
+        "source": "Visa Recorrente",
+        "person": "Desconhecido",
+        "expected_amount": 299.79,
+        "recurring_items": [
+          "MICROSOFT-G130508996",
+          "PAYPAL *ATLASSIANUS (USD 35.00)"
+        ],
+        "is_variable": false,
+        "calculation_method": "recurring"
+      },
+      {
+        "week": 2,
+        "week_days": "8-14",
+        "category": "Faculdade",
+        "source": "PIX",
+        "person": "Usuário",
+        "expected_amount": 1530.96,
+        "recurring_items": [
+          "PAG BOLETO MULTIVIX VILA VELHA  ENSINO"
+        ],
+        "is_variable": false,
+        "calculation_method": "recurring"
+      },
+      {
+        "week": 3,
+        "week_days": "15-21",
+        "category": "Utilidades",
+        "source": "PIX",
+        "person": "Usuário",
+        "expected_amount": 406.31,
+        "recurring_items": [
+          "PIX QRS CLARO",
+          "DA  CLARO CELULAR  38828"
+        ],
+        "is_variable": false,
+        "calculation_method": "recurring"
+      },
+      {
+        "week": 2,
+        "week_days": "8-14",
+        "category": "Estética",
+        "source": "Visa Físico",
+        "person": "Bia",
+        "expected_amount": 78.67,
+        "recurring_items": [
+          "CAMILA OLIVE-CT ESPACO"
+        ],
+        "is_variable": false,
+        "calculation_method": "recurring"
+      },
+      {
+        "week": 3,
+        "week_days": "15-21",
+        "category": "Esporte",
+        "source": "PIX",
+        "person": "Usuário",
+        "expected_amount": 1349.83,
+        "recurring_items": [
+          "PIX TRANSF RAFFAEL",
+          "PIX TRANSF Kamilla20/09"
+        ],
+        "is_variable": false,
+        "calculation_method": "recurring"
+      },
+      {
+        "week": 2,
+        "week_days": "8-14",
+        "category": "Carro",
+        "source": "PIX",
+        "person": "Usuário",
+        "expected_amount": 37.5,
+        "recurring_items": [
+          "PIX TRANSF RODRIGO"
+        ],
+        "is_variable": false,
+        "calculation_method": "recurring"
+      },
+      {
+        "week": 2,
+        "week_days": "8-14",
+        "category": "Lazer",
+        "source": "Master Físico",
+        "person": "Usuário",
+        "expected_amount": 210.78,
+        "recurring_items": [
+          "BRAVO ES",
+          "KATIAGOMESDE"
+        ],
+        "is_variable": true,
+        "calculation_method": "mixed"
+      },
+      {
+        "week": 2,
+        "week_days": "8-14",
+        "category": "Stream",
+        "source": "Visa Recorrente",
+        "person": "Desconhecido",
+        "expected_amount": 119.8,
+        "recurring_items": [
+          "NETFLIX ENTRETENIMENTO",
+          "NETFLIX.COM"
+        ],
+        "is_variable": false,
+        "calculation_method": "recurring"
+      },
+      {
+        "week": 2,
+        "week_days": "8-14",
+        "category": "Combustível",
+        "source": "Visa Bia",
+        "person": "Bia",
+        "expected_amount": 68.87,
+        "recurring_items": [
+          "COMERCIAL HELKER LTDA"
+        ],
+        "is_variable": true,
+        "calculation_method": "mixed"
+      },
+      {
+        "week": 1,
+        "week_days": "1-7",
+        "category": "Cartão",
+        "source": "PIX",
+        "person": "Usuário",
+        "expected_amount": 19.08,
+        "recurring_items": [
+          "IOF"
+        ],
+        "is_variable": false,
+        "calculation_method": "recurring"
+      },
+      {
+        "week": 4,
+        "week_days": "22-28",
+        "category": "Feira",
+        "source": "Visa Bia",
+        "person": "Bia",
+        "expected_amount": 86.51,
+        "recurring_items": [
+          "ADAUTOXAVIER",
+          "SOLIMAR LUIZ HELMER 153"
+        ],
+        "is_variable": false,
+        "calculation_method": "recurring"
+      },
+      {
+        "week": 3,
+        "week_days": "15-21",
+        "category": "Combustível",
+        "source": "Visa Mae",
+        "person": "Mãe",
+        "expected_amount": 240.0,
+        "recurring_items": [
+          "COMERCIAL HE-CT  LTDA"
+        ],
+        "is_variable": true,
+        "calculation_method": "mixed"
+      },
+      {
+        "week": 4,
+        "week_days": "22-28",
+        "category": "Estética",
+        "source": "Visa Bia",
+        "person": "Bia",
+        "expected_amount": 100.25,
+        "recurring_items": [
+          "CAMILA OLIVEIRA ESPACO"
+        ],
+        "is_variable": false,
+        "calculation_method": "recurring"
+      },
+      {
+        "week": 4,
+        "week_days": "22-28",
+        "category": "Combustível",
+        "source": "Master Físico",
+        "person": "Usuário",
+        "expected_amount": 326.98,
+        "recurring_items": [
+          "AUTO POSTO 2001 LTDA"
+        ],
+        "is_variable": true,
+        "calculation_method": "mixed"
+      },
+      {
+        "week": 3,
+        "week_days": "15-21",
+        "category": "Estética",
+        "source": "PIX",
+        "person": "Usuário",
+        "expected_amount": 2.0,
+        "recurring_items": [
+          "PIX QRS PAGFACIL IP"
+        ],
+        "is_variable": false,
+        "calculation_method": "recurring"
+      },
+      {
+        "week": 4,
+        "week_days": "22-28",
+        "category": "Padaria",
+        "source": "Visa Bia",
+        "person": "Bia",
+        "expected_amount": 34.12,
+        "recurring_items": [
+          "PADARIA E CONFEITARIA"
+        ],
+        "is_variable": true,
+        "calculation_method": "mixed"
+      },
+      {
+        "week": 4,
+        "week_days": "22-28",
+        "category": "Datas",
+        "source": "PIX",
+        "person": "Usuário",
+        "expected_amount": 245.25,
+        "recurring_items": [
+          "PIX TRANSF KELEN C"
+        ],
+        "is_variable": false,
+        "calculation_method": "recurring"
+      },
+      {
+        "week": 3,
+        "week_days": "15-21",
+        "category": "Stream",
+        "source": "Visa Recorrente",
+        "person": "Desconhecido",
+        "expected_amount": 52.79,
+        "recurring_items": [
+          "Amazon Prime Canais",
+          "Paramount+"
+        ],
+        "is_variable": false,
+        "calculation_method": "recurring"
+      },
+      {
+        "week": 2,
+        "week_days": "8-14",
+        "category": "Mercado",
+        "source": "Visa Físico",
+        "person": "Bia",
+        "expected_amount": 612.52,
+        "recurring_items": [
+          "CARONE GAIVO-CT   02/02",
+          "SUPERMERCADO-CT RIM"
+        ],
+        "is_variable": true,
+        "calculation_method": "mixed"
+      },
+      {
+        "week": 1,
+        "week_days": "1-7",
+        "category": "Mercado",
+        "source": "Master Físico",
+        "person": "Usuário",
+        "expected_amount": 340.57,
+        "recurring_items": [
+          "SUPERMERCADOS BH  02/02"
+        ],
+        "is_variable": true,
+        "calculation_method": "mixed"
+      },
+      {
+        "week": 1,
+        "week_days": "1-7",
+        "category": "Cartão",
+        "source": "Master Virtual",
+        "person": "Usuário",
+        "expected_amount": 2.23,
+        "recurring_items": [
+          "IOF COMPRA INTERNACIONA"
+        ],
+        "is_variable": false,
+        "calculation_method": "recurring"
+      },
+      {
+        "week": 3,
+        "week_days": "15-21",
+        "category": "Padaria",
+        "source": "Visa Bia",
+        "person": "Bia",
+        "expected_amount": 33.53,
+        "recurring_items": [
+          "GALERIA DOS PAES",
+          "ANA PAULA AMBROSIO ALM"
+        ],
+        "is_variable": true,
+        "calculation_method": "mixed"
+      },
+      {
+        "week": 4,
+        "week_days": "22-28",
+        "category": "Hobby",
+        "source": "Visa Recorrente",
+        "person": "Desconhecido",
+        "expected_amount": 26.55,
+        "recurring_items": [
+          "VIRTUAL RACING SCHOOL (USD 4.99)"
+        ],
+        "is_variable": false,
+        "calculation_method": "recurring"
+      },
+      {
+        "week": 3,
+        "week_days": "15-21",
+        "category": "Seguro",
+        "source": "Master Recorrente",
+        "person": "Usuário",
+        "expected_amount": 333.18,
+        "recurring_items": [
+          "METLIFE SEGUROS"
+        ],
+        "is_variable": false,
+        "calculation_method": "recurring"
+      },
+      {
+        "week": 2,
+        "week_days": "8-14",
+        "category": "Lazer",
+        "source": "Visa Bia",
+        "person": "Bia",
+        "expected_amount": 147.42,
+        "recurring_items": [
+          "CACAU SHOW",
+          "IFD*PROJETO FOOD LTDA"
+        ],
+        "is_variable": true,
+        "calculation_method": "mixed"
+      },
+      {
+        "week": 3,
+        "week_days": "15-21",
+        "category": "LF",
+        "source": "Master Virtual",
+        "person": "Usuário",
+        "expected_amount": 2198.28,
+        "recurring_items": [
+          "MagaluPay*KaBuM   07/10",
+          "MLP    *KaBuM -KaB06/10"
+        ],
+        "is_variable": false,
+        "calculation_method": "recurring"
+      },
+      {
+        "week": 3,
+        "week_days": "15-21",
+        "category": "Cartão",
+        "source": "Master Físico",
+        "person": "Usuário",
+        "expected_amount": 124.2,
+        "recurring_items": [
+          "GOLD ESQUADRIAS   06/06"
+        ],
+        "is_variable": false,
+        "calculation_method": "recurring"
+      },
+      {
+        "week": 3,
+        "week_days": "15-21",
+        "category": "Betina",
+        "source": "Master Virtual",
+        "person": "Usuário",
+        "expected_amount": 558.5,
+        "recurring_items": [
+          "DELCI PEREIRA DA S06/06",
+          "PHARMAPELE VILA VE06/06"
+        ],
+        "is_variable": false,
+        "calculation_method": "recurring"
+      },
+      {
+        "week": 3,
+        "week_days": "15-21",
+        "category": "Casa",
+        "source": "Master Físico",
+        "person": "Usuário",
+        "expected_amount": 114.0,
+        "recurring_items": [
+          "VILA BOMBAS LTDA  05/05"
+        ],
+        "is_variable": false,
+        "calculation_method": "recurring"
+      },
+      {
+        "week": 3,
+        "week_days": "15-21",
+        "category": "Compras",
+        "source": "Master Virtual",
+        "person": "Usuário",
+        "expected_amount": 356.06,
+        "recurring_items": [
+          "E-LENS.COM.BR     05/06",
+          "MERCADOPAGO *PICHA04/12"
+        ],
+        "is_variable": true,
+        "calculation_method": "mixed"
+      },
+      {
+        "week": 3,
+        "week_days": "15-21",
+        "category": "Carro",
+        "source": "Master Físico",
+        "person": "Usuário",
+        "expected_amount": 206.85,
+        "recurring_items": [
+          "M. G. VILA VELHA C05/10",
+          "LAVAJATO"
+        ],
+        "is_variable": false,
+        "calculation_method": "recurring"
+      },
+      {
+        "week": 3,
+        "week_days": "15-21",
+        "category": "Pet",
+        "source": "Master Físico",
+        "person": "Usuário",
+        "expected_amount": 1092.48,
+        "recurring_items": [
+          "55195054Adelaide  03/04",
+          "ONCOPET           05/05",
+          "EVO*Animales      04/04",
+          "SOS HOSP VETERINAR02/02"
+        ],
+        "is_variable": false,
+        "calculation_method": "recurring"
+      },
+      {
+        "week": 3,
+        "week_days": "15-21",
+        "category": "Compras",
+        "source": "Visa Físico",
+        "person": "Bia",
+        "expected_amount": 198.9,
+        "recurring_items": [
+          "12 FBO OTICAS DINI05/10"
+        ],
+        "is_variable": true,
+        "calculation_method": "mixed"
+      },
+      {
+        "week": 3,
+        "week_days": "15-21",
+        "category": "Estética",
+        "source": "Visa Físico",
+        "person": "Bia",
+        "expected_amount": 1351.16,
+        "recurring_items": [
+          "VICTORIA FREITAS  05/08",
+          "VICTORIA FRE-CT   03/04"
+        ],
+        "is_variable": false,
+        "calculation_method": "recurring"
+      },
+      {
+        "week": 3,
+        "week_days": "15-21",
+        "category": "Esporte",
+        "source": "Visa Mae",
+        "person": "Mãe",
+        "expected_amount": 209.9,
+        "recurring_items": [
+          "MOVIMENT ACADEMIA 04/04"
+        ],
+        "is_variable": false,
+        "calculation_method": "recurring"
+      },
+      {
+        "week": 3,
+        "week_days": "15-21",
+        "category": "Betina",
+        "source": "Visa Virtual",
+        "person": "Bia",
+        "expected_amount": 558.5,
+        "recurring_items": [
+          "DELCI PEREIRA DA  04/06",
+          "PHARMIC           03/03"
+        ],
+        "is_variable": false,
+        "calculation_method": "recurring"
+      },
+      {
+        "week": 4,
+        "week_days": "22-28",
+        "category": "Compras",
+        "source": "Visa Virtual",
+        "person": "Bia",
+        "expected_amount": 332.08,
+        "recurring_items": [
+          "MLP*KaBuM KaBuM   03/10"
+        ],
+        "is_variable": true,
+        "calculation_method": "mixed"
+      },
+      {
+        "week": 3,
+        "week_days": "15-21",
+        "category": "Esporte",
+        "source": "Visa Virtual",
+        "person": "Bia",
+        "expected_amount": 104.38,
+        "recurring_items": [
+          "PG *SUPLEY LABORA 03/03"
+        ],
+        "is_variable": false,
+        "calculation_method": "recurring"
+      },
+      {
+        "week": 2,
+        "week_days": "8-14",
+        "category": "Combustível",
+        "source": "Master Físico",
+        "person": "Usuário",
+        "expected_amount": 295.53,
+        "recurring_items": [
+          "AUTO POSTO R M"
+        ],
+        "is_variable": true,
+        "calculation_method": "mixed"
+      },
+      {
+        "week": 1,
+        "week_days": "1-7",
+        "category": "Feira",
+        "source": "Visa Bia",
+        "person": "Bia",
+        "expected_amount": 43.0,
+        "recurring_items": [
+          "MICHELI FLORES"
+        ],
+        "is_variable": false,
+        "calculation_method": "recurring"
+      },
+      {
+        "week": 2,
+        "week_days": "8-14",
+        "category": "Estética",
+        "source": "Master Físico",
+        "person": "Usuário",
+        "expected_amount": 102.5,
+        "recurring_items": [
+          "27535280Lorena"
+        ],
+        "is_variable": false,
+        "calculation_method": "recurring"
+      },
+      {
+        "week": 1,
+        "week_days": "1-7",
+        "category": "Combustível",
+        "source": "Visa Bia",
+        "person": "Bia",
+        "expected_amount": 86.0,
+        "recurring_items": [
+          "PostoColorado"
+        ],
+        "is_variable": true,
+        "calculation_method": "mixed"
+      },
+      {
+        "week": 4,
+        "week_days": "22-28",
+        "category": "Pet",
+        "source": "Visa Bia",
+        "person": "Bia",
+        "expected_amount": 127.52,
+        "recurring_items": [
+          "COBASI VILA VELHA"
+        ],
+        "is_variable": false,
+        "calculation_method": "recurring"
+      },
+      {
+        "week": 3,
+        "week_days": "15-21",
+        "category": "Datas",
+        "source": "Master Físico",
+        "person": "Usuário",
+        "expected_amount": 309.33,
+        "recurring_items": [
+          "LOS NETO PAULO NUN06/06",
+          "FRAGRANCE MAISON  05/05"
+        ],
+        "is_variable": false,
+        "calculation_method": "recurring"
+      },
+      {
+        "week": 2,
+        "week_days": "8-14",
+        "category": "Padaria",
+        "source": "Visa Bia",
+        "person": "Bia",
+        "expected_amount": 35.54,
+        "recurring_items": [
+          "PADARIA JARDINS"
+        ],
+        "is_variable": true,
+        "calculation_method": "mixed"
+      },
+      {
+        "week": 4,
+        "week_days": "22-28",
+        "category": "Stream",
+        "source": "Visa Recorrente",
+        "person": "Desconhecido",
+        "expected_amount": 63.4,
+        "recurring_items": [
+          "PAYPAL *DISNEYPLUS"
+        ],
+        "is_variable": false,
+        "calculation_method": "recurring"
+      },
+      {
+        "week": 3,
+        "week_days": "15-21",
+        "category": "Datas",
+        "source": "Master Virtual",
+        "person": "Usuário",
+        "expected_amount": 93.3,
+        "recurring_items": [
+          "MLP    *MAGAZINELU06/06"
+        ],
+        "is_variable": false,
+        "calculation_method": "recurring"
+      },
+      {
+        "week": 3,
+        "week_days": "15-21",
+        "category": "Compras",
+        "source": "Visa Virtual",
+        "person": "Bia",
+        "expected_amount": 272.64,
+        "recurring_items": [
+          "PG *NANIBLU KSFIT 04/04"
+        ],
+        "is_variable": true,
+        "calculation_method": "mixed"
+      },
+      {
+        "week": 3,
+        "week_days": "15-21",
+        "category": "Estética",
+        "source": "Visa Bia",
+        "person": "Bia",
+        "expected_amount": 53.41,
+        "recurring_items": [
+          "SEMPRE BELA VV    03/03"
+        ],
+        "is_variable": false,
+        "calculation_method": "recurring"
+      },
+      {
+        "week": 3,
+        "week_days": "15-21",
+        "category": "Feira",
+        "source": "Visa Físico",
+        "person": "Bia",
+        "expected_amount": 73.83,
+        "recurring_items": [
+          "AdautoXavier-CT",
+          "PauloCesarNu-CT"
+        ],
+        "is_variable": false,
+        "calculation_method": "recurring"
+      },
+      {
+        "week": 3,
+        "week_days": "15-21",
+        "category": "Padaria",
+        "source": "Master Físico",
+        "person": "Usuário",
+        "expected_amount": 130.83,
+        "recurring_items": [
+          "HELKER DOCES E CONFEI",
+          "LEVEI UM BOLO",
+          "ANA PAULA AMBROSIO ALM"
+        ],
+        "is_variable": true,
+        "calculation_method": "mixed"
+      },
+      {
+        "week": 3,
+        "week_days": "15-21",
+        "category": "Saúde",
+        "source": "Master Físico",
+        "person": "Usuário",
+        "expected_amount": 250.0,
+        "recurring_items": [
+          "CONSULTORIO ODONTO05/05"
+        ],
+        "is_variable": false,
+        "calculation_method": "recurring"
+      },
+      {
+        "week": 1,
+        "week_days": "1-7",
+        "category": "Lazer",
+        "source": "Visa Recorrente",
+        "person": "Desconhecido",
+        "expected_amount": 10.95,
+        "recurring_items": [
+          "IFD*IFOOD CLUB"
+        ],
+        "is_variable": true,
+        "calculation_method": "mixed"
+      },
+      {
+        "week": 4,
+        "week_days": "22-28",
+        "category": "Pet",
+        "source": "Master Físico",
+        "person": "Usuário",
+        "expected_amount": 127.9,
+        "recurring_items": [
+          "COBASI VILA VELHA"
+        ],
+        "is_variable": false,
+        "calculation_method": "recurring"
+      },
+      {
+        "week": 2,
+        "week_days": "8-14",
+        "category": "Mercado",
+        "source": "Master Físico",
+        "person": "Usuário",
+        "expected_amount": 169.99,
+        "recurring_items": [
+          "Casafruti das Americas"
+        ],
+        "is_variable": true,
+        "calculation_method": "mixed"
+      },
+      {
+        "week": 2,
+        "week_days": "8-14",
+        "category": "Seguro",
+        "source": "PIX",
+        "person": "Usuário",
+        "expected_amount": 308.77,
+        "recurring_items": [
+          "ITAU SEG AP PF     05/12"
+        ],
+        "is_variable": false,
+        "calculation_method": "recurring"
+      },
+      {
+        "week": 1,
+        "week_days": "1-7",
+        "category": "Transporte",
+        "source": "Master Recorrente",
+        "person": "Usuário",
+        "expected_amount": 19.89,
+        "recurring_items": [
+          "Uber UBER *ONE HELP.UB"
+        ],
+        "is_variable": false,
+        "calculation_method": "recurring"
+      },
+      {
+        "week": 4,
+        "week_days": "22-28",
+        "category": "Carro",
+        "source": "Master Físico",
+        "person": "Usuário",
+        "expected_amount": 136.66,
+        "recurring_items": [
+          "Marcosdemagalhaes"
+        ],
+        "is_variable": false,
+        "calculation_method": "recurring"
+      },
+      {
+        "week": 3,
+        "week_days": "15-21",
+        "category": "Compras",
+        "source": "Master Físico",
+        "person": "Usuário",
+        "expected_amount": 449.98,
+        "recurring_items": [
+          "ACQUAMARE         03/03"
+        ],
+        "is_variable": true,
+        "calculation_method": "mixed"
+      },
+      {
+        "week": 3,
+        "week_days": "15-21",
+        "category": "Hobby",
+        "source": "Visa Recorrente",
+        "person": "Desconhecido",
+        "expected_amount": 339.48,
+        "recurring_items": [
+          "PAYPAL *IRACINGCOMM (USD 149.25)"
+        ],
+        "is_variable": false,
+        "calculation_method": "recurring"
+      },
+      {
+        "week": 2,
+        "week_days": "8-14",
+        "category": "Padaria",
+        "source": "Visa Físico",
+        "person": "Bia",
+        "expected_amount": 10,
+        "recurring_items": [],
+        "is_variable": true,
+        "calculation_method": "average"
+      },
+      {
+        "week": 2,
+        "week_days": "8-14",
+        "category": "Compras",
+        "source": "Master Virtual",
+        "person": "Usuário",
+        "expected_amount": 48,
+        "recurring_items": [],
+        "is_variable": true,
+        "calculation_method": "average"
+      },
+      {
+        "week": 1,
+        "week_days": "1-7",
+        "category": "Mercado",
+        "source": "Visa Mae",
+        "person": "Mãe",
+        "expected_amount": 70,
+        "recurring_items": [],
+        "is_variable": true,
+        "calculation_method": "average"
+      },
+      {
+        "week": 1,
+        "week_days": "1-7",
+        "category": "Mercado",
+        "source": "Visa Físico",
+        "person": "Bia",
+        "expected_amount": 177,
+        "recurring_items": [],
+        "is_variable": true,
+        "calculation_method": "average"
+      },
+      {
+        "week": 1,
+        "week_days": "1-7",
+        "category": "Lazer",
+        "source": "Master Físico",
+        "person": "Usuário",
+        "expected_amount": 74,
+        "recurring_items": [],
+        "is_variable": true,
+        "calculation_method": "average"
+      },
+      {
+        "week": 1,
+        "week_days": "1-7",
+        "category": "Compras",
+        "source": "Master Recorrente",
+        "person": "Usuário",
+        "expected_amount": 85,
+        "recurring_items": [],
+        "is_variable": true,
+        "calculation_method": "average"
+      },
+      {
+        "week": 1,
+        "week_days": "1-7",
+        "category": "Compras",
+        "source": "Visa Virtual",
+        "person": "Bia",
+        "expected_amount": 98,
+        "recurring_items": [],
+        "is_variable": true,
+        "calculation_method": "average"
+      },
+      {
+        "week": 1,
+        "week_days": "1-7",
+        "category": "Lazer",
+        "source": "PIX",
+        "person": "Usuário",
+        "expected_amount": 71,
+        "recurring_items": [],
+        "is_variable": true,
+        "calculation_method": "average"
+      },
+      {
+        "week": 1,
+        "week_days": "1-7",
+        "category": "Padaria",
+        "source": "Master Físico",
+        "person": "Usuário",
+        "expected_amount": 18,
+        "recurring_items": [],
+        "is_variable": true,
+        "calculation_method": "average"
+      },
+      {
+        "week": 1,
+        "week_days": "1-7",
+        "category": "Compras",
+        "source": "Visa Bia",
+        "person": "Bia",
+        "expected_amount": 33,
+        "recurring_items": [],
+        "is_variable": true,
+        "calculation_method": "average"
+      },
+      {
+        "week": 5,
+        "week_days": "29-31",
+        "category": "Compras",
+        "source": "Visa Bia",
+        "person": "Bia",
+        "expected_amount": 143,
+        "recurring_items": [],
+        "is_variable": true,
+        "calculation_method": "average"
+      },
+      {
+        "week": 5,
+        "week_days": "29-31",
+        "category": "Lazer",
+        "source": "Master Físico",
+        "person": "Usuário",
+        "expected_amount": 95,
+        "recurring_items": [],
+        "is_variable": true,
+        "calculation_method": "average"
+      },
+      {
+        "week": 5,
+        "week_days": "29-31",
+        "category": "Mercado",
+        "source": "Visa Mae",
+        "person": "Mãe",
+        "expected_amount": 76,
+        "recurring_items": [],
+        "is_variable": true,
+        "calculation_method": "average"
+      },
+      {
+        "week": 5,
+        "week_days": "29-31",
+        "category": "Mercado",
+        "source": "Visa Bia",
+        "person": "Bia",
+        "expected_amount": 155,
+        "recurring_items": [],
+        "is_variable": true,
+        "calculation_method": "average"
+      },
+      {
+        "week": 5,
+        "week_days": "29-31",
+        "category": "Compras",
+        "source": "Master Recorrente",
+        "person": "Usuário",
+        "expected_amount": 193,
+        "recurring_items": [],
+        "is_variable": true,
+        "calculation_method": "average"
+      },
+      {
+        "week": 5,
+        "week_days": "29-31",
+        "category": "Lazer",
+        "source": "PIX",
+        "person": "Usuário",
+        "expected_amount": 45,
+        "recurring_items": [],
+        "is_variable": true,
+        "calculation_method": "average"
+      },
+      {
+        "week": 4,
+        "week_days": "22-28",
+        "category": "Padaria",
+        "source": "Master Físico",
+        "person": "Usuário",
+        "expected_amount": 14,
+        "recurring_items": [],
+        "is_variable": true,
+        "calculation_method": "average"
+      },
+      {
+        "week": 4,
+        "week_days": "22-28",
+        "category": "Mercado",
+        "source": "Visa Mae",
+        "person": "Mãe",
+        "expected_amount": 67,
+        "recurring_items": [],
+        "is_variable": true,
+        "calculation_method": "average"
+      },
+      {
+        "week": 4,
+        "week_days": "22-28",
+        "category": "Lazer",
+        "source": "Visa Recorrente",
+        "person": "Desconhecido",
+        "expected_amount": 10,
+        "recurring_items": [],
+        "is_variable": true,
+        "calculation_method": "average"
+      },
+      {
+        "week": 4,
+        "week_days": "22-28",
+        "category": "Mercado",
+        "source": "PIX",
+        "person": "Usuário",
+        "expected_amount": 130,
+        "recurring_items": [],
+        "is_variable": true,
+        "calculation_method": "average"
+      },
+      {
+        "week": 4,
+        "week_days": "22-28",
+        "category": "Compras",
+        "source": "Master Físico",
+        "person": "Usuário",
+        "expected_amount": 102,
+        "recurring_items": [],
+        "is_variable": true,
+        "calculation_method": "average"
+      },
+      {
+        "week": 4,
+        "week_days": "22-28",
+        "category": "Lazer",
+        "source": "Master Físico",
+        "person": "Usuário",
+        "expected_amount": 73,
+        "recurring_items": [],
+        "is_variable": true,
+        "calculation_method": "average"
+      },
+      {
+        "week": 4,
+        "week_days": "22-28",
+        "category": "Compras",
+        "source": "Visa Bia",
+        "person": "Bia",
+        "expected_amount": 69,
+        "recurring_items": [],
+        "is_variable": true,
+        "calculation_method": "average"
+      },
+      {
+        "week": 4,
+        "week_days": "22-28",
+        "category": "Compras",
+        "source": "Master Recorrente",
+        "person": "Usuário",
+        "expected_amount": 71,
+        "recurring_items": [],
+        "is_variable": true,
+        "calculation_method": "average"
+      },
+      {
+        "week": 3,
+        "week_days": "15-21",
+        "category": "Compras",
+        "source": "PIX",
+        "person": "Usuário",
+        "expected_amount": 120,
+        "recurring_items": [],
+        "is_variable": true,
+        "calculation_method": "average"
+      },
+      {
+        "week": 3,
+        "week_days": "15-21",
+        "category": "Mercado",
+        "source": "Visa Mae",
+        "person": "Mãe",
+        "expected_amount": 86,
+        "recurring_items": [],
+        "is_variable": true,
+        "calculation_method": "average"
+      },
+      {
+        "week": 2,
+        "week_days": "8-14",
+        "category": "Compras",
+        "source": "Visa Físico",
+        "person": "Bia",
+        "expected_amount": 123,
+        "recurring_items": [],
+        "is_variable": true,
+        "calculation_method": "average"
+      },
+      {
+        "week": 2,
+        "week_days": "8-14",
+        "category": "Mercado",
+        "source": "Visa Mae",
+        "person": "Mãe",
+        "expected_amount": 68,
+        "recurring_items": [],
+        "is_variable": true,
+        "calculation_method": "average"
+      },
+      {
+        "week": 1,
+        "week_days": "1-7",
+        "category": "Mercado",
+        "source": "Visa Bia",
+        "person": "Bia",
+        "expected_amount": 145,
+        "recurring_items": [],
+        "is_variable": true,
+        "calculation_method": "average"
+      },
+      {
+        "week": 1,
+        "week_days": "1-7",
+        "category": "Compras",
+        "source": "Master Virtual",
+        "person": "Usuário",
+        "expected_amount": 123,
+        "recurring_items": [],
+        "is_variable": true,
+        "calculation_method": "average"
+      },
+      {
+        "week": 5,
+        "week_days": "29-31",
+        "category": "Lazer",
+        "source": "Visa Bia",
+        "person": "Bia",
+        "expected_amount": 60,
+        "recurring_items": [],
+        "is_variable": true,
+        "calculation_method": "average"
+      },
+      {
+        "week": 5,
+        "week_days": "29-31",
+        "category": "Compras",
+        "source": "Visa Físico",
+        "person": "Bia",
+        "expected_amount": 123,
+        "recurring_items": [],
+        "is_variable": true,
+        "calculation_method": "average"
+      },
+      {
+        "week": 5,
+        "week_days": "29-31",
+        "category": "Padaria",
+        "source": "Master Físico",
+        "person": "Usuário",
+        "expected_amount": 19,
+        "recurring_items": [],
+        "is_variable": true,
+        "calculation_method": "average"
+      },
+      {
+        "week": 4,
+        "week_days": "22-28",
+        "category": "Combustível",
+        "source": "Visa Mae",
+        "person": "Mãe",
+        "expected_amount": 120,
+        "recurring_items": [],
+        "is_variable": true,
+        "calculation_method": "average"
+      },
+      {
+        "week": 4,
+        "week_days": "22-28",
+        "category": "Combustível",
+        "source": "Visa Bia",
+        "person": "Bia",
+        "expected_amount": 73,
+        "recurring_items": [],
+        "is_variable": true,
+        "calculation_method": "average"
+      },
+      {
+        "week": 4,
+        "week_days": "22-28",
+        "category": "Lazer",
+        "source": "PIX",
+        "person": "Usuário",
+        "expected_amount": 26,
+        "recurring_items": [],
+        "is_variable": true,
+        "calculation_method": "average"
+      },
+      {
+        "week": 4,
+        "week_days": "22-28",
+        "category": "Combustível",
+        "source": "Visa Físico",
+        "person": "Bia",
+        "expected_amount": 227,
+        "recurring_items": [],
+        "is_variable": true,
+        "calculation_method": "average"
+      },
+      {
+        "week": 4,
+        "week_days": "22-28",
+        "category": "Compras",
+        "source": "Visa Físico",
+        "person": "Bia",
+        "expected_amount": 122,
+        "recurring_items": [],
+        "is_variable": true,
+        "calculation_method": "average"
+      },
+      {
+        "week": 3,
+        "week_days": "15-21",
+        "category": "Lazer",
+        "source": "Visa Bia",
+        "person": "Bia",
+        "expected_amount": 66,
+        "recurring_items": [],
+        "is_variable": true,
+        "calculation_method": "average"
+      },
+      {
+        "week": 3,
+        "week_days": "15-21",
+        "category": "Combustível",
+        "source": "Visa Bia",
+        "person": "Bia",
+        "expected_amount": 60,
+        "recurring_items": [],
+        "is_variable": true,
+        "calculation_method": "average"
+      },
+      {
+        "week": 3,
+        "week_days": "15-21",
+        "category": "Lazer",
+        "source": "Visa Virtual",
+        "person": "Bia",
+        "expected_amount": 75,
+        "recurring_items": [],
+        "is_variable": true,
+        "calculation_method": "average"
+      },
+      {
+        "week": 3,
+        "week_days": "15-21",
+        "category": "Lazer",
+        "source": "Visa Físico",
+        "person": "Bia",
+        "expected_amount": 88,
+        "recurring_items": [],
+        "is_variable": true,
+        "calculation_method": "average"
+      },
+      {
+        "week": 2,
+        "week_days": "8-14",
+        "category": "Compras",
+        "source": "Visa Virtual",
+        "person": "Bia",
+        "expected_amount": 212,
+        "recurring_items": [],
+        "is_variable": true,
+        "calculation_method": "average"
+      },
+      {
+        "week": 1,
+        "week_days": "1-7",
+        "category": "Compras",
+        "source": "Master Físico",
+        "person": "Usuário",
+        "expected_amount": 76,
+        "recurring_items": [],
+        "is_variable": true,
+        "calculation_method": "average"
+      },
+      {
+        "week": 1,
+        "week_days": "1-7",
+        "category": "Combustível",
+        "source": "Visa Físico",
+        "person": "Bia",
+        "expected_amount": 159,
+        "recurring_items": [],
+        "is_variable": true,
+        "calculation_method": "average"
+      },
+      {
+        "week": 1,
+        "week_days": "1-7",
+        "category": "Padaria",
+        "source": "Visa Físico",
+        "person": "Bia",
+        "expected_amount": 19,
+        "recurring_items": [],
+        "is_variable": true,
+        "calculation_method": "average"
+      },
+      {
+        "week": 1,
+        "week_days": "1-7",
+        "category": "Padaria",
+        "source": "Visa Bia",
+        "person": "Bia",
+        "expected_amount": 22,
+        "recurring_items": [],
+        "is_variable": true,
+        "calculation_method": "average"
+      },
+      {
+        "week": 4,
+        "week_days": "22-28",
+        "category": "Mercado",
+        "source": "Visa Virtual",
+        "person": "Bia",
+        "expected_amount": 142,
+        "recurring_items": [],
+        "is_variable": true,
+        "calculation_method": "average"
+      },
+      {
+        "week": 3,
+        "week_days": "15-21",
+        "category": "Padaria",
+        "source": "Visa Físico",
+        "person": "Bia",
+        "expected_amount": 11,
+        "recurring_items": [],
+        "is_variable": true,
+        "calculation_method": "average"
+      },
+      {
+        "week": 1,
+        "week_days": "1-7",
+        "category": "Combustível",
+        "source": "Master Físico",
+        "person": "Usuário",
+        "expected_amount": 203,
+        "recurring_items": [],
+        "is_variable": true,
+        "calculation_method": "average"
+      },
+      {
+        "week": 5,
+        "week_days": "29-31",
+        "category": "Compras",
+        "source": "Visa Virtual",
+        "person": "Bia",
+        "expected_amount": 92,
+        "recurring_items": [],
+        "is_variable": true,
+        "calculation_method": "average"
+      },
+      {
+        "week": 2,
+        "week_days": "8-14",
+        "category": "Compras",
+        "source": "PIX",
+        "person": "Usuário",
+        "expected_amount": 68,
+        "recurring_items": [],
+        "is_variable": true,
+        "calculation_method": "average"
+      },
+      {
+        "week": 1,
+        "week_days": "1-7",
+        "category": "Compras",
+        "source": "Visa Físico",
+        "person": "Bia",
+        "expected_amount": 71,
+        "recurring_items": [],
+        "is_variable": true,
+        "calculation_method": "average"
+      },
+      {
+        "week": 1,
+        "week_days": "1-7",
+        "category": "Combustível",
+        "source": "Visa Mae",
+        "person": "Mãe",
+        "expected_amount": 120,
+        "recurring_items": [],
+        "is_variable": true,
+        "calculation_method": "average"
+      },
+      {
+        "week": 5,
+        "week_days": "29-31",
+        "category": "Padaria",
+        "source": "Visa Bia",
+        "person": "Bia",
+        "expected_amount": 11,
+        "recurring_items": [],
+        "is_variable": true,
+        "calculation_method": "average"
+      },
+      {
+        "week": 5,
+        "week_days": "29-31",
+        "category": "Combustível",
+        "source": "Visa Bia",
+        "person": "Bia",
+        "expected_amount": 81,
+        "recurring_items": [],
+        "is_variable": true,
+        "calculation_method": "average"
+      },
+      {
+        "week": 2,
+        "week_days": "8-14",
+        "category": "Mercado",
+        "source": "PIX",
+        "person": "Usuário",
+        "expected_amount": 305,
+        "recurring_items": [],
+        "is_variable": true,
+        "calculation_method": "average"
+      },
+      {
+        "week": 5,
+        "week_days": "29-31",
+        "category": "Combustível",
+        "source": "Visa Mae",
+        "person": "Mãe",
+        "expected_amount": 120,
+        "recurring_items": [],
+        "is_variable": true,
+        "calculation_method": "average"
+      },
+      {
+        "week": 2,
+        "week_days": "8-14",
+        "category": "Combustível",
+        "source": "Visa Físico",
+        "person": "Bia",
+        "expected_amount": 33,
+        "recurring_items": [],
+        "is_variable": true,
+        "calculation_method": "average"
+      },
+      {
+        "week": 2,
+        "week_days": "8-14",
+        "category": "Compras",
+        "source": "Master Físico",
+        "person": "Usuário",
+        "expected_amount": 25,
+        "recurring_items": [],
+        "is_variable": true,
+        "calculation_method": "average"
+      },
+      {
+        "week": 5,
+        "week_days": "29-31",
+        "category": "Combustível",
+        "source": "Visa Físico",
+        "person": "Bia",
+        "expected_amount": 17,
+        "recurring_items": [],
+        "is_variable": true,
+        "calculation_method": "average"
+      },
+      {
+        "week": 5,
+        "week_days": "29-31",
+        "category": "Mercado",
+        "source": "Master Físico",
+        "person": "Usuário",
+        "expected_amount": 29,
+        "recurring_items": [],
+        "is_variable": true,
+        "calculation_method": "average"
+      },
+      {
+        "week": 4,
+        "week_days": "22-28",
+        "category": "Mercado",
+        "source": "Master Físico",
+        "person": "Usuário",
+        "expected_amount": 93,
+        "recurring_items": [],
+        "is_variable": true,
+        "calculation_method": "average"
+      },
+      {
+        "week": 4,
+        "week_days": "22-28",
+        "category": "Mercado",
+        "source": "Visa Físico",
+        "person": "Bia",
+        "expected_amount": 342,
+        "recurring_items": [],
+        "is_variable": true,
+        "calculation_method": "average"
+      },
+      {
+        "week": 5,
+        "week_days": "29-31",
+        "category": "Lazer",
+        "source": "Visa Físico",
+        "person": "Bia",
+        "expected_amount": 134,
+        "recurring_items": [],
+        "is_variable": true,
+        "calculation_method": "average"
+      },
+      {
+        "week": 5,
+        "week_days": "29-31",
+        "category": "Compras",
+        "source": "Master Físico",
+        "person": "Usuário",
+        "expected_amount": 112,
+        "recurring_items": [],
+        "is_variable": true,
+        "calculation_method": "average"
+      },
+      {
+        "week": 3,
+        "week_days": "15-21",
+        "category": "Mercado",
+        "source": "Master Físico",
+        "person": "Usuário",
+        "expected_amount": 194,
+        "recurring_items": [],
+        "is_variable": true,
+        "calculation_method": "average"
+      },
+      {
+        "week": 3,
+        "week_days": "15-21",
+        "category": "Combustível",
+        "source": "Visa Físico",
+        "person": "Bia",
+        "expected_amount": 50,
+        "recurring_items": [],
+        "is_variable": true,
+        "calculation_method": "average"
+      },
+      {
+        "week": 4,
+        "week_days": "22-28",
+        "category": "Lanche",
+        "source": "Visa Bia",
+        "person": "Bia",
+        "expected_amount": 66,
+        "recurring_items": [],
+        "is_variable": true,
+        "calculation_method": "average"
+      },
+      {
+        "week": 3,
+        "week_days": "15-21",
+        "category": "Combustível",
+        "source": "PIX",
+        "person": "Usuário",
+        "expected_amount": 200,
+        "recurring_items": [],
+        "is_variable": true,
+        "calculation_method": "average"
+      },
+      {
+        "week": 2,
+        "week_days": "8-14",
+        "category": "Lazer",
+        "source": "PIX",
+        "person": "Usuário",
+        "expected_amount": 110,
+        "recurring_items": [],
+        "is_variable": true,
+        "calculation_method": "average"
+      },
+      {
+        "week": 2,
+        "week_days": "8-14",
+        "category": "Lazer",
+        "source": "Visa Físico",
+        "person": "Bia",
+        "expected_amount": 15,
+        "recurring_items": [],
+        "is_variable": true,
+        "calculation_method": "average"
+      },
+      {
+        "week": 1,
+        "week_days": "1-7",
+        "category": "Mercado",
+        "source": "PIX",
+        "person": "Usuário",
+        "expected_amount": 100,
+        "recurring_items": [],
+        "is_variable": true,
+        "calculation_method": "average"
+      },
+      {
+        "week": 3,
+        "week_days": "15-21",
+        "category": "Lazer",
+        "source": "PIX",
+        "person": "Usuário",
+        "expected_amount": 40,
+        "recurring_items": [],
+        "is_variable": true,
+        "calculation_method": "average"
+      }
+    ]
+  }
+}

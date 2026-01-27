@@ -10,12 +10,46 @@ from typing import List, Dict
 from datetime import date, timedelta
 from collections import defaultdict
 import math
+import re
 import logging
 from models import Transaction, TransactionCategory
 from .models import RecurringTransaction, WeekOfMonth
 from .person_mapper import PersonMapper
 
 logger = logging.getLogger(__name__)
+
+
+def normalize_description(description: str) -> str:
+    """
+    Normaliza descrição removendo sufixos variáveis.
+    
+    Remove padrões como:
+    - PIX: "KENIA E17/01" → "KENIA"
+    - Cartão: "VILA VELHA 01/02" → "VILA VELHA"
+    - Parcelas: "12 FBO OTICAS DINI03/10" → "12 FBO OTICAS DINI"
+    
+    Args:
+        description: Descrição original
+        
+    Returns:
+        Descrição normalizada
+    """
+    if not description:
+        return description
+    
+    # Remove sufixo de data em PIX (E\d{2}/\d{2} no final)
+    # Ex: "KENIA E17/01" → "KENIA"
+    description = re.sub(r'\s+E\d{2}/\d{2}$', '', description, flags=re.IGNORECASE)
+    
+    # Remove sufixo de parcela em cartão (\d{2}/\d{2} no final)
+    # Ex: "VILA VELHA 01/02" → "VILA VELHA"
+    # Ex: "12 FBO OTICAS DINI03/10" → "12 FBO OTICAS DINI"
+    description = re.sub(r'\d{2}/\d{2}$', '', description)
+    
+    # Remove espaços extras
+    description = ' '.join(description.split())
+    
+    return description.strip()
 
 
 class RecurringAnalyzer:
@@ -29,14 +63,14 @@ class RecurringAnalyzer:
     """
     
     def __init__(self, 
-                 min_months: int = 3,
+                 min_months: int = 6,
                  day_tolerance: int = 2,
                  person_mapper: PersonMapper = None):
         """
         Inicializa o analisador.
         
         Args:
-            min_months: Mínimo de meses para considerar recorrente (padrão: 3)
+            min_months: Mínimo de meses para considerar recorrente (padrão: 6)
             day_tolerance: Tolerância de dias para agrupar (padrão: ±2)
             person_mapper: Mapeador de pessoas (opcional)
         """
@@ -62,8 +96,8 @@ class RecurringAnalyzer:
         """
         logger.info(f"Analisando {len(transactions)} transações...")
         
-        # Filtra apenas despesas (valores negativos)
-        expenses = [t for t in transactions if t.amount < 0]
+        # Filtra apenas despesas (valores positivos = débitos)
+        expenses = [t for t in transactions if t.amount > 0]
         logger.info(f"Despesas para análise: {len(expenses)}")
         
         # Agrupa por chave de matching (categoria + descrição normalizada)
@@ -90,8 +124,13 @@ class RecurringAnalyzer:
         """
         Normaliza descrição para matching.
         
-        Remove números, caracteres especiais, mantém palavras principais.
+        Remove sufixos variáveis, números, caracteres especiais.
         """
+        # PASSO 1: Remove sufixos variáveis ANTES de processar
+        # Usa a função global normalize_description
+        description = normalize_description(description)
+        
+        # PASSO 2: Normalização padrão
         import re
         # Remove números
         text = re.sub(r'\d+', '', description)
@@ -212,7 +251,7 @@ class RecurringAnalyzer:
             avg_amount = self._calculate_avg_amount(transactions)
             unique_months = self._count_unique_months(transactions)
             confidence = self._calculate_confidence(unique_months, months_analyzed)
-            person = self.person_mapper.get_person(source)
+            person = self.person_mapper.get_person(source, first.description)
             
             # Padrão mensal
             monthly_pattern = {}
@@ -228,7 +267,7 @@ class RecurringAnalyzer:
                 week_of_month=week,
                 source=source,
                 person=person,
-                occurrences=len(transactions),
+                occurrences=unique_months,  # Usa meses únicos, não total de transações
                 months_analyzed=months_analyzed,
                 confidence=confidence,
                 last_seen=max(t.date for t in transactions),

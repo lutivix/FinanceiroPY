@@ -66,17 +66,19 @@ DEFAULT_PERSON_MAPPINGS = [
     PersonCardMapping(
         person="Usuário",
         sources=[
+            TransactionSource.PIX,
             TransactionSource.ITAU_MASTER_FISICO,
             TransactionSource.ITAU_MASTER_VIRTUAL,
             TransactionSource.ITAU_MASTER_RECORRENTE
         ],
-        description="Cartões Master Itaú"
+        description="PIX e Cartões Master Itaú"
     ),
     PersonCardMapping(
         person="Bia",
         sources=[
             TransactionSource.LATAM_VISA_FISICO,
             TransactionSource.LATAM_VISA_VIRTUAL,
+            TransactionSource.LATAM_VISA_RECORRENTE,
             TransactionSource.LATAM_VISA_BIA
         ],
         description="Cartões Visa - Bia e adicional"

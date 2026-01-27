@@ -26,6 +26,7 @@ from typing import List
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from database.transaction_repository import TransactionRepository
+from database.budget_repository import BudgetRepository
 from budget_analysis import (
     RecurringAnalyzer,
     WeeklyBudgetCalculator,
@@ -38,7 +39,7 @@ logging.basicConfig(
     format='%(asctime)s - %(levelname)s - %(message)s',
     handlers=[
         logging.StreamHandler(),
-        logging.FileHandler('budget_analysis.log')
+        logging.FileHandler('budget_analysis.log', encoding='utf-8')
     ]
 )
 logger = logging.getLogger(__name__)
@@ -163,8 +164,10 @@ def export_results(recurring: List, budgets: List, output_file: str = "weekly_bu
         "weekly_budgets": calculator.export_to_dict(budgets)
     }
     
-    # Salva arquivo
-    output_path = Path(__file__).parent / output_file
+    # Salva arquivo na pasta dados/
+    dados_dir = Path(__file__).parent.parent.parent / "dados"
+    dados_dir.mkdir(exist_ok=True)
+    output_path = dados_dir / output_file
     with open(output_path, 'w', encoding='utf-8') as f:
         json.dump(output, f, ensure_ascii=False, indent=2)
     
@@ -178,6 +181,13 @@ def print_weekly_summary(budgets: List):
     Args:
         budgets: Orçamentos semanais
     """
+    import sys
+    import io
+    
+    # Configura stdout para UTF-8 no Windows
+    if sys.platform == 'win32':
+        sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
+    
     calculator = WeeklyBudgetCalculator()
     summaries = calculator.generate_summary(budgets)
     
@@ -219,8 +229,8 @@ def main():
     parser = argparse.ArgumentParser(description='Análise de Padrões Semanais')
     parser.add_argument('--months-history', type=int, default=12,
                        help='Meses de histórico para analisar (padrão: 12)')
-    parser.add_argument('--min-recurrence', type=int, default=3,
-                       help='Mínimo de meses para considerar recorrente (padrão: 3)')
+    parser.add_argument('--min-recurrence', type=int, default=6,
+                       help='Mínimo de meses para considerar recorrente (padrão: 6)')
     parser.add_argument('--output', type=str, default='weekly_budget.json',
                        help='Arquivo de saída (padrão: weekly_budget.json)')
     
@@ -241,10 +251,15 @@ def main():
         # 3. Calcula orçamento semanal
         budgets = calculate_weekly_budgets(recurring, transactions)
         
-        # 4. Exporta resultados
+        # 4. Exporta resultados (JSON)
         export_results(recurring, budgets, args.output)
         
-        # 5. Mostra resumo
+        # 5. Persiste no banco de dados
+        db_path = Path(__file__).parent.parent.parent / "dados" / "db" / "financeiro.db"
+        budget_repo = BudgetRepository(str(db_path))
+        budget_repo.save_budgets(budgets, date.today())
+        
+        # 6. Mostra resumo
         print_weekly_summary(budgets)
         
         logger.info("🎉 Análise concluída com sucesso!")

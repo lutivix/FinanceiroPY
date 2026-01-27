@@ -44,16 +44,33 @@ class PersonMapper:
                     )
                 self.source_to_person[source] = mapping.person
     
-    def get_person(self, source: TransactionSource) -> str:
+    def get_person(self, source: TransactionSource, description: str = "") -> str:
         """
         Retorna a pessoa associada a uma fonte.
         
+        Regras especiais:
+        - Crossfit em cartões recorrentes: retorna "Usuário e Bia" (compartilhado)
+        - J E L Academia: apenas Bia
+        
         Args:
             source: Fonte da transação
+            description: Descrição da transação (para regras especiais)
             
         Returns:
             Nome da pessoa ou "Desconhecido"
         """
+        # Regra especial: Crossfit compartilhado entre Usuário e Bia
+        if description and (
+            'CROSSFIT' in description.upper() or 
+            'CROSS FIT' in description.upper()
+        ):
+            # Cartões recorrentes Master e Visa são compartilhados para Crossfit
+            if source in [TransactionSource.ITAU_MASTER_RECORRENTE, 
+                         TransactionSource.LATAM_VISA_RECORRENTE]:
+                return "Usuário e Bia"
+        
+        # J E L Academia é apenas da Bia (mapeamento padrão já resolve isso)
+        
         return self.source_to_person.get(source, "Desconhecido")
     
     def get_sources_for_person(self, person: str) -> List[TransactionSource]:

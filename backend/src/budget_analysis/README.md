@@ -54,7 +54,7 @@ Identifica transações recorrentes através de análise histórica.
 
 **Critérios:**
 - Mesma categoria + descrição normalizada
-- Mínimo de 3 meses de ocorrência
+- Mínimo de 6 meses de ocorrência (≥50% de confiança)
 - Ignora valores (foca em padrão)
 
 **Exemplo:**
@@ -96,20 +96,20 @@ summary = calculator.export_to_dict(budgets)
 Execute a análise completa:
 
 ```bash
-# Análise padrão (12 meses, min 3 recorrências)
+# Análise padrão (12 meses, min 6 recorrências)
 python backend/src/analisar_padroes_semanais.py
 
 # Customizado
 python backend/src/analisar_padroes_semanais.py \
-    --months-history 6 \
-    --min-recurrence 3 \
+    --months-history 12 \
+    --min-recurrence 6 \
     --output resultado.json
 ```
 
 **Parâmetros:**
 - `--months-history`: Meses de histórico (padrão: 12)
-- `--min-recurrence`: Mínimo de meses para recorrência (padrão: 3)
-- `--output`: Arquivo JSON de saída (padrão: weekly_budget.json)
+- `--min-recurrence`: Mínimo de meses para recorrência (padrão: 6)
+- `--output`: Arquivo JSON de saída (padrão: weekly_budget.json, salvo em dados/)
 
 ### Output
 
@@ -234,13 +234,14 @@ Semana 5: Dias 29-31 (dias extras)
 
 - **Arredondamento**: Sempre para menos para evitar surpresas
 - **Tolerância**: ±2 dias para agrupar recorrências
-- **Mínimo**: 3 meses para evitar falsos positivos em assinaturas
+- **Mínimo**: 6 meses (≥50% confiança) para focar em recorrências reais
 - **Ignore**: Categoria "A definir" não entra na análise
+- **Mapeamentos especiais**: Crossfit dividido entre Usuário e Bia
 
 ## 🐛 Troubleshooting
 
 **Poucas recorrências identificadas?**
-- Reduza `--min-recurrence` para 2
+- Reduza `--min-recurrence` para 4 ou 5
 - Verifique se as descrições estão normalizadas
 - Confira se as categorias estão preenchidas
 
