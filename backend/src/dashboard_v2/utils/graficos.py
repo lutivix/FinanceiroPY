@@ -554,69 +554,75 @@ def criar_grafico_ideals_comparison(df, mes_filtro, categoria_filtro='TODOS', fo
     multiplier = 12 if is_annual else 1
     
     # Decidir agrupamento baseado nos filtros e view_by
-    if categoria_filtro != 'TODOS':
-        # Categoria específica selecionada - mostrar apenas ela
-        grupo = df_debitos[df_debitos['categoria'] == categoria_filtro]
+    if view_by == 'source':
+        # VIEW BY SOURCE: Sempre mostrar por fontes
+        df_filtrado = df_debitos
+        
+        # Aplicar filtro de categoria se houver
+        if categoria_filtro != 'TODOS':
+            df_filtrado = df_filtrado[df_filtrado['categoria'] == categoria_filtro]
         
         # Aplicar filtro de fonte se houver
         if fonte_filtro != 'TODOS':
-            grupo = grupo[grupo['fonte'] == fonte_filtro]
-            title_suffix = f" - {categoria_filtro} ({fonte_filtro})"
+            df_filtrado = df_filtrado[df_filtrado['fonte'] == fonte_filtro]
+        
+        # Agrupar por fonte (mostrar TODAS as fontes que têm dados)
+        por_fonte = df_filtrado.groupby('fonte')['valor_normalizado'].sum()
+        todas = por_fonte.sort_values(ascending=True)  # Menor para maior (bottom to top)
+        
+        labels = todas.index.tolist()
+        real_values = todas.values.tolist()
+        
+        # Calcular ideais por fonte
+        if categoria_filtro != 'TODOS':
+            # Quando categoria específica, usar orçamento proporcional de cada fonte para essa categoria
+            # Se a fonte tem orçamento específico para categorias, usar; senão usar ORCAMENTO_IDEAL
+            ideal_values = []
+            for fonte in labels:
+                if fonte in ORCAMENTO_POR_FONTE:
+                    ideal_values.append(ORCAMENTO_POR_FONTE[fonte].get(categoria_filtro, 0) * multiplier)
+                else:
+                    # Fallback: usar proporção do orçamento geral
+                    ideal_values.append(ORCAMENTO_IDEAL.get(categoria_filtro, 0) * multiplier * 0.1)  # assumir 10% por fonte
+            title_suffix = f" - All Sources ({categoria_filtro})" if fonte_filtro == 'TODOS' else f" - {fonte_filtro} ({categoria_filtro})"
         else:
-            title_suffix = f" - {categoria_filtro}"
+            # Sem filtro de categoria: usar orçamento total da fonte
+            ideal_values = [ORCAMENTO_IDEAL_FONTE.get(fonte, 0) * multiplier for fonte in labels]
+            title_suffix = f" - All Sources" if fonte_filtro == 'TODOS' else f" - {fonte_filtro}"
         
-        real_total = grupo['valor_normalizado'].sum()
-        ideal_total = ORCAMENTO_IDEAL.get(categoria_filtro, 0) * multiplier
-        labels = [categoria_filtro]
-        real_values = [real_total]
-        ideal_values = [ideal_total]
-        
-    elif fonte_filtro != 'TODOS' and view_by == 'source':
-        # Fonte específica selecionada E view_by=source - mostrar apenas ela
-        grupo = df_debitos[df_debitos['fonte'] == fonte_filtro]
-        real_total = grupo['valor_normalizado'].sum()
-        ideal_total = ORCAMENTO_IDEAL_FONTE.get(fonte_filtro, 0) * multiplier
-        labels = [fonte_filtro]
-        real_values = [real_total]
-        ideal_values = [ideal_total]
-        title_suffix = f" - {fonte_filtro}"
-        
-    else:
-        # Visão geral: baseado no view_by
-        # Aplicar filtro de fonte se houver (mas manter agrupamento por categoria)
+    elif view_by == 'category':
+        # VIEW BY CATEGORY: Sempre mostrar por categorias
         df_filtrado = df_debitos
+        
+        # Aplicar filtro de fonte se houver
         if fonte_filtro != 'TODOS':
             df_filtrado = df_filtrado[df_filtrado['fonte'] == fonte_filtro]
         
-        if view_by == 'source':
-            # TODAS as fontes (ordenadas por valor)
-            por_fonte = df_filtrado.groupby('fonte')['valor_normalizado'].sum()
-            todas = por_fonte.sort_values(ascending=True)  # Menor para maior (bottom to top)
-            
-            labels = todas.index.tolist()
-            real_values = todas.values.tolist()
-            ideal_values = [ORCAMENTO_IDEAL_FONTE.get(fonte, 0) * multiplier for fonte in labels]
-            title_suffix = " - All Sources"
+        # Aplicar filtro de categoria se houver
+        if categoria_filtro != 'TODOS':
+            df_filtrado = df_filtrado[df_filtrado['categoria'] == categoria_filtro]
+        
+        # Agrupar por categoria (mostrar TODAS as categorias que têm dados)
+        por_categoria = df_filtrado.groupby('categoria')['valor_normalizado'].sum()
+        todas = por_categoria.sort_values(ascending=True)  # Menor para maior (bottom to top)
+        
+        labels = todas.index.tolist()
+        real_values = todas.values.tolist()
+        
+        # Usar orçamento específico da fonte se disponível
+        if fonte_filtro != 'TODOS' and fonte_filtro in ORCAMENTO_POR_FONTE:
+            orcamento_categorias = ORCAMENTO_POR_FONTE[fonte_filtro]
+            ideal_values = [orcamento_categorias.get(cat, 0) * multiplier for cat in labels]
+            title_suffix = f" - All Categories (Source: {fonte_filtro})" if categoria_filtro == 'TODOS' else f" - {categoria_filtro} ({fonte_filtro})"
         else:
-            # TODAS as categorias (ordenadas por valor)
-            por_categoria = df_filtrado.groupby('categoria')['valor_normalizado'].sum()
-            todas = por_categoria.sort_values(ascending=True)  # Menor para maior (bottom to top)
-            
-            labels = todas.index.tolist()
-            real_values = todas.values.tolist()
-            
-            # Usar orçamento específico da fonte se disponível
-            if fonte_filtro != 'TODOS' and fonte_filtro in ORCAMENTO_POR_FONTE:
-                orcamento_categorias = ORCAMENTO_POR_FONTE[fonte_filtro]
-                ideal_values = [orcamento_categorias.get(cat, 0) * multiplier for cat in labels]
-            else:
-                ideal_values = [ORCAMENTO_IDEAL.get(cat, 0) * multiplier for cat in labels]
-            
-            # Ajustar título se houver filtro de fonte
-            if fonte_filtro != 'TODOS':
-                title_suffix = f" - All Categories (Source: {fonte_filtro})"
-            else:
-                title_suffix = " - All Categories"
+            ideal_values = [ORCAMENTO_IDEAL.get(cat, 0) * multiplier for cat in labels]
+            title_suffix = f" - All Categories" if categoria_filtro == 'TODOS' else f" - {categoria_filtro}"
+    else:
+        # Fallback para view_by inválido
+        labels = []
+        real_values = []
+        ideal_values = []
+        title_suffix = ""
     
     # Calcular diferenças (positivo = excesso, negativo = economia)
     diff_values = [real - ideal for real, ideal in zip(real_values, ideal_values)]
@@ -626,36 +632,11 @@ def criar_grafico_ideals_comparison(df, mes_filtro, categoria_filtro='TODOS', fo
     
     fig = go.Figure()
     
-    # Determinar orientação: vertical para categories, horizontal para sources
-    is_vertical = (view_by == 'category' and categoria_filtro == 'TODOS')
+    # Determinar orientação: horizontal para source, vertical para category
+    is_horizontal = (view_by == 'source')
     
-    if is_vertical:
-        # Barras VERTICAIS (para categorias)
-        fig.add_trace(go.Bar(
-            x=labels,
-            y=real_values,
-            name='Real',
-            marker=dict(color=COLORS['primary']),
-            hovertemplate='<b>%{x}</b><br>Real: R$ %{y:,.2f}<extra></extra>'
-        ))
-        
-        fig.add_trace(go.Bar(
-            x=labels,
-            y=ideal_values,
-            name='Ideal',
-            marker=dict(color=COLORS['success'], opacity=0.6),
-            hovertemplate='<b>%{x}</b><br>Ideal: R$ %{y:,.2f}<extra></extra>'
-        ))
-        
-        fig.add_trace(go.Bar(
-            x=labels,
-            y=diff_values,
-            name='Difference',
-            marker=dict(color=diff_colors),
-            hovertemplate='<b>%{x}</b><br>Diff: R$ %{y:,.2f}<extra></extra>'
-        ))
-    else:
-        # Barras HORIZONTAIS (para fontes ou itens individuais)
+    if is_horizontal:
+        # Barras HORIZONTAIS (para fontes)
         fig.add_trace(go.Bar(
             y=labels,
             x=real_values,
@@ -682,14 +663,68 @@ def criar_grafico_ideals_comparison(df, mes_filtro, categoria_filtro='TODOS', fo
             marker=dict(color=diff_colors),
             hovertemplate='<b>%{y}</b><br>Diff: R$ %{x:,.2f}<extra></extra>'
         ))
+    else:
+        # Barras VERTICAIS (para categorias)
+        fig.add_trace(go.Bar(
+            x=labels,
+            y=real_values,
+            name='Real',
+            marker=dict(color=COLORS['primary']),
+            hovertemplate='<b>%{x}</b><br>Real: R$ %{y:,.2f}<extra></extra>'
+        ))
+        
+        fig.add_trace(go.Bar(
+            x=labels,
+            y=ideal_values,
+            name='Ideal',
+            marker=dict(color=COLORS['success'], opacity=0.6),
+            hovertemplate='<b>%{x}</b><br>Ideal: R$ %{y:,.2f}<extra></extra>'
+        ))
+        
+        fig.add_trace(go.Bar(
+            x=labels,
+            y=diff_values,
+            name='Difference',
+            marker=dict(color=diff_colors),
+            hovertemplate='<b>%{x}</b><br>Diff: R$ %{y:,.2f}<extra></extra>'
+        ))
     
     period_text = "Last 12 Months" if is_annual else mes_filtro
     
     # Apply template and then override specific settings
     fig.update_layout(**PLOTLY_TEMPLATE['layout'])
     
-    if is_vertical:
-        # Layout para barras verticais
+    if is_horizontal:
+        # Layout para barras horizontais (sources)
+        fig.update_layout(
+            title=f"Budget Comparison{title_suffix} ({period_text})",
+            barmode='group',
+            showlegend=True,
+            legend=dict(
+                orientation="h",
+                yanchor="bottom",
+                y=1.02,
+                xanchor="right",
+                x=1
+            ),
+            margin=dict(l=150, r=40, t=80, b=60),
+            height=max(600, len(labels) * 60)
+        )
+        
+        fig.update_xaxes(
+            title='Amount (R$)',
+            gridcolor=COLORS['grid'],
+            showgrid=True,
+            tickformat=',.0f'
+        )
+        
+        fig.update_yaxes(
+            title='',
+            gridcolor=COLORS['grid'],
+            showgrid=False
+        )
+    else:
+        # Layout para barras verticais (categories)
         fig.update_layout(
             title=f"Budget Comparison{title_suffix} ({period_text})",
             barmode='group',
@@ -717,35 +752,6 @@ def criar_grafico_ideals_comparison(df, mes_filtro, categoria_filtro='TODOS', fo
             gridcolor=COLORS['grid'],
             showgrid=True,
             tickformat=',.0f'
-        )
-    else:
-        # Layout para barras horizontais
-        fig.update_layout(
-            title=f"Budget Comparison{title_suffix} ({period_text})",
-            barmode='group',
-            showlegend=True,
-            legend=dict(
-                orientation="h",
-                yanchor="bottom",
-                y=1.02,
-                xanchor="right",
-                x=1
-            ),
-            margin=dict(l=150, r=40, t=80, b=60),
-            height=max(600, len(labels) * 60)
-        )
-        
-        fig.update_xaxes(
-            title='Amount (R$)',
-            gridcolor=COLORS['grid'],
-            showgrid=True,
-            tickformat=',.0f'
-        )
-        
-        fig.update_yaxes(
-            title='',
-            gridcolor=COLORS['grid'],
-            showgrid=False
         )
     
     return fig
