@@ -16,35 +16,74 @@ def create_budget_page():
     return html.Div([
         # Header
         html.Div([
-            html.H1("💰 Orçamento Semanal", style={
+            html.H1("� Médias Semanais", style={
                 'color': COLORS['text_primary'],
                 'fontFamily': FONTS['family'],
                 'marginBottom': SPACING['lg']
             }),
-            html.P("Acompanhe seu orçamento semanal e compare com gastos reais", style={
+            html.P("Médias calculadas com base em padrões históricos. Compare qualquer mês com essas referências.", style={
                 'color': COLORS['text_secondary'],
                 'fontSize': '1.1rem'
             })
         ], style={'marginBottom': SPACING['xl']}),
         
-        # Seletor de mês
-        html.Div([
-            html.Label("Mês de Referência:", style={
-                'color': COLORS['text_primary'],
-                'fontWeight': 'bold',
-                'marginBottom': '0.5rem'
-            }),
-            dcc.Dropdown(
-                id='budget-month-selector',
-                placeholder="Selecione o mês...",
-                value='current',
-                style={
-                    'width': '300px',
-                    'backgroundColor': COLORS['bg_card'],
-                    'color': COLORS['text_primary']
-                },
-                className='custom-dropdown'
-            )
+        # Seletores
+        dbc.Row([
+            # Referência de médias
+            dbc.Col([
+                html.Label("Referência de Médias:", style={
+                    'color': COLORS['text_primary'],
+                    'fontWeight': 'bold',
+                    'marginBottom': '0.5rem',
+                    'display': 'block'
+                }),
+                dcc.Dropdown(
+                    id='budget-month-selector',
+                    placeholder="Selecione a referência...",
+                    style={
+                        'backgroundColor': COLORS['bg_card'],
+                        'color': COLORS['text_primary']
+                    },
+                    className='custom-dropdown'
+                ),
+                html.P(
+                    "📈 Médias calculadas com histórico de 12 meses",
+                    style={
+                        'color': COLORS['text_secondary'],
+                        'fontSize': '0.85rem',
+                        'marginTop': '0.5rem',
+                        'fontStyle': 'italic'
+                    }
+                )
+            ], md=6),
+            
+            # Mês para comparação
+            dbc.Col([
+                html.Label("Mês para Comparação:", style={
+                    'color': COLORS['text_primary'],
+                    'fontWeight': 'bold',
+                    'marginBottom': '0.5rem',
+                    'display': 'block'
+                }),
+                dcc.Dropdown(
+                    id='budget-comparison-month',
+                    placeholder="Selecione o mês...",
+                    style={
+                        'backgroundColor': COLORS['bg_card'],
+                        'color': COLORS['text_primary']
+                    },
+                    className='custom-dropdown'
+                ),
+                html.P(
+                    "🔍 Escolha qualquer mês para ver seus gastos reais",
+                    style={
+                        'color': COLORS['text_secondary'],
+                        'fontSize': '0.85rem',
+                        'marginTop': '0.5rem',
+                        'fontStyle': 'italic'
+                    }
+                )
+            ], md=6)
         ], style={'marginBottom': SPACING['xl']}),
         
         # Cards de resumo

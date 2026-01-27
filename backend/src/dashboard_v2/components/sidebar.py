@@ -44,7 +44,7 @@ def create_sidebar():
                     create_nav_item('Dashboard', 'dashboard', '/'),
                     create_nav_item('Analytics', 'analytics', '/analytics'),
                     create_nav_item('Transações', 'transactions', '/transacoes'),
-                    create_nav_item('Orçamento', 'budget', '/budget'),
+                    create_nav_item('Médias', 'budget', '/budget'),
                     create_nav_item('Ideals', 'ideals', '/ideals'),
                 ],
                 style={

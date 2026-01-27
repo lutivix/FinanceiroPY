@@ -349,3 +349,100 @@ def obter_meses_orcamento_disponiveis():
     except Exception as e:
         print(f"❌ Erro ao buscar meses de orçamento: {e}")
         return [{'label': 'Atual', 'value': 'current'}]
+
+
+def obter_resumo_orcamento_por_data(data_geracao: str):
+    """
+    Retorna resumo de orçamento para uma data específica.
+    
+    Args:
+        data_geracao: Data no formato YYYY-MM-DD
+        
+    Returns:
+        Dict com totais por semana, pessoa e categoria
+    """
+    try:
+        conn = sqlite3.connect(DB_PATH)
+        
+        # Resumo por semana
+        query = f"""
+        SELECT 
+            week_number,
+            person,
+            category,
+            SUM(expected_amount) as total
+        FROM weekly_budgets
+        WHERE generated_at = '{data_geracao}'
+        GROUP BY week_number, person, category
+        ORDER BY week_number
+        """
+        
+        df = pd.read_sql_query(query, conn)
+        conn.close()
+        
+        if df.empty:
+            return {}
+        
+        # Organiza por semana
+        summary = {}
+        for week in df['week_number'].unique():
+            week_data = df[df['week_number'] == week]
+            summary[int(week)] = {
+                'total': week_data['total'].sum(),
+                'by_person': week_data.groupby('person')['total'].sum().to_dict(),
+                'by_category': week_data.groupby('category')['total'].sum().to_dict()
+            }
+        
+        return {
+            'generated_at': data_geracao,
+            'summary': summary
+        }
+    
+    except Exception as e:
+        print(f"❌ Erro ao buscar orçamento por data: {e}")
+        return {}
+
+
+def obter_meses_disponiveis_para_comparacao():
+    """
+    Retorna lista de meses disponíveis para comparação (baseado nas transações reais)
+    
+    Returns:
+        Lista de dicts com 'label' e 'value' (YYYY-MM)
+    """
+    try:
+        conn = sqlite3.connect(DB_PATH, check_same_thread=False)
+        
+        query = """
+        SELECT DISTINCT
+            strftime('%Y-%m', Data) as year_month,
+            strftime('%m', Data) as month_num,
+            strftime('%Y', Data) as year
+        FROM lancamentos
+        WHERE Categoria NOT IN ('INVESTIMENTOS', 'SALÁRIO', 'Salário', 'Investimentos')
+        ORDER BY year_month DESC
+        """
+        
+        df = pd.read_sql_query(query, conn)
+        conn.close()
+        
+        # Mapeamento de meses
+        meses_pt = {
+            '01': 'Janeiro', '02': 'Fevereiro', '03': 'Março', '04': 'Abril',
+            '05': 'Maio', '06': 'Junho', '07': 'Julho', '08': 'Agosto',
+            '09': 'Setembro', '10': 'Outubro', '11': 'Novembro', '12': 'Dezembro'
+        }
+        
+        opcoes = []
+        for _, row in df.iterrows():
+            mes_nome = meses_pt.get(row['month_num'], row['month_num'])
+            opcoes.append({
+                'label': f"{mes_nome} {row['year']}",
+                'value': row['year_month']
+            })
+        
+        return opcoes
+    
+    except Exception as e:
+        print(f"❌ Erro ao buscar meses disponíveis: {e}")
+        return []

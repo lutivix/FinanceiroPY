@@ -31,7 +31,9 @@ from dashboard_v2.utils.database import (
     obter_fontes,
     obter_orcamento_mais_recente,
     obter_resumo_orcamento_semanal,
-    obter_meses_orcamento_disponiveis
+    obter_meses_orcamento_disponiveis,
+    obter_resumo_orcamento_por_data,
+    obter_meses_disponiveis_para_comparacao
 )
 from dashboard_v2.utils.graficos import (
     criar_grafico_evolucao,
