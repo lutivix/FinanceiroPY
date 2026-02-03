@@ -127,9 +127,11 @@ class TransactionRepository:
         """
         Verifica se uma transação já existe no banco (duplicata).
         
-        Usa normalização de descrição para detectar duplicatas mesmo quando:
-        - Descrição tem datas (dd/mm) ou parcelas (x/y) variáveis
-        - Há pequenas diferenças de formatação
+        Compara descrições ORIGINAIS (sem normalização) junto com:
+        - Data da transação
+        - Valor (com tolerância de 0.01)
+        - Fonte (PIX, Cartão, etc)
+        - Mês de compensação (para distinguir parcelas de cartão)
         
         Args:
             transaction: Transação a verificar
@@ -141,36 +143,38 @@ class TransactionRepository:
             with sqlite3.connect(self.db_path) as conn:
                 cursor = conn.cursor()
                 
-                # Normaliza descrição para comparação
-                desc_norm = self.dedup_helper.normalize_description_for_dedup(
-                    transaction.description
-                )
-                
-                # Busca transações com mesma data, valor aproximado e fonte
+                # Busca transações com mesma data, valor aproximado, fonte E descrição exata
                 cursor.execute("""
-                    SELECT Descricao FROM lancamentos 
+                    SELECT Descricao, MesComp FROM lancamentos 
                     WHERE Data = ? 
                     AND ABS(Valor - ?) < 0.01
                     AND UPPER(Fonte) = UPPER(?)
+                    AND UPPER(TRIM(Descricao)) = UPPER(TRIM(?))
                 """, (
                     transaction.date.isoformat(),
                     float(transaction.amount),
-                    transaction.source.value
+                    transaction.source.value,
+                    transaction.description
                 ))
                 
-                existing_descs = cursor.fetchall()
+                existing = cursor.fetchall()
                 
-                # Compara descrições normalizadas
-                for (existing_desc,) in existing_descs:
-                    existing_norm = self.dedup_helper.normalize_description_for_dedup(
-                        existing_desc
-                    )
-                    if existing_norm == desc_norm:
+                # Se encontrou algo, verifica o mês de compensação
+                for existing_desc, existing_mes_comp in existing:
+                    # Se ambos têm mes_comp, devem ser iguais para ser duplicata
+                    if transaction.mes_comp and existing_mes_comp:
+                        if transaction.mes_comp == existing_mes_comp:
+                            logger.debug(
+                                f"🔍 Duplicata detectada: '{transaction.description}' "
+                                f"(mes_comp: {transaction.mes_comp})",
+                            )
+                            return True
+                    else:
+                        # Se algum não tem mes_comp, considera duplicata pela descrição
                         logger.debug(
-                            f"🔍 Duplicata detectada: '{transaction.description}' "
-                            f"vs '{existing_desc}'",
+                            f"🔍 Duplicata detectada: '{transaction.description}'",
                         )
-                        return True  # Duplicata encontrada
+                        return True
                 
                 return False  # Não é duplicata
                 

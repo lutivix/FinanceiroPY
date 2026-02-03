@@ -83,7 +83,7 @@ class PixProcessor(BaseProcessor):
                 
                 transaction = Transaction(
                     date=row["Data"].date(),
-                    description=self.normalize_description(row["Descricao"]),
+                    description=row["Descricao"].strip(),
                     amount=row["Valor"],
                     source=TransactionSource.PIX,
                     category=TransactionCategory.A_DEFINIR,

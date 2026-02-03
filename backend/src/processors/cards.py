@@ -200,7 +200,7 @@ class CardProcessor(BaseProcessor):
             if pd.notnull(valor) and valor != 0 and data is not None:
                 transaction = Transaction(
                     date=data,
-                    description=self.normalize_description(col_b),
+                    description=col_b.strip(),
                     amount=float(valor),
                     source=current_source,
                     category=TransactionCategory.A_DEFINIR,
@@ -285,7 +285,7 @@ class CardProcessor(BaseProcessor):
             if pd.notnull(valor) and valor != 0:
                 transaction = Transaction(
                     date=data,
-                    description=self.normalize_description(col_b),
+                    description=col_b.strip(),
                     amount=float(valor),
                     source=source,
                     category=TransactionCategory.A_DEFINIR,
