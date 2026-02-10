@@ -35,10 +35,34 @@ dashboard_v2/
     └── graficos.py               # Geração de gráficos (converter_mes_para_data)
 ```
 
+## � **IMPORTANTE: Use `py` no Windows**
+
+**⚡ No Windows, sempre use o comando `py`:**
+
+```bash
+# ✅ CORRETO - Funciona sempre
+py backend/src/dashboard_v2/main.py
+
+# ❌ ERRADO - Pode falhar no Windows
+python backend/src/dashboard_v2/main.py
+```
+
+**Por quê?** O Python Launcher (`py`) gerencia corretamente múltiplas versões do Python no Windows.
+
+---
+
 ## 🚀 Como Executar
 
-### Windows
+### Windows (Recomendado)
 ```bash
+# Opção 1: Script interativo (recomendado)
+./agente_financeiro_completo.sh
+# Escolha opção [7] para iniciar o Dashboard
+
+# Opção 2: Direto via comando
+py backend/src/dashboard_v2/main.py
+
+# Opção 3: Via batch (legado)
 dashboard_v2.bat
 ```
 

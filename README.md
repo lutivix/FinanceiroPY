@@ -4,6 +4,23 @@
 
 ---
 
+## 🚨 **IMPORTANTE: COMANDO PYTHON**
+
+**⚡ No Windows, use `py` ao invés de `python`:**
+
+```bash
+# ✅ CORRETO
+py backend/src/dashboard_v2/main.py
+py backend/src/agente_financeiro.py
+
+# ❌ ERRADO
+python backend/src/dashboard_v2/main.py  # Pode não funcionar no Windows
+```
+
+**Por quê?** O Windows usa o [Python Launcher](https://docs.python.org/3/using/windows.html#launcher) (`py`) que gerencia múltiplas versões do Python corretamente.
+
+---
+
 ## ⚠️ **AVISO IMPORTANTE PARA NOVOS CHATS**
 
 **🛡️ PRESERVAÇÃO DA DOCUMENTAÇÃO**

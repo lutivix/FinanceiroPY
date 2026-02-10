@@ -4,7 +4,21 @@ Arquivos de configuração centralizados do projeto.
 
 ---
 
-## 📂 Arquivos
+## � **IMPORTANTE: Comando Python no Windows**
+
+**⚡ Sempre use `py` ao invés de `python` no Windows:**
+
+```bash
+# ✅ CORRETO
+py backend/src/agente_financeiro.py
+
+# ❌ ERRADO
+python backend/src/agente_financeiro.py  # Pode não funcionar
+```
+
+---
+
+## �📂 Arquivos
 
 | Arquivo              | Descrição                                  | Versionado          |
 | -------------------- | ------------------------------------------ | ------------------- |

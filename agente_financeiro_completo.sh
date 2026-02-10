@@ -44,9 +44,15 @@ show_banner() {
     if [ "$active_env" != "nenhum" ]; then
         echo -e "${YELLOW}✅ Ambiente ativo no terminal: ${GREEN}${active_env}${NC}"
     else
-        echo -e "${YELLOW}⚠️  Ambiente ativo no terminal: ${RED}${active_env}${NC} ${BLUE}(usando conda run)${NC}"
+        echo -e "${YELLOW}⚠️  Ambiente ativo no terminal: ${RED}${active_env}${NC} ${BLUE}(ativando automaticamente)${NC}"
     fi
     echo ""
+}
+
+# Função para executar comando no ambiente conda
+run_in_conda() {
+    # Ativa o ambiente e executa o comando no shell atual (preserva TTY para UTF-8)
+    bash -c "eval \"\$('$CONDA_EXE' shell.bash hook)\" && conda activate '$CONDA_ENV' && $*"
 }
 
 # Função para validar ambiente
@@ -158,7 +164,7 @@ run_complete() {
     echo ""
     
     echo -e "${YELLOW}⏳ Executando processamento principal...${NC}"
-    "$CONDA_EXE" run -n "$CONDA_ENV" python backend/src/agente_financeiro.py
+    run_in_conda py backend/src/agente_financeiro.py
     if [ $? -ne 0 ]; then
         echo -e "${RED}❌ Erro no processamento principal!${NC}"
         read -p "Pressione ENTER para continuar..."
@@ -167,7 +173,7 @@ run_complete() {
     
     echo ""
     echo -e "${YELLOW}⏳ Atualizando dicionário do Excel...${NC}"
-    "$CONDA_EXE" run -n "$CONDA_ENV" python backend/src/atualiza_dicionario.py
+    run_in_conda py backend/src/atualiza_dicionario.py
     if [ $? -ne 0 ]; then
         echo -e "${RED}❌ Erro na atualização do dicionário Excel!${NC}"
         read -p "Pressione ENTER para continuar..."
@@ -176,7 +182,7 @@ run_complete() {
     
     echo ""
     echo -e "${YELLOW}⏳ Atualizando dicionário do Controle...${NC}"
-    "$CONDA_EXE" run -n "$CONDA_ENV" python backend/src/atualiza_dicionario_controle.py
+    run_in_conda py backend/src/atualiza_dicionario_controle.py
     if [ $? -ne 0 ]; then
         echo -e "${RED}❌ Erro na atualização do dicionário Controle!${NC}"
         read -p "Pressione ENTER para continuar..."
@@ -197,7 +203,7 @@ run_agent() {
     echo -e "${CYAN}========================================================${NC}"
     echo ""
     
-    "$CONDA_EXE" run -n "$CONDA_ENV" python backend/src/agente_financeiro.py
+    run_in_conda py backend/src/agente_financeiro.py
     if [ $? -ne 0 ]; then
         echo -e "${RED}❌ Erro no processamento!${NC}"
         read -p "Pressione ENTER para continuar..."
@@ -218,7 +224,7 @@ update_dict_excel() {
     echo -e "${CYAN}========================================================${NC}"
     echo ""
     
-    "$CONDA_EXE" run -n "$CONDA_ENV" python backend/src/atualiza_dicionario.py
+    run_in_conda py backend/src/atualiza_dicionario.py
     if [ $? -ne 0 ]; then
         echo -e "${RED}❌ Erro na atualização do dicionário!${NC}"
         read -p "Pressione ENTER para continuar..."
@@ -239,7 +245,7 @@ update_dict_control() {
     echo -e "${CYAN}========================================================${NC}"
     echo ""
     
-    "$CONDA_EXE" run -n "$CONDA_ENV" python backend/src/atualiza_dicionario_controle.py
+    run_in_conda py backend/src/atualiza_dicionario_controle.py
     if [ $? -ne 0 ]; then
         echo -e "${RED}❌ Erro na atualização do dicionário!${NC}"
         read -p "Pressione ENTER para continuar..."
@@ -261,7 +267,7 @@ update_dict_db() {
     echo ""
     echo -e "${BLUE}📊 Lendo categorizações da tabela lancamentos...${NC}"
     
-    "$CONDA_EXE" run -n "$CONDA_ENV" python backend/src/atualiza_dicionario_unificado.py db
+    run_in_conda py backend/src/atualiza_dicionario_unificado.py db
     if [ $? -ne 0 ]; then
         echo -e "${RED}❌ Erro na atualização do dicionário!${NC}"
         read -p "Pressione ENTER para continuar..."
@@ -282,7 +288,7 @@ clean_categories() {
     echo -e "${CYAN}========================================================${NC}"
     echo ""
     
-    "$CONDA_EXE" run -n "$CONDA_ENV" python backend/src/limpar_categorias.py
+    run_in_conda py backend/src/limpar_categorias.py
     if [ $? -ne 0 ]; then
         echo -e "${RED}❌ Erro na limpeza!${NC}"
         read -p "Pressione ENTER para continuar..."
@@ -296,7 +302,7 @@ clean_categories() {
 
 # Função para verificar dependências do dashboard
 check_dashboard_deps() {
-    "$CONDA_EXE" run -n "$CONDA_ENV" python -c "import dash" 2>/dev/null
+    run_in_conda py -c 'import dash' 2>/dev/null
     return $?
 }
 
@@ -318,7 +324,7 @@ install_dashboard_deps() {
     echo -e "${YELLOW}⏳ Instalando pacotes via pip...${NC}"
     echo ""
     
-    "$CONDA_EXE" run -n "$CONDA_ENV" pip install -r backend/requirements-dashboard.txt
+    run_in_conda pip install -r backend/requirements-dashboard.txt
     
     if [ $? -eq 0 ]; then
         echo ""
@@ -382,7 +388,7 @@ start_dashboard() {
     echo ""
     
     echo -e "${YELLOW}⏳ Abrindo Dashboard em nova janela...${NC}"
-    mintty -t "Dashboard Financeiro v2" -s 120,30 /bin/bash -c "cd '$SCRIPT_DIR' && echo 'Iniciando Dashboard...' && '$CONDA_EXE' run -n '$CONDA_ENV' py backend/src/dashboard_v2/main.py 2>&1 | sed 's/\x1b\[[0-9;]*m//g'; echo ''; echo 'Dashboard encerrado. Pressione ENTER para fechar.'; read" &
+    mintty -t "Dashboard Financeiro v2" -s 120,30 /bin/bash -c "cd '$SCRIPT_DIR' && echo 'Iniciando Dashboard...' && '/c/ProgramData/anaconda3/Scripts/conda.exe' run -n financeiro py backend/src/dashboard_v2/main.py 2>&1; echo ''; echo 'Dashboard encerrado. Pressione ENTER para fechar.'; read" &
     DASHBOARD_PID=$!
     
     echo -e "${YELLOW}⏳ Aguardando servidor inicializar...${NC}"
@@ -465,12 +471,12 @@ show_environment_info() {
         echo -e "   Modo: ${GREEN}Execução direta (python)${NC}"
     else
         echo -e "   Terminal: ${YELLOW}⚠️  Não ativado${NC}"
-        echo -e "   Modo: ${BLUE}Execução via conda run${NC}"
+        echo -e "   Modo: ${BLUE}Ativação automática via source${NC}"
     fi
     echo ""
     
     echo -e "${BLUE}🐍 Versão do Python no ambiente:${NC}"
-    "$CONDA_EXE" run -n "$CONDA_ENV" python --version 2>&1 | sed 's/^/   /'
+    run_in_conda py --version 2>&1 | sed 's/^/   /'
     echo ""
     
     echo -e "${BLUE}📚 Pacotes Principais Instalados:${NC}"
@@ -482,9 +488,26 @@ show_environment_info() {
         echo -e "   ${RED}❌${NC} dash (Dashboard) - ${YELLOW}Use opção [8] para instalar${NC}"
     fi
     
-    "$CONDA_EXE" run -n "$CONDA_ENV" python -c "import pandas; print('   \033[0;32m✅\033[0m pandas ' + pandas.__version__)" 2>/dev/null || echo -e "   ${RED}❌${NC} pandas"
-    "$CONDA_EXE" run -n "$CONDA_ENV" python -c "import plotly; print('   \033[0;32m✅\033[0m plotly ' + plotly.__version__)" 2>/dev/null || echo -e "   ${RED}❌${NC} plotly"
-    "$CONDA_EXE" run -n "$CONDA_ENV" python -c "import openpyxl; print('   \033[0;32m✅\033[0m openpyxl ' + openpyxl.__version__)" 2>/dev/null || echo -e "   ${RED}❌${NC} openpyxl"
+    PANDAS_VER=$(run_in_conda py -c "import pandas; print(pandas.__version__)" 2>/dev/null)
+    if [ -n "$PANDAS_VER" ]; then
+        echo -e "   ${GREEN}✅${NC} pandas $PANDAS_VER"
+    else
+        echo -e "   ${RED}❌${NC} pandas"
+    fi
+    
+    PLOTLY_VER=$(run_in_conda py -c "import plotly; print(plotly.__version__)" 2>/dev/null)
+    if [ -n "$PLOTLY_VER" ]; then
+        echo -e "   ${GREEN}✅${NC} plotly $PLOTLY_VER"
+    else
+        echo -e "   ${RED}❌${NC} plotly"
+    fi
+    
+    OPENPYXL_VER=$(run_in_conda py -c "import openpyxl; print(openpyxl.__version__)" 2>/dev/null)
+    if [ -n "$OPENPYXL_VER" ]; then
+        echo -e "   ${GREEN}✅${NC} openpyxl $OPENPYXL_VER"
+    else
+        echo -e "   ${RED}❌${NC} openpyxl"
+    fi
     
     echo ""
     echo -e "${BLUE}📂 Arquivos de Configuração:${NC}"

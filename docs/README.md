@@ -6,6 +6,21 @@
 
 ---
 
+## 🚨 **IMPORTANTE: Use `py` no Windows**
+
+**⚡ No Windows, sempre use `py` ao invés de `python`:**
+
+```bash
+# ✅ CORRETO
+py backend/src/agente_financeiro.py
+py backend/src/dashboard_v2/main.py
+
+# ❌ ERRADO  
+python backend/src/agente_financeiro.py  # Pode falhar no Windows
+```
+
+---
+
 ## 🎉 NOVIDADES v2.3.0
 
 **📊 DASHBOARD INTERATIVO + OPEN FINANCE COMPLETO!**
