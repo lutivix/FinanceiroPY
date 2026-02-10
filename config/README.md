@@ -18,7 +18,7 @@ python backend/src/agente_financeiro.py  # Pode não funcionar
 
 ---
 
-## �📂 Arquivos
+## 📂 Arquivos
 
 | Arquivo              | Descrição                                  | Versionado          |
 | -------------------- | ------------------------------------------ | ------------------- |
