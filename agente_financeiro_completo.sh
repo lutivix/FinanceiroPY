@@ -302,7 +302,7 @@ clean_categories() {
 
 # Função para verificar dependências do dashboard
 check_dashboard_deps() {
-    run_in_conda py -c 'import dash' 2>/dev/null
+    bash -c "eval \"\$('$CONDA_EXE' shell.bash hook)\" && conda activate '$CONDA_ENV' && py -c 'import dash'" 2>/dev/null
     return $?
 }
 
@@ -488,21 +488,21 @@ show_environment_info() {
         echo -e "   ${RED}❌${NC} dash (Dashboard) - ${YELLOW}Use opção [8] para instalar${NC}"
     fi
     
-    PANDAS_VER=$(run_in_conda py -c "import pandas; print(pandas.__version__)" 2>/dev/null)
+    PANDAS_VER=$(bash -c "eval \"\$('$CONDA_EXE' shell.bash hook)\" && conda activate '$CONDA_ENV' && py -c 'import pandas; print(pandas.__version__)'" 2>/dev/null)
     if [ -n "$PANDAS_VER" ]; then
         echo -e "   ${GREEN}✅${NC} pandas $PANDAS_VER"
     else
         echo -e "   ${RED}❌${NC} pandas"
     fi
     
-    PLOTLY_VER=$(run_in_conda py -c "import plotly; print(plotly.__version__)" 2>/dev/null)
+    PLOTLY_VER=$(bash -c "eval \"\$('$CONDA_EXE' shell.bash hook)\" && conda activate '$CONDA_ENV' && py -c 'import plotly; print(plotly.__version__)'" 2>/dev/null)
     if [ -n "$PLOTLY_VER" ]; then
         echo -e "   ${GREEN}✅${NC} plotly $PLOTLY_VER"
     else
         echo -e "   ${RED}❌${NC} plotly"
     fi
     
-    OPENPYXL_VER=$(run_in_conda py -c "import openpyxl; print(openpyxl.__version__)" 2>/dev/null)
+    OPENPYXL_VER=$(bash -c "eval \"\$('$CONDA_EXE' shell.bash hook)\" && conda activate '$CONDA_ENV' && py -c 'import openpyxl; print(openpyxl.__version__)'" 2>/dev/null)
     if [ -n "$OPENPYXL_VER" ]; then
         echo -e "   ${GREEN}✅${NC} openpyxl $OPENPYXL_VER"
     else
