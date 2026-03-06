@@ -148,6 +148,7 @@ show_menu() {
     fi
     echo -e "${MAGENTA}[8]${NC} 📦 Instalar Dependências do Dashboard"
     echo -e "${CYAN}[9]${NC} ℹ️  Informações do Ambiente"
+    echo -e "${GREEN}[10]${NC} 📊 Gerar Médias Semanais (Atualizar Orçamento)"
     echo ""
     echo -e "${YELLOW}[0]${NC} ❌ Sair"
     echo ""
@@ -297,6 +298,32 @@ clean_categories() {
     
     echo ""
     echo -e "${GREEN}✅ Limpeza concluída!${NC}"
+    return 0
+}
+
+# Função para gerar médias semanais
+generate_weekly_budgets() {
+    clear_screen
+    show_banner
+    echo -e "${CYAN}========================================================${NC}"
+    echo -e "${CYAN}       📊 GERANDO MÉDIAS SEMANAIS (ORÇAMENTO)${NC}"
+    echo -e "${CYAN}========================================================${NC}"
+    echo ""
+    echo -e "${BLUE}📈 Analisando padrões dos últimos 12 meses...${NC}"
+    echo ""
+    
+    run_in_conda py backend/src/analisar_padroes_semanais.py
+    if [ $? -ne 0 ]; then
+        echo -e "${RED}❌ Erro na geração de médias!${NC}"
+        read -p "Pressione ENTER para continuar..."
+        return 1
+    fi
+    
+    echo ""
+    echo -e "${GREEN}✅ Médias semanais geradas com sucesso!${NC}"
+    echo -e "${BLUE}💡 Visualize no Dashboard: Médias Semanais${NC}"
+    echo ""
+    read -p "Pressione ENTER para continuar..."
     return 0
 }
 
@@ -582,6 +609,9 @@ while true; do
             ;;
         9)
             show_environment_info
+            ;;
+        10)
+            generate_weekly_budgets
             ;;
         0)
             echo ""
