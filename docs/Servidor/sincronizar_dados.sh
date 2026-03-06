@@ -326,9 +326,11 @@ health_check() {
         sleep 3
     done
 
-    log_warn "Dashboard não respondeu HTTP 200 após ${max_attempts} tentativas"
-    log_warn "Verifique com: ssh lfadm \"docker logs $LFADM_CONTAINER --tail 30\""
-    return 1
+    # Não falha o script — sync já foi feito, dashboard pode demorar mais pra subir
+    log_warn "Dashboard ainda não respondeu HTTP 200 (pode levar mais alguns segundos)"
+    log_warn "Acesse manualmente: $LFADM_DASHBOARD_URL"
+    log_warn "Ou verifique: ssh lfadm \"docker logs $LFADM_CONTAINER --tail 30\""
+    return 0
 }
 
 print_summary() {
