@@ -309,6 +309,13 @@ health_check() {
         return 0
     fi
 
+    # Verifica se curl está disponível
+    if ! command -v curl &>/dev/null; then
+        log_warn "curl não disponível — pulando health check"
+        log_info "Acesse manualmente: $LFADM_DASHBOARD_URL"
+        return 0
+    fi
+
     local attempts=0
     local max_attempts=10
     local http_code
@@ -373,3 +380,6 @@ else
     log_dry "Dry-run concluído. Nenhuma alteração foi feita."
     echo -e "  Para executar de verdade: ${GREEN}bash docs/Servidor/sincronizar_dados.sh${NC}"
 fi
+
+# Garante exit 0 após sync bem-sucedido (health check é apenas informativo)
+exit 0

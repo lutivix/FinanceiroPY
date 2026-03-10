@@ -61,7 +61,7 @@ Scripts shell para automação de tarefas e gerenciamento de sistemas.
 
 **Scripts principais:**
 
-- **`agente_financeiro_completo.sh`** - Menu interativo com 9 opções:
+- **`agente_financeiro_completo.sh`** - Menu interativo com 11 opções:
   1. Processamento completo
   2. Processar apenas transações
   3-5. Atualizar dicionários (Excel, Controle, DB)
@@ -69,6 +69,8 @@ Scripts shell para automação de tarefas e gerenciamento de sistemas.
   7. Iniciar/Parar Dashboard
   8. Instalar dependências do dashboard
   9. Informações do ambiente
+  10. Gerar médias semanais (atualizar orçamento)
+  11. Sincronizar dados com servidor LFADM (produção)
 
 - **`iniciar_sistemas.sh`** - Gerenciador de sistemas múltiplos:
   - Financeiro backend
@@ -77,6 +79,12 @@ Scripts shell para automação de tarefas e gerenciamento de sistemas.
   - Controle de PIDs e status
 
 - **`iniciar_sistemas.bat`** - Versão Windows (plano B)
+
+- **`docs/Servidor/sincronizar_dados.sh`** - Sincronização de dados:
+  - Copia banco financeiro.db para servidor LFADM via SSH
+  - Reinicia container Docker do dashboard
+  - Health check automático
+  - Modos: normal, --dry-run, --status
 
 #### **⚡ Solução Técnica: UTF-8 no Git Bash**
 
@@ -187,5 +195,5 @@ pytest tests/
 ---
 
 **Criado em:** 11/11/2025  
-**Última atualização:** 10/02/2026  
-**Mudanças recentes:** Adicionada documentação sobre scripts bash de automação e solução UTF-8 para Git Bash
+**Última atualização:** 10/03/2026  
+**Mudanças recentes:** Adicionadas opções 10 (geração de médias semanais) e 11 (sincronização com servidor LFADM) ao menu principal

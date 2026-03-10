@@ -149,6 +149,7 @@ show_menu() {
     echo -e "${MAGENTA}[8]${NC} 📦 Instalar Dependências do Dashboard"
     echo -e "${CYAN}[9]${NC} ℹ️  Informações do Ambiente"
     echo -e "${GREEN}[10]${NC} 📊 Gerar Médias Semanais (Atualizar Orçamento)"
+    echo -e "${BLUE}[11]${NC} 🚀 Sincronizar Dados com LFADM (Produção)"
     echo ""
     echo -e "${YELLOW}[0]${NC} ❌ Sair"
     echo ""
@@ -325,6 +326,42 @@ generate_weekly_budgets() {
     echo ""
     read -p "Pressione ENTER para continuar..."
     return 0
+}
+
+# Função para sincronizar dados com servidor LFADM
+sync_to_server() {
+    clear_screen
+    show_banner
+    echo -e "${CYAN}========================================================${NC}"
+    echo -e "${CYAN}       🚀 SINCRONIZAR DADOS COM LFADM (PRODUÇÃO)${NC}"
+    echo -e "${CYAN}========================================================${NC}"
+    echo ""
+    echo -e "${BLUE}📦 Preparando sincronização do banco de dados...${NC}"
+    echo ""
+    
+    local sync_script="$SCRIPT_DIR/docs/Servidor/sincronizar_dados.sh"
+    
+    if [ ! -f "$sync_script" ]; then
+        echo -e "${RED}❌ Script de sincronização não encontrado!${NC}"
+        echo -e "${RED}   Esperado em: $sync_script${NC}"
+        echo ""
+        read -p "Pressione ENTER para continuar..."
+        return 1
+    fi
+    
+    # Executa o script de sincronização
+    bash "$sync_script"
+    local exit_code=$?
+    
+    echo ""
+    if [ $exit_code -eq 0 ]; then
+        echo -e "${GREEN}✅ Sincronização concluída!${NC}"
+    else
+        echo -e "${RED}❌ Erro na sincronização (código: $exit_code)${NC}"
+    fi
+    echo ""
+    read -p "Pressione ENTER para continuar..."
+    return $exit_code
 }
 
 # Função para verificar dependências do dashboard
@@ -612,6 +649,9 @@ while true; do
             ;;
         10)
             generate_weekly_budgets
+            ;;
+        11)
+            sync_to_server
             ;;
         0)
             echo ""
