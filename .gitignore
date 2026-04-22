@@ -24,6 +24,23 @@ config.ini
 credentials.*
 
 # ==========================================
+# API ITAÚ - CERTIFICADOS E CREDENCIAIS
+# ==========================================
+# Certificados SSL/TLS
+config/certificates/
+*.crt
+*.csr
+*.p12
+*.pfx
+
+# Configurações da API
+config/itau_api.ini
+
+# Logs sensíveis da API
+logs/itau_api.log
+logs/itau_*.log
+
+# ==========================================
 # PYTHON
 # ==========================================
 # Byte-compiled / optimized / DLL files

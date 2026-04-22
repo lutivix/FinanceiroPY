@@ -71,12 +71,22 @@ Documentação técnica, arquitetura e guias do sistema.
 
 Documentação sobre integrações externas (Open Finance, APIs, etc).
 
+#### **Pluggy (Open Finance)**
+
 | Arquivo                                                                 | Descrição                                 |
 | ----------------------------------------------------------------------- | ----------------------------------------- |
 | [001_INTEGRACAO_PLUGGY.md](Integracao/001_INTEGRACAO_PLUGGY.md)         | Integração Open Finance via Pluggy        |
 | [002_CHECKLIST_PLUGGY.md](Integracao/002_CHECKLIST_PLUGGY.md)           | Checklist de implementação Pluggy         |
 | [003_ARQUITETURA_PLUGGY.md](Integracao/003_ARQUITETURA_PLUGGY.md)       | Decisões técnicas e arquitetura (a criar) |
 | [004_SEGURANCA_OPENFINANCE.md](Integracao/004_SEGURANCA_OPENFINANCE.md) | Segurança e compliance (a criar)          |
+
+#### **API Itaú (Nativa)**
+
+| Arquivo                                                                          | Descrição                              |
+| -------------------------------------------------------------------------------- | -------------------------------------- |
+| [Itau/README.md](Integracao/Itau/README.md)                                      | Visão geral da integração Itaú         |
+| [Itau/001_INTEGRACAO_API_ITAU.md](Integracao/Itau/001_INTEGRACAO_API_ITAU.md)   | Guia completo de integração e arquitetura |
+| [Itau/002_CHECKLIST_HABILITACAO.md](Integracao/Itau/002_CHECKLIST_HABILITACAO.md) | Checklist passo a passo de habilitação |
 
 ### 🧪 [Testing](Testing/)
 

@@ -21,6 +21,33 @@ python backend/src/dashboard_v2/main.py  # Pode não funcionar no Windows
 
 ---
 
+## 💡 **INSTALAÇÃO DE PACOTES NO WINDOWS**
+
+**⚡ Use `py -m pip` ao invés de `pip` diretamente:**
+
+```bash
+# ✅ CORRETO - Funciona em todos os terminais (PowerShell, CMD, Git Bash)
+py -m pip install -r requirements.txt
+py -m pip install plaid-python
+py -m pip list
+
+# ❌ ERRADO - Não funciona no Git Bash
+pip install -r requirements.txt  # bash: pip: command not found
+```
+
+**Por quê?** 
+- No Windows, `pip.exe` não está no PATH do Git Bash
+- `py -m pip` funciona universalmente em **todos os terminais**
+- Garante que você está instalando no Python correto
+
+**💡 Dica:** Crie um alias permanente no Git Bash:
+```bash
+echo 'alias pip="py -m pip"' >> ~/.bashrc
+source ~/.bashrc
+```
+
+---
+
 ## ⚠️ **AVISO IMPORTANTE PARA NOVOS CHATS**
 
 **🛡️ PRESERVAÇÃO DA DOCUMENTAÇÃO**

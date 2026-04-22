@@ -20,10 +20,13 @@ python backend/src/agente_financeiro.py  # Pode não funcionar
 
 ## 📂 Arquivos
 
-| Arquivo              | Descrição                                  | Versionado          |
-| -------------------- | ------------------------------------------ | ------------------- |
-| `config.example.ini` | Template de configuração (sem credenciais) | ✅ Sim              |
-| `config.ini`         | Configuração real com credenciais          | ❌ Não (.gitignore) |
+| Arquivo                   | Descrição                                  | Versionado          |
+| ------------------------- | ------------------------------------------ | ------------------- |
+| `config.example.ini`      | Template de configuração (sem credenciais) | ✅ Sim              |
+| `config.ini`              | Configuração real com credenciais          | ❌ Não (.gitignore) |
+| `itau_api.example.ini`    | Template de configuração API Itaú          | ✅ Sim              |
+| `itau_api.ini`            | Configuração real API Itaú                 | ❌ Não (.gitignore) |
+| `certificates/`           | Certificados SSL/TLS da API Itaú           | ❌ Não (.gitignore) |
 
 ---
 
@@ -228,8 +231,92 @@ config.read(config_path)
 - [📖 Documentação de Integração](../docs/Integracao/)
 - [🔐 Segurança Open Finance](../docs/Integracao/004_SEGURANCA_OPENFINANCE.md)
 - [🚀 Integracao_PROXIMO_CHAT.md](../docs/Integracao_PROXIMO_CHAT.md)
+- [🏦 API Itaú Account Statement](../docs/Integracao/Itau/README.md)
+
+---
+
+## 🏦 Configuração da API Itaú (Novo)
+
+### **Configuração da API Account Statement**
+
+A integração com a API do Itaú permite sincronização automática de extratos bancários.
+
+### **Setup Inicial**
+
+1. **Copie o template de configuração:**
+
+   ```bash
+   # Windows
+   copy config\itau_api.example.ini config\itau_api.ini
+   
+   # Linux/Mac
+   cp config/itau_api.example.ini config/itau_api.ini
+   ```
+
+2. **Preencha as credenciais** (após receber do Itaú):
+
+   ```ini
+   [credentials]
+   client_id = e26f2f89-0ead-4ca6-8bc3-dd44b4ab3cc7
+   client_secret = seu_client_secret_aqui
+   
+   [account]
+   statement_id = 150001234567  # Agência + Conta + DV (12 dígitos)
+   account_type = current_account
+   ```
+
+### **Certificados SSL/TLS**
+
+Os certificados devem ser armazenados em `config/certificates/`:
+
+```
+config/
+└── certificates/
+    ├── private.pem              # Chave privada (gerada localmente)
+    ├── public.pem               # Chave pública (enviar ao Itaú)
+    ├── certificate_private.key  # Chave privada do certificado
+    └── itau_certificate.crt     # Certificado assinado pelo Itaú
+```
+
+⚠️ **IMPORTANTE:** Este diretório está no `.gitignore` - nunca será commitado!
+
+### **Ambientes Disponíveis**
+
+```ini
+[api]
+environment = sandbox  # ou production
+```
+
+- **Sandbox**: Ambiente de testes (dados fictícios)
+- **Production**: Ambiente real (dados bancários reais)
+
+### **Processo Completo de Habilitação**
+
+Documentação completa: [Visão Geral](../docs/Integracao/Itau/README.md) | [Guia Completo](../docs/Integracao/Itau/001_INTEGRACAO_API_ITAU.md)
+
+**Resumo dos passos:**
+1. ✅ Cadastro no Developer Portal do Itaú
+2. ⏳ Contato com time comercial/técnico
+3. ⏳ Assinatura de contrato e termo de adesão
+4. ⏳ Geração de par de chaves (pública/privada)
+5. ⏳ Recebimento de credenciais criptografadas
+6. ⏳ Descriptografia de credenciais
+7. ⏳ Geração e envio de CSR (Certificate Sign Request)
+8. ⏳ Recebimento de certificado assinado
+9. ⏳ Configuração final no sistema
+
+### **Status Atual**
+
+| Item | Status |
+|------|--------|
+| Documentação | ✅ Completa |
+| Configuração template | ✅ Criada |
+| Cadastro Developer Portal | ⏳ Pendente |
+| Credenciais | ⏳ Aguardando |
+| Certificados | ⏳ Aguardando |
+| Implementação código | ⏳ Aguardando habilitação |
 
 ---
 
 **Criado em:** 10/11/2025  
-**Última atualização:** 10/11/2025
+**Última atualização:** 21/04/2026
