@@ -37,15 +37,23 @@ O texto copiado da tela da fatura em aberto possui o seguinte padrão base:
 parcela 5 de 6
 ```
 - A informação de parcelamento vem na linha seguinte (`parcela X de Y`).
-- Será necessário criar lógica de banco de dados para suportar: `indicador_parcelado`, `qtd_parcelas`, `parcela_atual`.
+- Campos estruturados a serem mapeados:
+  - `compra_parcelada`: Booleano (Sim/Não)
+  - `parcela_atual`: Inteiro (ex: 5)
+  - `qtd_parcelas`: Inteiro (ex: 6)
 
-**3. Compra Internacional (Multi-linha)**
+**3. Compra em Moeda Estrangeira (Multi-linha)**
 ```text
 24 mar.	virtual racing school virtual	R$ 27,84 • US$ 4,99
 valor da cotação (R$ 5,58)
 ```
-- Traz o valor em Dólar ao lado direito (`• US$ 4,99`).
+- Traz o valor na moeda original ao lado direito (ex: `• US$ 4,99`, podendo ser `€`, `£`, etc).
 - A cotação vem na linha de baixo.
+- Campos estruturados a serem mapeados:
+  - `moeda_estrangeira`: Booleano (Sim/Não)
+  - `simbolo_moeda`: Texto (ex: "US$")
+  - `valor_moeda_estrangeira`: Decimal (ex: 4.99)
+  - `cotacao`: Decimal (ex: 5.58)
 
 **4. Estornos / Pagamentos**
 ```text
