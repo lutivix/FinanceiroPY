@@ -1,0 +1,38 @@
+# ============================================
+# Financeiro Dashboard — Docker Compose
+# ============================================
+# Stack isolada (NÃO compartilha rede com Belgo/BCE)
+# Servidor: LFADM (192.168.7.106) — Windows 10 Pro 22H2
+# ============================================
+
+services:
+  financeiro-dashboard:
+    container_name: financeiro-dashboard
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    ports:
+      - "8052:8052"
+    volumes:
+      - ../dados:/app/dados
+    environment:
+      - DASH_DEBUG=False
+      - DASH_PORT=8052
+      - DASH_HOST=0.0.0.0
+      - PYTHONDONTWRITEBYTECODE=1
+      - PYTHONUNBUFFERED=1
+      - TZ=America/Sao_Paulo
+    restart: unless-stopped
+    networks:
+      - financeiro-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8052/"]
+      interval: 30s
+      timeout: 10s
+      start_period: 15s
+      retries: 3
+
+networks:
+  financeiro-network:
+    name: financeiro-network
+    driver: bridge
