@@ -107,6 +107,7 @@ def create_transacoes_page():
                         ],
                         value='TODOS',
                         clearable=False,
+                        style=dropdown_style,
                         className='custom-dropdown'
                     )
                 ], style={'flex': '1', 'minWidth': '200px'}),

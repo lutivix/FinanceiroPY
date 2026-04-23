@@ -6,6 +6,13 @@ Real vs Ideal spending with filters and detailed analysis
 from dash import html, dcc
 from dashboard_v2.config import COLORS, FONTS, SPACING
 
+dropdown_style = {
+    'backgroundColor': '#16213E',
+    'color': '#FFFFFF',
+    'borderRadius': '8px',
+    'border': '1px solid #2D3748'
+}
+
 def create_ideals_page():
     """Creates Ideals (Budget Planning) page"""
     
@@ -64,6 +71,7 @@ def create_ideals_page():
                             options=[{'label': 'All (Last 12 months)', 'value': 'TODOS'}],
                             value='TODOS',
                             clearable=False,
+                            style=dropdown_style,
                             className='custom-dropdown'
                         )
                     ], style={'flex': '1', 'minWidth': '200px'}),
@@ -88,6 +96,7 @@ def create_ideals_page():
                             ],
                             value='category',
                             clearable=False,
+                            style=dropdown_style,
                             className='custom-dropdown'
                         )
                     ], style={'flex': '1', 'minWidth': '200px'}),
@@ -117,6 +126,7 @@ def create_ideals_page():
                             options=[{'label': 'All Categories', 'value': 'TODOS'}],
                             value='TODOS',
                             clearable=False,
+                            style=dropdown_style,
                             className='custom-dropdown'
                         )
                     ], style={'flex': '1', 'minWidth': '200px'}),
@@ -138,6 +148,7 @@ def create_ideals_page():
                             options=[{'label': 'All Sources', 'value': 'TODOS'}],
                             value='TODOS',
                             clearable=False,
+                            style=dropdown_style,
                             className='custom-dropdown'
                         )
                     ], style={'flex': '1', 'minWidth': '200px'}),
