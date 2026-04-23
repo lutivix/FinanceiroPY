@@ -47,14 +47,16 @@ from dashboard_v2.utils.graficos import (
 from dashboard_v2.callbacks.budget_callbacks import register_budget_callbacks
 
 # Inicializar app
-app = Dash(
-    __name__,
-    external_stylesheets=[
-        dbc.themes.BOOTSTRAP,
-        "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    ],
-    suppress_callback_exceptions=True
-)
+# app = Dash(
+#     __name__,
+#     external_stylesheets=[
+#         dbc.themes.BOOTSTRAP,
+#         "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+#     ],
+#     suppress_callback_exceptions=True
+# )
+
+app = Dash(__name__, external_stylesheets=[dbc.themes.DARKLY], serve_locally=True)
 
 app.title = "FinancePro - Dashboard v2.0"
 
