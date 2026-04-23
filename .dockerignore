@@ -1,0 +1,51 @@
+# Git
+.git
+.github
+.gitignore
+
+# Python
+__pycache__
+*.pyc
+*.pyo
+*.egg-info
+.pytest_cache
+.coverage
+htmlcov/
+
+# Virtual environments
+venv/
+.venv/
+env/
+
+# IDE
+.vscode/
+.idea/
+
+# Dados (montado como volume, não incluir no build)
+dados/
+
+# Docker
+docker/
+
+# Docs e scripts desnecessários no container
+docs/
+scripts/
+tests/
+*.md
+*.bat
+*.ini
+pytest.ini
+.coveragerc
+COMMIT_MESSAGE.md
+CHANGELOG.md
+LICENSE
+CONTRIBUTING.md
+CONFIGURACAO_AMBIENTE.md
+
+# Arquivos temporários
+*.log
+*.tmp
+*.bak
+
+# Deprecated
+backend/src/_deprecated/
