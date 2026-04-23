@@ -18,6 +18,11 @@ scripts/
     └── verificar_parcelas.py    # Análise de parcelas
 ```
 
+**Scripts Bash de Automação (na raiz do projeto):**
+- `agente_financeiro_completo.sh` - Menu interativo com todas funcionalidades
+- `iniciar_sistemas.sh` - Gerenciador de sistemas (Financeiro, BCE)
+- `iniciar_sistemas.bat` - Versão Windows (fallback)
+
 ---
 
 ## 🎯 Tipos de Scripts
@@ -48,7 +53,67 @@ Scripts que fazem parte do fluxo de trabalho.
 - `atualizar_categoria_vestuario.py` - Manutenção de categorias
 - `limpar_categorias.py` - Limpeza de duplicatas
 
-### **3. Scripts de Automação (.bat)** ⚙️
+### **3. Scripts Bash de Automação** 🔧
+
+Scripts shell para automação de tarefas e gerenciamento de sistemas.
+
+**Localização:** Raiz do projeto
+
+**Scripts principais:**
+
+- **`agente_financeiro_completo.sh`** - Menu interativo com 11 opções:
+  1. Processamento completo
+  2. Processar apenas transações
+  3-5. Atualizar dicionários (Excel, Controle, DB)
+  6. Limpar categorias duplicadas
+  7. Iniciar/Parar Dashboard
+  8. Instalar dependências do dashboard
+  9. Informações do ambiente
+  10. Gerar médias semanais (atualizar orçamento)
+  11. Sincronizar dados com servidor LFADM (produção)
+
+- **`iniciar_sistemas.sh`** - Gerenciador de sistemas múltiplos:
+  - Financeiro backend
+  - BCE backend
+  - BCE frontend
+  - Controle de PIDs e status
+
+- **`iniciar_sistemas.bat`** - Versão Windows (plano B)
+
+- **`docs/Servidor/sincronizar_dados.sh`** - Sincronização de dados:
+  - Copia banco financeiro.db para servidor LFADM via SSH
+  - Reinicia container Docker do dashboard
+  - Health check automático
+  - Modos: normal, --dry-run, --status
+
+#### **⚡ Solução Técnica: UTF-8 no Git Bash**
+
+**Problema:** `conda run` não preserva TTY, resultando em caracteres UTF-8 quebrados (emojis e acentos aparecem como `ðŸ"„`, `Ã§Ãµ`).
+
+**Solução:** Usar `bash -c` com `conda activate` em vez de `conda run`:
+
+```bash
+# ❌ NÃO funciona (não preserva TTY)
+run_in_conda() {
+    "$CONDA_EXE" run -n "$CONDA_ENV" "$@"
+}
+
+# ✅ FUNCIONA (preserva TTY e UTF-8)
+run_in_conda() {
+    bash -c "eval \"\$('$CONDA_EXE' shell.bash hook)\" && conda activate '$CONDA_ENV' && $*"
+}
+```
+
+**Motivo:** 
+- `conda run` cria subprocesso sem detecção de TTY
+- `bash -c + conda activate` mantém terminal interativo
+- Python detecta TTY e habilita UTF-8 automaticamente
+- Emojis e acentos aparecem corretamente: 🎉 ✅ 📊
+
+**Aplicação:**
+Todos os scripts que executam Python via conda devem usar este padrão para garantir saída formatada corretamente no Git Bash (Windows).
+
+### **4. Scripts de Automação (.bat)** ⚙️
 
 Scripts batch para execução rápida no Windows.
 
@@ -75,15 +140,28 @@ Scripts que não funcionam mais ou foram substituídos.
 
 | Aspecto       | `/scripts/`                        | `/tests/`                        |
 | ------------- | ---------------------------------- | -------------------------------- |
-| **Propósito** | Testes manuais de API, ferramentas | Testes automatizados (pytest)    |
-| **Execução**  | Manual, ad-hoc                     | Automática (CI/CD, pytest)       |
+| **Propósito** | Testes manuais de API, ferramentas, automação | Testes automatizados (pytest)    |
+| **Execução**  | Manual, ad-hoc, menu interativo    | Automática (CI/CD, pytest)       |
 | **Dados**     | Reais ou sandbox                   | Fixtures, mocks                  |
-| **Objetivo**  | Validar integração externa         | Validar lógica interna           |
-| **Exemplo**   | `teste_pluggy_rest.py`             | `test_transaction_repository.py` |
+| **Objetivo**  | Validar integração externa, gerenciar sistemas | Validar lógica interna           |
+| **Exemplo**   | `teste_pluggy_rest.py`, `agente_financeiro_completo.sh` | `test_transaction_repository.py` |
 
 ---
 
 ## 🎯 Como Usar
+
+### **Executar scripts bash de automação:**
+
+```bash
+# Menu interativo completo
+./agente_financeiro_completo.sh
+
+# Gerenciador de sistemas
+./iniciar_sistemas.sh
+
+# Windows (Git Bash ou CMD)
+iniciar_sistemas.bat
+```
 
 ### **Executar teste de API:**
 
@@ -117,4 +195,5 @@ pytest tests/
 ---
 
 **Criado em:** 11/11/2025  
-**Última atualização:** 11/11/2025
+**Última atualização:** 10/03/2026  
+**Mudanças recentes:** Adicionadas opções 10 (geração de médias semanais) e 11 (sincronização com servidor LFADM) ao menu principal

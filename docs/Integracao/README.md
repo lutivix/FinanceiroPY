@@ -46,6 +46,8 @@ Documentação sobre integrações externas: Open Finance (Pluggy), APIs bancár
 
 ## 📂 Documentos
 
+### **Pluggy (Open Finance)**
+
 | Arquivo                                                      | Descrição                               | Status         |
 | ------------------------------------------------------------ | --------------------------------------- | -------------- |
 | [001_INTEGRACAO_PLUGGY.md](001_INTEGRACAO_PLUGGY.md)         | Integração Open Finance via Pluggy      | ✅ Completo    |
@@ -59,6 +61,16 @@ Documentação sobre integrações externas: Open Finance (Pluggy), APIs bancár
 | [009_DASHBOARD_INTERATIVO.md](009_DASHBOARD_INTERATIVO.md)   | **📊 Dashboard Plotly (v2.3.0)**        | ✅ **PROD**    |
 | [010_DASHBOARD_DUAL.md](010_DASHBOARD_DUAL.md)               | **📊 Dashboard Dual (Excel vs OF)**     | 🆕 **NOVO!**   |
 | [011_ALTERNATIVAS_OPEN_FINANCE.md](011_ALTERNATIVAS_OPEN_FINANCE.md) | **🔄 Alternativas ao Pluggy** | 🆕 **IMPORTANTE!** |
+
+### **API Itaú (Nativa)**
+
+| Arquivo | Descrição | Status |
+| ------- | --------- | ------ |
+| [Itau/README.md](Itau/README.md) | **📋 Visão geral da integração Itaú** | ✅ **COMPLETO** |
+| [Itau/001_INTEGRACAO_API_ITAU.md](Itau/001_INTEGRACAO_API_ITAU.md) | **📖 Guia completo de integração** | ✅ **COMPLETO** |
+| [Itau/002_CHECKLIST_HABILITACAO.md](Itau/002_CHECKLIST_HABILITACAO.md) | **✅ Checklist passo a passo** | ✅ **COMPLETO** |
+| `Itau/003_IMPLEMENTACAO.md` | Implementação dos módulos Python | ⏳ Aguardando habilitação |
+| `Itau/004_TESTES.md` | Documentação de testes | ⏳ Futuro |
 
 ---
 
@@ -90,7 +102,32 @@ Documentação sobre integrações externas: Open Finance (Pluggy), APIs bancár
   - ✅ Mapeamento de fontes (PIX, Visa, Master)
 - **Ver:** [001_INTEGRACAO_PLUGGY.md](001_INTEGRACAO_PLUGGY.md)
 
-### **2. Outras Instituições (Futuro)**
+### **2. API Itaú Account Statement - ⏳ EM HABILITAÇÃO**
+
+- **Status:** ⏳ Aguardando credenciais do Developer Portal
+- **Tipo:** API REST Nativa do Itaú
+- **Objetivo:** Sincronização automática de extratos bancários
+- **Autenticação:** OAuth2 + mTLS (Certificado Dinâmico)
+- **Endpoints:**
+  - ✅ GET /statements/{id} - Consultar extratos e transações
+  - ✅ GET /statements/{id}/interest-bearing-accounts - Rendimentos
+- **Vantagens sobre Pluggy:**
+  - 🏦 Direto do banco (sem intermediário)
+  - 💰 Gratuito (sem custo de agregador)
+  - 📊 Dados oficiais em tempo real
+  - 🔍 Detalhamento completo de contrapartes
+  - ⚡ Performance: até 1000 transações/requisição
+- **Fase atual:**
+  - ✅ Documentação completa
+  - ✅ Templates de configuração
+  - ✅ Checklist de habilitação
+  - ⏳ Cadastro no Developer Portal (pendente)
+  - ⏳ Recebimento de credenciais (pendente)
+  - ⏳ Geração de certificados (pendente)
+  - ⏳ Implementação dos módulos (aguardando habilitação)
+- **Ver:** [Itau/README.md](Itau/README.md)
+
+### **3. Outras Instituições (Futuro)**
 
 - **Status:** 📋 Disponível para conectar
 - **Método:** Open Finance via Pluggy Dashboard

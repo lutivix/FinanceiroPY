@@ -6,6 +6,21 @@
 
 ---
 
+## 🚨 **IMPORTANTE: Use `py` no Windows**
+
+**⚡ No Windows, sempre use `py` ao invés de `python`:**
+
+```bash
+# ✅ CORRETO
+py backend/src/agente_financeiro.py
+py backend/src/dashboard_v2/main.py
+
+# ❌ ERRADO  
+python backend/src/agente_financeiro.py  # Pode falhar no Windows
+```
+
+---
+
 ## 🎉 NOVIDADES v2.3.0
 
 **📊 DASHBOARD INTERATIVO + OPEN FINANCE COMPLETO!**
@@ -56,12 +71,22 @@ Documentação técnica, arquitetura e guias do sistema.
 
 Documentação sobre integrações externas (Open Finance, APIs, etc).
 
+#### **Pluggy (Open Finance)**
+
 | Arquivo                                                                 | Descrição                                 |
 | ----------------------------------------------------------------------- | ----------------------------------------- |
 | [001_INTEGRACAO_PLUGGY.md](Integracao/001_INTEGRACAO_PLUGGY.md)         | Integração Open Finance via Pluggy        |
 | [002_CHECKLIST_PLUGGY.md](Integracao/002_CHECKLIST_PLUGGY.md)           | Checklist de implementação Pluggy         |
 | [003_ARQUITETURA_PLUGGY.md](Integracao/003_ARQUITETURA_PLUGGY.md)       | Decisões técnicas e arquitetura (a criar) |
 | [004_SEGURANCA_OPENFINANCE.md](Integracao/004_SEGURANCA_OPENFINANCE.md) | Segurança e compliance (a criar)          |
+
+#### **API Itaú (Nativa)**
+
+| Arquivo                                                                          | Descrição                              |
+| -------------------------------------------------------------------------------- | -------------------------------------- |
+| [Itau/README.md](Integracao/Itau/README.md)                                      | Visão geral da integração Itaú         |
+| [Itau/001_INTEGRACAO_API_ITAU.md](Integracao/Itau/001_INTEGRACAO_API_ITAU.md)   | Guia completo de integração e arquitetura |
+| [Itau/002_CHECKLIST_HABILITACAO.md](Integracao/Itau/002_CHECKLIST_HABILITACAO.md) | Checklist passo a passo de habilitação |
 
 ### 🧪 [Testing](Testing/)
 
@@ -73,6 +98,14 @@ Documentação sobre testes, qualidade e cobertura.
 | [002_SEMANA1_CONCLUSAO.md](Testing/002_SEMANA1_CONCLUSAO.md)               | Relatório Semana 1 - Infraestrutura de testes |
 | [003_SEMANA2_PRONTIDAO.md](Testing/003_SEMANA2_PRONTIDAO.md)               | Status de prontidão dos testes                |
 | [004_SEMANA2_RESUMO_EXECUTIVO.md](Testing/004_SEMANA2_RESUMO_EXECUTIVO.md) | Resumo executivo Semana 2                     |
+
+### 🔧 [Manutenção](Manutencao/)
+
+Documentação de bugs, correções e ajustes do sistema.
+
+| Arquivo                                                                            | Descrição                                           |
+| ---------------------------------------------------------------------------------- | --------------------------------------------------- |
+| [001_BUGFIX_DUPLICATAS_PARCELAS.md](Manutencao/001_BUGFIX_DUPLICATAS_PARCELAS.md) | Correção de parcelas sendo descartadas como duplicatas |
 
 ---
 
@@ -100,6 +133,11 @@ Documentação sobre testes, qualidade e cobertura.
 - [Estratégia de Testes](Testing/001_TESTING.md)
 - [Cobertura: 35.34%](../htmlcov/index.html)
 - [Status: 119/127 testes passing](Testing/003_SEMANA2_PRONTIDAO.md)
+
+### � **Manutenção e Correções**
+
+- [Bugs e Correções](Manutencao/) - Documentação de bugfixes
+- [Correção: Duplicatas de Parcelas](Manutencao/001_BUGFIX_DUPLICATAS_PARCELAS.md) - Compras parceladas
 
 ### 📊 **Relatórios e Análises**
 
@@ -153,6 +191,7 @@ Documentação sobre testes, qualidade e cobertura.
 ```
 /docs/
 ├── README.md                    # Este arquivo (índice)
+├── 001_AUDITORIA_CONFORMIDADE.md  # Auditoria de conformidade
 ├── Integracao_PROXIMO_CHAT.md  # Contexto rápido Open Finance
 │
 ├── /Desenvolvimento/            # Arquitetura e guias
@@ -163,9 +202,17 @@ Documentação sobre testes, qualidade e cobertura.
 │   ├── README.md
 │   └── XXX_NOME.md
 │
-└── /Testing/                    # Testes e qualidade
-    ├── README.md
-    └── XXX_NOME.md
+├── /Testing/                    # Testes e qualidade
+│   ├── README.md
+│   └── XXX_NOME.md
+│
+├── /Manutencao/                 # Bugs e correções
+│   ├── README.md
+│   └── XXX_BUGFIX_*.md
+│
+├── /Deploy/                     # Deployment e infraestrutura
+├── /V2/                         # Documentação versão 2.0
+└── /documentation/              # Padrões de documentação
 ```
 
 ### **Emojis de Seção**
@@ -212,5 +259,5 @@ Documentação sobre testes, qualidade e cobertura.
 
 ---
 
-**Última atualização:** 10/11/2025  
+**Última atualização:** 03/02/2026  
 **Criado em:** 10/11/2025

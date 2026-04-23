@@ -36,14 +36,20 @@ body {{
 }}
 
 /* ===== DROPDOWN CUSTOMIZATION ===== */
-.Select-control {{
+/* Seletores para Dash 2.x (modernos) */
+.dash-dropdown .Select-control,
+.Select-control,
+div[class*="dash-dropdown"] .Select-control {{
     background-color: {COLORS['bg_card']} !important;
     border: 1px solid {COLORS['border']} !important;
     border-radius: 8px !important;
     color: {COLORS['text_primary']} !important;
+    min-height: 38px !important;
 }}
 
-.Select-menu-outer {{
+.dash-dropdown .Select-menu-outer,
+.Select-menu-outer,
+div[class*="dash-dropdown"] .Select-menu-outer {{
     background-color: {COLORS['bg_secondary']} !important;
     border: 1px solid {COLORS['border']} !important;
     border-radius: 8px !important;
@@ -51,58 +57,182 @@ body {{
     z-index: 9999 !important;
 }}
 
-.Select-option {{
+.dash-dropdown .Select-option,
+.Select-option,
+div[class*="dash-dropdown"] .Select-option {{
     background-color: transparent !important;
     color: {COLORS['text_primary']} !important;
     padding: {SPACING['sm']}px {SPACING['md']}px !important;
 }}
 
-.Select-option:hover {{
+.dash-dropdown .Select-option:hover,
+.Select-option:hover,
+div[class*="dash-dropdown"] .Select-option:hover {{
     background-color: {COLORS['bg_hover']} !important;
 }}
 
-.Select-option.is-selected {{
+.dash-dropdown .Select-option.is-selected,
+.Select-option.is-selected,
+div[class*="dash-dropdown"] .Select-option.is-selected {{
     background-color: {COLORS['primary']} !important;
 }}
 
-.Select-placeholder {{
+.dash-dropdown .Select-placeholder,
+.Select-placeholder,
+div[class*="dash-dropdown"] .Select-placeholder {{
     color: {COLORS['text_muted']} !important;
 }}
 
-.Select-value-label {{
+.dash-dropdown .Select-value-label,
+.Select-value-label,
+div[class*="dash-dropdown"] .Select-value-label {{
     color: {COLORS['text_primary']} !important;
 }}
 
+.dash-dropdown .Select-value,
+.Select-value,
+div[class*="dash-dropdown"] .Select-value {{
+    color: {COLORS['text_primary']} !important;
+}}
+
+.dash-dropdown .Select-input > input,
+.Select-input > input,
+div[class*="dash-dropdown"] .Select-input > input {{
+    color: {COLORS['text_primary']} !important;
+}}
+
+/* Correção específica para o componente Dropdown sem className */
+._dash-undo-redo .Select-control,
+#_dash-app-content .Select-control {{
+    background-color: {COLORS['bg_card']} !important;
+    border-color: {COLORS['border']} !important;
+    color: {COLORS['text_primary']} !important;
+}}
+
+/* Força global para todos os dropdowns e seus elementos */
+[id*="filtro"] .Select-control,
+[id*="dropdown"] .Select-control,
+div[id^="react-select-"] {{
+    background-color: {COLORS['bg_card']} !important;
+    border: 1px solid {COLORS['border']} !important;
+}}
+
+[id*="filtro"] .Select-value-label,
+[id*="dropdown"] .Select-value-label,
+[id*="filtro"] .Select-value,
+[id*="dropdown"] .Select-value {{
+    color: {COLORS['text_primary']} !important;
+}}
+
+[id*="filtro"] .Select-menu-outer,
+[id*="dropdown"] .Select-menu-outer {{
+    background-color: {COLORS['bg_secondary']} !important;
+    border: 1px solid {COLORS['border']} !important;
+}}
+
+[id*="filtro"] .Select-option,
+[id*="dropdown"] .Select-option {{
+    color: {COLORS['text_primary']} !important;
+}}
+
+/* Multi-value (tags) em dropdowns multi-select */
+.Select-multi-value-wrapper .Select-value {{
+    background-color: {COLORS['primary']} !important;
+    color: white !important;
+}}
+
+.Select-multi-value-wrapper .Select-value-label {{
+    color: white !important;
+}}
+
+.Select-clear-zone {{
+    color: {COLORS['text_muted']} !important;
+}}
+
+.Select-arrow-zone {{
+    color: {COLORS['text_muted']} !important;
+}}
+
 /* ===== DROPDOWN COM TEXTO BRANCO (para modais) ===== */
-.dropdown-white-text .Select-control {{
+.dropdown-white-text .Select-control,
+.dropdown-white-text.dash-dropdown .Select-control {{
     background-color: {COLORS['bg_card']} !important;
     color: {COLORS['text_primary']} !important;
 }}
 
-.dropdown-white-text .Select-value-label {{
+.dropdown-white-text .Select-value-label,
+.dropdown-white-text.dash-dropdown .Select-value-label {{
     color: {COLORS['text_primary']} !important;
 }}
 
-.dropdown-white-text .Select-placeholder {{
+.dropdown-white-text .Select-placeholder,
+.dropdown-white-text.dash-dropdown .Select-placeholder {{
     color: {COLORS['text_secondary']} !important;
 }}
 
-.dropdown-white-text .Select-menu-outer {{
+.dropdown-white-text .Select-menu-outer,
+.dropdown-white-text.dash-dropdown .Select-menu-outer {{
     background-color: {COLORS['bg_secondary']} !important;
 }}
 
-.dropdown-white-text .Select-option {{
+.dropdown-white-text .Select-option,
+.dropdown-white-text.dash-dropdown .Select-option {{
     color: {COLORS['text_primary']} !important;
     background-color: transparent !important;
 }}
 
-.dropdown-white-text .Select-option:hover {{
+.dropdown-white-text .Select-option:hover,
+.dropdown-white-text.dash-dropdown .Select-option:hover {{
     background-color: {COLORS['bg_hover']} !important;
 }}
 
-.dropdown-white-text .Select-option.is-selected {{
+.dropdown-white-text .Select-option.is-selected,
+.dropdown-white-text.dash-dropdown .Select-option.is-selected {{
     background-color: {COLORS['primary']} !important;
     color: white !important;
+}}
+
+/* ===== DROPDOWN CUSTOMIZADO PADRÃO ===== */
+.custom-dropdown .Select-control,
+.custom-dropdown.dash-dropdown .Select-control {{
+    background-color: {COLORS['bg_card']} !important;
+    border: 1px solid {COLORS['border']} !important;
+    border-radius: 8px !important;
+    color: {COLORS['text_primary']} !important;
+}}
+
+.custom-dropdown .Select-value-label,
+.custom-dropdown.dash-dropdown .Select-value-label,
+.custom-dropdown .Select-value,
+.custom-dropdown.dash-dropdown .Select-value {{
+    color: {COLORS['text_primary']} !important;
+}}
+
+.custom-dropdown .Select-placeholder,
+.custom-dropdown.dash-dropdown .Select-placeholder {{
+    color: {COLORS['text_muted']} !important;
+}}
+
+.custom-dropdown .Select-menu-outer,
+.custom-dropdown.dash-dropdown .Select-menu-outer {{
+    background-color: {COLORS['bg_secondary']} !important;
+    border: 1px solid {COLORS['border']} !important;
+}}
+
+.custom-dropdown .Select-option,
+.custom-dropdown.dash-dropdown .Select-option {{
+    color: {COLORS['text_primary']} !important;
+    background-color: transparent !important;
+}}
+
+.custom-dropdown .Select-option:hover,
+.custom-dropdown.dash-dropdown .Select-option:hover {{
+    background-color: {COLORS['bg_hover']} !important;
+}}
+
+.custom-dropdown .Select-option.is-selected,
+.custom-dropdown.dash-dropdown .Select-option.is-selected {{
+    background-color: {COLORS['primary']} !important;
 }}
 
 /* ===== DROPDOWN SIDEBAR (abre para cima) ===== */
@@ -115,6 +245,7 @@ body {{
 }}
 
 /* ===== DATE PICKER CUSTOMIZATION ===== */
+.custom-datepicker .DateInput_input,
 .DateInput_input {{
     background-color: {COLORS['bg_card']} !important;
     border: 1px solid {COLORS['border']} !important;
@@ -124,14 +255,26 @@ body {{
     padding: 8px 12px !important;
 }}
 
+.custom-datepicker .DateInput_input::placeholder,
 .DateInput_input::placeholder {{
     color: {COLORS['text_muted']} !important;
 }}
 
+.custom-datepicker .DateRangePickerInput,
 .DateRangePickerInput {{
     background-color: {COLORS['bg_card']} !important;
     border: 1px solid {COLORS['border']} !important;
     border-radius: 8px !important;
+}}
+
+.custom-datepicker .DateRangePickerInput_arrow,
+.DateRangePickerInput_arrow {{
+    color: {COLORS['text_primary']} !important;
+}}
+
+.custom-datepicker .DateInput,
+.DateInput {{
+    background-color: {COLORS['bg_card']} !important;
 }}
 
 .DateRangePicker_picker {{

@@ -17,3 +17,6 @@ isort>=5.12.0
 # User experience
 tqdm>=4.66.0
 colorama>=0.4.6
+
+# Open Finance Integration
+plaid-python>=14.0.0  # Plaid API (Open Finance)
