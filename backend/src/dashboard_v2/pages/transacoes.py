@@ -60,7 +60,8 @@ def create_transacoes_page():
                         value=[],
                         multi=True,
                         placeholder='Todas',
-                        style=dropdown_style
+                        style=dropdown_style,
+                        className='custom-dropdown'
                     )
                 ], style={'flex': '1', 'minWidth': '200px'}),
                 
@@ -81,7 +82,8 @@ def create_transacoes_page():
                         value=[],
                         multi=True,
                         placeholder='Todas',
-                        style=dropdown_style
+                        style=dropdown_style,
+                        className='custom-dropdown'
                     )
                 ], style={'flex': '1', 'minWidth': '200px'}),
                 
@@ -104,7 +106,8 @@ def create_transacoes_page():
                             {'label': 'Pendentes', 'value': 'PENDENTES'}
                         ],
                         value='TODOS',
-                        clearable=False
+                        clearable=False,
+                        className='custom-dropdown'
                     )
                 ], style={'flex': '1', 'minWidth': '200px'}),
             ], style={
@@ -133,7 +136,8 @@ def create_transacoes_page():
                         value=[],
                         multi=True,
                         placeholder='Todos',
-                        style=dropdown_style
+                        style=dropdown_style,
+                        className='custom-dropdown'
                     )
                 ], style={'flex': '1', 'minWidth': '200px'}),
                 

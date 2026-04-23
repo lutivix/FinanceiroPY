@@ -63,7 +63,8 @@ def create_ideals_page():
                             id='filtro-mes-ideals',
                             options=[{'label': 'All (Last 12 months)', 'value': 'TODOS'}],
                             value='TODOS',
-                            clearable=False
+                            clearable=False,
+                            className='custom-dropdown'
                         )
                     ], style={'flex': '1', 'minWidth': '200px'}),
                     
@@ -86,7 +87,8 @@ def create_ideals_page():
                                 {'label': 'By Source', 'value': 'source'}
                             ],
                             value='category',
-                            clearable=False
+                            clearable=False,
+                            className='custom-dropdown'
                         )
                     ], style={'flex': '1', 'minWidth': '200px'}),
                 ], style={
@@ -114,7 +116,8 @@ def create_ideals_page():
                             id='filtro-categoria-ideals',
                             options=[{'label': 'All Categories', 'value': 'TODOS'}],
                             value='TODOS',
-                            clearable=False
+                            clearable=False,
+                            className='custom-dropdown'
                         )
                     ], style={'flex': '1', 'minWidth': '200px'}),
                     
@@ -134,7 +137,8 @@ def create_ideals_page():
                             id='filtro-fonte-ideals',
                             options=[{'label': 'All Sources', 'value': 'TODOS'}],
                             value='TODOS',
-                            clearable=False
+                            clearable=False,
+                            className='custom-dropdown'
                         )
                     ], style={'flex': '1', 'minWidth': '200px'}),
                 ], style={
