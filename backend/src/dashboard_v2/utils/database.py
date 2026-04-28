@@ -70,10 +70,6 @@ def carregar_transacoes(mes_filtro='TODOS'):
         
         # Renomear rowid para id
         df = df.rename(columns={'rowid': 'id'})
-        
-        # Remove duplicatas
-        df = df.drop_duplicates(subset=['data', 'descricao', 'valor', 'fonte'], keep='first')
-        df = df.drop_duplicates(subset=['id'], keep='first')
     
     return df
 

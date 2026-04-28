@@ -56,7 +56,14 @@ from dashboard_v2.callbacks.budget_callbacks import register_budget_callbacks
 #     suppress_callback_exceptions=True
 # )
 
-app = Dash(__name__, external_stylesheets=[dbc.themes.DARKLY], serve_locally=True)
+app = Dash(
+    __name__,
+    external_stylesheets=[
+        dbc.themes.DARKLY,
+        "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    ],
+    serve_locally=True
+)
 
 app.title = "FinancePro - Dashboard v2.0"
 
@@ -321,12 +328,13 @@ def atualizar_tabela_transacoes(mes_selecionado, categoria_filtro, fonte_filtro,
             style={'color': COLORS['text_secondary'], 'textAlign': 'center', 'padding': '20px'}
         )
     
+    # Calcular subtotal ANTES de limitar as linhas (usar todas as transações filtradas)
+    total_transacoes = len(df_filtrado)
+    subtotal = df_filtrado['valor_normalizado'].sum()
+    
     # Preparar dados para tabela
     df_tabela = df_filtrado[['id', 'data', 'descricao', 'valor_normalizado', 'categoria', 'fonte', 'mes_comp']].copy()
     df_tabela = df_tabela.sort_values(['mes_comp', 'fonte', 'data'], ascending=[True, False, True]).head(100)  # Limitar a 100
-    
-    # Calcular subtotal
-    subtotal = df_tabela['valor_normalizado'].sum()
     
     df_tabela['data'] = pd.to_datetime(df_tabela['data']).dt.strftime('%d/%m/%Y')
     df_tabela['valor'] = df_tabela['valor_normalizado'].apply(lambda x: f"R$ {x:,.2f}")
@@ -414,11 +422,11 @@ def atualizar_tabela_transacoes(mes_selecionado, categoria_filtro, fonte_filtro,
         # Estatísticas
         html.Div([
             html.Span(
-                f"Mostrando {len(df_tabela)} transações de {len(df_filtrado)} encontradas",
+                f"Mostrando {len(df_tabela)} de {total_transacoes} transações",
                 style={'color': COLORS['text_secondary'], 'fontSize': FONTS['size']['sm']}
             ),
             html.Span(
-                f" • Subtotal: R$ {subtotal:,.2f}",
+                f" • Total: R$ {subtotal:,.2f} ({total_transacoes} transações)",
                 style={'color': COLORS['primary'], 'fontSize': FONTS['size']['base'], 'fontWeight': FONTS['weight']['bold'], 'marginLeft': '16px'}
             )
         ], style={'marginBottom': '16px'}),
