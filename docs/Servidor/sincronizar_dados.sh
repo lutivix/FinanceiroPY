@@ -299,6 +299,7 @@ restart_container() {
 
     log_info "Aguardando container inicializar..."
     sleep 5
+	log_info "Espera finalizada..."
 }
 
 health_check() {
@@ -317,7 +318,7 @@ health_check() {
     fi
 
     local attempts=0
-    local max_attempts=10
+    local max_attempts=50
     local http_code
 
     while (( attempts < max_attempts )); do
@@ -330,7 +331,7 @@ health_check() {
         fi
 
         log_info "  Tentativa $attempts/$max_attempts — HTTP $http_code — aguardando..."
-        sleep 3
+        sleep 5
     done
 
     # Não falha o script — sync já foi feito, dashboard pode demorar mais pra subir
