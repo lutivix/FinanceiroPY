@@ -267,6 +267,82 @@ def criar_grafico_top_fontes(mes_selecionado='TODOS'):
     
     return fig
 
+
+# Mapeamento só para exibição (o dado bruto salvo no banco é o código ISO-alpha2)
+_NOMES_PAISES = {
+    'BR': 'Brasil',
+    'US': 'Estados Unidos',
+    'ES': 'Espanha',
+}
+
+def criar_grafico_gasto_por_pais(mes_selecionado='TODOS'):
+    """
+    Cria gráfico de gasto por país (barras horizontais).
+    Só considera transações do formato novo de fatura (onde o país foi
+    identificado); meses antigos não têm esse dado e ficam de fora.
+
+    Args:
+        mes_selecionado: Filtro de mês
+
+    Returns:
+        Figure do Plotly
+    """
+    df = carregar_transacoes(mes_selecionado)
+
+    if len(df) == 0 or 'pais' not in df.columns:
+        return go.Figure().update_layout(
+            **PLOTLY_TEMPLATE['layout'],
+            title_text="Sem dados disponíveis"
+        )
+
+    df_debitos = df[(df['valor'] > 0) & (df['pais'].notna())].copy()
+
+    if len(df_debitos) == 0:
+        return go.Figure().update_layout(
+            **PLOTLY_TEMPLATE['layout'],
+            title_text="Sem dados de país disponíveis para o período"
+        )
+
+    df_debitos['pais_label'] = df_debitos['pais'].map(_NOMES_PAISES).fillna(df_debitos['pais'])
+
+    top_paises = df_debitos.groupby('pais_label')['valor_normalizado'].sum().nlargest(10).reset_index()
+    top_paises = top_paises.sort_values('valor_normalizado')
+
+    fig = go.Figure()
+
+    fig.add_trace(go.Bar(
+        y=top_paises['pais_label'],
+        x=top_paises['valor_normalizado'],
+        orientation='h',
+        marker=dict(
+            color=COLORS['chart_2'],
+            line=dict(color=COLORS['border'], width=1)
+        ),
+        text=top_paises['valor_normalizado'].apply(lambda x: f'R$ {x:,.0f}'),
+        textposition='outside',
+        hovertemplate='<b>%{y}</b><br>R$ %{x:,.2f}<extra></extra>'
+    ))
+
+    fig.update_layout(
+        **PLOTLY_TEMPLATE['layout'],
+        showlegend=False,
+        margin=dict(l=120, r=80, t=20, b=40)
+    )
+
+    fig.update_xaxes(
+        title='',
+        gridcolor=COLORS['grid'],
+        showgrid=True,
+        tickformat=',.0f'
+    )
+
+    fig.update_yaxes(
+        title='',
+        gridcolor=COLORS['grid']
+    )
+
+    return fig
+
 def criar_grafico_real_ideal(mes_selecionado='TODOS'):
     """
     Cria gráfico Real vs Ideal por categoria (barras horizontais agrupadas)

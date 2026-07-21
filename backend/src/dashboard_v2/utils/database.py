@@ -34,7 +34,12 @@ def carregar_transacoes(mes_filtro='TODOS'):
         Valor as valor,
         Categoria as categoria,
         Fonte as fonte,
-        MesComp as mes_comp
+        MesComp as mes_comp,
+        NomeTitular as nome_titular,
+        Titularidade as titularidade,
+        ParcelaAtual as parcela_atual,
+        QtdParcelas as qtd_parcelas,
+        Pais as pais
     FROM lancamentos
     WHERE Categoria NOT IN ('INVESTIMENTOS', 'SALÁRIO', 'Salário', 'Investimentos')
       AND (
@@ -129,6 +134,28 @@ def obter_fontes():
     conn.close()
     
     return df['Fonte'].tolist()
+
+def obter_titulares():
+    """
+    Retorna lista de titulares únicos (NomeTitular), disponível só para
+    transações do formato novo de fatura. Meses antigos não têm esse dado
+    (NULL) e não aparecem aqui.
+    
+    Returns:
+        Lista de strings com nomes de titulares
+    """
+    conn = sqlite3.connect(DB_PATH)
+    query = """
+    SELECT DISTINCT NomeTitular 
+    FROM lancamentos 
+    WHERE Categoria NOT IN ('INVESTIMENTOS', 'SALÁRIO', 'Salário', 'Investimentos')
+      AND NomeTitular IS NOT NULL
+    ORDER BY NomeTitular
+    """
+    df = pd.read_sql_query(query, conn)
+    conn.close()
+    
+    return df['NomeTitular'].tolist()
 
 def calcular_estatisticas(df):
     """

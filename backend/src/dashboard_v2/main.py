@@ -29,6 +29,7 @@ from dashboard_v2.utils.database import (
     calcular_estatisticas,
     obter_categorias,
     obter_fontes,
+    obter_titulares,
     obter_orcamento_mais_recente,
     obter_resumo_orcamento_semanal,
     obter_meses_orcamento_disponiveis,
@@ -39,12 +40,18 @@ from dashboard_v2.utils.graficos import (
     criar_grafico_evolucao,
     criar_grafico_top_categorias,
     criar_grafico_top_fontes,
+    criar_grafico_gasto_por_pais,
     criar_grafico_real_ideal,
     criar_grafico_distribuicao_temporal,
     criar_grafico_acumulado,
     criar_grafico_ideals_comparison
 )
 from dashboard_v2.callbacks.budget_callbacks import register_budget_callbacks
+
+# Sentinela usado no filtro de Titular para representar transações sem
+# titular identificado (PIX e transações do formato antigo de fatura, que
+# não têm NomeTitular preenchido no banco).
+SEM_TITULAR = '__SEM_TITULAR__'
 
 # Inicializar app
 # app = Dash(
@@ -167,6 +174,7 @@ def display_page(pathname, mes_selecionado):
     Output('filtro-categoria-transacoes', 'options'),
     Output('filtro-fonte-transacoes', 'options'),
     Output('filtro-mes-comp-transacoes', 'options'),
+    Output('filtro-titular-transacoes', 'options'),
     Input('url', 'pathname')
 )
 def atualizar_filtros_transacoes(pathname):
@@ -175,15 +183,18 @@ def atualizar_filtros_transacoes(pathname):
         categorias = obter_categorias()
         fontes = obter_fontes()
         meses = obter_meses_disponiveis()
+        titulares = obter_titulares()
         
         # Para checkboxes, não precisa da opção "Todas"
         opcoes_cat = [{'label': cat, 'value': cat} for cat in categorias]
         opcoes_fonte = [{'label': fonte, 'value': fonte} for fonte in fontes]
         opcoes_mes = [{'label': mes, 'value': mes} for mes in meses]
+        opcoes_titular = [{'label': 'Sem titular (PIX / formato antigo)', 'value': SEM_TITULAR}] + \
+                         [{'label': titular, 'value': titular} for titular in titulares]
         
-        return opcoes_cat, opcoes_fonte, opcoes_mes
+        return opcoes_cat, opcoes_fonte, opcoes_mes, opcoes_titular
     
-    return [], [], []
+    return [], [], [], []
 
 # Callback para highlighting do item ativo na sidebar
 app.clientside_callback(
@@ -267,6 +278,15 @@ def atualizar_grafico_acumulado(mes_selecionado, pathname):
     """Atualiza gráfico de acumulado mensal"""
     return criar_grafico_acumulado(mes_selecionado)
 
+@callback(
+    Output('grafico-gasto-pais', 'figure'),
+    [Input('store-mes-global', 'data'),
+     Input('url', 'pathname')]
+)
+def atualizar_grafico_gasto_pais(mes_selecionado, pathname):
+    """Atualiza gráfico de gasto por país"""
+    return criar_grafico_gasto_por_pais(mes_selecionado)
+
 # Callback para tabela de transações
 @callback(
     Output('tabela-transacoes-container', 'children'),
@@ -276,10 +296,13 @@ def atualizar_grafico_acumulado(mes_selecionado, pathname):
      Input('filtro-status-transacoes', 'value'),
      Input('filtro-mes-comp-transacoes', 'value'),
      Input('filtro-data-transacoes', 'start_date'),
-     Input('filtro-data-transacoes', 'end_date')]
+     Input('filtro-data-transacoes', 'end_date'),
+     Input('filtro-titular-transacoes', 'value'),
+     Input('filtro-parcelado-transacoes', 'value')]
 )
 def atualizar_tabela_transacoes(mes_selecionado, categoria_filtro, fonte_filtro, status_filtro, 
-                                mes_comp_filtro, data_inicio, data_fim):
+                                mes_comp_filtro, data_inicio, data_fim,
+                                titular_filtro=None, parcelado_filtro='TODOS'):
     """Atualiza tabela de transações com filtros"""
     from dash import dash_table
     
@@ -310,6 +333,27 @@ def atualizar_tabela_transacoes(mes_selecionado, categoria_filtro, fonte_filtro,
     if mes_comp_filtro and len(mes_comp_filtro) > 0:
         df_filtrado = df_filtrado[df_filtrado['mes_comp'].isin(mes_comp_filtro)]
     
+    # Filtro de titular (multi-select; inclui sentinela "sem titular" para
+    # PIX e transações do formato antigo, que não têm nome_titular)
+    if titular_filtro and len(titular_filtro) > 0:
+        nomes_reais = [t for t in titular_filtro if t != SEM_TITULAR]
+        incluir_sem_titular = SEM_TITULAR in titular_filtro
+        
+        if incluir_sem_titular and nomes_reais:
+            df_filtrado = df_filtrado[
+                df_filtrado['nome_titular'].isin(nomes_reais) | df_filtrado['nome_titular'].isna()
+            ]
+        elif incluir_sem_titular:
+            df_filtrado = df_filtrado[df_filtrado['nome_titular'].isna()]
+        else:
+            df_filtrado = df_filtrado[df_filtrado['nome_titular'].isin(nomes_reais)]
+    
+    # Filtro de parcelado (Sim/Não/Todas)
+    if parcelado_filtro == 'SIM':
+        df_filtrado = df_filtrado[df_filtrado['qtd_parcelas'].notna()]
+    elif parcelado_filtro == 'NAO':
+        df_filtrado = df_filtrado[df_filtrado['qtd_parcelas'].isna()]
+    
     # Filtro de data
     if data_inicio:
         try:
@@ -333,7 +377,8 @@ def atualizar_tabela_transacoes(mes_selecionado, categoria_filtro, fonte_filtro,
     subtotal = df_filtrado['valor_normalizado'].sum()
     
     # Preparar dados para tabela
-    df_tabela = df_filtrado[['id', 'data', 'descricao', 'valor_normalizado', 'categoria', 'fonte', 'mes_comp']].copy()
+    df_tabela = df_filtrado[['id', 'data', 'descricao', 'valor_normalizado', 'categoria', 'fonte', 'mes_comp',
+                              'nome_titular', 'parcela_atual', 'qtd_parcelas']].copy()
     df_tabela = df_tabela.sort_values(['mes_comp', 'fonte', 'data'], ascending=[True, False, True]).head(100)  # Limitar a 100
     
     df_tabela['data'] = pd.to_datetime(df_tabela['data']).dt.strftime('%d/%m/%Y')
@@ -354,15 +399,15 @@ def atualizar_tabela_transacoes(mes_selecionado, categoria_filtro, fonte_filtro,
             'display': 'inline-block'
         } if row['categoria'] == 'A definir' else {'display': 'inline-block'}
         
-        # Checkbox apenas para itens "A definir"
+        # Checkbox de seleção em bloco (disponível para qualquer status, não só "A definir")
         checkbox = dcc.Checklist(
             id={'type': 'checkbox-transacao', 'index': row['id']},
             options=[{'label': '', 'value': row['id']}],
             value=[],
             style={'margin': '0'}
-        ) if row['categoria'] == 'A definir' else ''
+        )
         
-        # Botão de edição apenas para itens "A definir"
+        # Botão de edição de categoria (disponível para qualquer status)
         edit_button = html.Button(
             '✏️',
             id={'type': 'btn-edit-transacao', 'index': row['id']},
@@ -376,7 +421,13 @@ def atualizar_tabela_transacoes(mes_selecionado, categoria_filtro, fonte_filtro,
                 'cursor': 'pointer',
                 'fontSize': '14px'
             }
-        ) if row['categoria'] == 'A definir' else ''
+        )
+        
+        # Badge de parcela (ex.: "3/6"), quando disponível
+        if pd.notna(row.get('qtd_parcelas')):
+            parcela_texto = f"{int(row['parcela_atual'])}/{int(row['qtd_parcelas'])}"
+        else:
+            parcela_texto = '—'
         
         rows.append(html.Tr([
             html.Td(checkbox, style={'padding': '12px', 'borderBottom': f"1px solid {COLORS['border']}", 'textAlign': 'center'}),
@@ -386,6 +437,8 @@ def atualizar_tabela_transacoes(mes_selecionado, categoria_filtro, fonte_filtro,
             html.Td(html.Span(row['categoria'], style=categoria_style), style={'padding': '12px', 'borderBottom': f"1px solid {COLORS['border']}"}),
             html.Td(row['fonte'], style={'padding': '12px', 'borderBottom': f"1px solid {COLORS['border']}"}),
             html.Td(row['mes_comp'], style={'padding': '12px', 'borderBottom': f"1px solid {COLORS['border']}"}),
+            html.Td(row.get('nome_titular') or '—', style={'padding': '12px', 'borderBottom': f"1px solid {COLORS['border']}"}),
+            html.Td(parcela_texto, style={'padding': '12px', 'borderBottom': f"1px solid {COLORS['border']}", 'textAlign': 'center'}),
             html.Td(edit_button, style={'padding': '12px', 'borderBottom': f"1px solid {COLORS['border']}", 'textAlign': 'center'}),
         ]))
     
@@ -442,6 +495,8 @@ def atualizar_tabela_transacoes(mes_selecionado, categoria_filtro, fonte_filtro,
                     html.Th('Categoria', style={'padding': '12px', 'textAlign': 'left', 'borderBottom': f"2px solid {COLORS['border']}", 'color': COLORS['text_primary'], 'fontWeight': 'bold'}),
                     html.Th('Fonte', style={'padding': '12px', 'textAlign': 'left', 'borderBottom': f"2px solid {COLORS['border']}", 'color': COLORS['text_primary'], 'fontWeight': 'bold'}),
                     html.Th('Mês', style={'padding': '12px', 'textAlign': 'left', 'borderBottom': f"2px solid {COLORS['border']}", 'color': COLORS['text_primary'], 'fontWeight': 'bold'}),
+                    html.Th('Titular', style={'padding': '12px', 'textAlign': 'left', 'borderBottom': f"2px solid {COLORS['border']}", 'color': COLORS['text_primary'], 'fontWeight': 'bold'}),
+                    html.Th('Parcela', style={'padding': '12px', 'textAlign': 'center', 'borderBottom': f"2px solid {COLORS['border']}", 'color': COLORS['text_primary'], 'fontWeight': 'bold'}),
                     html.Th('Ações', style={'padding': '12px', 'textAlign': 'center', 'borderBottom': f"2px solid {COLORS['border']}", 'color': COLORS['text_primary'], 'fontWeight': 'bold'}),
                 ])),
                 html.Tbody(rows, style={'color': COLORS['text_primary']})
@@ -451,6 +506,7 @@ def atualizar_tabela_transacoes(mes_selecionado, categoria_filtro, fonte_filtro,
         # Container para armazenar dados da tabela (para atualização após salvar)
         html.Div(id='dummy-output-transacoes', style={'display': 'none'})
     ])
+
 
 # Callback para abrir modal de edição
 @callback(
@@ -503,11 +559,14 @@ def toggle_modal_edit(edit_clicks, cancel_clicks, save_clicks, is_open, transaca
      State('filtro-status-transacoes', 'value'),
      State('filtro-mes-comp-transacoes', 'value'),
      State('filtro-data-transacoes', 'start_date'),
-     State('filtro-data-transacoes', 'end_date')],
+     State('filtro-data-transacoes', 'end_date'),
+     State('filtro-titular-transacoes', 'value'),
+     State('filtro-parcelado-transacoes', 'value')],
     prevent_initial_call=True
 )
 def salvar_categoria(n_clicks, transacao_id, nova_categoria, mes_selecionado, categoria_filtro, 
-                    fonte_filtro, status_filtro, mes_comp_filtro, data_inicio, data_fim):
+                    fonte_filtro, status_filtro, mes_comp_filtro, data_inicio, data_fim,
+                    titular_filtro=None, parcelado_filtro='TODOS'):
     """Salva nova categoria no banco e recarrega tabela"""
     from dash import no_update
     
@@ -539,7 +598,8 @@ def salvar_categoria(n_clicks, transacao_id, nova_categoria, mes_selecionado, ca
         # Recarregar tabela com filtros atuais
         return atualizar_tabela_transacoes(
             mes_selecionado, categoria_filtro, fonte_filtro, status_filtro,
-            mes_comp_filtro, data_inicio, data_fim
+            mes_comp_filtro, data_inicio, data_fim,
+            titular_filtro, parcelado_filtro
         )
         
     except Exception as e:
@@ -723,15 +783,13 @@ def popular_dropdown_categoria_bloco(pathname, status_filtro):
     [Input('filtro-status-transacoes', 'value')]
 )
 def toggle_controles_categorizacao(status_filtro):
-    """Mostra/oculta controles de categorização em bloco baseado no filtro de status"""
-    print(f"Toggle controles - Status filtro: {status_filtro}")
-    if status_filtro == 'PENDENTES':
-        style = {'marginBottom': f"{SPACING['md']}px", 'display': 'block'}
-        print("Mostrando controles de categorizacao")
-        return style
-    else:
-        print("Ocultando controles de categorizacao")
-        return {'display': 'none'}
+    """Mostra os controles de categorização em bloco.
+    
+    Antes só apareciam com o filtro 'Pendentes' (o checkbox só existia em
+    itens 'A definir'). Agora o checkbox aparece em qualquer status, então
+    os controles ficam sempre visíveis.
+    """
+    return {'marginBottom': f"{SPACING['md']}px", 'display': 'block'}
 
 # Callback para categorização em bloco
 @callback(
@@ -748,11 +806,14 @@ def toggle_controles_categorizacao(status_filtro):
      State('filtro-status-transacoes', 'value'),
      State('filtro-mes-comp-transacoes', 'value'),
      State('filtro-data-transacoes', 'start_date'),
-     State('filtro-data-transacoes', 'end_date')],
+     State('filtro-data-transacoes', 'end_date'),
+     State('filtro-titular-transacoes', 'value'),
+     State('filtro-parcelado-transacoes', 'value')],
     prevent_initial_call=True
 )
 def categorizar_bloco(n_clicks, categoria, checkboxes_values, checkboxes_ids, mes_selecionado, 
-                      categoria_filtro, fonte_filtro, status_filtro, mes_comp_filtro, data_inicio, data_fim):
+                      categoria_filtro, fonte_filtro, status_filtro, mes_comp_filtro, data_inicio, data_fim,
+                      titular_filtro=None, parcelado_filtro='TODOS'):
     """Categoriza múltiplas transações de uma vez"""
     from dash import no_update
     import sqlite3
@@ -783,7 +844,8 @@ def categorizar_bloco(n_clicks, categoria, checkboxes_values, checkboxes_ids, me
     
     # Recarregar tabela
     tabela_atualizada = atualizar_tabela_transacoes(mes_selecionado, categoria_filtro, fonte_filtro, 
-                                                     status_filtro, mes_comp_filtro, data_inicio, data_fim)
+                                                     status_filtro, mes_comp_filtro, data_inicio, data_fim,
+                                                     titular_filtro, parcelado_filtro)
     
     mensagem = f"✓ {len(ids_selecionados)} transação(ões) categorizada(s) como '{categoria}'"
     return mensagem, {'color': COLORS['success'], 'marginTop': '10px', 'fontWeight': 'bold'}, tabela_atualizada

@@ -9,7 +9,7 @@ import time
 from datetime import datetime, timedelta
 
 from models import Transaction, ProcessingStats
-from processors import PixProcessor, ItauProcessor, LatamProcessor, BaseProcessor
+from processors import BaseProcessor, PixProcessor, ItauProcessor, LatamProcessor, CardStatementV2Processor
 
 logger = logging.getLogger(__name__)
 
@@ -22,8 +22,16 @@ class FileProcessingService:
         self.planilhas_dir = self.data_directory / "planilhas"
         
         # Inicializa processadores
+        # IMPORTANTE: os processadores do formato NOVO (CardStatementV2Processor)
+        # vêm ANTES dos antigos (ItauProcessor/LatamProcessor) propositalmente.
+        # A seleção é feita por detecção de cabeçalho na planilha, não só pelo
+        # nome do arquivo — então um arquivo no formato novo precisa ser
+        # interceptado aqui antes de cair no parser antigo (que não reconhece
+        # a diferença de layout e produziria resultado errado silenciosamente).
         self.processors: List[BaseProcessor] = [
             PixProcessor(),
+            CardStatementV2Processor('itau'),
+            CardStatementV2Processor('latam'),
             ItauProcessor(), 
             LatamProcessor()
         ]
