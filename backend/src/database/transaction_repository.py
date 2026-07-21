@@ -14,6 +14,23 @@ from utils import DeduplicationHelper
 
 logger = logging.getLogger(__name__)
 
+# Colunas novas introduzidas pelo formato v2 de fatura (Itaú/Latam com
+# colunas estruturadas: Titularidade, Parcelamento, Cotação, etc.).
+# Todas nullable/aditivas: linhas do formato antigo continuam com NULL aqui.
+NOVAS_COLUNAS_V2 = {
+    "ParcelaAtual": "INTEGER",
+    "QtdParcelas": "INTEGER",
+    "Titularidade": "TEXT",
+    "NomeTitular": "TEXT",
+    "TipoCartaoRaw": "TEXT",
+    "NumeroCartao": "TEXT",
+    "Cotacao": "REAL",
+    "MoedaEstrangeira": "TEXT",
+    "ValorMoedaEstrangeira": "REAL",
+    "Pais": "TEXT",
+    "LocalSite": "TEXT",
+}
+
 
 class TransactionRepository:
     """Repositório para gerenciar transações no banco de dados."""
@@ -72,6 +89,17 @@ class TransactionRepository:
                     except sqlite3.OperationalError:
                         pass  # Coluna já existe
                 
+                # Adiciona colunas do formato v2 (fatura estruturada), se ainda não existirem
+                cursor.execute("PRAGMA table_info(lancamentos)")
+                colunas_atuais = {row[1] for row in cursor.fetchall()}
+                for nome_coluna, tipo_coluna in NOVAS_COLUNAS_V2.items():
+                    if nome_coluna not in colunas_atuais:
+                        try:
+                            cursor.execute(f"ALTER TABLE lancamentos ADD COLUMN {nome_coluna} {tipo_coluna}")
+                            logger.info(f"🆕 Coluna adicionada em lancamentos: {nome_coluna}")
+                        except sqlite3.OperationalError:
+                            pass  # Coluna já existe
+                
                 # Cria índices para performance (usando nomes em português)
                 try:
                     cursor.execute("CREATE INDEX IF NOT EXISTS idx_data ON lancamentos(Data)")
@@ -100,10 +128,13 @@ class TransactionRepository:
         try:
             with sqlite3.connect(self.db_path) as conn:
                 cursor = conn.cursor()
+                campos_v2 = self._extrair_campos_v2(transaction)
                 cursor.execute("""
                     INSERT OR REPLACE INTO lancamentos 
-                    (Data, Descricao, Valor, Fonte, Categoria, MesComp, id, raw_data, created_at, updated_at)
-                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                    (Data, Descricao, Valor, Fonte, Categoria, MesComp, id, raw_data, created_at, updated_at,
+                     ParcelaAtual, QtdParcelas, Titularidade, NomeTitular, TipoCartaoRaw, NumeroCartao,
+                     Cotacao, MoedaEstrangeira, ValorMoedaEstrangeira, Pais, LocalSite)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                 """, (
                     transaction.date.isoformat(),
                     transaction.description,
@@ -114,7 +145,8 @@ class TransactionRepository:
                     transaction.id,
                     json.dumps(transaction.raw_data),
                     transaction.created_at.isoformat(),
-                    None  # updated_at vazia por padrão
+                    None,  # updated_at vazia por padrão
+                    *campos_v2,
                 ))
                 conn.commit()
                 logger.debug(f"✅ Transação salva: {transaction.description} - R$ {transaction.amount}")
@@ -122,6 +154,28 @@ class TransactionRepository:
         except Exception as e:
             logger.error(f"❌ Erro ao salvar transação: {e}")
             return False
+
+    @staticmethod
+    def _extrair_campos_v2(transaction: Transaction) -> tuple:
+        """
+        Extrai os campos do formato v2 (fatura estruturada) do raw_data da
+        transação. Transações do formato antigo não têm essas chaves em
+        raw_data, então tudo fica None (colunas nullable).
+        """
+        rd = transaction.raw_data or {}
+        return (
+            rd.get("parcela_atual"),
+            rd.get("qtd_parcelas"),
+            rd.get("titularidade"),
+            rd.get("nome_titular"),
+            rd.get("tipo_cartao_raw"),
+            rd.get("numero_cartao"),
+            rd.get("cotacao"),
+            rd.get("moeda_estrangeira"),
+            rd.get("valor_moeda_estrangeira"),
+            rd.get("pais"),
+            rd.get("local_site"),
+        )
     
     def check_duplicate(self, transaction: Transaction) -> bool:
         """
@@ -221,10 +275,13 @@ class TransactionRepository:
                             continue  # Pula esta transação
                     
                     try:
+                        campos_v2 = self._extrair_campos_v2(transaction)
                         cursor.execute("""
                             INSERT OR REPLACE INTO lancamentos 
-                            (Data, Descricao, Valor, Fonte, Categoria, MesComp, id, raw_data, created_at, updated_at)
-                            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                            (Data, Descricao, Valor, Fonte, Categoria, MesComp, id, raw_data, created_at, updated_at,
+                             ParcelaAtual, QtdParcelas, Titularidade, NomeTitular, TipoCartaoRaw, NumeroCartao,
+                             Cotacao, MoedaEstrangeira, ValorMoedaEstrangeira, Pais, LocalSite)
+                            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                         """, (
                             transaction.date.isoformat(),
                             transaction.description,
@@ -235,7 +292,8 @@ class TransactionRepository:
                             transaction.id,
                             json.dumps(transaction.raw_data),
                             transaction.created_at.isoformat(),
-                            transaction.updated_at.isoformat() if transaction.updated_at else None
+                            transaction.updated_at.isoformat() if transaction.updated_at else None,
+                            *campos_v2,
                         ))
                         saved_count += 1
                     except Exception as e:

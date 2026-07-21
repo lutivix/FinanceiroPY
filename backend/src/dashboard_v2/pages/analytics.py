@@ -110,9 +110,35 @@ def create_analytics_page():
         ], style={
             'display': 'flex',
             'justifyContent': 'space-between',
-            'gap': f"{SPACING['lg']}px"
-        })
-        
+            'gap': f"{SPACING['lg']}px",
+            'marginBottom': f"{SPACING['2xl']}px"
+        }),
+
+        # Gasto por país (disponível para transações do formato novo de fatura)
+        html.Div([
+            html.Div([
+                html.H3(
+                    "Gasto por País",
+                    className="graph-title",
+                    style={
+                        'color': COLORS['text_primary'],
+                        'fontSize': FONTS['size']['lg'],
+                        'fontWeight': FONTS['weight']['semibold'],
+                        'marginBottom': f"{SPACING['md']}px"
+                    }
+                ),
+                dcc.Graph(
+                    id='grafico-gasto-pais',
+                    config={
+                        'displayModeBar': True,
+                        'displaylogo': False,
+                        'modeBarButtonsToAdd': ['toImage']
+                    },
+                    style={'height': '350px'}
+                )
+            ], className="graph-container")
+        ])
+
     ], style={
         'padding': f"{SPACING['xl']}px",
         'maxWidth': '1600px',

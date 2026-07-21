@@ -166,6 +166,60 @@ def create_transacoes_page():
                 'display': 'flex',
                 'flexWrap': 'wrap',
                 'gap': f"{SPACING['lg']}px"
+            }),
+            
+            # Linha 3: Titular e Parcelado (disponíveis para o formato novo de fatura)
+            html.Div([
+                html.Div([
+                    html.Label(
+                        "Titular",
+                        style={
+                            'color': COLORS['text_secondary'],
+                            'fontSize': FONTS['size']['sm'],
+                            'fontWeight': FONTS['weight']['semibold'],
+                            'marginBottom': '8px',
+                            'display': 'block'
+                        }
+                    ),
+                    dcc.Dropdown(
+                        id='filtro-titular-transacoes',
+                        options=[],
+                        value=[],
+                        multi=True,
+                        placeholder='Todos',
+                        style=dropdown_style,
+                        className='custom-dropdown'
+                    )
+                ], style={'flex': '1', 'minWidth': '200px'}),
+                
+                html.Div([
+                    html.Label(
+                        "Parcelado",
+                        style={
+                            'color': COLORS['text_secondary'],
+                            'fontSize': FONTS['size']['sm'],
+                            'fontWeight': FONTS['weight']['semibold'],
+                            'marginBottom': '8px',
+                            'display': 'block'
+                        }
+                    ),
+                    dcc.Dropdown(
+                        id='filtro-parcelado-transacoes',
+                        options=[
+                            {'label': 'Todas', 'value': 'TODOS'},
+                            {'label': 'Sim', 'value': 'SIM'},
+                            {'label': 'Não', 'value': 'NAO'}
+                        ],
+                        value='TODOS',
+                        clearable=False,
+                        className='custom-dropdown'
+                    )
+                ], style={'flex': '1', 'minWidth': '200px'}),
+            ], style={
+                'display': 'flex',
+                'flexWrap': 'wrap',
+                'gap': f"{SPACING['lg']}px",
+                'marginTop': f"{SPACING['md']}px"
             })
             
         ], className="custom-card", style={'marginBottom': f"{SPACING['xl']}px"}),
